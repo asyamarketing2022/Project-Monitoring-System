@@ -2,16 +2,9 @@
 <?php include 'register-user.php'; ?>
 <?php include 'update-user.php'; ?>
 <?/*php include 'edit-user.php'; */?>
+<?php include 'users-table.php'; ?>
 
 <?php 
-
-include_once("connections/connection.php");
-$con = connection();
-
-$sql = "SELECT * FROM registered_users ORDER BY id ASC";
-$users = $con->query($sql) or die ($con->error);
-$row = $users->fetch_assoc();
-
 
 if(isset($_POST['userID'])) {
 
@@ -70,18 +63,18 @@ if(isset($_POST['userID'])) {
                     
                     <form action="delete.php" method="POST">
                         <?php do { ?>
-                        <tr class="table-row_user" value="<?php echo $row['ID'] ?>">
-                            <td><input type="checkbox" class="id" id="id" name="lang[]" value="<?php echo $row['ID'] ?>"></td>
-                            <td class="user-id"><?php echo $row['ID'] ?></td>
-                            <td><?php echo $row['first_name'] ?> <?php echo $row['last_name'] ?></td>
-                            <td><?php echo $row['position'] ?></td>
-                            <td><?php echo $row['email'] ?></td>
-                            <td><?php echo $row['department'] ?></td>
-                            <td><?php echo $row['mobile_number'] ?></td>
-                            <td><?php echo $row['access'] ?></td>
-                            <td data-toggle="modal" data-target="#edit_employee"><span class="edit" value="<?php echo $row['ID'] ?>">Edit</span></td>
+                        <tr class="table-userInfo_user table-form" value="<?php echo $userInfo['ID'] ?>">
+                            <td><input type="checkbox" class="id" id="id" name="lang[]" value="<?php echo $userInfo['ID'] ?>"></td>
+                            <td class="user-id"><?php echo $userInfo['ID'] ?></td>
+                            <td><?php echo $userInfo['first_name'] ?> <?php echo $userInfo['last_name'] ?></td>
+                            <td><?php echo $userInfo['position'] ?></td>
+                            <td><?php echo $userInfo['email'] ?></td>
+                            <td><?php echo $userInfo['department'] ?></td>
+                            <td><?php echo $userInfo['mobile_number'] ?></td>
+                            <td><?php echo $userInfo['access'] ?></td>
+                            <td data-toggle="modal" data-target="#edit_employee"><span class="edit" value="<?php echo $userInfo['ID'] ?>">Edit</span></td>
                         </tr>
-                        <?php } while($row = $users->fetch_assoc()); 
+                        <?php } while($userInfo = $users->fetch_assoc()); 
                         
                         ?>
 

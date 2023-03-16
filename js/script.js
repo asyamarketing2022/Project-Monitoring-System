@@ -19,32 +19,77 @@ Array.from(users_row).forEach((user_row) => {
        });
 });
 
-let search_menu = document.querySelector('.search');
+//Search function
 
-search_menu.addEventListener('keyup', () => {
-    let input, filter, tr, table_data, txtValue
+let searchInput = document.querySelectorAll('.search');
 
-    input = document.querySelector(".search");
-    filter = input.value.toUpperCase();
-    tr = document.querySelector('.table-row_user');
-    table_data = document.querySelectorAll(".table-row_user td:nth-child(3)");
-
-    Array.from(table_data).forEach((td) => {
-
-        txtValue = td.textContent || td.innerText;
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-
-            td.parentNode.style.display = "";
-
-        } else {
-
-            td.parentNode.style.display = "none";
-
-        }
-
+Array.from(searchInput).forEach((search) => {
+    search.addEventListener('keyup', () => {
+        let input, filter, tr, table_data, txtValue
+    
+        // input = document.querySelector(".search");
+        filter = search.value.toUpperCase();
+        tr = document.querySelector('.table-form');
+        table_data = document.querySelectorAll(".table-form td:nth-child(3)");
+    
+        console.log('keyup')
+    
+        Array.from(table_data).forEach((td) => {
+    
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+    
+                td.parentNode.style.display = "";
+    
+            } else {
+    
+                td.parentNode.style.display = "none";
+    
+            }
+    
+        });
     });
 });
 
+//Search User Filter
+
+let searchUser_input = document.querySelectorAll('.searchUser-input');
+
+Array.from(searchUser_input).forEach((search) => {
+    search.addEventListener('keyup', () => {
+        let input, filter, tr, table_data, txtValue
+   
+
+        // input = document.querySelector(".search");
+        filter = search.value.toUpperCase();
+        tr = document.querySelector('.search-user');
+        table_data = document.querySelectorAll(".search-user td:nth-child(1)");
+
+        let searchValue = search.value;
+    
+        Array.from(table_data).forEach((td) => {
+
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+    
+                td.parentNode.style.display = "block";
+    
+            } else  {
+
+                td.parentNode.style.display = "";
+            }
+        });
+
+        Array.from(table_data).forEach((td) => {
+
+            if ( searchValue == "" || searchValue == null ) {
+    
+               td.parentNode.style.display = "";
+    
+            }
+        });
+    });
+});
 
 // Disable Input
 function disableInput() {
@@ -61,8 +106,7 @@ function disableInput() {
                 console.log(input)
 
             });
-              
-
+    
         });
 
     });
@@ -70,3 +114,67 @@ function disableInput() {
 }
 
 disableInput();
+
+//Create dynamic Input
+function dynamicInput() {
+    let searchUser = document.querySelectorAll('.search-user');
+    
+    Array.from(searchUser).forEach((rowUser) => {
+
+        rowUser.addEventListener('click', () => {
+
+            let nameofuser = rowUser.querySelector('.nameofuser').innerText;
+            // let pickBtn = rowUser.querySelector('.pickBtn')
+            let btnValue = rowUser.getAttribute('value');
+            const input = document.createElement(`input`);
+            const div = document.createElement(`div`);
+            const p = document.createElement(`p`);
+            
+            p.innerHTML = " x ";
+            // p.setAttribute('class', 'removeInput');
+            p.classList.add(btnValue)
+            div.classList.add('content__info');
+            div.classList.add('text-center');
+            input.setAttribute('name', 'pickEmployee');
+            // input.setAttribute('id', btnValue);
+            input.setAttribute('value', nameofuser);
+
+            div.appendChild(p);
+            div.appendChild(input);
+
+            document.querySelector('#pick_project .assign').appendChild(div);
+
+            rowUser.classList.add('d-none');
+          
+
+
+            //Remove Dynamic Input
+            
+            function removeInput() {
+
+                let removeIcon = document.querySelectorAll('.content__info p');
+            
+                Array.from(removeIcon).forEach((removeInput) => {
+            
+                    removeInput.addEventListener('click', () => {
+            
+                        removeInput.parentElement.remove();
+                        rowUser.classList.remove('d-none');
+
+                    });
+                    
+                });
+            
+            }
+
+            removeInput();
+        });
+        
+    });
+    
+}
+
+dynamicInput();
+
+
+

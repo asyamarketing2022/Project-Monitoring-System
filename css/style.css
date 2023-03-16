@@ -252,6 +252,18 @@ tr {
     width: 14vw;
 }
 
+.search-action__wrapper .search-action.search-nb {
+    width: 100%;
+}
+
+.search-action__wrapper .search-action.search-nb input {
+    border: 0 !important;
+    border-bottom: 1px solid #ebebeb !important;
+    padding-bottom: 15px;
+    background: #fff;
+    width: 100%;
+}
+
 .search-action__wrapper button {
     color: #fff;
     background-color: #1b8dff;
@@ -264,6 +276,10 @@ tr {
 .search-action__wrapper button,
 .select-action__wrapper .select-action__sort {
     float: right;
+}
+
+.search-action__wrapper .search-user {
+    display: none;
 }
 
 .select-action__wrapper .select-action__sort {

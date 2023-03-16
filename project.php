@@ -1,20 +1,11 @@
 <?php include 'header.php'; ?>
 <?php include 'add-project.php'; ?>
 <?/*php include 'edit-user.php'; */?>
-
 <?php include 'header.php'; ?>
 <?php include 'update-project.php'; ?>
+<?php include 'project-table.php'; ?>
+<?php include 'users-table.php'; ?>
 
-<?php 
-
-include_once("connections/connection.php");
-$con = connection();
-
-$sql = "SELECT * FROM projects ORDER BY id ASC";
-$projects = $con->query($sql) or die ($con->error);
-$row = $projects->fetch_assoc();
-
-?>
 
 <?php include("sidebar.php"); ?>
 
@@ -68,31 +59,31 @@ $row = $projects->fetch_assoc();
                     </tr>
                     <form action="" method="POST">
                         <?php do { ?>
-                        <tr class="table-row_projects" value="<?php echo $row['id'] ?>">
+                        <tr class="table-row_projects table-form" value="<?php echo $projectInfo['id'] ?>">
                             <td><input type="checkbox" id="" name="" value=""></td>
-                            <td class="project-id"><?php echo $row['id'] ?></td>
-                            <td><?php echo $row['code'] ?></td>
-                            <td><?php echo $row['project_name'] ?></td>
-                            <td><?php echo $row['quality_check'] ?></td>
-                            <td><?php echo $row['file_type'] ?></td>
-                            <td><?php echo $row['project_tree_style'] ?></td>
-                            <td><?php echo $row['ignore_files'] ?></td>
-                            <td><?php echo $row['string_error_contact'] ?></td>
-                            <td><?php echo $row['screenshot_search_prefix'] ?></td>
+                            <td class="project-id"><?php echo $projectInfo['id'] ?></td>
+                            <td><?php echo $projectInfo['code'] ?></td>
+                            <td><?php echo $projectInfo['project_name'] ?></td>
+                            <td><?php echo $projectInfo['quality_check'] ?></td>
+                            <td><?php echo $projectInfo['file_type'] ?></td>
+                            <td><?php echo $projectInfo['project_tree_style'] ?></td>
+                            <td><?php echo $projectInfo['ignore_files'] ?></td>
+                            <td><?php echo $projectInfo['string_error_contact'] ?></td>
+                            <td><?php echo $projectInfo['screenshot_search_prefix'] ?></td>
                             <td></td>
 
                             <?php if(isset($_SESSION['UserLogin']) && $_SESSION['Access'] == "admin" ) { ?>
 
-                                <td data-toggle="modal" data-target="#edit_project"><span class="edit-project" value="<?php echo $row['id'] ?>">View</span></td>
+                                <td data-toggle="modal" data-target="#edit_project"><span class="edit-project" value="<?php echo $projectInfo['id'] ?>">View</span></td>
 
                             <?php } elseif (isset($_SESSION['UserLogin']) && $_SESSION['Access'] == "manager" ) { ?>
 
-                                <td data-toggle="modal" data-target="#view_project"><span class="view-project" value="<?php echo $row['id'] ?>">View</span></td>
+                                <td data-toggle="modal" data-target="#view_project"><span class="view-project" value="<?php echo $projectInfo['id'] ?>">View</span></td>
 
                             <?php } ?>
 
                         </tr>
-                        <?php } while($row = $projects->fetch_assoc()); ?>
+                        <?php } while($projectInfo = $project->fetch_assoc()); ?>
                     </form>
                 </table>
             </div>
@@ -232,7 +223,7 @@ $row = $projects->fetch_assoc();
                 </div>
 
                 <div class='assign-form'>
-                    <div class='content-info__wrapper'>
+                    <div class='content-info__wrapper assign'>
                         <div class='content__info'> 
                             <span>Date Start</span>
                             <input class='input' type='date' name='update_code' id='formControlDefault' value='' required>
@@ -243,12 +234,30 @@ $row = $projects->fetch_assoc();
                         </div>
                         <div class='content__info'> 
                             <span>Manager</span>
-
                             <input class='input' type='text' name='update_code' id='formControlDefault' value="<?php echo $_SESSION['UserLogin']; ?> <?php echo $_SESSION['Userlname']; ?>" required>
                         </div>
                         <div class='content__info'>     
                             <span>Assign Employee</span>
-                            <input class='input' type='text' name='update_code' id='formControlDefault' value='' required>
+                            <div class="search-action__wrapper">
+                                <div class="search-action search-nb">
+                                    <input class="searchUser-input" type="text">
+                                    <div class="search-button">Search</div>
+                                </div>
+                                <table class="">
+                                    <form action="" method="POST">
+                                        <?php do { ?>
+                                        <tr class="table-userInfo_user search-user <?php echo $userInfo['ID'] ?>" id="<?php echo $userInfo['ID'] ?>" value="<?php echo $userInfo['ID'] ?>" >
+                                            <td class='nameofuser'><?php echo $userInfo['first_name'] ?> <?php echo $userInfo['last_name'] ?></td>
+                                            <td><?php echo $userInfo['position'] ?></td>
+                                            <td><?php echo $userInfo['email'] ?></td>
+                                            <td><?php echo $userInfo['department'] ?></td>
+                                     
+                                            <td><span class="pickBtn" value="<?php echo $userInfo['ID'] ?>">Add</span></td>
+                                        </tr>
+                                        <?php } while($userInfo = $users->fetch_assoc()); ?>
+                                    </form>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
