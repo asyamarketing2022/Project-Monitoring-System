@@ -41,7 +41,6 @@ $con = connection();
             </div>
         </div>
 
-
         <div class="col-lg-12">
             <div class="content shadow">
                 <div class="container">

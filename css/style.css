@@ -396,7 +396,8 @@ tr {
     height: 540px;
 }
 
-.project-form.pick-project_form {
+.project-form .pick-project_form {
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: 50% 50%;
+    grid-gap: 20px;
 }

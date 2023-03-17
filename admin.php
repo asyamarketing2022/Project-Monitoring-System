@@ -63,7 +63,7 @@ if(isset($_POST['userID'])) {
                     
                     <form action="delete.php" method="POST">
                         <?php do { ?>
-                        <tr class="table-userInfo_user table-form" value="<?php echo $userInfo['ID'] ?>">
+                        <tr class="table-row_user Info_user table-form" value="<?php echo $userInfo['ID'] ?>">
                             <td><input type="checkbox" class="id" id="id" name="lang[]" value="<?php echo $userInfo['ID'] ?>"></td>
                             <td class="user-id"><?php echo $userInfo['ID'] ?></td>
                             <td><?php echo $userInfo['first_name'] ?> <?php echo $userInfo['last_name'] ?></td>
@@ -80,8 +80,6 @@ if(isset($_POST['userID'])) {
 
                          <input class="submit-button" name="submit" type="submit" value="submit"/>
                     </form>
-
-                
                 </table>
             </div>
         </div>
@@ -190,18 +188,18 @@ if(isset($_POST['userID'])) {
 </div>
 
     <!-- Edit employee - Modal -->
-    <div class="modal fade pop-up__modal" id="edit_employee" tabindex="-1" role="dialog" aria-labelledby="edit_employeeTitle" aria-hidden="true" >
-        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
-            <div class="modal-content">
-                <div class="modal-header border-0">
+<div class="modal fade pop-up__modal" id="edit_employee" tabindex="-1" role="dialog" aria-labelledby="edit_employeeTitle" aria-hidden="true" >
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header border-0">
                     <h5></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
-                </div>
-                <span class="modal-title">Account Settings Edit</span>
+            </div>
+            <span class="modal-title">Account Settings Edit</span>
                 <!-- Tab -->
-                <ul class="nav nav-tabs" id="profile-tab" role="tablist">
+            <ul class="nav nav-tabs" id="profile-tab" role="tablist">
                     <li class="nav-item">
                         <a class="nav-link active" id="profile-tab" data-toggle="tab" href="#profile_edit" role="tab" aria-controls="profile" aria-selected="true">Profile</a>
                     </li>

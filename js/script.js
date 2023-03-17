@@ -17,7 +17,7 @@ Array.from(users_row).forEach((user_row) => {
            
 
        });
-});
+}); 
 
 //Search function
 
@@ -103,7 +103,7 @@ function disableInput() {
             Array.from(inputbox).forEach((input) => {
 
                 // input.setAttribute('readonly', true);
-                console.log(input)
+                // console.log(input)
 
             });
     
@@ -135,7 +135,7 @@ function dynamicInput() {
             p.classList.add(btnValue)
             div.classList.add('content__info');
             div.classList.add('text-center');
-            input.setAttribute('name', 'pickEmployee');
+            input.setAttribute('name', 'pickEmployee[]');
             // input.setAttribute('id', btnValue);
             input.setAttribute('value', nameofuser);
 
@@ -146,7 +146,7 @@ function dynamicInput() {
 
             rowUser.classList.add('d-none');
           
-
+            document.querySelector('.dateToday').valueAsDate = new Date();
 
             //Remove Dynamic Input
             

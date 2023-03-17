@@ -1,10 +1,10 @@
 <?php include 'header.php'; ?>
 <?php include 'add-project.php'; ?>
 <?/*php include 'edit-user.php'; */?>
-<?php include 'header.php'; ?>
 <?php include 'update-project.php'; ?>
 <?php include 'project-table.php'; ?>
 <?php include 'users-table.php'; ?>
+<?php include 'assign-project.php'; ?>
 
 
 <?php include("sidebar.php"); ?>
@@ -217,53 +217,56 @@
                 </button>
             </div>
             <span class="modal-title">Pick Project</span>
-            <form class="project-form pick-project_form" action="" method="">
-                <div class="updateform-project">
+            <form class="project-form" action="" method="POST">
+                <div class="pick-project_form">
+                    <div class="updateform-project">
 
-                </div>
+                    </div>
 
-                <div class='assign-form'>
-                    <div class='content-info__wrapper assign'>
-                        <div class='content__info'> 
-                            <span>Date Start</span>
-                            <input class='input' type='date' name='update_code' id='formControlDefault' value='' required>
-                        </div>
-                        <div class='content__info'> 
-                            <span>Target End Date</span>
-                            <input class='input' type='date' name='update_code' id='formControlDefault' value='' required>
-                        </div>
-                        <div class='content__info'> 
-                            <span>Manager</span>
-                            <input class='input' type='text' name='update_code' id='formControlDefault' value="<?php echo $_SESSION['UserLogin']; ?> <?php echo $_SESSION['Userlname']; ?>" required>
-                        </div>
-                        <div class='content__info'>     
-                            <span>Assign Employee</span>
-                            <div class="search-action__wrapper">
-                                <div class="search-action search-nb">
-                                    <input class="searchUser-input" type="text">
-                                    <div class="search-button">Search</div>
+                    <div class='assign-form'>
+                        <div class='content-info__wrapper assign'>
+                            <div class='content__info'> 
+                                <span>Date Start</span>
+                                <input class='input dateToday' name='dateStart' type='date' id='formControlDefault' value=''>
+                            </div>
+                            <div class='content__info'> 
+                                <span>Target End Date</span>
+                                <input class='input' type='date' name='dateEnd' id='formControlDefault' value='' required>
+                            </div>
+                            <div class='content__info'> 
+                                <span>Manager</span>
+                                <input class='input' name='manager' id='formControlDefault' value="<?php echo $_SESSION['UserLogin']; ?> <?php echo $_SESSION['Userlname']; ?>" required>
+                            </div>
+                            <div class='content__info'>     
+                                <span>Assign Employee</span>
+                                <div class="search-action__wrapper">
+                                    <div class="search-action search-nb">
+                                        <input class="searchUser-input" type="text">
+                                        <div class="search-button">Search</div>
+                                    </div>
+                                    <table class="">
+                                        <form action="" method="POST">
+                                            <?php do { ?>
+                                            <tr class="table-userInfo_user search-user <?php echo $userInfo['ID'] ?>" id="<?php echo $userInfo['ID'] ?>" value="<?php echo $userInfo['ID'] ?>" >
+                                                <td class='nameofuser'><?php echo $userInfo['first_name'] ?> <?php echo $userInfo['last_name'] ?></td>
+                                                <td><?php echo $userInfo['position'] ?></td>
+                                                <td><?php echo $userInfo['email'] ?></td>
+                                                <td><?php echo $userInfo['department'] ?></td>
+                                        
+                                                <td><span class="pickBtn" value="<?php echo $userInfo['ID'] ?>">Add</span></td>
+                                            </tr>
+                                            <?php } while($userInfo = $users->fetch_assoc()); ?>
+                                        </form>
+                                    </table>
                                 </div>
-                                <table class="">
-                                    <form action="" method="POST">
-                                        <?php do { ?>
-                                        <tr class="table-userInfo_user search-user <?php echo $userInfo['ID'] ?>" id="<?php echo $userInfo['ID'] ?>" value="<?php echo $userInfo['ID'] ?>" >
-                                            <td class='nameofuser'><?php echo $userInfo['first_name'] ?> <?php echo $userInfo['last_name'] ?></td>
-                                            <td><?php echo $userInfo['position'] ?></td>
-                                            <td><?php echo $userInfo['email'] ?></td>
-                                            <td><?php echo $userInfo['department'] ?></td>
-                                     
-                                            <td><span class="pickBtn" value="<?php echo $userInfo['ID'] ?>">Add</span></td>
-                                        </tr>
-                                        <?php } while($userInfo = $users->fetch_assoc()); ?>
-                                    </form>
-                                </table>
                             </div>
                         </div>
                     </div>
                 </div>
-    
+                    
                 <div class="button-wrapper">
-                    <input class="submit-button" name="" type="submit"  value="Submit">
+                    <!-- <input class="submit-button" name="submit" type="submit" value="Save"/> -->
+                    <input class="submit-button" name="submitAssign" type="submit" value="Save">
                 </div>
             </form>
         </div>
