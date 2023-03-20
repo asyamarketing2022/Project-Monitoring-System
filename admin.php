@@ -3,6 +3,7 @@
 <?php include 'update-user.php'; ?>
 <?/*php include 'edit-user.php'; */?>
 <?php include 'users-table.php'; ?>
+<?php include("sidebar.php"); ?>
 
 <?php 
 
@@ -19,7 +20,7 @@ if(isset($_POST['userID'])) {
 
 ?>
 
-<?php include("sidebar.php"); ?>
+
 
         <div class="grid-right__content">
             <div class="search-action__wrapper mt-4">

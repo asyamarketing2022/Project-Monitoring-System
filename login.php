@@ -23,6 +23,8 @@ if(isset($_POST['login'])){
         $_SESSION['UserLogin'] = $row['first_name'];
         $_SESSION['Userlname'] = $row['last_name'];
         $_SESSION['UserEmail'] = $row['email'];
+        $_SESSION['Department'] = $row['department'];
+        $_SESSION['Position'] = $row['position'];
         $_SESSION['Access'] = $row['access'];
         
         echo "<p>Login success!</p>";

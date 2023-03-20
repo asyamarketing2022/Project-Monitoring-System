@@ -36,7 +36,7 @@
                 <?php } ?> 
 
                 <li><a href="/project.php"><i class="fa fa-clipboard"></i> Projects</a></li>
-                <li><i class="fa fa-users"></i> Team</li>
+                <li><a href="/profile.php"> <i class="fa fa-users"></i> Profile</a></li>
                 <li><i class="fa fa-bitcoin"></i> Financial</li>
                 <li><i class="fa fa-newspaper-o"></i> Report</li>
             </ul>

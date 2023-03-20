@@ -1,6 +1,5 @@
 <?php include 'header.php'; ?>
 <?php include 'add-project.php'; ?>
-<?/*php include 'edit-user.php'; */?>
 <?php include 'update-project.php'; ?>
 <?php include 'project-table.php'; ?>
 <?php include 'users-table.php'; ?>
@@ -201,7 +200,7 @@
                 <div class="button-wrapper">
                     <input class="submit-button" name="" type="button" data-toggle="modal" data-target="#pick_project" value="Pick">
                 </div>
-             </form>
+            </form>
         </div>
     </div>
 </div>
@@ -220,25 +219,30 @@
             <form class="project-form" action="" method="POST">
                 <div class="pick-project_form">
                     <div class="updateform-project">
-
+                            <!-- kindly check update-project.php for dynamic codes -->
                     </div>
 
                     <div class='assign-form'>
                         <div class='content-info__wrapper assign'>
                             <div class='content__info'> 
                                 <span>Date Start</span>
-                                <input class='input dateToday' name='dateStart' type='date' id='formControlDefault' value=''>
+                                <p>Date will start when all participants accept the project invation</p>
+                                <!-- <input class='input dateToday' name='dateStart' type='date' id='formControlDefault' value=''> -->
                             </div>
                             <div class='content__info'> 
                                 <span>Target End Date</span>
                                 <input class='input' type='date' name='dateEnd' id='formControlDefault' value='' required>
                             </div>
                             <div class='content__info'> 
+                                <span>Emloyee's ID</span>
+                                <input class='input' name='employees_id' id='formControlDefault' value="<?php echo $_SESSION['UserId']; ?>" required>
+                            </div>
+                            <div class='content__info'> 
                                 <span>Manager</span>
                                 <input class='input' name='manager' id='formControlDefault' value="<?php echo $_SESSION['UserLogin']; ?> <?php echo $_SESSION['Userlname']; ?>" required>
                             </div>
                             <div class='content__info'>     
-                                <span>Assign Employee</span>
+                                <span>Project Involve</span>
                                 <div class="search-action__wrapper">
                                     <div class="search-action search-nb">
                                         <input class="searchUser-input" type="text">

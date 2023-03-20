@@ -14,7 +14,7 @@ if(isset($_POST['tableID'])) {
 
     $_SESSION['Update_projectID'] = $updateProject['id'];
 
-        echo "<div class='project'>
+        echo "
                 <div class='content-info__wrapper'>
                     <div class='content__info'> 
                         <span>Code</span>
@@ -57,8 +57,11 @@ if(isset($_POST['tableID'])) {
                         <span>Screenshot Search Prefix</span>
                         <input type='text' name='update_screenSearch' id='address formControlDefault' value=" . $updateProject['screenshot_search_prefix'] .  " required>
                     </div>
-                </div>
-            </div>";}
+                    <div class='content__info d-none'>
+                        <span>Status</span>
+                        <input type='text' name='status' id='address formControlDefault' value='waiting' required>
+                    </div>
+                </div>";}
 
     if(isset($_POST['submit-updateProject'])){
 
@@ -72,8 +75,9 @@ if(isset($_POST['tableID'])) {
         $ignoreFiles = $_POST['update_ignoreFiles'];
         $stringErrorContact = $_POST['update_stringErrorsContact'];
         $screenSearch = $_POST['update_screenSearch'];
+        $status = $_POST['status'];
         
-        $sql = "UPDATE `projects` SET `code` = '$code', `project_name` = '$projectName', `quality_check` = '$qualityCheck', `file_type` = '$fileType', `project_tree_style` = '$projectTreeStyle', `ignore_files` = '$ignoreFiles', `string_error_contact` = '$stringErrorContact', `screenshot_search_prefix` = '$screenSearch' WHERE id = '$update_projectID'";
+        $sql = "UPDATE `projects` SET `code` = '$code', `project_name` = '$projectName', `quality_check` = '$qualityCheck', `file_type` = '$fileType', `project_tree_style` = '$projectTreeStyle', `ignore_files` = '$ignoreFiles', `string_error_contact` = '$stringErrorContact', `screenshot_search_prefix` = '$screenSearch', `status` = '$status' WHERE id = '$update_projectID'";
 
         $con->query($sql) or die ($con->error);
 

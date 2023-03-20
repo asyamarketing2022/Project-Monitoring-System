@@ -49,7 +49,6 @@ jQuery(function () {
    });
 
    //Pick Project
-   // $('.table-row_projects').each(function(){
       $(".view-project").on("click", function(){
          $.ajax({
             type: 'POST',
@@ -62,10 +61,23 @@ jQuery(function () {
             }
          });
       });
-   // });
 
 
+   //MyProject Details
+   $(".view-myProject").on("click", function(){
+      $.ajax({
+         type: 'POST',
+         url: 'view-myproject.php',
+         data: {
+            tableID:($(this).attr('value')),
+         },
+         success:function(data){
+            console.log(data)
+            // $('.myProject-details').html(data);
+         }
+      })
 
+   });
 });
 
 

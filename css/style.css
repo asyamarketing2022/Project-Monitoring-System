@@ -183,7 +183,7 @@ tr {
 
 .grid-left__menu {
     background-color: #eff6fe;
-    height: 100vh;
+    height: calc(100vh - 60px);
 }
 
 .grid-left__menu ul {
@@ -366,6 +366,7 @@ tr {
     display: grid;
     grid-template-columns: 20% 80%;
     margin-bottom: 20px;
+    grid-gap: 10px;
 }
 
 .content-info__wrapper .content__info span, .profile-info .profile-info__content span {
@@ -378,8 +379,10 @@ tr {
 
 .content__info input, 
 .content__info select,
+.content__info p,
 .profile-info input, 
-.profile-info select {
+.profile-info select,
+.profile-info__content p {
     border: 0;
     border-bottom: 1px solid #ebebeb;
     padding-bottom: 15px;
@@ -397,6 +400,65 @@ tr {
 }
 
 .project-form .pick-project_form {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-gap: 20px;
+}
+
+.profile {
+    height: calc(100% - 1%);
+}
+
+.profile .profile-container {
+    margin: 25px;
+    background: #fff;
+    height: 100%;
+}
+
+.profile .profile-column {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(400px,1fr));
+    grid-gap: 50px;
+    padding: 20px;
+}
+
+.profile .myprofile-info {
+    display: grid;
+    grid-template-columns: 35% 65%;
+    grid-template-areas: 'myphoto profileinfo profileinfo'
+    'mydesc mydesc mydesc';
+
+}
+
+.profile .myprofile-info .profile-info__content {
+    grid-gap: 10px;
+}
+
+.profile .myprofile-info .myphoto {
+    grid-area: myphoto;
+}
+
+.profile .myprofile-info .profile-info {
+    grid-area: profileinfo;
+}
+
+.profile .myprofile-info .mydesc {
+    grid-area: mydesc;
+}
+
+.profile .myprojects .content-table {
+    padding-top: 50px;
+}
+
+.profile .myprojects .content-table table { 
+    border: 1px solid #f7f6f6;
+}
+
+.profile .myprojects .search-action__wrapper {
+    
+}
+
+.myProject-form {
     display: grid;
     grid-template-columns: 50% 50%;
     grid-gap: 20px;

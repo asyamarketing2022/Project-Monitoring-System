@@ -135,7 +135,7 @@ function dynamicInput() {
             p.classList.add(btnValue)
             div.classList.add('content__info');
             div.classList.add('text-center');
-            input.setAttribute('name', 'pickEmployee[]');
+            input.setAttribute('name', 'project_involve[]');
             // input.setAttribute('id', btnValue);
             input.setAttribute('value', nameofuser);
 
@@ -146,7 +146,7 @@ function dynamicInput() {
 
             rowUser.classList.add('d-none');
           
-            document.querySelector('.dateToday').valueAsDate = new Date();
+            // document.querySelector('.dateToday').valueAsDate = new Date();
 
             //Remove Dynamic Input
             
@@ -178,3 +178,21 @@ dynamicInput();
 
 
 
+function refreshPage() {
+
+    let closeBtn = document.querySelectorAll('.close');
+
+    Array.from(closeBtn).forEach((close) => {
+
+        close.addEventListener('click', () => {
+
+            location.reload();
+            // console.log(close);
+
+        });
+
+    });
+
+}
+
+refreshPage();
