@@ -48,16 +48,16 @@ jQuery(function () {
       });
    });
 
-   //Pick Project
+   //Assign Project
       $(".view-project").on("click", function(){
          $.ajax({
             type: 'POST',
-            url: 'update-project.php',
+            url: 'assign-project.php',
             data: {
                   tableID:($(this).attr('value')),
             },
             success:function(data){
-               $('.updateform-project').html(data);
+               $('.assignform-project').html(data);
             }
          });
       });
@@ -73,7 +73,7 @@ jQuery(function () {
          },
          success:function(data){
             console.log(data)
-            // $('.myProject-details').html(data);
+            $('.myProject-details').html(data);
          }
       })
 

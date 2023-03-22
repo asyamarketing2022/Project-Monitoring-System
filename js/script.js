@@ -127,22 +127,26 @@ function dynamicInput() {
             // let pickBtn = rowUser.querySelector('.pickBtn')
             let btnValue = rowUser.getAttribute('value');
             const input = document.createElement(`input`);
+            const inputID = document.createElement(`input`);
             const div = document.createElement(`div`);
             const p = document.createElement(`p`);
             
             p.innerHTML = " x ";
             // p.setAttribute('class', 'removeInput');
-            p.classList.add(btnValue)
+            // p.classList.add(btnValue)
+            inputID.setAttribute('value', btnValue);
+            inputID.setAttribute('name', 'managerID[]');
             div.classList.add('content__info');
             div.classList.add('text-center');
-            input.setAttribute('name', 'project_involve[]');
+            input.setAttribute('name', 'project_manager[]');
             // input.setAttribute('id', btnValue);
             input.setAttribute('value', nameofuser);
 
             div.appendChild(p);
             div.appendChild(input);
+            div.appendChild(inputID);
 
-            document.querySelector('#pick_project .assign').appendChild(div);
+            document.querySelector('#assign_project .assign').appendChild(div);
 
             rowUser.classList.add('d-none');
           

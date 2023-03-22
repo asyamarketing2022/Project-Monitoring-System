@@ -171,9 +171,9 @@ if(isset($_POST['userID'])) {
                                 <div class="profile-info__content">
                                     <span>Access</span>
                                     <select name="access" id="access" class="">
-                                        <option value="employee" selected>Employee</option>
                                         <option value="admin">Admin</option>
-                                        <option value="manager">Manager</option>
+                                        <option value="project-manager">Project Manager</option>
+                                        <option value="employee" selected>Employee</option>
                                     </select>
                                 </div>
                             </div>
@@ -216,9 +216,9 @@ if(isset($_POST['userID'])) {
                 </div>
                 <form id="editUser" action="" method="post">
                     <div class='tab-content updateform-user' id='profile-tab'>
-
-
+                        <!-- kindly check update-user.php for dynamic content -->
                     </div>
+
                     <div class='button-wrapper'>
                         <input class='submit-button' name='submit-updateUser' type='submit' value='Save'>
                     </div>

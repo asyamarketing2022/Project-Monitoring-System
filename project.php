@@ -3,6 +3,7 @@
 <?php include 'update-project.php'; ?>
 <?php include 'project-table.php'; ?>
 <?php include 'users-table.php'; ?>
+<?php include 'managers-table.php'; ?>
 <?php include 'assign-project.php'; ?>
 
 
@@ -15,7 +16,7 @@
                     <div class="search-button">Search</div>
                 </div>
 
-                <?php if(isset($_SESSION['UserLogin']) && $_SESSION['Access'] == "admin" ) { ?>
+                <?php if(isset($_SESSION['UserLogin']) && $_SESSION['Access'] == "admin") { ?>
 
                 <button type="button" class="btn" data-toggle="modal" data-target="#add_project"><i class="fa fa-plus"></i> Add Project</button>
 
@@ -70,16 +71,8 @@
                             <td><?php echo $projectInfo['string_error_contact'] ?></td>
                             <td><?php echo $projectInfo['screenshot_search_prefix'] ?></td>
                             <td></td>
-
-                            <?php if(isset($_SESSION['UserLogin']) && $_SESSION['Access'] == "admin" ) { ?>
-
-                                <td data-toggle="modal" data-target="#edit_project"><span class="edit-project" value="<?php echo $projectInfo['id'] ?>">View</span></td>
-
-                            <?php } elseif (isset($_SESSION['UserLogin']) && $_SESSION['Access'] == "manager" ) { ?>
-
-                                <td data-toggle="modal" data-target="#view_project"><span class="view-project" value="<?php echo $projectInfo['id'] ?>">View</span></td>
-
-                            <?php } ?>
+                            <td><span data-toggle="modal" data-target="#edit_project" class="edit-project" value="<?php echo $projectInfo['id'] ?>">Edit</span></td>
+                            <td><span data-toggle="modal" data-target="#assign_project" class="view-project" value="<?php echo $projectInfo['id'] ?>">Assign</span></td>
 
                         </tr>
                         <?php } while($projectInfo = $project->fetch_assoc()); ?>
@@ -89,7 +82,7 @@
         </div>
     <!-- </div> -->
 
-<!-- Add New Project - Modal -->
+<!-- Add New Project - Modal -->    
 <div class="modal fade pop-up__modal" id="add_project" tabindex="-1" role="dialog" aria-labelledby="addNewProjectTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
@@ -205,8 +198,8 @@
     </div>
 </div>
 
-<!-- Pick Project - Modal -->
-<div class="modal fade pop-up__modal" id="pick_project" tabindex="-1" role="dialog" aria-labelledby="addNewProjectTitle" aria-hidden="true">
+<!-- Assign Project - Modal -->
+<div class="modal fade pop-up__modal" id="assign_project" tabindex="-1" role="dialog" aria-labelledby="assignProject" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-xl" role="document" style="max-width: 1700px;">
         <div class="modal-content">
             <div class="modal-header border-0">
@@ -215,11 +208,11 @@
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <span class="modal-title">Pick Project</span>
+            <span class="modal-title">Assign Project</span>
             <form class="project-form" action="" method="POST">
                 <div class="pick-project_form">
-                    <div class="updateform-project">
-                            <!-- kindly check update-project.php for dynamic codes -->
+                    <div class="assignform-project">
+                        <!-- kindly check assign-project.php for dynamic content -->   
                     </div>
 
                     <div class='assign-form'>
@@ -233,44 +226,39 @@
                                 <span>Target End Date</span>
                                 <input class='input' type='date' name='dateEnd' id='formControlDefault' value='' required>
                             </div>
-                            <div class='content__info'> 
-                                <span>Emloyee's ID</span>
-                                <input class='input' name='employees_id' id='formControlDefault' value="<?php echo $_SESSION['UserId']; ?>" required>
-                            </div>
+
                             <div class='content__info'> 
                                 <span>Manager</span>
-                                <input class='input' name='manager' id='formControlDefault' value="<?php echo $_SESSION['UserLogin']; ?> <?php echo $_SESSION['Userlname']; ?>" required>
-                            </div>
-                            <div class='content__info'>     
-                                <span>Project Involve</span>
                                 <div class="search-action__wrapper">
                                     <div class="search-action search-nb">
                                         <input class="searchUser-input" type="text">
                                         <div class="search-button">Search</div>
                                     </div>
                                     <table class="">
+                                        <!-- managers-table.php for php code -->
                                         <form action="" method="POST">
-                                            <?php do { ?>
-                                            <tr class="table-userInfo_user search-user <?php echo $userInfo['ID'] ?>" id="<?php echo $userInfo['ID'] ?>" value="<?php echo $userInfo['ID'] ?>" >
-                                                <td class='nameofuser'><?php echo $userInfo['first_name'] ?> <?php echo $userInfo['last_name'] ?></td>
-                                                <td><?php echo $userInfo['position'] ?></td>
-                                                <td><?php echo $userInfo['email'] ?></td>
-                                                <td><?php echo $userInfo['department'] ?></td>
+                                            <?php do { ?>   
+                                            <tr class="search-user <?php echo $managerInfo['ID'] ?>" id="<?php echo $managerInfo['ID'] ?>" value="<?php echo $managerInfo['ID'] ?>" >
+                                                <td class='nameofuser'><?php echo $managerInfo['first_name'] ?> <?php echo $managerInfo['last_name'] ?></td>
+                                                <td><?php echo $managerInfo['position'] ?></td>
+                                                <td><?php echo $managerInfo['email'] ?></td>
+                                                <td><?php echo $managerInfo['department'] ?></td>
                                         
-                                                <td><span class="pickBtn" value="<?php echo $userInfo['ID'] ?>">Add</span></td>
+                                                <td><span class="pickBtn" value="<?php echo $managerInfo['ID'] ?>">Add</span></td>
                                             </tr>
-                                            <?php } while($userInfo = $users->fetch_assoc()); ?>
+                                            <?php } while($managerInfo= $manager->fetch_assoc()); ?>
                                         </form>
                                     </table>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
                     
                 <div class="button-wrapper">
                     <!-- <input class="submit-button" name="submit" type="submit" value="Save"/> -->
-                    <input class="submit-button" name="submitAssign" type="submit" value="Save">
+                    <input class="submit-button" name="submitAssign" type="submit" value="Assign">
                 </div>
             </form>
         </div>

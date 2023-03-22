@@ -12,52 +12,40 @@ session_start();
     $project = $con->query($projectSQL) or die ($con->error);
     $myProject = $project->fetch_assoc();
 
-    echo "<div class='content-info__wrapper'>
-        <div class='content__info'> 
-            <span>Code</span>
-            <input class='input' type='text' name='update_code' id='code formControlDefault' value=" . $myProject['code'] . " required>
-        </div>
-        <div class='content__info'>
-            <span>Project Name</span>
-            <input class='input' type='text' name='update_projectName' id='projectName formControlDefault' value=" . $myProject['project_name'] . " required>
-        </div>
-        <div class='content__info'>
-            <span>Quality Check</span>
-            <select name='update_qualityCheck' id='qualityCheck' aria-label='Default' value=" . $myProject['quality_check'] . ">
-                <option value='Standard' selected>Standard</option>
-                <option value='Standard'>Standard</option>
-            </select>
-        </div>
-        <div class='content__info'>
-            <span>File Type</span>
-            <select name='update_file_type' id='file_type' aria-label='Default' value=" . $myProject['file_type'] . ">
-                <option value='Gettext PO' selected>Gettext PO</option>
-                <option value='Gettext PO'>Gettext PO</option>
-            </select>
-        </div>
-        <div class='content__info'>
-            <span>Project Tree Style</span>
-            <select name='update_projectTreeStyle' id='projectTreeStyle' aria-label='Default' value=" . $myProject['project_tree_style'] . ">
-                <option value='Gettext PO' selected>Gettext PO</option>
-                <option value='Gettext PO'>Gettext PO</option>
-            </select>
-        </div>
-        <div class='content__info'>
-            <span>Ignore Files</span>
-            <input type='text' name='update_ignoreFiles' id='mobile_number formControlDefault' value=" . $myProject['ignore_files'] . ">
-        </div>
-        <div class='content__info'>
-            <span>String Errors Contact</span>
-            <input type='text' name='update_stringErrorsContact' id='stringErrorsContact formControlDefault' value=" . $myProject['string_error_contact'] . " required>
-        </div>
-        <div class='content__info'>
-            <span>Screenshot Search Prefix</span>
-            <input type='text' name='update_screenSearch' id='address formControlDefault' value=" . $myProject['screenshot_search_prefix'] .  " required>
-        </div>
-        <div class='content__info d-none'>
-            <span>Status</span>
-            <input type='text' name='status' id='address formControlDefault' value='waiting' required>
-        </div>
-    </div>";}
+    echo "
+            <div class='content-info__wrapper'>
+                <div class='content__info'> 
+                    <span>Code</span>
+                    <p class='input' type='text' name='update_code' id='code formControlDefault'>" . $myProject['code'] . "</p>
+                </div>
+                <div class='content__info'>
+                    <span>Project Name</span>
+                    <p class='input' type='text' name='update_projectName' id='projectName formControlDefault'>" . $myProject['project_name'] . "</p>
+                </div>
+                <div class='content__info'>
+                    <span>Quality Check</span>
+                    <p name='update_qualityCheck' id='qualityCheck' aria-label='Default'>" . $myProject['quality_check'] . "</p>
+                </div>
+                <div class='content__info'>
+                    <span>File Type</span>
+                    <p name='update_file_type' id='file_type' aria-label='Default'>" . $myProject['file_type'] . "</p>
+                </div>
+                <div class='content__info'>
+                    <span>Project Tree Style</span>
+                    <p name='update_projectTreeStyle' id='projectTreeStyle' aria-label='Default'>" . $myProject['project_tree_style'] . "</p>
+                </div>
+                <div class='content__info'>
+                    <span>Ignore Files</span>
+                    <p type='text' name='update_ignoreFiles' id='mobile_number formControlDefault'>" . $myProject['ignore_files'] . "</p>
+                </div>
+                <div class='content__info'>
+                    <span>String Errors Contact</span>
+                    <p type='text' name='update_stringErrorsContact' id='stringErrorsContact formControlDefault'>" . $myProject['string_error_contact'] . "</p>
+                </div>
+                <div class='content__info'>
+                    <span>Screenshot Search Prefix</span>
+                    <p type='text' name='update_screenSearch' id='address formControlDefault'>" . $myProject['screenshot_search_prefix'] .  "</p>
+                </div>
+            </div>";}
 
 ?>
