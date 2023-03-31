@@ -3,6 +3,9 @@
 <?php include 'myprojects-table.php'; ?>
 <?php include 'assign-project.php'; ?>
 <?php include 'projectIncharge_table.php'; ?>
+<?php include 'view-myproject.php'; ?>
+<?/*php include 'assign-projectIncharge.php'; */?>
+
 
 
 <div class="grid-right__content">
@@ -40,6 +43,7 @@
 
                 <div class="myprojects">
                     <h1>My Projects</h1>
+                  
                     <div class="content-table">
                         <div class="search-action__wrapper">
                             <div class="search-action">
@@ -57,18 +61,22 @@
                                 </tr>
                                 <form action="" method="POST">
                      
+                                <?php if(!empty($userProject['id'])) { ?>
+
                                     <?php do { ?>
 
-                                        <tr class="table-row_projects table-form" value="<?php echo $userProject['project_id']; ?>">
+                                        <tr class="table-row_projects table-form" value="<?php echo $userProject['id']; ?>">
                                             <td><?php echo $userProject['project_code']; ?></td>
                                             <td><?php echo $userProject['project_name']; ?></td>
                                             <td><?php echo $userProject['status']; ?></td>
-                                            <td><span data-toggle="modal" data-target="#view_project" class="view-myProject" value="<?php echo $userProject['project_id']; ?>">View</span></td>
+                                            <td><span data-toggle="modal" data-target="#view_project" class="view-myProject" value="<?php echo $userProject['id']; ?>">View</span></td>
                                         </tr>
 
                                     <?php
                                     
                                     } while($userProject = $myProjects->fetch_assoc()); ?>
+
+                                <?php } ?>
 
                                 </form>
                             </tbody>
@@ -91,13 +99,14 @@
                 </button>
             </div>
             <span class="modal-title">Project Name</span>
-            <form class="project-form" action="" method="POST">
+            <div class="here"></div>
+            <form class="project-form" action="profile.php" method="POST">
                 <div class="myProject-form">
                     <div class='myProject-details'>
                         <!-- view-myproject.php for php code -->
                     </div>
                     <div class='myProject-status'>
-                        <div class='content-info__wrapper'>
+                        <div class='content-info__wrapper assign'>
                             <div class='content__info'>
                                 <span>Status</span>
                                 <p></p>
@@ -118,17 +127,17 @@
                                         <div class='search-button'>Search</div>
                                     </div>
                                     <table class=''>
-                                        <form action='' method='POST'>
+                                       <form action="" method="POST">
                                             <?php do {  ?>   
-                                            <tr class='search-user'   id=" <?php echo $employeeInfo['ID']; ?> " value=" <?php echo $employeeInfo['ID']; ?> " >
+                                            <tr class='search-user' id=" <?php echo $employeeInfo['ID']; ?> " value=" <?php echo $employeeInfo['ID']; ?> " >
                                                 <td class='nameofuser'> <?php echo $employeeInfo['first_name']; ?> <?php echo $employeeInfo['last_name']; ?></td>
                                                 <td><?php echo $employeeInfo['position']; ?></td>
                                                 <td><?php echo $employeeInfo['email']; ?></td>
                                                 <td><?php echo $employeeInfo['department']; ?></td>
                                         
-                                                <td><span class='pickBtn' value=' <?php $employeeInfo['ID']; ?>'>Add</span></td>
+                                                <td><span class='pickBtn' value='<?php echo $employeeInfo['first_name']; ?> <?php echo $employeeInfo['last_name']; ?>'>Adds</span></td>
                                             </tr>
-                                           <?php } while($employeeInfo = $employee->fetch_assoc());  ?>
+                                           <?php } while($employeeInfo = $employee->fetch_assoc()); ?>
                                         </form>
                                     </table>
                                 </div>
@@ -138,8 +147,8 @@
                 </div>
 
                 <div class="button-wrapper">
+                    <input class="submit-button prevent" name="submitPIC" type="submit" value="Submit">
                     <input class="submit-button" name="" type="button" value="Cancel">
-                    <input class="submit-button" name="" type="button" value="Edit">
                 </div>
             </form>
         </div>

@@ -2,21 +2,28 @@
 
 include_once('connections/connection.php');
 $con = connection();
-session_start();
+
+if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+} 
+
 
  if(isset($_POST['tableID'])) {
 
     $projectID = $_POST['tableID'];
+    $_SESSION['projectID'] = $projectID;
 
-    $projectSQL = "SELECT * FROM projects WHERE ID = $projectID";
+    $projectSQL = "SELECT * FROM assign_project WHERE id = $projectID";
     $project = $con->query($projectSQL) or die ($con->error);
     $myProject = $project->fetch_assoc();
 
-    echo "
-            <div class='content-info__wrapper'>
+    $_SESSION['assignProject_id'] = $myProject['id'];
+
+    echo "<div class='content-info__wrapper'>
                 <div class='content__info'> 
                     <span>Code</span>
-                    <p class='input' type='text' name='update_code' id='code formControlDefault'>" . $myProject['code'] . "</p>
+                    <p class='input' type='text' name='update_code' id='code formControlDefault'>" . $myProject['project_code'] . "</p>
                 </div>
                 <div class='content__info'>
                     <span>Project Name</span>
@@ -36,7 +43,7 @@ session_start();
                 </div>
                 <div class='content__info'>
                     <span>Ignore Files</span>
-                    <p type='text' name='update_ignoreFiles' id='mobile_number formControlDefault'>" . $myProject['ignore_files'] . "</p>
+                    <p type='text' name='update_ignoreFiles' id='mobile_number formControlDefault'>" . $myProject['ignores_files'] . "</p>
                 </div>
                 <div class='content__info'>
                     <span>String Errors Contact</span>
@@ -46,6 +53,19 @@ session_start();
                     <span>Screenshot Search Prefix</span>
                     <p type='text' name='update_screenSearch' id='address formControlDefault'>" . $myProject['screenshot_search_prefix'] .  "</p>
                 </div>
-            </div>";}
+            </div>"; }
 
+ if(isset($_POST['submitPIC'])) {
+
+    $assignProject_id = $_SESSION['assignProject_id'];
+
+    $users_array = $_POST['user'];
+    $users = implode(" ", $users_array);
+
+    $sql = "UPDATE `assign_project` SET `project_in_charge` = '$users' WHERE id = '$assignProject_id'";
+
+    $con->query($sql) or die ($con->error);
+
+    
+    }
 ?>

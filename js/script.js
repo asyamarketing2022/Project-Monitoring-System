@@ -138,7 +138,8 @@ function dynamicInput() {
             inputID.setAttribute('name', 'managerID[]');
             div.classList.add('content__info');
             div.classList.add('text-center');
-            input.setAttribute('name', 'project_manager[]');
+            input.setAttribute('name', 'user[]');
+            input.setAttribute('class', 'user');
             // input.setAttribute('id', btnValue);
             input.setAttribute('value', nameofuser);
 
@@ -146,7 +147,7 @@ function dynamicInput() {
             div.appendChild(input);
             div.appendChild(inputID);
 
-            document.querySelector('#assign_project .assign').appendChild(div);
+            document.querySelector('.assign').appendChild(div);
 
             rowUser.classList.add('d-none');
           
@@ -200,3 +201,12 @@ function refreshPage() {
 }
 
 refreshPage();
+
+// let prevent = document.querySelector('.prevent');
+
+// prevent.addEventListener('click', (e) => {
+
+//     e.preventDefault();
+//     console.log(prevent);
+
+// });

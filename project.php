@@ -26,8 +26,13 @@
             <div class="select-action__wrapper mt-4">
                 <ul class="select-action">
                     <li><td><input type="checkbox" id="" name="" value=""></td></li>
+
+         
+
                     <li><i class="fa fa-edit"></i> Edit</li>
                     <li><i class="fa fa-trash"></i> Delete</li>
+
+           
                 </ul>
 
                 <div class="select-action__sort">
@@ -57,25 +62,40 @@
                         <th>Status</th>
                         <th></th>
                     </tr>
-                    <form action="" method="POST">
-                        <?php do { ?>
-                        <tr class="table-row_projects table-form" value="<?php echo $projectInfo['id'] ?>">
-                            <td><input type="checkbox" id="" name="" value=""></td>
-                            <td class="project-id"><?php echo $projectInfo['id'] ?></td>
-                            <td><?php echo $projectInfo['code'] ?></td>
-                            <td><?php echo $projectInfo['project_name'] ?></td>
-                            <td><?php echo $projectInfo['quality_check'] ?></td>
-                            <td><?php echo $projectInfo['file_type'] ?></td>
-                            <td><?php echo $projectInfo['project_tree_style'] ?></td>
-                            <td><?php echo $projectInfo['ignore_files'] ?></td>
-                            <td><?php echo $projectInfo['string_error_contact'] ?></td>
-                            <td><?php echo $projectInfo['screenshot_search_prefix'] ?></td>
-                            <td></td>
-                            <td><span data-toggle="modal" data-target="#edit_project" class="edit-project" value="<?php echo $projectInfo['id'] ?>">Edit</span></td>
-                            <td><span data-toggle="modal" data-target="#assign_project" class="view-project" value="<?php echo $projectInfo['id'] ?>">Assign</span></td>
 
-                        </tr>
-                        <?php } while($projectInfo = $project->fetch_assoc()); ?>
+                    
+                    <!-- project-table.php for SQL -->
+
+                    <form action="" method="POST">
+
+                 
+
+                            <?php do { ?>
+                                <tr class="table-row_projects table-form" value="<?php echo $projectInfo['id'] ?>">
+                                    <td><input type="checkbox" id="" name="" value=""></td>
+                                    <td class="project-id"><?php echo $projectInfo['id'] ?></td>
+                                    <td><?php echo $projectInfo['code'] ?></td>
+                                    <td><?php echo $projectInfo['project_name'] ?></td>
+                                    <td><?php echo $projectInfo['quality_check'] ?></td>
+                                    <td><?php echo $projectInfo['file_type'] ?></td>
+                                    <td><?php echo $projectInfo['project_tree_style'] ?></td>
+                                    <td><?php echo $projectInfo['ignore_files'] ?></td>
+                                    <td><?php echo $projectInfo['string_error_contact'] ?></td>
+                                    <td><?php echo $projectInfo['screenshot_search_prefix'] ?></td>
+                                    <td></td>
+
+                                    <?php if(isset($_SESSION['UserLogin']) && $_SESSION['Access'] == "admin") { ?>
+                                        
+                                        <td><span data-toggle="modal" data-target="#edit_project" class="edit-project" value="<?php echo $projectInfo['id'] ?>">Edit</span></td>
+                                        <td><span data-toggle="modal" data-target="#assign_project" class="view-project" value="<?php echo $projectInfo['id'] ?>">Assign</span></td>
+                                    
+                                    <?php } ?>
+
+                                </tr>
+                            <?php } while($projectInfo = $project->fetch_assoc()); ?>
+
+                     
+                   
                     </form>
                 </table>
             </div>

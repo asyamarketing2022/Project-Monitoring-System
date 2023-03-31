@@ -64,20 +64,120 @@ jQuery(function () {
 
 
    //MyProject Details
-   $(".view-myProject").on("click", function(){
-      $.ajax({
-         type: 'POST',
-         url: 'view-myproject.php',
-         data: {
-            tableID:($(this).attr('value')),
-         },
-         success:function(data){
-            console.log(data)
-            $('.myProject-details').html(data);
-         }
-      })
-
+   $(".view-myProject").each(function(){
+      $(this).on("click", function(){
+         $.ajax({
+            type: 'POST',
+            url: 'view-myproject.php',
+            data: {
+               tableID:($(this).attr('value')),
+            },
+            success:function(data){
+               $('.myProject-details').html(data);
+            }
+         });
+         console.log($(this).attr('value'));
+      });
    });
-});
 
+   //Assign Project In Charge
+   $('.view-myProject').each(function(){
+      $(this).on("click", function(){
+
+         let eventID = $(this).attr('value');
+         // let users_array = [];
+
+          $.ajax({
+            type: 'GET',
+            url: 'assign-projectIncharge.php',
+            data: {'tableID': eventID},
+   
+            success:function(data){
+               $('.here').html(data);
+            }
+         });
+         
+      });
+   });
+
+   function btntext(){
+
+      let viewsBtn = document.querySelectorAll('.view-myProject');
+
+      Array.from(viewsBtn).forEach((viewBtn) => {
+
+
+      });
+
+      let submitBtn = document.querySelector('.prevent');
+      submitBtn.addEventListener('click', ()=> {
+
+         let users = document.querySelectorAll('.user');
+         let users_array = [];
+
+         Array.from(users).forEach((user) => {
+
+            users_array.push($(user).attr('value'));
+
+            $.ajax({
+               type: 'POST',
+               url: 'assign-projectIncharge.php',
+               data: {'users': users_array },
+    
+               success:function(data){
+                   $('.here').html(data);
+               }
+            });
+
+         });
+
+      });
+ 
+   }
+
+   // btntext();
+
+   // function btnPick(){
+
+   //    let pickBtns = document.querySelectorAll('.pickBtn');
+   //    let users_array = [];
+      
+   //    Array.from(pickBtns).forEach((pickbtn) => {
+   //       pickbtn.addEventListener('click', () => {
+
+   //          users_array.push($(pickbtn).attr('value'));
+
+   //          $.ajax({
+   //             type: 'GET',
+   //             url: 'assign-projectIncharge.php',
+   //             data: {'users': users_array},
+    
+   //             success:function(data){
+   //                 $('.here').html(data);
+   //             }
+   //          });
+   //       });
+   //    });
+   // }
+
+   // btnPick();
+
+
+
+
+   // function preventDefault(){
+
+   //    let btn = document.querySelector('.prevent');
+
+   //    btn.addEventListener('click', (e) => {
+
+   //       e.preventDefault();
+       
+   //    });
+
+   // }
+
+   // preventDefault();
+
+});
 

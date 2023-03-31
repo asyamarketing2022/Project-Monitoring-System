@@ -17,10 +17,7 @@ if(isset($_POST['userID'])) {
 
 }
 
-
 ?>
-
-
 
         <div class="grid-right__content">
             <div class="search-action__wrapper mt-4">
@@ -226,8 +223,5 @@ if(isset($_POST['userID'])) {
             </div>
         </div>
     </div>
-
-
-
 
 <?php include 'footer.php'; ?>
