@@ -1,6 +1,6 @@
 <?php include 'login.php'; ?>
-<?php include 'header.php'; ?>
-<?php include("sidebar.php"); ?>
+<?php $page = 'homepage'; include 'header.php'; ?>
+<?php include "sidebar.php"; ?>
 
 
 <?php 

@@ -1,4 +1,4 @@
-<?php include 'header.php'; ?>
+<?php $page = 'admin'; include 'header.php'; ?>
 <?php include 'register-user.php'; ?>
 <?php include 'update-user.php'; ?>
 <?/*php include 'edit-user.php'; */?>
@@ -29,11 +29,11 @@ if(isset($_POST['userID'])) {
             </div>
 
             <div class="select-action__wrapper mt-4">
-                <ul class="select-action">
+                <!-- <ul class="select-action">
                     <li><td><input type="checkbox" id="" name="" value=""></td></li>
                     <li><i class="fa fa-edit"></i> Edit</li>
                     <li><i class="fa fa-trash"></i> Delete</li>
-                </ul>
+                </ul> -->
 
                 <div class="select-action__sort">
                     <span><i class="fa fa-sort-amount-desc"></i> Sort by</span>
@@ -76,7 +76,7 @@ if(isset($_POST['userID'])) {
                         
                         ?>
 
-                         <input class="submit-button" name="submit" type="submit" value="submit"/>
+                         <input class="submit-button delete button" name="submit" type="submit" value="Delete"/>
                     </form>
                 </table>
             </div>

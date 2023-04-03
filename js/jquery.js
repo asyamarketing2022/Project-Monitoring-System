@@ -162,22 +162,21 @@ jQuery(function () {
 
    // btnPick();
 
+   function notif(){
 
+      $(function() {
+         $.ajax({
+            type: 'GET',
+            url: 'notification.php',
+            success:function(data){
+                $('.notif_count').html(data);
+            }
+         });
+      });
+   }
 
-
-   // function preventDefault(){
-
-   //    let btn = document.querySelector('.prevent');
-
-   //    btn.addEventListener('click', (e) => {
-
-   //       e.preventDefault();
-       
-   //    });
-
-   // }
-
-   // preventDefault();
+notif();
 
 });
+
 

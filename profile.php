@@ -1,4 +1,4 @@
-<?php include 'header.php'; ?>
+<?php $page = 'profile'; include 'header.php'; ?>
 <?php include 'sidebar.php'; ?>
 <?php include 'myprojects-table.php'; ?>
 <?php include 'assign-project.php'; ?>

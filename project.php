@@ -1,4 +1,4 @@
-<?php include 'header.php'; ?>
+<?php $page = 'project'; include 'header.php'; ?>
 <?php include 'add-project.php'; ?>
 <?php include 'update-project.php'; ?>
 <?php include 'project-table.php'; ?>
@@ -24,16 +24,12 @@
             </div>
 
             <div class="select-action__wrapper mt-4">
-                <ul class="select-action">
+                <!-- <ul class="select-action">
                     <li><td><input type="checkbox" id="" name="" value=""></td></li>
-
-         
 
                     <li><i class="fa fa-edit"></i> Edit</li>
                     <li><i class="fa fa-trash"></i> Delete</li>
-
-           
-                </ul>
+                </ul> -->
 
                 <div class="select-action__sort">
                     <span><i class="fa fa-sort-amount-desc"></i> Sort by</span>
@@ -60,6 +56,7 @@
                         <th>String Error Contact</th>
                         <th>Screen Search</th>
                         <th>Status</th>
+                        <th></th>
                         <th></th>
                     </tr>
 

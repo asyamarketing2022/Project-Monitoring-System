@@ -84,12 +84,13 @@ if(isset($_POST['tableID'])) {
         $managerId_array = $_POST['managerID'];
         $projectManager_array = $_POST['user'];
         $status = $_POST['status'];
+        $notif_status = 'new';
 
         // $managersId = implode(" ", $managersId_array);
         // $managers = implode(" ", $projectManager_array);
 
         foreach(array_combine($managerId_array, $projectManager_array) as $managerId => $projectManager) {
-            $sql = "INSERT INTO `assign_project` (`project_id`, `project_code`, `project_name`, `quality_check`, `file_type`, `project_tree_style`, `ignores_files`, `string_error_contact`, `screenshot_search_prefix`, `date_end`,`manager_id`, `manager`, `status`) VALUES ('$projectId', '$code', '$projectName', '$qualityCheck', '$fileType', '$projectTreeStyle', '$ignoreFiles', '$stringErrorsContact', '$screenSearch', '$dateEnd', '$managerId', '$projectManager', '$status')";
+            $sql = "INSERT INTO `assign_project` (`project_id`, `project_code`, `project_name`, `quality_check`, `file_type`, `project_tree_style`, `ignores_files`, `string_error_contact`, `screenshot_search_prefix`, `date_end`,`manager_id`, `manager`, `status`, `notif_status`) VALUES ('$projectId', '$code', '$projectName', '$qualityCheck', '$fileType', '$projectTreeStyle', '$ignoreFiles', '$stringErrorsContact', '$screenSearch', '$dateEnd', '$managerId', '$projectManager', '$status', '$notif_status')";
             $con->query($sql) or die ($con->error);
         }
     }
