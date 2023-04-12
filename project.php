@@ -5,6 +5,7 @@
 <?php include 'users-table.php'; ?>
 <?php include 'managers-table.php'; ?>
 <?php include 'assign-project.php'; ?>
+<?php include 'project-history.php'; ?>
 
 
 <?php include("sidebar.php"); ?>
@@ -180,6 +181,7 @@
             </div>
             <span class="modal-title">Edit Project</span>
             <form class="project-form" action="" method="post">
+                 <!-- update-project.php -->
                 <div class="updateform-project">
 
                 </div>
@@ -193,7 +195,7 @@
 
 
 <!-- View Project - Modal -->
-<div class="modal fade pop-up__modal" id="view_project" tabindex="-1" role="dialog" aria-labelledby="addNewProjectTitle" aria-hidden="true">
+<!-- <div class="modal fade pop-up__modal" id="view_project" tabindex="-1" role="dialog" aria-labelledby="addNewProjectTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header border-0">
@@ -204,8 +206,8 @@
             </div>
             <span class="modal-title">View Project</span>
             <form class="project-form" action="" method="">
-                <div class="updateform-project">
-
+                <div class="assignform-project">
+                                
                 </div>
                 <div class="button-wrapper">
                     <input class="submit-button" name="" type="button" data-toggle="modal" data-target="#pick_project" value="Pick">
@@ -213,7 +215,7 @@
             </form>
         </div>
     </div>
-</div>
+</div> -->
 
 <!-- Assign Project - Modal -->
 <div class="modal fade pop-up__modal" id="assign_project" tabindex="-1" role="dialog" aria-labelledby="assignProject" aria-hidden="true">
@@ -253,17 +255,23 @@
                                     </div>
                                     <table class="">
                                         <!-- managers-table.php for php code -->
-                                        <form action="" method="POST">
-                                            <?php do { ?>   
-                                            <tr class="search-user <?php echo $managerInfo['ID'] ?>" id="<?php echo $managerInfo['ID'] ?>" value="<?php echo $managerInfo['ID'] ?>" >
-                                                <td class='nameofuser'><?php echo $managerInfo['first_name'] ?> <?php echo $managerInfo['last_name'] ?></td>
-                                                <td><?php echo $managerInfo['position'] ?></td>
-                                                <td><?php echo $managerInfo['email'] ?></td>
-                                                <td><?php echo $managerInfo['department'] ?></td>
                                         
-                                                <td><span class="pickBtn" value="<?php echo $managerInfo['ID'] ?>">Add</span></td>
-                                            </tr>
-                                            <?php } while($managerInfo= $manager->fetch_assoc()); ?>
+                                        <form action="" method="POST">
+
+                                            <?php if(!empty($managerInfo['ID'])) { ?>
+
+                                                <?php do { ?>   
+                                                <tr class="search-user <?php echo $managerInfo['ID'] ?>" id="<?php echo $managerInfo['ID'] ?>" value="<?php echo $managerInfo['ID'] ?>" >
+                                                    <td class='nameofuser'><?php echo $managerInfo['first_name'] ?> <?php echo $managerInfo['last_name'] ?></td>
+                                                    <td><?php echo $managerInfo['position'] ?></td>
+                                                    <td><?php echo $managerInfo['email'] ?></td>
+                                                    <td><?php echo $managerInfo['department'] ?></td>
+                                            
+                                                    <td><span class="pickBtn" value="<?php echo $managerInfo['ID'] ?>">Add</span></td>
+                                                </tr>
+                                                <?php } while($managerInfo= $manager->fetch_assoc()); ?>
+
+                                            <?php } ?>
                                         </form>
                                     </table>
                                 </div>

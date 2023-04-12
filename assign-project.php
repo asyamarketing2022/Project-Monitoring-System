@@ -81,7 +81,7 @@ if(isset($_POST['tableID'])) {
         $dateEnd = $_POST['dateEnd'];
         // $employessId = $_POST['employees_id'];
         // $manager = $_POST['manager'];
-        $managerId_array = $_POST['managerID'];
+        $managerId_array = $_POST['userID'];
         $projectManager_array = $_POST['user'];
         $status = $_POST['status'];
         $notif_status = 'new';

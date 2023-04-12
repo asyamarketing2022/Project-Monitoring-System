@@ -14,8 +14,6 @@ Array.from(users_row).forEach((user_row) => {
 
 
             // user_row.setAttribute("value", td);
-           
-
        });
 }); 
 
@@ -135,7 +133,7 @@ function dynamicInput() {
             // p.setAttribute('class', 'removeInput');
             // p.classList.add(btnValue)
             inputID.setAttribute('value', btnValue);
-            inputID.setAttribute('name', 'managerID[]');
+            inputID.setAttribute('name', 'userID[]');
             div.classList.add('content__info');
             div.classList.add('text-center');
             input.setAttribute('name', 'user[]');

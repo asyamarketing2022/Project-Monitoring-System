@@ -2,8 +2,12 @@
 
 include_once('connections/connection.php');
 $con = connection();
-session_start();
+if(!isset($_SESSION)) 
+{ 
+    session_start(); 
+} 
 
+include_once("user-record.php");
 
 if(isset($_POST['tableID'])) {
 
@@ -105,6 +109,10 @@ if(isset($_POST['tableID'])) {
         $sql = "UPDATE `registered_users` SET `first_name` = '$fname', `last_name` = '$lname', `gender` = '$gender', `date_of_birth` = '$birthday', `mobile_number` = '$mobilenumber', `address` = '$address', `email` = '$email', `department` = '$department', `position` = '$position', `password` = '$password', `access` = '$access' WHERE ID = '$userID'";
     
         $con->query($sql) or die ($con->error);
+
+        $userDetails = $userID . ' ' . $fname  . ' ' . $lname ;
+
+        userRecord('edit info user', $userDetails);
     }
 
 ?>

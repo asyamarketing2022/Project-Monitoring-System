@@ -10,7 +10,7 @@ if(!isset($_SESSION))
 
 $userID = $_SESSION['UserId'];
 
-$sql = "SELECT notif_status FROM assign_project WHERE manager_id = $userID";
+$sql = "SELECT notif_status FROM project_history WHERE employee_id = $userID";
 $project = $con->query($sql) or die ($con->error);
 
 if (mysqli_num_rows($project) > 0){
@@ -27,9 +27,14 @@ if (mysqli_num_rows($project) > 0){
     }
 
     echo $_SESSION['new_notif'];
+    // echo $userID;
 
+    // echo 'error';
+    
 } else {
+
     echo "";
+
 }
 
 mysqli_close($con);

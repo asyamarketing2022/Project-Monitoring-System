@@ -3,6 +3,8 @@
 include_once("connections/connection.php");
 $con = connection();
 
+include_once("user-record.php");
+
    if(isset($_POST['addSubmit'])){
 
     $fname = $_POST['firstname'];
@@ -30,6 +32,12 @@ $con = connection();
         $sql = "INSERT INTO `registered_users`(`first_name`, `last_name`, `gender`, `date_of_birth`, `mobile_number`, `address`, `email`, `department`, `position`, `password`, `access`) VALUES ('$fname', '$lname', '$gender', '$birthday', '$mobilenumber', '$address','$email', '$department', '$position', '$password', '$access')";
 
         $con->query($sql) or die ($con->error); 
+
+
+        //User Record Action Add
+        $userDetails = $fname  . ' ' . $lname ;
+              
+        userRecord('add user', $userDetails);
 
     }
 

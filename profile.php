@@ -4,6 +4,8 @@
 <?php include 'assign-project.php'; ?>
 <?php include 'projectIncharge_table.php'; ?>
 <?php include 'view-myproject.php'; ?>
+<?php include 'picproject-table.php'; ?>
+<?php include 'project-history.php'; ?>
 <?/*php include 'assign-projectIncharge.php'; */?>
 
 
@@ -59,24 +61,45 @@
                                     <th>Status</th>
                                     <th></th>
                                 </tr>
+
+                                <!-- myprojects-table.php -->
                                 <form action="" method="POST">
+
+                                <?php if(isset($_SESSION['UserLogin']) && $_SESSION['Access'] == "manager" ) { ?>
                      
-                                <?php if(!empty($userProject['id'])) { ?>
+                                    <?php if(!empty($userProject['id'])) { ?>
 
-                                    <?php do { ?>
+                                        <?php do { ?>
 
-                                        <tr class="table-row_projects table-form" value="<?php echo $userProject['id']; ?>">
-                                            <td><?php echo $userProject['project_code']; ?></td>
-                                            <td><?php echo $userProject['project_name']; ?></td>
-                                            <td><?php echo $userProject['status']; ?></td>
-                                            <td><span data-toggle="modal" data-target="#view_project" class="view-myProject" value="<?php echo $userProject['id']; ?>">View</span></td>
-                                        </tr>
+                                            <tr class="table-row_projects table-form" value="<?php echo $userProject['id']; ?>">
+                                                <td><?php echo $userProject['project_code']; ?></td>
+                                                <td><?php echo $userProject['project_name']; ?></td>
+                                                <td><?php echo $userProject['status']; ?></td>
+                                                <td><span data-toggle="modal" data-target="#view_project" class="view-myProject" value="<?php echo $userProject['id']; ?>">View</span></td>
+                                            </tr>
 
-                                    <?php
-                                    
-                                    } while($userProject = $myProjects->fetch_assoc()); ?>
+                                        <?php } while($userProject = $myProjects->fetch_assoc()); ?>
 
-                                <?php } ?>
+                                    <?php } ?>
+
+                                <?php } elseif(isset($_SESSION['UserLogin']) && $_SESSION['Access'] == "employee") { ?>
+
+                                        <?php if(!empty($picProject['id'])) { ?>
+
+                                            <?php do { ?>
+
+                                                <tr class="table-row_projects table-form" value="<?php echo $picProject['id']; ?>">
+                                                    <td><?php echo $picProject['project_code']; ?></td>
+                                                    <td><?php echo $picProject['project_name']; ?></td>
+                                                    <td><?php echo $picProject['status']; ?></td>
+                                                    <td><span data-toggle="modal" data-target="#view_project" class="view-myProject" value="<?php echo $picProject['id']; ?>">View</span></td>
+                                                </tr>
+                                                
+                                            <?php } while($picProject = $project->fetch_assoc()); ?>
+
+                                        <?php } ?>
+
+                                    <?php } ?>
 
                                 </form>
                             </tbody>
@@ -119,29 +142,35 @@
                                 <span>Target End Date</span>
                                 <p></p>
                             </div> 
-                            <div class='content__info'> 
-                                <span>Project In Charge</span>
-                                <div class='search-action__wrapper'>
-                                    <div class='search-action search-nb'>
-                                        <input class='searchUser-input' type='text'>
-                                        <div class='search-button'>Search</div>
+
+                            <?php if (isset($_SESSION['UserLogin']) && $_SESSION['Access'] == "admin" || $_SESSION['Access'] == "manager") { ?>
+
+                                <div class='content__info'> 
+                                    <span>Project In Charge</span>
+                                    <div class='search-action__wrapper'>
+                                        <div class='search-action search-nb'>
+                                            <input class='searchUser-input' type='text'>
+                                            <div class='search-button'>Search</div>
+                                        </div>
+                                        <table class=''>
+                                        <form action="" method="POST">
+                                                <?php do {  ?>   
+                                                <tr class='search-user' id=" <?php echo $employeeInfo['ID']; ?> " value=" <?php echo $employeeInfo['ID']; ?> " >
+                                                    <td class='nameofuser'> <?php echo $employeeInfo['first_name']; ?> <?php echo $employeeInfo['last_name']; ?></td>
+                                                    <td><?php echo $employeeInfo['position']; ?></td>
+                                                    <td><?php echo $employeeInfo['email']; ?></td>
+                                                    <td><?php echo $employeeInfo['department']; ?></td>
+                                            
+                                                    <td><span class='pickBtn' value='<?php echo $employeeInfo['first_name']; ?> <?php echo $employeeInfo['last_name']; ?>'>Adds</span></td>
+                                                </tr>
+                                            <?php } while($employeeInfo = $employee->fetch_assoc()); ?>
+                                            </form>
+                                        </table>
                                     </div>
-                                    <table class=''>
-                                       <form action="" method="POST">
-                                            <?php do {  ?>   
-                                            <tr class='search-user' id=" <?php echo $employeeInfo['ID']; ?> " value=" <?php echo $employeeInfo['ID']; ?> " >
-                                                <td class='nameofuser'> <?php echo $employeeInfo['first_name']; ?> <?php echo $employeeInfo['last_name']; ?></td>
-                                                <td><?php echo $employeeInfo['position']; ?></td>
-                                                <td><?php echo $employeeInfo['email']; ?></td>
-                                                <td><?php echo $employeeInfo['department']; ?></td>
-                                        
-                                                <td><span class='pickBtn' value='<?php echo $employeeInfo['first_name']; ?> <?php echo $employeeInfo['last_name']; ?>'>Adds</span></td>
-                                            </tr>
-                                           <?php } while($employeeInfo = $employee->fetch_assoc()); ?>
-                                        </form>
-                                    </table>
                                 </div>
-                            </div>
+
+                            <?php } ?>
+
                         </div>
                     </div>
                 </div>

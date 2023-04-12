@@ -59,7 +59,8 @@ if(isset($_POST['userID'])) {
                         <th></th>
                     </tr>
                     
-                    <form action="delete.php" method="POST">
+                    <form action="deleteUser.php" method="POST">
+                        <!-- users-table.php -->
                         <?php do { ?>
                         <tr class="table-row_user Info_user table-form" value="<?php echo $userInfo['ID'] ?>">
                             <td><input type="checkbox" class="id" id="id" name="lang[]" value="<?php echo $userInfo['ID'] ?>"></td>
@@ -76,7 +77,7 @@ if(isset($_POST['userID'])) {
                         
                         ?>
 
-                         <input class="submit-button delete button" name="submit" type="submit" value="Delete"/>
+                         <input class="submit-button delete button" name="deleteUser" type="submit" value="Delete"/>
                     </form>
                 </table>
             </div>

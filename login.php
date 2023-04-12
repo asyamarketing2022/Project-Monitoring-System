@@ -7,6 +7,9 @@ if(!isset($_SESSION)){
 include_once("connections/connection.php");
 $con = connection();
 
+include_once("user-record.php");
+
+
 if(isset($_POST['login'])){
 
     $email = $_POST['email'];
@@ -26,15 +29,23 @@ if(isset($_POST['login'])){
         $_SESSION['Department'] = $row['department'];
         $_SESSION['Position'] = $row['position'];
         $_SESSION['Access'] = $row['access'];
-        
+
+        //User Record Action Login
+        userRecord('login');
+
         echo "<p>Login success!</p>";
         header("Location: homepage.php");
- 
+
+
+    
     }  else {
 
         echo "<p>email or password is incorrect!</p>";
 
     }
+
+    
+
 }
 
 ?>

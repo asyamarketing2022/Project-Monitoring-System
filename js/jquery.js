@@ -162,20 +162,30 @@ jQuery(function () {
 
    // btnPick();
 
-   function notif(){
-
-      $(function() {
+   function notif() {
+       $(function() {
          $.ajax({
             type: 'GET',
             url: 'notification.php',
             success:function(data){
-                $('.notif_count').html(data);
+               $('.notif_count').html(data);
             }
          });
       });
    }
 
-notif();
+ notif();
+
+   function notifShow() {
+      $(".fa-bell").on('click', ()=> {
+
+         $(".notif-list").toggle();
+
+      });
+   }
+
+notifShow();
+
 
 });
 

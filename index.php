@@ -16,7 +16,7 @@
                     <input type="password" name="password" id="login-password" placeholder="Password" required>
                 </div>
 
-                <div class="button pt-3">
+                <div class="pt-3">
                     <button class="btn" type="submit" name="login" value="Submit Form" id="btn-login">Log in</button>
                     <!-- <button type="button" class="btn">Cancel</button> -->
                 </div>

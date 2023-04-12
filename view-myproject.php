@@ -22,36 +22,44 @@ if(!isset($_SESSION))
 
     echo "<div class='content-info__wrapper'>
                 <div class='content__info'> 
+                    <span>Project ID</span>
+                    <input class='input' type='text' name='projectId' id='projectId' value=" . $myProject['id'] . " required>
+                </div>
+                <div class='content__info'> 
                     <span>Code</span>
-                    <p class='input' type='text' name='update_code' id='code formControlDefault'>" . $myProject['project_code'] . "</p>
+                    <input class='input' type='text' name='code' id='code' value=" . $myProject['project_code'] . " >
                 </div>
                 <div class='content__info'>
                     <span>Project Name</span>
-                    <p class='input' type='text' name='update_projectName' id='projectName formControlDefault'>" . $myProject['project_name'] . "</p>
+                    <input class='input' type='text' name='projectName' id='projectName' value =" . $myProject['project_name'] . " >
                 </div>
                 <div class='content__info'>
                     <span>Quality Check</span>
-                    <p name='update_qualityCheck' id='qualityCheck' aria-label='Default'>" . $myProject['quality_check'] . "</p>
+                    <input class='input' type='text' name='qualityCheck' id='qualityCheck' aria-label='Default' value=" . $myProject['quality_check'] . " >
                 </div>
                 <div class='content__info'>
                     <span>File Type</span>
-                    <p name='update_file_type' id='file_type' aria-label='Default'>" . $myProject['file_type'] . "</p>
+                    <input class='input' type='text' name='file_type' id='file_type' aria-label='Default' value=" . $myProject['file_type'] . " >
                 </div>
                 <div class='content__info'>
                     <span>Project Tree Style</span>
-                    <p name='update_projectTreeStyle' id='projectTreeStyle' aria-label='Default'>" . $myProject['project_tree_style'] . "</p>
+                    <input class='input' type='text' name='projectTreeStyle' id='projectTreeStyle' aria-label='Default' value= " . $myProject['project_tree_style'] . " >
                 </div>
                 <div class='content__info'>
                     <span>Ignore Files</span>
-                    <p type='text' name='update_ignoreFiles' id='mobile_number formControlDefault'>" . $myProject['ignores_files'] . "</p>
+                    <input class='input' type='text' name='ignoreFiles' id='mobile_number formControlDefault' value=" . $myProject['ignores_files'] . " >
                 </div>
                 <div class='content__info'>
                     <span>String Errors Contact</span>
-                    <p type='text' name='update_stringErrorsContact' id='stringErrorsContact formControlDefault'>" . $myProject['string_error_contact'] . "</p>
+                    <input class='input' type='text' name='stringErrorsContact' id='stringErrorsContact formControlDefault' value=" . $myProject['string_error_contact'] . " >
                 </div>
                 <div class='content__info'>
                     <span>Screenshot Search Prefix</span>
-                    <p type='text' name='update_screenSearch' id='address formControlDefault'>" . $myProject['screenshot_search_prefix'] .  "</p>
+                    <input class='input' type='text' name='screenSearch' id='address formControlDefault' value=" . $myProject['screenshot_search_prefix'] .  " >
+                </div>
+                <div class='content__info d-none'>
+                    <span>Status</span>
+                    <input type='text' name='status' id='address formControlDefault' value='waiting' required>
                 </div>
             </div>"; }
 
@@ -60,9 +68,11 @@ if(!isset($_SESSION))
     $assignProject_id = $_SESSION['assignProject_id'];
 
     $users_array = $_POST['user'];
+    $usersID_array = $_POST['userID'];
     $users = implode(" ", $users_array);
+    $usersID = implode(" ", $usersID_array);
 
-    $sql = "UPDATE `assign_project` SET `project_in_charge` = '$users' WHERE id = '$assignProject_id'";
+    $sql = "UPDATE `assign_project` SET `project_in_charge` = '$users', `project_in_charge_id` = '$usersID' WHERE id = '$assignProject_id'";
 
     $con->query($sql) or die ($con->error);
 
