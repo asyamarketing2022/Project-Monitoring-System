@@ -101,7 +101,6 @@ jQuery(function () {
    });
 
    function btntext(){
-
       let viewsBtn = document.querySelectorAll('.view-myProject');
 
       Array.from(viewsBtn).forEach((viewBtn) => {
@@ -137,33 +136,9 @@ jQuery(function () {
 
    // btntext();
 
-   // function btnPick(){
-
-   //    let pickBtns = document.querySelectorAll('.pickBtn');
-   //    let users_array = [];
-      
-   //    Array.from(pickBtns).forEach((pickbtn) => {
-   //       pickbtn.addEventListener('click', () => {
-
-   //          users_array.push($(pickbtn).attr('value'));
-
-   //          $.ajax({
-   //             type: 'GET',
-   //             url: 'assign-projectIncharge.php',
-   //             data: {'users': users_array},
-    
-   //             success:function(data){
-   //                 $('.here').html(data);
-   //             }
-   //          });
-   //       });
-   //    });
-   // }
-
-   // btnPick();
-
+   // Notification Message
    function notif() {
-       $(function() {
+      $(function() {
          $.ajax({
             type: 'GET',
             url: 'notification.php',
@@ -173,8 +148,7 @@ jQuery(function () {
          });
       });
    }
-
- notif();
+   notif();
 
    function notifShow() {
       $(".fa-bell").on('click', ()=> {
@@ -183,8 +157,52 @@ jQuery(function () {
 
       });
    }
+   notifShow();
 
-notifShow();
+   //Limit of data in table   
+   function limitData() {
+      $('.dataLimit').on('change', function(){
+         let searchFilter = $(".searchFilter").val();
+          let val = $('.dataLimit option:selected').attr('value');
+          $.ajax({
+            type: 'POST',
+            url: 'usersReport-table.php',
+            data: {
+               'searchFilter': searchFilter,
+               'DataLimit': val 
+            },
+               success:function(data){
+                  $('.userhistory-table').html(data);
+            }
+          });
+         
+      });
+   }
+   limitData();
+
+   //Search Filter  
+   function searchFilter() {
+      $('.submitFilter').on('click', (e)=> {
+         let searchFilter = $(".searchFilter").val();
+         let val = $('.dataLimit option:selected').attr('value');
+
+            $.ajax({
+               type: 'POST',
+               url: 'usersReport-table.php',
+               data: {
+                  'searchFilter': searchFilter,
+                  'DataLimit': val
+               },
+               success:function(data){
+                  $('.userhistory-table').html(data);
+               }
+            });
+
+            e.preventDefault();
+      });
+
+   }
+   searchFilter()
 
 
 });

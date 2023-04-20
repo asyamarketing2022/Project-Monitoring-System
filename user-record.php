@@ -18,7 +18,7 @@ function userRecord($action = null, &$source = null) {
     
     $actionStatus = 'success';
     
-    $sql_userRecord = "INSERT INTO `user_record`(`user_name`, `user_id`, `user_position`, `department`, `action`, `source`, `action_status`) VALUE ('$firstName $lastName', '$userId', '$userPostion', '$userDepartment', '$action', '$source', '$actionStatus')";
+    $sql_userRecord = "INSERT INTO `users_record`(`user_name`, `user_id`, `user_position`, `department`, `action`, `source`, `action_status`) VALUE ('$firstName $lastName', '$userId', '$userPostion', '$userDepartment', '$action', '$source', '$actionStatus')";
      
     $con->query($sql_userRecord) or die ($con->error);
 }

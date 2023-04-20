@@ -36,9 +36,9 @@
                     <span><i class="fa fa-sort-amount-desc"></i> Sort by</span>
                     <select class="form-select" aria-label="Default select example">
                         <option selected>Name</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                        <option value="3">3</option>
+                        <option value="5">5</option>
+                        <option value="8">8</option>
                     </select>
                 </div>
             </div>
@@ -65,8 +65,6 @@
                     <!-- project-table.php for SQL -->
 
                     <form action="" method="POST">
-
-                 
 
                             <?php do { ?>
                                 <tr class="table-row_projects table-form" value="<?php echo $projectInfo['id'] ?>">

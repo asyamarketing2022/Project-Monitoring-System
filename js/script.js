@@ -19,35 +19,35 @@ Array.from(users_row).forEach((user_row) => {
 
 //Search function
 
-let searchInput = document.querySelectorAll('.search');
+// let searchInput = document.querySelectorAll('.search');
 
-Array.from(searchInput).forEach((search) => {
-    search.addEventListener('keyup', () => {
-        let input, filter, tr, table_data, txtValue
+// Array.from(searchInput).forEach((search) => {
+//     search.addEventListener('keyup', () => {
+//         let input, filter, tr, table_data, txtValue
     
-        // input = document.querySelector(".search");
-        filter = search.value.toUpperCase();
-        tr = document.querySelector('.table-form');
-        table_data = document.querySelectorAll(".table-form td:nth-child(3)");
+//         // input = document.querySelector(".search");
+//         filter = search.value.toUpperCase();
+//         tr = document.querySelector('.table-form');
+//         table_data = document.querySelectorAll(".table-form td:nth-child(3)");
     
-        console.log('keyup')
+//         console.log('keyup')
     
-        Array.from(table_data).forEach((td) => {
+//         Array.from(table_data).forEach((td) => {
     
-            txtValue = td.textContent || td.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+//             txtValue = td.textContent || td.innerText;
+//             if (txtValue.toUpperCase().indexOf(filter) > -1) {
     
-                td.parentNode.style.display = "";
+//                 td.parentNode.style.display = "";
     
-            } else {
+//             } else {
     
-                td.parentNode.style.display = "none";
+//                 td.parentNode.style.display = "none";
     
-            }
+//             }
     
-        });
-    });
-});
+//         });
+//     });
+// });
 
 //Search User Filter
 
@@ -199,6 +199,57 @@ function refreshPage() {
 }
 
 refreshPage();
+
+function download_csv() {
+    
+    let dl_csv = document.querySelector('.dl_csv');
+    let tableData = document.querySelectorAll('td');
+
+    dl_csv.addEventListener('click', (e) => {
+
+        //define the heading for each row of the data
+        let csv = 'ID,Name,User ID,Position,Department,Action,Action Status,Source,Added At\n';
+
+        //merge the data with CSV
+        tableData.forEach(function(row) {
+
+            td = row.innerText || row.innerText;
+            let td_array = [];
+
+            td_array.push(td)
+
+            console.log(td_array);
+
+            csv += td_array.join(',');
+            csv += "\n";
+        });
+
+
+        //display the created CSV data on the web browser 
+        // document.write(csv);
+
+        var hiddenElement = document.createElement('a');
+        hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
+        hiddenElement.target = '_blank';
+        
+        //provide the name for the CSV file to be downloaded
+        hiddenElement.download = 'Users History.csv';
+        hiddenElement.click();
+
+  
+    }); 
+
+        // Array.from(tableData).forEach((td) => {
+
+        //    td_text = td.innerText || td.textContent;
+
+        //    console.log(td_text);
+
+        // });
+
+}
+download_csv();
+
 
 // let prevent = document.querySelector('.prevent');
 
