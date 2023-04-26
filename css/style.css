@@ -331,6 +331,7 @@ a {
     padding: 0 20px 20px 20px;
     /* background-color: #f6f6f6; */
     background-color: #fff;
+    max-height: 100%;
 }
 
 .manage-employee__content {
@@ -422,6 +423,8 @@ a {
     position: relative;
     width: 100%;
     /* height: 100%; */
+    overflow-y: scroll;
+    height: 75vh;
 }
 
 .content-table .delete {

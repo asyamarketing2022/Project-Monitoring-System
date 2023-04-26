@@ -203,28 +203,33 @@ refreshPage();
 function download_csv() {
     
     let dl_csv = document.querySelector('.dl_csv');
-    let tableData = document.querySelectorAll('td');
 
     dl_csv.addEventListener('click', (e) => {
+
+        let tableRow = document.querySelectorAll('tr.table-row_user');
 
         //define the heading for each row of the data
         let csv = 'ID,Name,User ID,Position,Department,Action,Action Status,Source,Added At\n';
 
         //merge the data with CSV
-        tableData.forEach(function(row) {
+        Array.from(tableRow).forEach((row) => {
 
-            td = row.innerText || row.innerText;
-            let td_array = [];
+        let td_array = row.children;
+        let td_text = [];
+        let td_container = [];
+ 
+            for (let i = 0; i < td_array.length; i++) {
 
-            td_array.push(td)
+                td_text.push(td_array[i].innerText);
+            }
+       
+            td_container.push(td_text);
 
-            console.log(td_array);
-
-            csv += td_array.join(',');
+            csv += td_container.join(',');
             csv += "\n";
-        });
 
-
+       });
+        
         //display the created CSV data on the web browser 
         // document.write(csv);
 
@@ -238,15 +243,6 @@ function download_csv() {
 
   
     }); 
-
-        // Array.from(tableData).forEach((td) => {
-
-        //    td_text = td.innerText || td.textContent;
-
-        //    console.log(td_text);
-
-        // });
-
 }
 download_csv();
 

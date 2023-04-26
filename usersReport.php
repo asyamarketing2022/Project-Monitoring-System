@@ -3,12 +3,12 @@
 ?>
 <?php include("sidebar.php"); ?>
 <?php include("usersReport-table.php"); ?>
+<?php include("pagination.php"); ?>
 
 <div class="grid-right__content">
 
     <div class="select-action__wrapper mt-4">
         <div class="select-action__sort">
-            <h1 class="xx"></h1>
             <span>
                 <i class="fa fa-sort-amount-desc"></i>
                 Sort By
@@ -20,8 +20,28 @@
                 <option value="3">Three</option>
             </select>
         </div>
+        <div class="select-action__sort show">
+            <span>
+                Show
+            </span>
+            <select class="form-select dataLimit" aria-label="Default select dataLimit">
+                <option value="3">3</option>
+                <option value="5">5</option>
+                <option value="8">8</option>
+                <option value="100" selected="select">100</option>
+            </select>
+        </div>
     </div>
 
+    <div class="search-action__wrapper mt-4">
+        <div class="input-group search-action">
+            <input class="searchFilter" name="search" value="" type="text">
+            <button type="submit" class="search-button submitFilter">Search</button>
+            &nbsp;
+            <!-- <a href="usersReport-table_csv.php" class="submit-button download button">Download CSV</a> -->
+            <p type="text" class="submit-button dl_csv">Download CSV</p>
+        </div>             
+    </div>
     <div class="content-table">
         <table>
             <tr>
@@ -37,27 +57,10 @@
             </tr>
 
             <form action="" method="POST">
-                <div class="search-action__wrapper mt-4">
-                    <div class="input-group search-action">
-                        <input class="searchFilter" name="search" value="" type="text">
-                        <button type="submit" class="search-button submitFilter">Search</button>
-                        &nbsp;
-                        <!-- <a href="usersReport-table_csv.php" class="submit-button download button">Download CSV</a> -->
-                        <p type="text" class="submit-button dl_csv">Download CSV</p>
-
-                        &nbsp;
-                        <select class="form-select dataLimit" aria-label="Default select dataLimit">
-                            <option value="3">3</option>
-                            <option value="5">5</option>
-                            <option value="8">8</option>
-                            <option value="200" selected="select">200</option>
-                        </select>
-                    </div>             
-                </div>
                 <tbody class="userhistory-table">
                 <!-- usersReport-table.php -->
            
-                <?php do {  ?>
+                <?php  do {  ?>
                     
                     <tr class='table-row_user Info_user table-form' value="<?php echo $userRecord_info['id'] ?>">
                         <td class='user-id'><?php echo $userRecord_info['id'] ?></td>
@@ -71,12 +74,22 @@
                         <td><?php echo $userRecord_info['added_at'] ?></td>
                     </tr>
                     
-                <?php } while($userRecord_info = $userRecord->fetch_assoc()); ?>
+                <?php } while($userRecord_info = $userRecord->fetch_assoc());  ?>
 
                 </tbody>
+
             </form>
+            <div class="pageBtn">
+   
+            </div>
+            <!-- <div class="container">  
+             
+                <div class="table-responsive" id="pagination_data">  
+                </div>  
+           </div>  -->
         </table>
     </div>
+
 </div>
 
 <?php include 'footer.php'; ?>

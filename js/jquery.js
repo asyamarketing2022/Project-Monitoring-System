@@ -159,27 +159,6 @@ jQuery(function () {
    }
    notifShow();
 
-   //Limit of data in table   
-   function limitData() {
-      $('.dataLimit').on('change', function(){
-         let searchFilter = $(".searchFilter").val();
-          let val = $('.dataLimit option:selected').attr('value');
-          $.ajax({
-            type: 'POST',
-            url: 'usersReport-table.php',
-            data: {
-               'searchFilter': searchFilter,
-               'DataLimit': val 
-            },
-               success:function(data){
-                  $('.userhistory-table').html(data);
-            }
-          });
-         
-      });
-   }
-   limitData();
-
    //Search Filter  
    function searchFilter() {
       $('.submitFilter').on('click', (e)=> {
@@ -204,7 +183,70 @@ jQuery(function () {
    }
    searchFilter()
 
+   //Limit of data in table   
+   function limitData() {
+      $('.dataLimit').on('change', function(){
+         let searchFilter = $(".searchFilter").val();
+          let val = $('.dataLimit option:selected').attr('value');
+          $.ajax({
+            type: 'POST',
+            url: 'usersReport-table.php',
+            data: {
+               'searchFilter': searchFilter,
+               'DataLimit': val 
+            },
+               success:function(data){
+                  $('.userhistory-table').html(data);
+            }
+          });
+         
+      });
+   }
+   limitData();
 
+   //Changing Data thru pagination
+   function page() {
+      $(document).on('click', '.pagination_link', function(){
+         let page = $(this).attr("id");
+         let val = $('.dataLimit option:selected').attr('value');
+         let searchVal = $(".searchFilter").val();
+
+         $.ajax({
+            url:"usersReport-table_2.php",
+            type: 'POST',
+            data:{'page' :page,
+            'pageLimit' :val,
+            'searchVal' :searchVal
+            },
+            success:function(data){
+               $('.userhistory-table').html(data);
+            }
+         });
+      });
+  
+   }
+   page();  
+
+   //Pagination with LimitData 
+   function pageBtn() { 
+      $('.dataLimit').on('change', function(){
+          let val = $('.dataLimit option:selected').attr('value');
+          let searchVal = $(".searchFilter").val();
+          $.ajax({   
+            type: 'POST',
+            url: 'pagination.php',
+            data: {
+               'DataLimit': val,
+               'searchVal' :searchVal
+            },
+               success:function(data){
+                  $('.pageBtn').html(data);
+            }
+          });
+         
+      });
+   }
+   pageBtn();
 });
 
 
