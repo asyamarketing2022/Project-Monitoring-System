@@ -4,11 +4,15 @@ if(!isset($_SESSION)){
     session_start();
 }
 
-include_once("connections/connection.php");
-$con = connection();
-
 include_once("user-record.php");
+include_once("Userslog.php");
+// include_once("connections/connection.php");
+include_once("connections/DBconnection.php");
 
+// $con = connection();
+
+$conn = new DBconnection();
+$con = $conn->connection();
 
 if(isset($_POST['login'])){
 
@@ -16,6 +20,7 @@ if(isset($_POST['login'])){
     $password = $_POST['password'];
 
     $sql = "SELECT * FROM registered_users WHERE email = '$email' AND password = '$password'";
+    
     $user = $con->query($sql) or die ($con->error);
     $row = $user->fetch_assoc();
     $user_detail = $user->num_rows;
@@ -31,12 +36,11 @@ if(isset($_POST['login'])){
         $_SESSION['Access'] = $row['access'];
 
         //User Record Action Login
-        userRecord('login');
-
+        $login = new Userslog('login');
+        $login->userRecord();
+   
         echo "<p>Login success!</p>";
         header("Location: homepage.php");
-
-
     
     }  else {
 

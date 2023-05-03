@@ -7,7 +7,8 @@ if(!isset($_SESSION))
     session_start(); 
 } 
 
-include_once("user-record.php");
+include_once("Userslog.php");
+// include_once("user-record.php");
 
 if(isset($_POST['tableID'])) {
 
@@ -112,7 +113,11 @@ if(isset($_POST['tableID'])) {
 
         $userDetails = $userID . ' ' . $fname  . ' ' . $lname ;
 
-        userRecord('edit info user', $userDetails);
+        // userRecord();
+        //User Record Action Edit
+        $update = new Userslog('edit info of user', $userDetails);
+        $update->userRecord();
+
     }
 
 ?>

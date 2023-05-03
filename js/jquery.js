@@ -247,6 +247,31 @@ jQuery(function () {
       });
    }
    pageBtn();
+
+
+   function selectedPage() {
+      $(document).on('click', '.pagination_link', function(){
+
+     
+         if($(this).hasClass('selected') == false) {
+            $('.pagination_link').removeClass('selected');
+            $('.pagination_link').addClass('hide');
+            $(this).addClass('selected');
+            $('.selected').removeClass('hide');
+            $('.selected').next().removeClass('hide');
+            $('.selected').prev().removeClass('hide');
+            $('.pagination_link:first-child').removeClass('hide');
+            $('.pagination_link:last-child').removeClass('hide');
+         }
+
+         // $('.pagination_link').addClass('d-none');
+         // $(this).addClass('selected');
+         // $(this).removeClass('d-none');
+
+         // $('.pagination_link').removeClass('selected');
+      });
+   }
+   selectedPage();
 });
 
 
