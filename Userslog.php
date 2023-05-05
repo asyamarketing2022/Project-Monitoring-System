@@ -27,8 +27,8 @@ class Userslog {
 
         $actionStatus = 'success';
 
-        $conn = new DBconnection();
-        $con = $conn->connection();
+        $db = new DBconnection();
+        $con = $db->connection();
         if($con->connect_error){
 
             echo $con->connect_error;

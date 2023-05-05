@@ -111,8 +111,8 @@
             <span class="modal-title">Add New Project</span>
                 <form class="project-form " action="" method="post">
                     <div class="project">
-                        <div class="content-info__wrapper">
-                            <div class="content__info"> 
+                        <div class="content-info__wrapper assign">
+                            <!-- <div class="content__info"> 
                                 <span>Code</span>
                                 <input type="text" name="code" id="code formControlDefault" required>
                             </div>
@@ -152,13 +152,86 @@
                             <div class="content__info">
                                 <span>Screenshot Search Prefix</span>
                                 <input type="text" name="screenSearch" id="address formControlDefault" required>
-                            </div>
-                            <!-- <div class="content__info">
-                                <span>Disabled</span>
-                                <input class="checkbox" type="checkbox" value="" id="flexCheckChecked">
                             </div> -->
+
+                            <div class="content__info"> 
+                                <span>Project Name</span>
+                                <input type="text" name="project name" required>
+                            </div>
+                            <div class="content__info"> 
+                                <span>Location</span>
+                                <input type="text" name="location" required>
+                            </div>
+                            <div class="content__info"> 
+                                <span>Lot areas</span>
+                                <input type="text" name="lotAreas" required>
+                            </div>
+
+                            <div class="content__info" id="services"> 
+                                <span>Services</span>
+                                <select name="services" class="services" aria-label="Default select" required>
+                                    <option value="" disabled selected>Select your option</option>
+                                    <option value="architecture">Architecture</option>
+                                    <option value="engineering">Engineering</option>
+                                    <option value="interior design">Interior Design</option>
+                                    <option value="master planning">Master Planning</option>
+                                    <option value="scale model">Scale Model</option>
+                                    <option value="animation">Animation</option>
+                                    <option value="renders">Renders</option>
+                                    <option value="others">Others</option>
+                                </select>
+                            </div>
+
+                            <div class="content__info position-relative" > 
+                                <span>Department/<br>Manager</span>
+                                <input id="department" class="searchUser-input" name="department" value="" type="text"  disabled required>
+                                <span></span>
+                                <div class='dept_wrapper'>
+                                    <div class="managersTable">
+                                         <!-- managersTable.php for SQL code -->
+
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="content__info list"> 
+                                <ul>
+
+                                </ul>
+                            </div>
+
+                            <div class="content__info"> 
+                                <span>Typology</span>
+                                <select name="typology" aria-label="Default select" required>
+                                    <option value="" disabled selected>Select your option</option>
+                                    <option value="residential">Residential</option>
+                                    <option value="office">Office</option>
+                                    <option value="commercial/retail">Commercial/Retail</option>
+                                    <option value="hospitality">Hospitality</option>
+                                    <option value="institutional">Institutional (Pls Specify)</option>
+                                    <option value="industrial">Industrial (Pls Specify)</option>
+                                    <option value="airport/aviation">Airport/Aviation</option>
+                                    <option value="transportTerminal">Transport Terminal</option>
+                                    <option value="religiousBuilding">Religious Building</option>
+                                    <option value="mixedUse">Mixed Use (Pls Specify)</option>
+                                </select>
+                            </div>
+                            <div class="content__info"> 
+                                <span>Company Name</span>
+                                <input type="text" name="company name" required>
+                            </div>
+                            <div class="content__info"> 
+                                <span>Client Name</span>
+                                <input type="text" name="client name" required>
+                            </div>
                         </div>
                     </div>
+                    <!-- <table class="managersTable">
+             
+                        <form action="" method="POST">
+                 
+                        </form>
+                    </table> -->
                 <div class="button-wrapper">
                     <input class="submit-button" name="submit" type="submit" value="Save"/>
                 </div>

@@ -272,6 +272,194 @@ jQuery(function () {
       });
    }
    selectedPage();
+
+   function selectServices() {
+      $(document).on('change', '.services', function(){
+
+         let selectedVal = this.value;
+
+         if(selectedVal == "architecture") {
+
+           // Remove the unselected service
+           $('.dynamic').remove();
+
+            // Creating dynamic element
+           let openDiv = $("<div class='content__info dynamic'>");
+           let span = $("<span>Phases of Work</span>");
+           let select = $("<select class='architecture' name='architecture'>");
+           let option = [
+                        "<option value='' disabled selected>Select Phases of Work</option>",
+                        "<option value='conceptual'>Conceptual</option>",
+                        "<option value='schematic'>Schematic</option>",
+                        "<option value='design development'>Design Development</option>",
+                        "<option value='construction drawings'>Construction Drawings</option>",
+                        "<option value='site supervision'>Site Supervision</option>",
+                        ];
+    
+            // Marge all element
+            $(openDiv).append(span);
+            $(openDiv).append(select);
+            $(select).append(option);
+            $(openDiv).append(select);
+
+            // implement to html 
+            $(openDiv).insertAfter('#services');
+
+         } else if(selectedVal == "engineering") {
+            
+            // Remove the unselected service
+           $('.dynamic').remove();
+
+           // Creating dynamic element
+            let openDiv = $("<div class='content__info dynamic'>");
+            let span = $("<span>Phases of Work</span>");
+            let select = $("<select name='engineering'>");
+            let option = [
+                        "<option value='' disabled selected>Select Phases of Work</option>",
+                        "<option value='schematic'>Schematic</option>",
+                        "<option value='designDevelopment'>Design Development</option>",
+                        "<option value='constructionDrawings'>Construction Drawings</option>",
+                        "<option value='siteSupervision'>Site Supervision</option>",
+                        ];
+      
+            // Marge all element
+            $(openDiv).append(span);
+            $(openDiv).append(select);
+            $(select).append(option);
+            $(openDiv).append(select);
+
+            // implement to html 
+            $(openDiv).insertAfter('#services');
+
+         } else if(selectedVal == "interior design") {
+
+           // Remove the unselected service
+           $('.dynamic').remove();
+
+            // Creating dynamic element
+           let openDiv = $("<div class='content__info dynamic architecture'>");
+           let span = $("<span>Phases of Work</span>");
+           let select = $("<select name='interior design'>");
+           let option = [
+                        "<option value='' disabled selected>Select Phases of Work</option>",
+                        "<option value='conceptual'>Conceptual</option>",
+                        "<option value='schematic'>Schematic</option>",
+                        "<option value='designDevelopment'>Design Development</option>",
+                        "<option value='constructionDrawings'>Construction Drawings</option>",
+                        ];
+    
+            // Marge all element
+            $(openDiv).append(span);
+            $(openDiv).append(select);
+            $(select).append(option);
+            $(openDiv).append(select);
+
+            // implement to html 
+            $(openDiv).insertAfter('#services');
+
+         } else if(selectedVal == "master planning") {
+
+           // Remove the unselected service
+           $('.dynamic').remove();
+
+            // Creating dynamic element
+           let openDiv = $("<div class='content__info dynamic'>");
+           let span = $("<span>Phases of Work</span>");
+           let select = $("<select name='master planning'>");
+           let option = [
+                        "<option value='' disabled selected>Select Phases of Work</option>",
+                        "<option value='conceptual'>Conceptual</option>",
+                        "<option value='schematic'>Schematic</option>",
+                        ];
+    
+            // Marge all element
+            $(openDiv).append(span);
+            $(openDiv).append(select);
+            $(select).append(option);
+            $(openDiv).append(select);
+
+            // implement to html 
+            $(openDiv).insertAfter('#services');
+         } else {
+
+            $('.dynamic').remove();
+
+         }
+         
+      });
+   }
+   selectServices();
+
+   function selectDepartment() {
+
+      $(document).on('change', '.architecture', function(){
+
+         let selectedVal = this.value;
+
+         if(selectedVal == 'conceptual' || selectedVal == 'schematic'){
+            
+            $('#department').attr("placeholder", " Design Manager");
+            $('#department').removeAttr("disabled");
+
+            let dept = "design";
+
+            $.ajax({   
+               type: 'POST',
+               url: 'managersTable.php',
+               data: {
+                  'Department': dept,
+               },
+                  success:function(data){
+                     $('.managersTable').html(data);
+               }
+             });
+            
+
+         } else if(selectedVal == 'design development' || selectedVal == 'construction drawings'){
+
+            $('#department').attr("placeholder", " Production Manager");
+            $('#department').removeAttr("disabled");
+
+         } else if(selectedVal == 'site supervision'){
+
+            $('#department').attr("placeholder", " Site Supervision Manager");
+            $('#department').removeAttr("disabled");
+
+         }
+
+      });
+   }
+   selectDepartment();
+
+   function dynamicList() {
+
+   let addBtn = document.querySelectorAll('.addBtn');
+
+       Array.from(addBtn).forEach((btn) => {
+
+         btn.addEventListener('click', () => {
+
+            let ul = document.querySelector('.list ul');
+            let nameofuser = document.querySelector('.nameofuser').innerText;
+            var li = document.createElement('li');
+
+            // $(".list ul").append('<li>');
+
+            console.log(ul);
+            console.log(nameofuser);
+
+         });
+
+      });
+
+   }
+
+   let searchUser = document.querySelector('.searchUser-input');
+
+   searchUser.addEventListener('keyup', () => {
+      dynamicList();
+   });
+
 });
 
 

@@ -61,28 +61,29 @@ Array.from(searchUser_input).forEach((search) => {
         // input = document.querySelector(".search");
         filter = search.value.toUpperCase();
         tr = document.querySelector('.search-user');
-        table_data = document.querySelectorAll(".search-user td:nth-child(1)");
+        // table_data = document.querySelectorAll(".search-user td:nth-child(1)");
+        table_data = document.querySelectorAll(".search-user li:nth-child(2)");
 
         let searchValue = search.value;
     
-        Array.from(table_data).forEach((td) => {
+        Array.from(table_data).forEach((li) => {
 
-            txtValue = td.textContent || td.innerText;
+            txtValue = li.textContent || li.innerText;
             if (txtValue.toUpperCase().indexOf(filter) > -1) {
     
-                td.parentNode.style.display = "block";
+                li.parentNode.style.display = "grid";
     
             } else  {
 
-                td.parentNode.style.display = "";
+                li.parentNode.style.display = "";
             }
         });
 
-        Array.from(table_data).forEach((td) => {
+        Array.from(table_data).forEach((li) => {
 
             if ( searchValue == "" || searchValue == null ) {
     
-               td.parentNode.style.display = "";
+               li.parentNode.style.display = "";
     
             }
         });
@@ -116,7 +117,7 @@ disableInput();
 //Create dynamic Input
 function dynamicInput() {
     let searchUser = document.querySelectorAll('.search-user');
-    
+
     Array.from(searchUser).forEach((rowUser) => {
 
         rowUser.addEventListener('click', () => {
@@ -153,6 +154,8 @@ function dynamicInput() {
 
             //Remove Dynamic Input
             
+          
+
             function removeInput() {
 
                 let removeIcon = document.querySelectorAll('.content__info p');
@@ -177,9 +180,12 @@ function dynamicInput() {
     
 }
 
-dynamicInput();
+// let searchUser = document.querySelector('.searchUser-input');
 
-
+// searchUser.addEventListener('keyup', () => {
+//     dynamicInput();
+  
+// });
 
 function refreshPage() {
 
