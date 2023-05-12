@@ -572,7 +572,27 @@ a {
 
 .content__info.list {
     margin-bottom: 0;
+    display: block;
 }
+
+.content__info.list ul {
+    display: flex;
+    gap: 15px;
+    padding-left: 150px;
+    position: relative;
+    z-index: 200;
+}
+
+/* .content__info.list ul li:nth-child(1) {
+   position: relative;
+}
+
+.content__info.list ul li:nth-child(1):before {
+    content: "\2716";
+    position: absolute;
+    font-size: 16px;
+    left: -32px;
+} */
 
  input:focus, select:focus  {
     outline-width: 0;
@@ -668,3 +688,4 @@ a {
     font-size: 16px;
     visibility: visible;
 } */
+

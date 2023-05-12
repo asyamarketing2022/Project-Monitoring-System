@@ -273,7 +273,7 @@ jQuery(function () {
    }
    selectedPage();
 
-   function selectServices() {
+   function selectServicesxxxxxxxxx() {
       $(document).on('change', '.services', function(){
 
          let selectedVal = this.value;
@@ -286,7 +286,7 @@ jQuery(function () {
             // Creating dynamic element
            let openDiv = $("<div class='content__info dynamic'>");
            let span = $("<span>Phases of Work</span>");
-           let select = $("<select class='architecture' name='architecture'>");
+           let select = $("<select class='phases-of-work architecture' name='architecture'>");
            let option = [
                         "<option value='' disabled selected>Select Phases of Work</option>",
                         "<option value='conceptual'>Conceptual</option>",
@@ -313,7 +313,7 @@ jQuery(function () {
            // Creating dynamic element
             let openDiv = $("<div class='content__info dynamic'>");
             let span = $("<span>Phases of Work</span>");
-            let select = $("<select name='engineering'>");
+            let select = $("<select class='phases-of-work engineering' name='engineering'>");
             let option = [
                         "<option value='' disabled selected>Select Phases of Work</option>",
                         "<option value='schematic'>Schematic</option>",
@@ -339,7 +339,7 @@ jQuery(function () {
             // Creating dynamic element
            let openDiv = $("<div class='content__info dynamic architecture'>");
            let span = $("<span>Phases of Work</span>");
-           let select = $("<select name='interior design'>");
+           let select = $("<select class='phases-of-work interiorDesign' name='interior design'>");
            let option = [
                         "<option value='' disabled selected>Select Phases of Work</option>",
                         "<option value='conceptual'>Conceptual</option>",
@@ -365,7 +365,7 @@ jQuery(function () {
             // Creating dynamic element
            let openDiv = $("<div class='content__info dynamic'>");
            let span = $("<span>Phases of Work</span>");
-           let select = $("<select name='master planning'>");
+           let select = $("<select class='phases-of-work masterPlanning' name='master planning'>");
            let option = [
                         "<option value='' disabled selected>Select Phases of Work</option>",
                         "<option value='conceptual'>Conceptual</option>",
@@ -388,7 +388,181 @@ jQuery(function () {
          
       });
    }
-   selectServices();
+   // selectServices();
+
+   function swiperInit() {
+      var swiper = new Swiper(".mySwiper", {
+         pagination: {
+           el: ".swiper-pagination",
+           type: "progressbar",
+         },
+         navigation: {
+           nextEl: ".swiper-button-next",
+           prevEl: ".swiper-button-prev",
+         },
+       });
+
+   }
+   swiperInit()
+
+   class SelectServices 
+   {
+       constructor(slide, checkbox, services, rmvPow) {
+           this.slide = slide;
+           this.checkbox = checkbox;
+           this.services = services;
+           this.rmvPow = rmvPow;
+       }
+   
+       dynamicSlides() {
+   
+           let swiperSlide = document.querySelectorAll('.servicesSlide');
+           let swiperLast = $(swiperSlide).last();
+           let dynamicSlide = `
+           <div class='swiper-slide servicesSlide ${this.slide}'>
+            <div class='modal-content'>
+               <div class='modal-header border-0'><h5></h5>
+                  <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+               <span aria-hidden='true'>&times;</span></button>
+               </div>
+               <span class='modal-title'>${this.services}</span>
+               <div class='pow ${this.rmvPow}'>
+                  <h2 class="pow_title">Phases of Work</h2>
+               </div>
+               
+               <div class='swiper-button-next'></div>
+               <div class='swiper-button-prev'></div>
+            </div>
+           </div>`;
+
+         $(this.checkbox).on('change', ()=> {
+
+           if($(this.checkbox).is(':checked')) {
+
+            $(dynamicSlide).insertAfter(swiperLast);
+   
+            swiperInit()
+          
+         } else if($(this.checkbox).prop('checked', false)) {
+   
+            let elements = document.getElementsByClassName(this.slide);
+            let x = document.getElementsByClassName(this.rmvPow);
+            let a = document.querySelector(`[class='${x}']`);
+
+            // $(elements).remove();
+            // console.log(elements);
+            console.log(x);
+            // $(x).remove();
+            $(elements).remove();
+
+            swiperInit()
+
+         }
+            
+         }); 
+           
+       }
+
+       conceptual() {
+
+         $(this.checkbox).on('change', ()=> {
+
+               let pow_title = document.querySelector('.pow_title');
+               let pow_checkbox = `<div class="form-check conceptual_checkbox" >
+                  <input class="form-check-input" name="conceptual" type="checkbox" value="">
+                  <label class="form-check-label" for="flexCheckDefault">
+                     Conceptual
+                  </label>
+               </div>`;
+
+               $(pow_checkbox).insertAfter(pow_title);
+
+         });
+      } 
+
+      schematic() {
+
+         $(this.checkbox).on('change', ()=> {
+         
+            let pow_title = document.querySelector('.pow_title');
+            let pow_checkbox = `<div class="form-check">
+                                 <input class="form-check-input" name="schematic" type="checkbox" value="">
+                                 <label class="form-check-label" for="flexCheckDefault">
+                                    Schematic
+                                 </label>
+                              </div>`;
+      
+            $(pow_checkbox).insertAfter(pow_title);
+   
+         });
+      }
+
+      designDevelopment() {
+
+         $(this.checkbox).on('change', ()=> {
+
+            let pow_title = document.querySelector('.pow_title');
+            let pow_checkbox = `<div class="form-check">
+                                 <input class="form-check-input" name="design development" type="checkbox" value="">
+                                 <label class="form-check-label" for="flexCheckDefault">
+                                    Design Development
+                                 </label>
+                              </div>`;
+      
+            $(pow_checkbox).insertAfter(pow_title);
+
+         });
+
+      }
+
+      constructionDrawings() {
+
+         $(this.checkbox).on('change', ()=> {
+         
+            let pow_title = document.querySelector('.pow_title');
+            let pow_checkbox = `<div class="form-check">
+                                 <input class="form-check-input" name="construction drawings" type="checkbox" value="">
+                                 <label class="form-check-label" for="flexCheckDefault">
+                                    Construction Drawings
+                                 </label>
+                              </div>`;
+      
+            $(pow_checkbox).insertAfter(pow_title);
+        
+         });
+
+      }
+
+      siteSupervision() {
+
+         $(this.checkbox).on('change', ()=> {
+         
+            let pow_title = document.querySelector('.pow_title');
+            let pow_checkbox = `<div class="form-check">
+                                 <input class="form-check-input" name="site supervision" type="checkbox" value="">
+                                 <label class="form-check-label" for="flexCheckDefault">
+                                    Site Supervision
+                                 </label>
+                              </div>`;
+      
+            $(pow_checkbox).insertAfter(pow_title);
+        
+         });
+
+      }
+     
+   }
+
+   let arch = new SelectServices('arch', '#architecture', 'Architecture', 'arch-rmv');
+   $('#architecture').on('change', arch.dynamicSlides(), arch.siteSupervision(), arch.constructionDrawings(), arch.designDevelopment(), arch.schematic(), arch.conceptual());
+
+   let engi = new SelectServices('engi', '#engineering', 'Engineering', 'engi-rmv');
+   $('#engineering').on('change', engi.dynamicSlides(), engi.schematic(),  engi.designDevelopment(), engi.constructionDrawings());
+
+   let intDesign = new SelectServices('interiorDesign', '#interiorDesign', 'Interior Design');
+   $('#interiorDesign').on('change', intDesign.dynamicSlides(), intDesign.siteSupervision(), intDesign.constructionDrawings(), intDesign.designDevelopment(), intDesign.conceptual());
+
+
 
    function selectDepartment() {
 
@@ -413,7 +587,7 @@ jQuery(function () {
                      $('.managersTable').html(data);
                }
              });
-            
+
 
          } else if(selectedVal == 'design development' || selectedVal == 'construction drawings'){
 
@@ -427,27 +601,116 @@ jQuery(function () {
 
          }
 
+
+    
       });
    }
    selectDepartment();
 
-   function dynamicList() {
 
-   let addBtn = document.querySelectorAll('.addBtn');
+   function removeUser() {
 
-       Array.from(addBtn).forEach((btn) => {
+      let btns = document.querySelectorAll('.removeUser')
 
-         btn.addEventListener('click', () => {
+      Array.from(btns).forEach((btn) => {
+  
+         $(btn).on('click', () => {
 
-            let ul = document.querySelector('.list ul');
-            let nameofuser = document.querySelector('.nameofuser').innerText;
-            var li = document.createElement('li');
+            $(btn).closest('ul').remove();
+            
+
+          });
+          
+      });
+
+   }
+
+   function selectedUser() {
+
+   let searchUser = document.querySelectorAll('.search-user');
+   let list = document.querySelector('.list');
+
+       Array.from(searchUser).forEach((user) => {
+
+         $(user).off().on('click', function(){
+
+         let listManagers = document.querySelectorAll('.list ul');
+         let nameofuser = $(user).children('li')[1];
+         let val1 = $(nameofuser).text()
+
+
+         // Array.from(listManagers).forEach((manager) => {
+
+         //    let managersName = $(manager).children('li')[1];
+         //    let val2 = $(managersName).text()
+
+         //    if(val1 != val2 || $('.list').is(':parent')){
+        
+         //       let ul = $("<ul>")
+         //       let userChild = $(user).children();
+         //       let userInfo = $(userChild).clone();
+        
+         //       $(ul).append(userInfo);
+         //       $(list).append(ul);
+         //       // $(this).css("display", "none");
+           
+         //       let btn = document.querySelector('.list .addBtn');
+         //       $(btn).text('remove');
+         //       $(btn).addClass('removeUser');
+         //       $(btn).removeClass('addBtn');
+
+         //    } else {
+         //       console.log('same');
+         //    }
+
+         // });
+
+         for(let i = 0; i < listManagers.length || i == listManagers.length; i++ ){
+
+            let managersName = $(listManagers[i]).children('li')[1];
+            let val2 = $(managersName).text()
+
+            if(val1 != val2 ){
+
+               let ul = $("<ul>")
+               let userChild = $(user).children();
+               let userInfo = $(userChild).clone();
+        
+               $(ul).append(userInfo);
+               $(list).append(ul);
+               // $(this).css("display", "none");
+           
+               let btn = document.querySelector('.list .addBtn');
+               $(btn).text('remove');
+               $(btn).addClass('removeUser');
+               $(btn).removeClass('addBtn');
+               
+               console.log('not same');
+
+            } else {
+
+     
+               console.log('same');
+            }
+         
+   
+            return "Not found"
+         } 
+
+
+
+  
+            // Array.from(userChild).forEach((userInfo) => {
+
+            //    console.log($(userInfo).text());
+
+            // });
+            // let nameofuser = user.querySelector('.nameofuser').innerText;
+            
+            // users_array.push($(user).attr('value'));
 
             // $(".list ul").append('<li>');
-
-            console.log(ul);
-            console.log(nameofuser);
-
+            removeUser();
          });
 
       });
@@ -456,9 +719,10 @@ jQuery(function () {
 
    let searchUser = document.querySelector('.searchUser-input');
 
-   searchUser.addEventListener('keyup', () => {
-      dynamicList();
-   });
+   // $(searchUser).on('change', () => {
+   $(searchUser).on('change', () => {
+      selectedUser();
+   })
 
 });
 

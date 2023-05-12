@@ -27,9 +27,9 @@ $con = $db->connection();
         //   ";
 
         echo "<ul class='search-user ". $managerInfo['ID'] ."' id=". $managerInfo['ID'] ." value=". $managerInfo['ID'] ." >
-            <li><span>ID</span>: " . $managerInfo['ID'] . "</li>
-            <li class='nameofuser'><span>Name</span>: " . $managerInfo['first_name'] . "  " . $managerInfo['last_name'] . "</li>
-            <li><span>Position</span>: " . $managerInfo['position'] . "</li>
+            <li>" . $managerInfo['ID'] . "</li>
+            <li class='nameofuser'>" . $managerInfo['first_name'] . "  " . $managerInfo['last_name'] . "</li>
+            <li>" . $managerInfo['position'] . "</li>
 
             <li><span class='addBtn' value='" . $managerInfo['ID'] . "'>Add</span></li>
         </ul>";
