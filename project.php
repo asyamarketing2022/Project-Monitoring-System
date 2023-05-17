@@ -6,6 +6,7 @@
 <?php include 'managers-table.php'; ?>
 <?php include 'assign-project.php'; ?>
 <?php include 'project-history.php'; ?>
+<?php include 'departmentManager.php'; ?>
 
 
 <?php include("sidebar.php"); ?>
@@ -102,9 +103,6 @@
 <div class="modal fade pop-up__modal" id="add_project" tabindex="-1" role="dialog" aria-labelledby="addNewProjectTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
 
-        <div class="swiper mySwiper w-100">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide servicesSlide">
                     <div class="modal-content">
                         <div class="modal-header border-0">
                             <h5></h5>
@@ -146,29 +144,41 @@
 
                                         <div class="content__info" id="services"> 
                                             <span>Services</span>
-                                            <div class="services">
-                                                <div class="form-check">
+                                            <div class="services_wrapper"><img src="" alt="">
+                                                <div class="form-check services">
                                                     <input class="form-check-input cb-services" name="architecture" type="checkbox" value="" id="architecture">
                                                     <label class="form-check-label" for="flexCheckDefault">
                                                         Architecture
                                                     </label>
                                                 </div>
-                                                <div class="form-check">
+                                                <div class="form-check services">
                                                     <input class="form-check-input cb-services" name="engineering" type="checkbox" value="" id="engineering">
                                                     <label class="form-check-label" for="flexCheckChecked">
                                                         Engineering
                                                     </label>
                                                 </div>
-                                                <div class="form-check">
+                                                <div class="form-check services">
                                                     <input class="form-check-input" name="interior design" type="checkbox" value="" id="interiorDesign">
                                                     <label class="form-check-label" for="flexCheckChecked">
                                                         Interior Design
                                                     </label>
                                                 </div>
-                                                <div class="form-check">
+                                                <div class="form-check services">
                                                     <input class="form-check-input" name="master planning" type="checkbox" value="" id="masterPlanning">
                                                     <label class="form-check-label" for="flexCheckChecked">
                                                         Master Planning
+                                                    </label>
+                                                </div>
+                                                <div class="form-check services">
+                                                    <input class="form-check-input" name="scale model" type="checkbox" value="" id="scaleModel">
+                                                    <label class="form-check-label" for="flexCheckChecked">
+                                                        Scale Model
+                                                    </label>
+                                                </div>
+                                                <div class="form-check services">
+                                                    <input class="form-check-input" name="animation" type="checkbox" value="" id="animation">
+                                                    <label class="form-check-label" for="flexCheckChecked">
+                                                        Animation
                                                     </label>
                                                 </div>
                                             </div>
@@ -225,10 +235,9 @@
                                 <input class="submit-button" name="submit" type="submit" value="Save"/>
                             </div>
                         </form>
-                        <div class="swiper-button-next"></div>
-                        <div class="swiper-button-prev"></div>
+                 
                     </div>
-                </div>
+              
                 <!-- <div class='swiper-slide servicesSlide arch'>
                     <div class='modal-content'>
                         <div class='modal-header border-0'>
@@ -279,11 +288,6 @@
                         <div class="swiper-button-prev"></div>
                     </div>
                 </div> -->
-             </div>
-             		<!-- Add Pagination -->
-		    <div class="swiper-pagination"></div>
-  
-        </div>
 
     </div>
 </div>

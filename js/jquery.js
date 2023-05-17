@@ -407,11 +407,11 @@ jQuery(function () {
 
    class SelectServices 
    {
-       constructor(slide, checkbox, services, rmvPow) {
+       constructor(slide, checkbox, services, powContent) {
            this.slide = slide;
            this.checkbox = checkbox;
            this.services = services;
-           this.rmvPow = rmvPow;
+           this.powContent = powContent;
        }
    
        dynamicSlides() {
@@ -426,8 +426,8 @@ jQuery(function () {
                <span aria-hidden='true'>&times;</span></button>
                </div>
                <span class='modal-title'>${this.services}</span>
-               <div class='pow ${this.rmvPow}'>
-                  <h2 class="pow_title">Phases of Work</h2>
+               <div class='pow ${this.powContent}'>
+                  <h2>Phases of Work</h2>
                </div>
                
                <div class='swiper-button-next'></div>
@@ -445,38 +445,127 @@ jQuery(function () {
           
          } else if($(this.checkbox).prop('checked', false)) {
    
+            // let rmv = document.getElementsByClassName(this.powContent);
             let elements = document.getElementsByClassName(this.slide);
-            let x = document.getElementsByClassName(this.rmvPow);
-            let a = document.querySelector(`[class='${x}']`);
 
-            // $(elements).remove();
-            // console.log(elements);
-            console.log(x);
-            // $(x).remove();
             $(elements).remove();
-
             swiperInit()
-
+  
          }
             
          }); 
            
        }
 
+       dynamic_phaseofwork() {
+
+         let dynamic_checkbox = `<div class='pow ${this.powContent}'>
+                                    <span>Phases of Work</span>
+                                 </div>`;
+
+
+            $(this.checkbox).off().on('change', ()=> {
+
+               if($(this.checkbox).is(':checked')) {
+                  
+                  let checkbox_wrapper = $(this.checkbox).parent();
+                  $(dynamic_checkbox).appendTo(checkbox_wrapper);
+
+               } else if($(this.checkbox).prop('checked', false)) {
+
+                  let powContent= document.getElementsByClassName(this.powContent);
+                  $(powContent).remove();
+
+               }
+
+            });
+
+       }
+
+      engrDepartment() {
+         
+         let deparment = `<div class='pow ${this.powContent}'>
+                              <span>Department</span>
+                              <div class="form-check dept_list">
+                                 <div class="checkbox_wrapper">
+                                    <input class="form-check-input dept_checkbox" name="mechanical" type="checkbox" value="">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                       Mechanical
+                                    </label>
+                                 </div>
+                              </div>
+
+                              <div class="form-check dept_list">
+                                 <div class="checkbox_wrapper">
+                                    <input class="form-check-input dept_checkbox" name="electrical" type="checkbox" value="">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                       Electrical
+                                    </label>
+                                 </div>
+                              </div>
+
+                              <div class="form-check dept_list">
+                                 <div class="checkbox_wrapper">
+                                    <input class="form-check-input dept_checkbox" name="plumbing" type="checkbox" value="">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                       Plumbing
+                                    </label>
+                                 </div>
+                              </div>
+
+                              <div class="form-check dept_list">
+                                 <div class="checkbox_wrapper">
+                                    <input class="form-check-input dept_checkbox" name="firepro" type="checkbox" value="">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                       Fire Protection
+                                    </label>
+                                 </div>
+                              </div>
+
+                              <div class="form-check dept_list">
+                                 <div class="checkbox_wrapper">
+                                    <input class="form-check-input dept_checkbox" name="firepro" type="checkbox" value="">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                       Structural
+                                    </label>
+                                 </div>
+                              </div>
+                           </div>`;
+
+          $(this.checkbox).off().on('change', ()=> {       
+            
+            if($(this.checkbox).is(':checked')) {
+                  
+               let checkbox_wrapper = $(this.checkbox).parent();
+               $(deparment).appendTo(checkbox_wrapper);
+
+            } else if($(this.checkbox).prop('checked', false)) {
+
+               let powContent= document.getElementsByClassName(this.powContent);
+               $(powContent).remove();
+
+            }
+
+          });
+         
+      }
+
        conceptual() {
 
          $(this.checkbox).on('change', ()=> {
+               let powContent= document.getElementsByClassName(this.powContent);
+               let pow_checkbox = `<div class="form-check pow_wrapper" >
+                     <div class="checkbox_wrapper">
+                        <input class="form-check-input pow_checkbox conceptual" name="conceptual" type="checkbox" value="">
+                        <label class="form-check-label" for="flexCheckDefault">
+                           Conceptual
+                        </label>
+                        <div class="managers_wrapper"></div>
+                     </div>
 
-               let pow_title = document.querySelector('.pow_title');
-               let pow_checkbox = `<div class="form-check conceptual_checkbox" >
-                  <input class="form-check-input" name="conceptual" type="checkbox" value="">
-                  <label class="form-check-label" for="flexCheckDefault">
-                     Conceptual
-                  </label>
-               </div>`;
+                  </div>`;
 
-               $(pow_checkbox).insertAfter(pow_title);
-
+               $(pow_checkbox).appendTo(powContent);
          });
       } 
 
@@ -484,15 +573,17 @@ jQuery(function () {
 
          $(this.checkbox).on('change', ()=> {
          
-            let pow_title = document.querySelector('.pow_title');
-            let pow_checkbox = `<div class="form-check">
-                                 <input class="form-check-input" name="schematic" type="checkbox" value="">
-                                 <label class="form-check-label" for="flexCheckDefault">
-                                    Schematic
-                                 </label>
-                              </div>`;
+            let powContent = document.getElementsByClassName(this.powContent);
+            let pow_checkbox = `<div class="form-check pow_wrapper" >
+                                 <div class="checkbox_wrapper">
+                                    <input class="form-check-input pow_checkbox schematic" name="schematic" type="checkbox" value="">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                       Schematic
+                                    </label>
+                                    <div class="managers_wrapper"></div>
+                                 </div>`;
       
-            $(pow_checkbox).insertAfter(pow_title);
+            $(pow_checkbox).appendTo(powContent);
    
          });
       }
@@ -501,15 +592,18 @@ jQuery(function () {
 
          $(this.checkbox).on('change', ()=> {
 
-            let pow_title = document.querySelector('.pow_title');
-            let pow_checkbox = `<div class="form-check">
-                                 <input class="form-check-input" name="design development" type="checkbox" value="">
-                                 <label class="form-check-label" for="flexCheckDefault">
-                                    Design Development
-                                 </label>
-                              </div>`;
+            let powContent = document.getElementsByClassName(this.powContent);
+            let pow_checkbox = `<div class="form-check pow_wrapper">
+                                 <div class="checkbox_wrapper">
+                                    <input class="form-check-input pow_checkbox designDevelopement" name="design development" type="checkbox" value="">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                       Design Development
+                                    </label>
+                                    <div class="managers_wrapper"></div>
+                                 </div>
+                                 </div>`;
       
-            $(pow_checkbox).insertAfter(pow_title);
+            $(pow_checkbox).appendTo(powContent);
 
          });
 
@@ -519,15 +613,18 @@ jQuery(function () {
 
          $(this.checkbox).on('change', ()=> {
          
-            let pow_title = document.querySelector('.pow_title');
-            let pow_checkbox = `<div class="form-check">
-                                 <input class="form-check-input" name="construction drawings" type="checkbox" value="">
-                                 <label class="form-check-label" for="flexCheckDefault">
-                                    Construction Drawings
-                                 </label>
-                              </div>`;
+            let powContent = document.getElementsByClassName(this.powContent);
+            let pow_checkbox = `<div class="form-check pow_wrapper">
+                                 <div class="checkbox_wrapper">
+                                    <input class="form-check-input pow_checkbox constructionDrawings" name="construction drawings" type="checkbox" value="">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                       Construction Drawings
+                                    </label>
+                                    <div class="managers_wrapper"></div>
+                                    </div>
+                                 </div>`;
       
-            $(pow_checkbox).insertAfter(pow_title);
+            $(pow_checkbox).appendTo(powContent);
         
          });
 
@@ -537,15 +634,18 @@ jQuery(function () {
 
          $(this.checkbox).on('change', ()=> {
          
-            let pow_title = document.querySelector('.pow_title');
-            let pow_checkbox = `<div class="form-check">
-                                 <input class="form-check-input" name="site supervision" type="checkbox" value="">
-                                 <label class="form-check-label" for="flexCheckDefault">
-                                    Site Supervision
-                                 </label>
-                              </div>`;
+            let powContent = document.getElementsByClassName(this.powContent);
+            let pow_checkbox = `<div class="form-check pow_wrapper">
+                                 <div class="checkbox_wrapper">
+                                    <input class="form-check-input pow_checkbox siteSupervision" name="site supervision" type="checkbox" value="">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                       Site Supervision
+                                    </label>
+                                    <div class="managers_wrapper"></div>
+                                 </div>
+                                 </div>`;
       
-            $(pow_checkbox).insertAfter(pow_title);
+            $(pow_checkbox).appendTo(powContent);
         
          });
 
@@ -553,15 +653,395 @@ jQuery(function () {
      
    }
 
-   let arch = new SelectServices('arch', '#architecture', 'Architecture', 'arch-rmv');
-   $('#architecture').on('change', arch.dynamicSlides(), arch.siteSupervision(), arch.constructionDrawings(), arch.designDevelopment(), arch.schematic(), arch.conceptual());
+   let arch = new SelectServices('arch', '#architecture', 'Architecture', 'arch-pow_wrapper');
+   $('#architecture').on('change', arch.dynamic_phaseofwork(), arch.conceptual(), arch.schematic(), arch.designDevelopment(), arch.constructionDrawings(), arch.siteSupervision()  );
 
-   let engi = new SelectServices('engi', '#engineering', 'Engineering', 'engi-rmv');
-   $('#engineering').on('change', engi.dynamicSlides(), engi.schematic(),  engi.designDevelopment(), engi.constructionDrawings());
+   let engi = new SelectServices('engi', '#engineering', 'Engineering', 'engi-pow_wrapper');
+   $('#engineering').on('change', engi.engrDepartment());
 
-   let intDesign = new SelectServices('interiorDesign', '#interiorDesign', 'Interior Design');
-   $('#interiorDesign').on('change', intDesign.dynamicSlides(), intDesign.siteSupervision(), intDesign.constructionDrawings(), intDesign.designDevelopment(), intDesign.conceptual());
+   let intDesign = new SelectServices('interiorDesign', '#interiorDesign', 'Interior Design', 'interiorDesign-pow_wrapper');
+   $('#interiorDesign').on('change', intDesign.dynamic_phaseofwork(), intDesign.conceptual(), intDesign.designDevelopment(), intDesign.constructionDrawings(), intDesign.siteSupervision());
 
+   let masterPlanning = new SelectServices('masterPlanning', '#masterPlanning', 'Master Planning', 'masterPlanning-pow_wrapper');
+   $('#masterPlanning').on('change', masterPlanning.dynamic_phaseofwork(), masterPlanning.conceptual(), masterPlanning.schematic());
+
+
+   //Phase of work checkbox to select managers
+   class SelectManagers
+   {
+       constructor(pow_wrapper, service_checkbox, phaseofwork_checkbox, department) {
+           this.pow_wrapper = pow_wrapper;
+           this.service_checkbox = service_checkbox;
+           this.phaseofwork_checkbox = phaseofwork_checkbox;
+           this.department = department;
+      }
+
+       pow_checkbox() {
+
+         let phaseofwork_checkbox = document.querySelector(`${this.pow_wrapper} ${this.phaseofwork_checkbox}`);
+
+          $(phaseofwork_checkbox).on('click', ()=> {
+
+            let checkbox_wrapper = $(phaseofwork_checkbox).parent();
+            let managerWrapper = $(checkbox_wrapper).children().last();
+
+            if($(phaseofwork_checkbox).is(':checked') ) {
+                  
+            let dept = `${this.department}`
+      
+               $.ajax({   
+                  type: 'POST',
+                  url: 'departmentManager.php',
+                  data: {
+                     'dept': dept,
+                  },
+                      success:function(data){
+                              
+                        $(managerWrapper).html(data);
+         
+                     }
+               });
+
+            } else {
+
+               $(managerWrapper).children().remove();
+
+            }
+
+          });
+      }
+
+   }
+   let archConceptual = new SelectManagers('.arch-pow_wrapper', '#architecture', '.conceptual', 'design');
+   let archSchematic = new SelectManagers('.arch-pow_wrapper', '#architecture', '.schematic', 'design');
+   let archdesignDev = new SelectManagers('.arch-pow_wrapper', '#architecture', '.designDevelopement', 'production');
+   let archconsDrawings = new SelectManagers('.arch-pow_wrapper', '#architecture', '.constructionDrawings', 'project management');
+   let archsiteVision = new SelectManagers('.arch-pow_wrapper', '#architecture', '.siteSupervision', 'project management');
+   
+   $(document).on('change', ()=> {
+
+      let conceptual_checkbox = document.querySelector('.arch-pow_wrapper .conceptual');
+      $(conceptual_checkbox ).off().on('change', archConceptual.pow_checkbox());
+
+      let schematic_checkbox = document.querySelector('.arch-pow_wrapper .schematic');
+      $(schematic_checkbox).off().on('change', archSchematic.pow_checkbox());
+
+      let designDev_checkbox = document.querySelector('.arch-pow_wrapper .designDevelopement');
+      $(designDev_checkbox).off().on('change', archdesignDev.pow_checkbox());
+
+      let consDrawings_checkbox = document.querySelector('.arch-pow_wrapper .constructionDrawings');
+      $(consDrawings_checkbox).off().on('change', archconsDrawings.pow_checkbox());
+
+      let siteVision_checkbox = document.querySelector('.arch-pow_wrapper .siteSupervision');
+      $(siteVision_checkbox).off().on('change', archsiteVision.pow_checkbox());
+
+   });
+
+
+   //Architecture Services > Phase of work checkbox(Architecture)
+   // function architecturePhaseofwork_checkbox(){
+   //    let checkbox = document.querySelectorAll('.arch-pow_wrapper .pow_checkbox');
+
+   //    for (let i = 0; i < checkbox.length; i++) {
+
+   //       $(checkbox[i]).off().on('change', ()=> {
+   
+   //          if($(checkbox[i]).is(':checked')) {
+
+   //             let checkboxWrapper = $(checkbox[i]).parent();
+   //             let managersWrapper = `<div class="managers_wrapper">
+   //                <span>Managers</span>
+   //                <div class="form-check">
+   //                   <input class="form-check-input" name="" type="checkbox" value="">
+   //                   <label class="form-check-label" for="flexCheckDefault">Sample Manager 1<label>
+   //                </div>
+   //                <div class="form-check">
+   //                   <input class="form-check-input" name="" type="checkbox" value="">
+   //                   <label class="form-check-label" for="flexCheckDefault">Sample Manager 2<label>
+   //                </div>
+   //                <div class="form-check">
+   //                   <input class="form-check-input" name="" type="checkbox" value="">
+   //                   <label class="form-check-label" for="flexCheckDefault">Sample Manager 3<label>
+   //                </div>
+   //             </div>`;
+
+   //             $(managersWrapper).appendTo(checkboxWrapper);
+              
+   //          } else {
+
+   //             let checkboxWrapper = $(checkbox[i]).parent();
+   //             $(checkboxWrapper).children().eq(2).remove();
+
+   //          }
+
+   //       });
+
+   //    }
+   // }
+   // $(document).on('change', architecturePhaseofwork_checkbox);
+
+
+   // Engineering Department Checkbox
+   function engrDepartment_checkbox(){
+      let checkbox = document.querySelectorAll('.engi-pow_wrapper .dept_checkbox');
+
+      for (let i = 0; i < checkbox.length; i++) {
+
+         $(checkbox[i]).off().on('change', ()=> {
+   
+            if($(checkbox[i]).is(':checked')) {
+
+               let checkboxWrapper = $(checkbox[i]).parent();
+               let managersWrapper = `<div class="managers_wrapper">
+                  <span>Managers</span>
+                  <div class="form-check">
+                     <input class="form-check-input engrManager" name="" type="checkbox" value="">
+                     <label class="form-check-label" for="flexCheckDefault">Sample Manager 1<label>
+                  </div>
+                  <div class="form-check">
+                     <input class="form-check-input engrManager" name="" type="checkbox" value="">
+                     <label class="form-check-label" for="flexCheckDefault">Sample Manager 2<label>
+                  </div>
+                  <div class="form-check">
+                     <input class="form-check-input engrManager" name="" type="checkbox" value="">
+                     <label class="form-check-label" for="flexCheckDefault">Sample Manager 3<label>
+                  </div>
+               </div>`;
+
+               $(managersWrapper).appendTo(checkboxWrapper);
+              
+
+            } else {
+
+               let checkboxWrapper = $(checkbox[i]).parent();
+               $(checkboxWrapper).children().eq(2).remove();
+
+            }
+
+         });
+
+      }
+
+   }
+   $(document).on('change', engrDepartment_checkbox);
+
+   // Engineering Manager Checkbox
+   function engrManager_checkbox(){
+      let checkbox = document.querySelectorAll('.engi-pow_wrapper .engrManager');
+
+      for (let i = 0; i < checkbox.length; i++) {
+
+         $(checkbox[i]).off().on('change', ()=> {
+   
+            if($(checkbox[i]).is(':checked')) {
+
+               let checkboxWrapper = $(checkbox[i]).parent();
+               let managersWrapper = `<div class="managers_wrapper">
+                  <span>Phase of Work</span>
+                  <div class="form-check">
+                     <input class="form-check-input" name="" type="checkbox" value="">
+                     <label class="form-check-label" for="flexCheckDefault">Schematic<label>
+                  </div>
+                  <div class="form-check">
+                     <input class="form-check-input" name="" type="checkbox" value="">
+                     <label class="form-check-label" for="flexCheckDefault">Design Development<label>
+                  </div>
+                  <div class="form-check">
+                     <input class="form-check-input" name="" type="checkbox" value="">
+                     <label class="form-check-label" for="flexCheckDefault">Construction Drawings<label>
+                  </div>
+               </div>`;
+
+               $(managersWrapper).appendTo(checkboxWrapper);
+              
+
+            } else {
+
+               let checkboxWrapper = $(checkbox[i]).parent();
+               $(checkboxWrapper).children().eq(2).remove();
+
+            }
+
+         });
+
+      }
+
+   }
+   $(document).on('change', engrManager_checkbox);
+
+    //Interior Design > Phase of work checkbox(Interior Design)
+    function interiorPhaseofwork_checkbox(){
+      let checkbox = document.querySelectorAll('.interiorDesign-pow_wrapper .pow_checkbox');
+
+      for (let i = 0; i < checkbox.length; i++) {
+
+         $(checkbox[i]).off().on('change', ()=> {
+   
+            if($(checkbox[i]).is(':checked')) {
+
+               let checkboxWrapper = $(checkbox[i]).parent();
+               let managersWrapper = `<div class="managers_wrapper">
+                  <span>Managers</span>
+                  <div class="form-check">
+                     <input class="form-check-input" name="" type="checkbox" value="">
+                     <label class="form-check-label" for="flexCheckDefault">Sample Manager 1<label>
+                  </div>
+                  <div class="form-check">
+                     <input class="form-check-input" name="" type="checkbox" value="">
+                     <label class="form-check-label" for="flexCheckDefault">Sample Manager 2<label>
+                  </div>
+                  <div class="form-check">
+                     <input class="form-check-input" name="" type="checkbox" value="">
+                     <label class="form-check-label" for="flexCheckDefault">Sample Manager 3<label>
+                  </div>
+               </div>`;
+
+               $(managersWrapper).appendTo(checkboxWrapper);
+              
+
+            } else {
+
+               let checkboxWrapper = $(checkbox[i]).parent();
+               $(checkboxWrapper).children().eq(2).remove();
+
+            }
+
+         });
+
+      }
+   }
+   $(document).on('change', interiorPhaseofwork_checkbox);
+
+    //MasterPlan > Phase of work checkbox(masterplan)
+    function masterplanPhaseofwork_checkbox(){
+      let checkbox = document.querySelectorAll('.masterPlanning-pow_wrapper .pow_checkbox');
+
+      for (let i = 0; i < checkbox.length; i++) {
+
+         $(checkbox[i]).off().on('change', ()=> {
+   
+            if($(checkbox[i]).is(':checked')) {
+
+               let checkboxWrapper = $(checkbox[i]).parent();
+               let managersWrapper = `<div class="managers_wrapper">
+                  <span>Managers</span>
+                  <div class="form-check">
+                     <input class="form-check-input" name="" type="checkbox" value="">
+                     <label class="form-check-label" for="flexCheckDefault">Sample Manager 1<label>
+                  </div>
+                  <div class="form-check">
+                     <input class="form-check-input" name="" type="checkbox" value="">
+                     <label class="form-check-label" for="flexCheckDefault">Sample Manager 2<label>
+                  </div>
+                  <div class="form-check">
+                     <input class="form-check-input" name="" type="checkbox" value="">
+                     <label class="form-check-label" for="flexCheckDefault">Sample Manager 3<label>
+                  </div>
+               </div>`;
+
+               $(managersWrapper).appendTo(checkboxWrapper);
+              
+
+            } else {
+
+               let checkboxWrapper = $(checkbox[i]).parent();
+               $(checkboxWrapper).children().eq(2).remove();
+
+            }
+
+         });
+
+      }
+   }
+   $(document).on('change', masterplanPhaseofwork_checkbox);
+
+   // Creating dyanamic inputbox
+   function pow_checkbox() {
+      let powCheckbox = document.querySelectorAll('.pow_checkbox');
+
+      Array.from(powCheckbox).forEach((checkbox)=> {
+
+         $(checkbox).off().on('change', ()=> {
+            
+            let wrapper = $(checkbox).parent().parent();
+
+            Array.from(wrapper).forEach((checkbox_wrapper)=> {
+
+                  if($(checkbox).is(':checked')) {
+
+                     let dynamicInput = `<input class="textEnter" type="text"><button type="button" class="btn btn-primary enterBtn ">Enter</button>`
+                     let contentSearch = $(checkbox_wrapper).children().eq(1);
+      
+                     $(dynamicInput).appendTo(contentSearch);
+
+                  } else {
+
+                     let contentSearch = $(checkbox_wrapper).children().eq(1);
+                     $(contentSearch).children().remove();
+
+                  }
+               
+            });
+
+         });
+         
+      });
+   }
+   // $(document).on('change', pow_checkbox);
+
+
+   // Get Text Value and Print
+   function enterText() {
+      let enterBtn = document.querySelectorAll('.enterBtn');
+
+         Array(enterBtn).forEach((btn_nodelist)=> {
+
+               $(btn_nodelist).off().on('click', ()=> {
+
+                  Array.from(btn_nodelist).forEach((btn)=> {
+                     
+                     $(btn).off().on('click', ()=> {
+
+                     let contentSearch = $(btn).parent();
+                     let textEnter = $(contentSearch).children().eq(0);
+                     let textValue = $(textEnter).val();  
+                     
+                     let pow_wrapper = $(btn).parent().parent();
+                     let contentEnter = $(pow_wrapper).children().eq(2);
+                     let ul_fn = contentEnter.children().eq(0)
+                     let li = `<li class='contentlist'><img class="removeContent" src="../img/x-circle-red.svg" alt=""> ${textValue} </li>`;
+
+                     $(li).appendTo(ul_fn);
+
+
+                     });
+                     
+                  });
+
+               });
+
+         });
+
+   }
+   // $(document).on('change', enterText);
+
+   $(document).on('change', ()=> {
+
+      let enterBtn = document.querySelectorAll('.enterBtn');
+
+      Array.from(enterBtn).forEach((btn) => {
+
+         $(btn).on('click', ()=> {
+
+            let contentList = document.querySelectorAll('.contentlist');
+ 
+         });
+
+         let x = contentList;
+
+      });
+
+   });
 
 
    function selectDepartment() {
@@ -600,9 +1080,6 @@ jQuery(function () {
             $('#department').removeAttr("disabled");
 
          }
-
-
-    
       });
    }
    selectDepartment();
@@ -723,6 +1200,9 @@ jQuery(function () {
    $(searchUser).on('change', () => {
       selectedUser();
    })
+
+
+   //Class for 
 
 });
 

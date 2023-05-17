@@ -156,7 +156,11 @@ if(isset($_POST['userID'])) {
                                 </div>
                                 <div class="profile-info__content">
                                     <span>Department</span>
-                                    <input type="text" name="department" id="department formControlDefault" required>
+                                    <select name="department" id="department" class="">
+                                        <option value="design" selected>Design</option>
+                                        <option value="production">Production</option>
+                                        <option value="project management">Project Management</option>
+                                    </select>
                                 </div>
                                 <div class="profile-info__content">
                                     <span>Position</span>
@@ -170,7 +174,7 @@ if(isset($_POST['userID'])) {
                                     <span>Access</span>
                                     <select name="access" id="access" class="">
                                         <option value="admin">Admin</option>
-                                        <option value="project-manager">Project Manager</option>
+                                        <option value="project-manager">Manager</option>
                                         <option value="employee" selected>Employee</option>
                                     </select>
                                 </div>

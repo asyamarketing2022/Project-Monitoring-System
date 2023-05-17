@@ -65,7 +65,11 @@ if(isset($_POST['tableID'])) {
                             </div>
                             <div class='profile-info__content'>
                                 <span>Department</span>
-                                <input type='text' name='update_department' id='department formControlDefault' value=" . $updateUser['department'] . " required>
+                                <select name='update_department' id='department' value=" . $updateUser['department'] . ">
+                                    <option value='design' selected>Design</option>
+                                    <option value='production'>Production</option>
+                                    <option value='project management'>Project Management</option>
+                                </select>
                             </div>
                             <div class='profile-info__content'>
                                 <span>Position</span>
@@ -79,7 +83,7 @@ if(isset($_POST['tableID'])) {
                             <div class='profile-info__content'>
                                 <span>Access</span>
                                 <select name='update_access' id='access' value=" . $updateUser['access'] . ">
-                                    <option value='employee' selected>Employee</option>
+                                    <option value='employee'>Employee</option>
                                     <option value='admin'>Admin</option>
                                     <option value='manager'>Manager</option>
                                 </select>

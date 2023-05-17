@@ -583,6 +583,29 @@ a {
     z-index: 200;
 }
 
+.pow_wrapper, .dept_list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(100px,1fr));
+}
+
+.content__info.content_search {
+    display: grid;
+    grid-template-columns: 70% 30%;
+    height: 20px;
+}
+
+.pow_wrapper .content_enter ul li {
+    position: relative;
+    top: -5px;
+}
+
+/* .pow_wrapper .content_enter ul li:before {
+    content: url('../img/x-circle-red.svg');
+    position: absolute;
+    left: -20px;
+    bottom: -3px
+} */
+
 /* .content__info.list ul li:nth-child(1) {
    position: relative;
 }
@@ -599,7 +622,6 @@ a {
     border: 0;
     border-bottom: 1px solid #ebebeb;
 }
-
 
 .project-form .updateform-project {
     height: 540px;
