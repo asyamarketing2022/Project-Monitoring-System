@@ -1,8 +1,10 @@
 <?php 
+if(!isset($_SESSION)){
+    session_start();
+}
 
 include_once('connections/connection.php');
 $con = connection();
-session_start();
 
 if(isset($_POST['tableID'])) {
 

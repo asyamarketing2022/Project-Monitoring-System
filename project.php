@@ -102,193 +102,102 @@
 <!-- Add New Project - Modal -->    
 <div class="modal fade pop-up__modal" id="add_project" tabindex="-1" role="dialog" aria-labelledby="addNewProjectTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-
-                    <div class="modal-content">
-                        <div class="modal-header border-0">
-                            <h5></h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <span class="modal-title">Add New Project</span>
-                        <form class="project-form " action="" method="post">
-                            <div class="project">
-                                <div class="content-info__wrapper assign">
-                                        <div class="content__info"> 
-                                            <span>Project Name</span>
-                                            <input type="text" name="project name" required>
-                                        </div>
-                                        <div class="content__info"> 
-                                            <span>Location</span>
-                                            <input type="text" name="location" required>
-                                        </div>
-                                        <div class="content__info"> 
-                                            <span>Lot areas</span>
-                                            <input type="text" name="lotAreas" required>
-                                        </div>
-
-                                        <!-- <div class="content__info" id="services"> 
-                                            <span>Services</span>
-                                            <select name="services" class="services" aria-label="Default select" required>
-                                                <option value="" disabled selected>Select your option</option>
-                                                <option value="architecture">Architecture</option>
-                                                <option value="engineering">Engineering</option>
-                                                <option value="interior design">Interior Design</option>
-                                                <option value="master planning">Master Planning</option>
-                                                <option value="scale model">Scale Model</option>
-                                                <option value="animation">Animation</option>
-                                                <option value="renders">Renders</option>
-                                                <option value="others">Others</option>
-                                            </select>
-                                        </div> -->
-
-                                        <div class="content__info" id="services"> 
-                                            <span>Services</span>
-                                            <div class="services_wrapper"><img src="" alt="">
-                                                <div class="form-check services">
-                                                    <input class="form-check-input cb-services" name="architecture" type="checkbox" value="" id="architecture">
-                                                    <label class="form-check-label" for="flexCheckDefault">
-                                                        Architecture
-                                                    </label>
-                                                </div>
-                                                <div class="form-check services">
-                                                    <input class="form-check-input cb-services" name="engineering" type="checkbox" value="" id="engineering">
-                                                    <label class="form-check-label" for="flexCheckChecked">
-                                                        Engineering
-                                                    </label>
-                                                </div>
-                                                <div class="form-check services">
-                                                    <input class="form-check-input" name="interior design" type="checkbox" value="" id="interiorDesign">
-                                                    <label class="form-check-label" for="flexCheckChecked">
-                                                        Interior Design
-                                                    </label>
-                                                </div>
-                                                <div class="form-check services">
-                                                    <input class="form-check-input" name="master planning" type="checkbox" value="" id="masterPlanning">
-                                                    <label class="form-check-label" for="flexCheckChecked">
-                                                        Master Planning
-                                                    </label>
-                                                </div>
-                                                <div class="form-check services">
-                                                    <input class="form-check-input" name="scale model" type="checkbox" value="" id="scaleModel">
-                                                    <label class="form-check-label" for="flexCheckChecked">
-                                                        Scale Model
-                                                    </label>
-                                                </div>
-                                                <div class="form-check services">
-                                                    <input class="form-check-input" name="animation" type="checkbox" value="" id="animation">
-                                                    <label class="form-check-label" for="flexCheckChecked">
-                                                        Animation
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    <!--   <div class="content__info position-relative" > 
-                                            <span>Department/<br>Manager</span>
-                                            <input id="department" class="searchUser-input" name="department" value="" type="text"  disabled required>
-                                            <span></span>
-                                            <div class='dept_wrapper'>
-                                                <div class="managersTable">
-                                                    managersTable.php for SQL code 
-
-                                                </div>
-                                            </div>
-                                        </div> -->
-                                        
-                                        <div class="content__info list"> 
-                                        
-                                        </div>
-
-                                        <div class="content__info"> 
-                                            <span>Typology</span>
-                                            <select name="typology" aria-label="Default select" required>
-                                                <option value="" disabled selected>Select your option</option>
-                                                <option value="residential">Residential</option>
-                                                <option value="office">Office</option>
-                                                <option value="commercial/retail">Commercial/Retail</option>
-                                                <option value="hospitality">Hospitality</option>
-                                                <option value="institutional">Institutional (Pls Specify)</option>
-                                                <option value="industrial">Industrial (Pls Specify)</option>
-                                                <option value="airport/aviation">Airport/Aviation</option>
-                                                <option value="transportTerminal">Transport Terminal</option>
-                                                <option value="religiousBuilding">Religious Building</option>
-                                                <option value="mixedUse">Mixed Use (Pls Specify)</option>
-                                            </select>
-                                        </div>
-                                        <div class="content__info"> 
-                                            <span>Company Name</span>
-                                            <input type="text" name="company name" required>
-                                        </div>
-                                        <div class="content__info"> 
-                                            <span>Client Name</span>
-                                            <input type="text" name="client name" required>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- <table class="managersTable">
-                        
-                                    <form action="" method="POST">
-                            
-                                    </form>
-                                </table> -->
-                            <div class="button-wrapper">
-                                <input class="submit-button" name="submit" type="submit" value="Save"/>
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <h5></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <span class="modal-title">Add New Project</span>
+            <form class="project-form " action="" method="post">
+                    <div class="project">
+                        <div class="content-info__wrapper assign">
+                            <div class="content__info"> 
+                                <span>Project Name</span>
+                                <input type="text" name="projectName" required>
                             </div>
-                        </form>
-                 
-                    </div>
-              
-                <!-- <div class='swiper-slide servicesSlide arch'>
-                    <div class='modal-content'>
-                        <div class='modal-header border-0'>
-                            <h5></h5><button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span>
-                            </button>
-                        </div>
-                        <span class='modal-title'>Architecture</span>
-
-                        <div class="content-info__wrapper">
-                            <div class="content__info">
-                                <span>Phases of work</span>
-                                <div class="phasesofwork">
-                                    <div class="form-check">
-                                        <input class="form-check-input" name="arch-concept" type="checkbox" value="" id="arch-concept">
+                            <div class="content__info"> 
+                                <span>Location</span>
+                                <input type="text" name="location" required>
+                            </div>
+                            <div class="content__info"> 
+                                <span>Lot areas</span>
+                                <input type="text" name="lotAreas" required>
+                            </div>
+                            <div class="content__info" id="services"> 
+                                <span>Services</span>
+                                <div class="services_wrapper"><img src="" alt="">
+                                    <div class="form-check services">
+                                        <input class="form-check-input cb-services" name="architecture" type="checkbox" value="" id="architecture">
                                         <label class="form-check-label" for="flexCheckDefault">
-                                           Conceptual
+                                            Architecture
                                         </label>
                                     </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" name="arch-schematic" type="checkbox" value="" id="arch-schematic">
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                           Schematic
+                                    <div class="form-check services">
+                                        <input class="form-check-input cb-services" name="engineering" type="checkbox" value="" id="engineering">
+                                        <label class="form-check-label" for="flexCheckChecked">
+                                            Engineering
                                         </label>
                                     </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" name="arch-dd" type="checkbox" value="" id="arch-dd">
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                           Design Development
+                                    <div class="form-check services">
+                                        <input class="form-check-input" name="interior design" type="checkbox" value="" id="interiorDesign">
+                                        <label class="form-check-label" for="flexCheckChecked">
+                                            Interior Design
                                         </label>
                                     </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" name="arch-cd" type="checkbox" value="" id="arch-cd">
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                           Construction Drawings
+                                    <div class="form-check services">
+                                        <input class="form-check-input" name="master planning" type="checkbox" value="" id="masterPlanning">
+                                        <label class="form-check-label" for="flexCheckChecked">
+                                            Master Planning
                                         </label>
                                     </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" name="arch-ss" type="checkbox" value="" id="arch-ss">
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                           Site Supervision
+                                    <div class="form-check services">
+                                        <input class="form-check-input" name="scale model" type="checkbox" value="" id="scaleModel">
+                                        <label class="form-check-label" for="flexCheckChecked">
+                                            Scale Model
+                                        </label>
+                                    </div>
+                                    <div class="form-check services">
+                                        <input class="form-check-input" name="animation" type="checkbox" value="" id="animation">
+                                        <label class="form-check-label" for="flexCheckChecked">
+                                            Animation
                                         </label>
                                     </div>
                                 </div>
                             </div>
+       
+                            <div class="content__info"> 
+                                <span>Typology</span>
+                                <select name="typology" aria-label="Default select" required>
+                                    <option value="" disabled selected>Select your option</option>
+                                    <option value="residential">Residential</option>
+                                    <option value="office">Office</option>
+                                    <option value="commercial/retail">Commercial/Retail</option>
+                                    <option value="hospitality">Hospitality</option>
+                                    <option value="institutional">Institutional (Pls Specify)</option>
+                                    <option value="industrial">Industrial (Pls Specify)</option>
+                                    <option value="airport/aviation">Airport/Aviation</option>
+                                    <option value="transportTerminal">Transport Terminal</option>
+                                    <option value="religiousBuilding">Religious Building</option>
+                                    <option value="mixedUse">Mixed Use (Pls Specify)</option>
+                                </select>
+                            </div>
+                            <div class="content__info"> 
+                                <span>Company Name</span>
+                                <input type="text" name="company name" required>
+                             </div>
+                            <div class="content__info"> 
+                                <span>Client Name</span>
+                                <input type="text" name="client name" required>
+                            </div>
                         </div>
-
-                        <div class="swiper-button-next"></div>
-                        <div class="swiper-button-prev"></div>
                     </div>
-                </div> -->
-
+                <div class="button-wrapper">
+                    <input class="submit-button" name="submit_project" type="submit" value="Save"/>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 

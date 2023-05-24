@@ -9,20 +9,26 @@ $con = $db->connection();
 
         $dept = $_POST['dept'];
 
-        $sql = "SELECT * FROM registered_users WHERE department = '$dept' AND access = 'manager'";
-        $manager = $con ->query($sql) or die ($con->error);
-        $managerInfo = $manager->fetch_assoc();
+            $sql = "SELECT * FROM registered_users WHERE department = '$dept' AND access = 'manager'";
+            $manager = $con ->query($sql) or die ($con->error);
+            $managerInfo = $manager->fetch_assoc();
 
-            $output = '<span>Select Manager</span>';
+            $department = str_replace(' ', '', $managerInfo['department']);
 
-        do {
-            $output .= "<div class='form-check'>
-                     <input class='form-check-input' name='zz' type='checkbox' value=''>
-                     <label class='form-check-label' for='flexCheckDefault'>". $managerInfo['first_name'] ." " . $managerInfo['last_name'] . "</label>
-                </div>";
-        } while($managerInfo = $manager->fetch_assoc());
+            if(!empty($managerInfo)){
 
-        echo $output;
+                $output = '<span>Select Manager</span>';
+
+                do {
+                    $output .= "<div class='form-check'>
+                             <input class='form-check-input managersCheckbox". $managerInfo['department'] ."' name='".$department ."[]' type='checkbox' value='". $managerInfo['first_name'] ." " . $managerInfo['last_name'] . "'>
+                             <label class='form-check-label' for='flexCheckDefault'>". $managerInfo['first_name'] ." " . $managerInfo['last_name'] . "</label>
+                            </div>";
+                } while($managerInfo = $manager->fetch_assoc());
+        
+                echo $output;
+
+            } 
 
     } 
 

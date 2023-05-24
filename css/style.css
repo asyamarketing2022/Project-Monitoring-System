@@ -94,7 +94,7 @@ a {
 .button-wrapper {
     text-align: center;
     position: relative;
-    top: -40px;
+    padding-bottom: 20px;
 }
 
 .button-wrapper .submit-button {
