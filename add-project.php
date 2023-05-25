@@ -17,10 +17,21 @@ $con = $db->connection();
         $location = $_POST['location'];
         $lotAreas = $_POST['lotAreas'];
 
-        $design_manager_array = $_POST['design'];
-        $design_manager = implode(" ", $design_manager_array);
+        $serviceArch = $_POST['serviceArch'];
+
+        $archConceptual = $_POST['arch_conceptual'];
+        $manager_conceptual_array = $_POST['conceptual_design'];
+        $manager_conceptual = implode(" ", $manager_conceptual_array);
+
+        $archSchematic = $_POST['arch_schematic'];
+        $manager_schematic_array = $_POST['schematic_design'];
+        $manager_schematic = implode(" ", $manager_schematic_array);
+
+        $typology = $_POST['typology'];
+        $companyName = $_POST['companyName'];
+        $clientName = $_POST['clientName'];
         
-        $sql = "INSERT INTO `pms_projects`(`project_name`, `location`, `lot_areas`, `arch_conceptual_manager`) VALUES ('$projectName', '$location', '$lotAreas', '$design_manager')";
+        $sql = "INSERT INTO `pms_projects`(`project_name`, `location`, `lot_areas`, `service_architecture`, `arch_conceptual`, `arch_conceptual_manager`, `arch_schematic`, `arch_schematic_manager`, `typology`, `company_name`, `client_name`) VALUES ('$projectName', '$location', '$lotAreas', '$serviceArch', '$archConceptual', '$manager_conceptual', '$archSchematic', '$manager_schematic', '$typology', '$companyName', '$clientName')";
 
         $con->query($sql) or die ($con->error);
 

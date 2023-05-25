@@ -21,7 +21,7 @@ $con = $db->connection();
 
                 do {
                     $output .= "<div class='form-check'>
-                             <input class='form-check-input managersCheckbox". $managerInfo['department'] ."' name='".$department ."[]' type='checkbox' value='". $managerInfo['first_name'] ." " . $managerInfo['last_name'] . "'>
+                             <input class='form-check-input managersCheckbox' name='' type='checkbox' value='". $managerInfo['first_name'] ." " . $managerInfo['last_name'] . "'>
                              <label class='form-check-label' for='flexCheckDefault'>". $managerInfo['first_name'] ." " . $managerInfo['last_name'] . "</label>
                             </div>";
                 } while($managerInfo = $manager->fetch_assoc());

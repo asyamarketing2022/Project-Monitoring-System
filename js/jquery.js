@@ -538,7 +538,7 @@ jQuery(function () {
             let powContent = document.getElementsByClassName(this.powContent);
             let pow_checkbox = `<div class="form-check pow_wrapper" >
                                  <div class="checkbox_wrapper">
-                                    <input class="form-check-input pow_checkbox schematic" name="${this.name}_schematic" type="checkbox" value="schematic">
+                                    <input class="form-check-input pow_checkbox schematic" name="${this.name}_schematic" type="checkbox" value="1">
                                     <label class="form-check-label" for="flexCheckDefault">
                                        Schematic
                                     </label>
@@ -557,7 +557,7 @@ jQuery(function () {
             let powContent = document.getElementsByClassName(this.powContent);
             let pow_checkbox = `<div class="form-check pow_wrapper">
                                  <div class="checkbox_wrapper">
-                                    <input class="form-check-input pow_checkbox designDevelopment" name="${this.name}_designdevelopment" type="checkbox" value="design development">
+                                    <input class="form-check-input pow_checkbox designDevelopment" name="${this.name}_designdevelopment" type="checkbox" value="1">
                                     <label class="form-check-label" for="flexCheckDefault">
                                        Design Development
                                     </label>
@@ -578,7 +578,7 @@ jQuery(function () {
             let powContent = document.getElementsByClassName(this.powContent);
             let pow_checkbox = `<div class="form-check pow_wrapper">
                                  <div class="checkbox_wrapper">
-                                    <input class="form-check-input pow_checkbox constructionDrawings" name="${this.name}_construction" type="checkbox" value="construction drawings">
+                                    <input class="form-check-input pow_checkbox constructionDrawings" name="${this.name}_construction" type="checkbox" value="1">
                                     <label class="form-check-label" for="flexCheckDefault">
                                        Construction Drawings
                                     </label>
@@ -599,7 +599,7 @@ jQuery(function () {
             let powContent = document.getElementsByClassName(this.powContent);
             let pow_checkbox = `<div class="form-check pow_wrapper">
                                  <div class="checkbox_wrapper">
-                                    <input class="form-check-input pow_checkbox siteSupervision" name="${this.name}_site" type="checkbox" value="site supervision">
+                                    <input class="form-check-input pow_checkbox siteSupervision" name="${this.name}_site" type="checkbox" value="1">
                                     <label class="form-check-label" for="flexCheckDefault">
                                        Site Supervision
                                     </label>
@@ -677,8 +677,8 @@ jQuery(function () {
          });
       }
 
-      managers_checkbox() {
-
+      managers_checkbox()
+      {
          let checkbox = document.querySelectorAll(`${this.pow_wrapper} ${this.service_checkbox}${this.phaseofwork_checkbox}`);
          let formCheck_wrapper = $(checkbox).parent();
 
@@ -712,8 +712,41 @@ jQuery(function () {
                   $(checkboxWrapper).children().eq(2).remove();
    
                }
+      }
+
+      powChecked()
+      {
+         let powCheckbox = document.querySelector(`${this.phaseofwork_checkbox}`);
+         let powCheckbox_wrapper = $(powCheckbox).parent();
+      
+         if($(powCheckbox).off().is(':checked')){
+
+            let managersWrapper = $(powCheckbox_wrapper).children().eq(2);
+            let formCheck_array = managersWrapper.children();
+        
+            Array.from(formCheck_array).forEach((formCheck) => {
+
+               let checkbox = $(formCheck).children().eq(0);
+               let powStringdot = `${this.phaseofwork_checkbox}`;
+               let pow = powStringdot.replace(/[^a-z0-9\s]/gi, '').replace(/[_\s]/g, '.')
+               let underscore = '_';
+               let department_space = `${this.department}`;
+               let department = department_space.replace(/\s/g, '');
+               let array = '[]';
+
+               let name1 = pow.concat(underscore);
+               let name2 = name1.concat(department);
+               let final = name2.concat(array);
+
+               $(checkbox).attr('name', final);
+
+
+            });
+
+         };
 
       }
+
     
    }
    let archConceptual = new SelectManagers('.arch-pow_wrapper', '#architecture', '.conceptual', 'design');
@@ -722,9 +755,9 @@ jQuery(function () {
    let archconsDrawings = new SelectManagers('.arch-pow_wrapper', '#architecture', '.constructionDrawings', 'project management');
    let archsiteVision = new SelectManagers('.arch-pow_wrapper', '#architecture', '.siteSupervision', 'project management');
    
-   let interiorDesign_pow = new SelectManagers('.interiorDesign-pow_wrapper', '#interiorDesign', '.pow_checkbox', 'interior design');
+   let interiorDesign_pow = new SelectManagers('.interiorDesign-pow_wrapper', '#interiorDesign', '.pow_checkbox', 'interiordesign');
    
-   let masterPlanning_pow = new SelectManagers('.masterPlanning-pow_wrapper', '#masterPlanning', '.pow_checkbox', 'master planning');
+   let masterPlanning_pow = new SelectManagers('.masterPlanning-pow_wrapper', '#masterPlanning', '.pow_checkbox', 'masterplanning');
 
    let engrMechanical = new SelectManagers('.engi-pow_wrapper', '#engineering', '.mechanical', 'mechanical');
    let engrElectrical = new SelectManagers('.engi-pow_wrapper', '#engineering', '.electrical', 'electrical');
@@ -741,6 +774,12 @@ jQuery(function () {
  
    $(document).on('change', ()=> {
 
+      archConceptual.powChecked();
+      archSchematic.powChecked();
+      archdesignDev.powChecked();
+      archconsDrawings.powChecked();
+      archsiteVision.powChecked();
+      
       //Department Manager > checkbox
       mechanicalDepartmentCheckbox.managers_checkbox();
       electricalDepartmentCheckbox.managers_checkbox();
@@ -768,29 +807,31 @@ jQuery(function () {
       engrFirepro.pow_checkbox();
       engrStructural.pow_checkbox();
 
+
+
    });
 
-   function xx() {
+   // function xx() {
 
-      let checkboxes = document.querySelectorAll('.engi-pow_wrapper .managers_wrapper .form-check-input')
+   //    let checkboxes = document.querySelectorAll('.engi-pow_wrapper .managers_wrapper .form-check-input')
 
-      Array.from(checkboxes).forEach((checkbox) => {
+   //    Array.from(checkboxes).forEach((checkbox) => {
 
-         $(checkbox).off().on('click', ()=> {
+   //       $(checkbox).off().on('click', ()=> {
 
-            // mechanicalDepartmentCheckbox.managers_checkbox();
-            // electricalDepartmentCheckbox.managers_checkbox();
-            // plumbingDepartmentCheckbox.managers_checkbox();
-            // fireProtectionDepartmentCheckbox.managers_checkbox();
+   //          // mechanicalDepartmentCheckbox.managers_checkbox();
+   //          // electricalDepartmentCheckbox.managers_checkbox();
+   //          // plumbingDepartmentCheckbox.managers_checkbox();
+   //          // fireProtectionDepartmentCheckbox.managers_checkbox();
 
-            console.log('okay');
+   //          console.log('okay');
       
-         });
+   //       });
 
 
-      });
+   //    });
 
-   }
+   // }
 
    // $(document).on('change', xx());
 

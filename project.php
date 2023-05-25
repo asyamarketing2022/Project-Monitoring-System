@@ -129,37 +129,37 @@
                                 <span>Services</span>
                                 <div class="services_wrapper"><img src="" alt="">
                                     <div class="form-check services">
-                                        <input class="form-check-input cb-services" name="architecture" type="checkbox" value="" id="architecture">
+                                        <input class="form-check-input cb-services" name="serviceArch" type="checkbox" value="1" id="architecture">
                                         <label class="form-check-label" for="flexCheckDefault">
                                             Architecture
                                         </label>
                                     </div>
                                     <div class="form-check services">
-                                        <input class="form-check-input cb-services" name="engineering" type="checkbox" value="" id="engineering">
+                                        <input class="form-check-input cb-services" name="serviceEngi" type="checkbox" value="1" id="engineering">
                                         <label class="form-check-label" for="flexCheckChecked">
                                             Engineering
                                         </label>
                                     </div>
                                     <div class="form-check services">
-                                        <input class="form-check-input" name="interior design" type="checkbox" value="" id="interiorDesign">
+                                        <input class="form-check-input" name="serviceInterior" type="checkbox" value="1" id="interiorDesign">
                                         <label class="form-check-label" for="flexCheckChecked">
                                             Interior Design
                                         </label>
                                     </div>
                                     <div class="form-check services">
-                                        <input class="form-check-input" name="master planning" type="checkbox" value="" id="masterPlanning">
+                                        <input class="form-check-input" name="serviceMasterplanning" type="checkbox" value="1" id="masterPlanning">
                                         <label class="form-check-label" for="flexCheckChecked">
                                             Master Planning
                                         </label>
                                     </div>
                                     <div class="form-check services">
-                                        <input class="form-check-input" name="scale model" type="checkbox" value="" id="scaleModel">
+                                        <input class="form-check-input" name="serviceScalemodel" type="checkbox" value="1" id="scaleModel">
                                         <label class="form-check-label" for="flexCheckChecked">
                                             Scale Model
                                         </label>
                                     </div>
                                     <div class="form-check services">
-                                        <input class="form-check-input" name="animation" type="checkbox" value="" id="animation">
+                                        <input class="form-check-input" name="serviceAnimation" type="checkbox" value="1" id="animation">
                                         <label class="form-check-label" for="flexCheckChecked">
                                             Animation
                                         </label>
@@ -185,11 +185,11 @@
                             </div>
                             <div class="content__info"> 
                                 <span>Company Name</span>
-                                <input type="text" name="company name" required>
+                                <input type="text" name="companyName" required>
                              </div>
                             <div class="content__info"> 
                                 <span>Client Name</span>
-                                <input type="text" name="client name" required>
+                                <input type="text" name="clientName" required>
                             </div>
                         </div>
                     </div>
