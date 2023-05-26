@@ -629,7 +629,7 @@ jQuery(function () {
 
 
    //Phase of work checkbox to select managers
-   class SelectManagers
+   class SelectCheckbox
    {
       constructor(pow_wrapper, service_checkbox, phaseofwork_checkbox, department) {
            this.pow_wrapper = pow_wrapper;
@@ -638,7 +638,8 @@ jQuery(function () {
            this.department = department;
       }
 
-      pow_checkbox() {
+      pow_checkbox()
+      {
 
          let phaseofwork_checkbox = document.querySelectorAll(`${this.pow_wrapper} ${this.phaseofwork_checkbox}`);
 
@@ -714,72 +715,88 @@ jQuery(function () {
                }
       }
 
-      powChecked()
+      managers()
       {
-         let powCheckbox = document.querySelector(`${this.phaseofwork_checkbox}`);
-         let powCheckbox_wrapper = $(powCheckbox).parent();
-      
-         if($(powCheckbox).off().is(':checked')){
+         let powCheckbox = document.querySelectorAll(`${this.pow_wrapper} ${this.phaseofwork_checkbox}`);
+    
+         for (let i = 0; i < powCheckbox.length; i++){
 
-            let managersWrapper = $(powCheckbox_wrapper).children().eq(2);
-            let formCheck_array = managersWrapper.children();
-        
-            Array.from(formCheck_array).forEach((formCheck) => {
+            let powCheckbox_wrapper = $(powCheckbox[i]).parent();
+            if($(powCheckbox[i]).off().is(':checked')){
+   
+               let managersWrapper = $(powCheckbox_wrapper).children().eq(2);
+               let formCheck_array = managersWrapper.children();
+           
+               Array.from(formCheck_array).forEach((formCheck) => {
+   
+                  let checkbox = $(formCheck).children().eq(0);
+                  let powStringdot = `${this.phaseofwork_checkbox}`;
+                  let pow = powStringdot.replace(/[^a-z0-9\s]/gi, '').replace(/[_\s]/g, '.')
+                  let underscore = '_';
+                  let department_space = `${this.department}`;
+                  let department = department_space.replace(/\s/g, '');
+                  let array = '[]';
+   
+                  let name1 = pow.concat(underscore);
+                  let name2 = name1.concat(department);
+                  let final = name2.concat(array);
+   
+                  $(checkbox).attr('name', final);
+   
+   
+               });   
+   
+            };
 
-               let checkbox = $(formCheck).children().eq(0);
-               let powStringdot = `${this.phaseofwork_checkbox}`;
-               let pow = powStringdot.replace(/[^a-z0-9\s]/gi, '').replace(/[_\s]/g, '.')
-               let underscore = '_';
-               let department_space = `${this.department}`;
-               let department = department_space.replace(/\s/g, '');
-               let array = '[]';
-
-               let name1 = pow.concat(underscore);
-               let name2 = name1.concat(department);
-               let final = name2.concat(array);
-
-               $(checkbox).attr('name', final);
-
-
-            });
-
-         };
+         }
 
       }
 
     
    }
-   let archConceptual = new SelectManagers('.arch-pow_wrapper', '#architecture', '.conceptual', 'design');
-   let archSchematic = new SelectManagers('.arch-pow_wrapper', '#architecture', '.schematic', 'design');
-   let archdesignDev = new SelectManagers('.arch-pow_wrapper', '#architecture', '.designDevelopement', 'production');
-   let archconsDrawings = new SelectManagers('.arch-pow_wrapper', '#architecture', '.constructionDrawings', 'project management');
-   let archsiteVision = new SelectManagers('.arch-pow_wrapper', '#architecture', '.siteSupervision', 'project management');
+   let archConceptual = new SelectCheckbox('.arch-pow_wrapper', '#architecture', '.conceptual', 'design');
+   let archSchematic = new SelectCheckbox('.arch-pow_wrapper', '#architecture', '.schematic', 'design');
+   let archdesignDev = new SelectCheckbox('.arch-pow_wrapper', '#architecture', '.designDevelopment', 'production');
+   let archconsDrawings = new SelectCheckbox('.arch-pow_wrapper', '#architecture', '.constructionDrawings', 'project management');
+   let archsiteVision = new SelectCheckbox('.arch-pow_wrapper', '#architecture', '.siteSupervision', 'project management');
    
-   let interiorDesign_pow = new SelectManagers('.interiorDesign-pow_wrapper', '#interiorDesign', '.pow_checkbox', 'interiordesign');
+   let interiorDesign_Conceptual = new SelectCheckbox('.interiorDesign-pow_wrapper', '#interiorDesign', '.conceptual', 'interior design');
+   let interiorDesign_designDev = new SelectCheckbox('.interiorDesign-pow_wrapper', '#interiorDesign', '.designDevelopment', 'interior design');
+   let interiorDesign_constructionDrawings = new SelectCheckbox('.interiorDesign-pow_wrapper', '#interiorDesign', '.constructionDrawings', 'interior design');
+   let interiorDesign_siteSupervision = new SelectCheckbox('.interiorDesign-pow_wrapper', '#interiorDesign', '.siteSupervision', 'interior design');
    
-   let masterPlanning_pow = new SelectManagers('.masterPlanning-pow_wrapper', '#masterPlanning', '.pow_checkbox', 'masterplanning');
+   let masterPlanning_Conceptual = new SelectCheckbox('.masterPlanning-pow_wrapper', '#masterPlanning', '.conceptual', 'master planning');
+   let masterPlanning_Schematic = new SelectCheckbox('.masterPlanning-pow_wrapper', '#masterPlanning', '.schematic', 'master planning');
 
-   let engrMechanical = new SelectManagers('.engi-pow_wrapper', '#engineering', '.mechanical', 'mechanical');
-   let engrElectrical = new SelectManagers('.engi-pow_wrapper', '#engineering', '.electrical', 'electrical');
-   let engrPlumbing = new SelectManagers('.engi-pow_wrapper', '#engineering', '.plumbing', 'plumbing');
-   let engrFirepro = new SelectManagers('.engi-pow_wrapper', '#engineering', '.fireProtection', 'fire protection');
-   let engrStructural = new SelectManagers('.engi-pow_wrapper', '#engineering', '.structural', 'structural');
+   let engrMechanical = new SelectCheckbox('.engi-pow_wrapper', '#engineering', '.mechanical', 'mechanical');
+   let engrElectrical = new SelectCheckbox('.engi-pow_wrapper', '#engineering', '.electrical', 'electrical');
+   let engrPlumbing = new SelectCheckbox('.engi-pow_wrapper', '#engineering', '.plumbing', 'plumbing');
+   let engrFirepro = new SelectCheckbox('.engi-pow_wrapper', '#engineering', '.fireProtection', 'fire protection');
+   let engrStructural = new SelectCheckbox('.engi-pow_wrapper', '#engineering', '.structural', 'structural');
 
-   let mechanicalDepartmentCheckbox = new SelectManagers('.engi-pow_wrapper', '.managersCheckbox', 'mechanical');
-   let electricalDepartmentCheckbox = new SelectManagers('.engi-pow_wrapper', '.managersCheckbox', 'electrical');
-   let plumbingDepartmentCheckbox = new SelectManagers('.engi-pow_wrapper', '.managersCheckbox', 'plumbing');
-   let fireProtectionDepartmentCheckbox = new SelectManagers('.engi-pow_wrapper', '.managersCheckbox', 'fire');
-   let structuralDepartmentCheckbox = new SelectManagers('.engi-pow_wrapper', '.managersCheckbox', 'structural');
+   let mechanicalDepartmentCheckbox = new SelectCheckbox('.engi-pow_wrapper', '.managersCheckbox', 'mechanical');
+   let electricalDepartmentCheckbox = new SelectCheckbox('.engi-pow_wrapper', '.managersCheckbox', 'electrical');
+   let plumbingDepartmentCheckbox = new SelectCheckbox('.engi-pow_wrapper', '.managersCheckbox', 'plumbing');
+   let fireProtectionDepartmentCheckbox = new SelectCheckbox('.engi-pow_wrapper', '.managersCheckbox', 'fire');
+   let structuralDepartmentCheckbox = new SelectCheckbox('.engi-pow_wrapper', '.managersCheckbox', 'structural');
 
  
    $(document).on('change', ()=> {
 
-      archConceptual.powChecked();
-      archSchematic.powChecked();
-      archdesignDev.powChecked();
-      archconsDrawings.powChecked();
-      archsiteVision.powChecked();
+      archConceptual.managers();
+      archSchematic.managers();
+      archdesignDev.managers();
+      archconsDrawings.managers();
+      archsiteVision.managers();
       
+      interiorDesign_Conceptual.managers();
+      interiorDesign_designDev.managers();
+      interiorDesign_constructionDrawings.managers();
+      interiorDesign_siteSupervision.managers();
+
+      masterPlanning_Conceptual.managers();
+      masterPlanning_Schematic.managers();
+
       //Department Manager > checkbox
       mechanicalDepartmentCheckbox.managers_checkbox();
       electricalDepartmentCheckbox.managers_checkbox();
@@ -795,10 +812,14 @@ jQuery(function () {
       archsiteVision.pow_checkbox();
 
       //Interior Design services > Phase of work checkbox
-      interiorDesign_pow.pow_checkbox();
+      interiorDesign_Conceptual.pow_checkbox();
+      interiorDesign_designDev.pow_checkbox();
+      interiorDesign_constructionDrawings.pow_checkbox();
+      interiorDesign_siteSupervision.pow_checkbox();
 
       //Master planning services > Phase of work checkbox
-      masterPlanning_pow.pow_checkbox();
+      masterPlanning_Conceptual.pow_checkbox();
+      masterPlanning_Schematic.pow_checkbox();
 
       //Engineering Department > checkbox
       engrMechanical.pow_checkbox();
