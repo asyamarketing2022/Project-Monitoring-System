@@ -20,8 +20,8 @@ $con = $db->connection();
                 $output = '<span>Select Manager</span>';
 
                 do {
-                    $output .= "<div class='form-check'>
-                             <input class='form-check-input managersCheckbox' name='' type='checkbox' value='". $managerInfo['first_name'] ." " . $managerInfo['last_name'] . "'>
+                    $output .= "<div class='form-check managerCheckbox_container'>
+                             <input class='form-check-input managersCheckbox ". $managerInfo['department'] ."' name='". $managerInfo['department'] ."_manager[]' type='checkbox' value='". $managerInfo['ID'] ."'>
                              <label class='form-check-label' for='flexCheckDefault'>". $managerInfo['first_name'] ." " . $managerInfo['last_name'] . "</label>
                             </div>";
                 } while($managerInfo = $manager->fetch_assoc());

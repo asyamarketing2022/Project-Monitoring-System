@@ -641,7 +641,47 @@ jQuery(function () {
       pow_checkbox()
       {
 
-         let phaseofwork_checkbox = document.querySelectorAll(`${this.pow_wrapper} ${this.phaseofwork_checkbox}`);
+         let phaseofwork_checkbox = document.querySelectorAll(`${this.pow_wrapper} .pow_checkbox${this.phaseofwork_checkbox}`);
+
+         Array.from(phaseofwork_checkbox).forEach((checkbox) => {
+
+            $(checkbox).off().on('click', ()=> {
+
+               let checkbox_wrapper = $(checkbox).parent();
+               let managerWrapper = $(checkbox_wrapper).children().last();
+
+               if($(checkbox).is(':checked') ) {
+                     
+               let dept = `${this.department}`
+         
+                  $.ajax({   
+                     type: 'POST',
+                     url: 'departmentManager.php',
+                     data: {
+                        'dept': dept,
+                     },
+                        success:function(data){
+                                 
+                           $(managerWrapper).html(data);
+            
+                        }
+                  });
+
+               } else {
+   
+                  $(managerWrapper).children().remove();
+   
+               }
+   
+             });
+
+         });
+      }
+
+      dept_checkbox()
+      {
+
+         let phaseofwork_checkbox = document.querySelectorAll(`${this.pow_wrapper} .dept_checkbox${this.phaseofwork_checkbox}`);
 
          Array.from(phaseofwork_checkbox).forEach((checkbox) => {
 
@@ -680,39 +720,45 @@ jQuery(function () {
 
       managers_checkbox()
       {
-         let checkbox = document.querySelectorAll(`${this.pow_wrapper} ${this.service_checkbox}${this.phaseofwork_checkbox}`);
-         let formCheck_wrapper = $(checkbox).parent();
+         let checkbox = document.querySelectorAll(`${this.pow_wrapper} .managerCheckbox_container ${this.service_checkbox}${this.phaseofwork_checkbox}`);
+       
+            for (let i = 0; checkbox.length > i; i++){
 
-               if($(checkbox).off().is(':checked')) {
+               if($(checkbox[i]).off().is(':checked')) {
 
-                  if($(formCheck_wrapper).children().length < 3){
+                  let formCheck = $(checkbox[i]).parent();
+
+                  if($(formCheck).children().length < 3){
 
                      let phaseofwork_Wrapper = `<div class="phase_of_work">
                      <span>Phase of Work</span>
                      <div class="form-check">
-                        <input class="form-check-input" name="" type="checkbox" value="">
+                        <input class="form-check-input schematic" name="${this.department}_schematic[]" type="checkbox" value="">
                         <label class="form-check-label" for="flexCheckDefault">Schematic<label>
                      </div>
                      <div class="form-check">
-                        <input class="form-check-input" name="" type="checkbox" value="">
+                        <input class="form-check-input designDevelopment" name="${this.department}_designdevelopment[]" type="checkbox" value="">
                         <label class="form-check-label" for="flexCheckDefault">Design Development<label>
                      </div>
                      <div class="form-check">
-                        <input class="form-check-input" name="" type="checkbox" value="">
+                        <input class="form-check-input constructionDrawing" name="${this.department}_constructiondrawing[]" type="checkbox" value="">
                         <label class="form-check-label" for="flexCheckDefault">Construction Drawings<label>
                      </div>
                   </div>`;
 
-                  $(phaseofwork_Wrapper).appendTo(formCheck_wrapper);
+                  $(phaseofwork_Wrapper).appendTo(formCheck);
 
                   } 
 
-               } else {
-   
-                  let checkboxWrapper = $(checkbox).parent();
-                  $(checkboxWrapper).children().eq(2).remove();
-   
+               } else if($(checkbox[i]).is(':not(:checked)')) {
+
+                  let formCheck = $(checkbox[i]).parent();
+                  $(formCheck).children().eq(2).remove();
+
                }
+
+         }
+        
       }
 
       managers()
@@ -746,9 +792,9 @@ jQuery(function () {
    
                });   
    
-            };
+            } 
 
-         }
+         } 
 
       }
 
@@ -774,11 +820,11 @@ jQuery(function () {
    let engrFirepro = new SelectCheckbox('.engi-pow_wrapper', '#engineering', '.fireProtection', 'fire protection');
    let engrStructural = new SelectCheckbox('.engi-pow_wrapper', '#engineering', '.structural', 'structural');
 
-   let mechanicalDepartmentCheckbox = new SelectCheckbox('.engi-pow_wrapper', '.managersCheckbox', 'mechanical');
-   let electricalDepartmentCheckbox = new SelectCheckbox('.engi-pow_wrapper', '.managersCheckbox', 'electrical');
-   let plumbingDepartmentCheckbox = new SelectCheckbox('.engi-pow_wrapper', '.managersCheckbox', 'plumbing');
-   let fireProtectionDepartmentCheckbox = new SelectCheckbox('.engi-pow_wrapper', '.managersCheckbox', 'fire');
-   let structuralDepartmentCheckbox = new SelectCheckbox('.engi-pow_wrapper', '.managersCheckbox', 'structural');
+   let mechanicalDepartmentCheckbox = new SelectCheckbox('.engi-pow_wrapper', '.managersCheckbox', '.mechanical', 'mechanical' );
+   let electricalDepartmentCheckbox = new SelectCheckbox('.engi-pow_wrapper', '.managersCheckbox', '.electrical', 'electrical');
+   let plumbingDepartmentCheckbox = new SelectCheckbox('.engi-pow_wrapper', '.managersCheckbox', '.plumbing', 'plumbing');
+   let fireProtectionDepartmentCheckbox = new SelectCheckbox('.engi-pow_wrapper', '.managersCheckbox', '.fire', 'fire protection');
+   let structuralDepartmentCheckbox = new SelectCheckbox('.engi-pow_wrapper', '.managersCheckbox', '.structural', 'structural');
 
  
    $(document).on('change', ()=> {
@@ -822,11 +868,11 @@ jQuery(function () {
       masterPlanning_Schematic.pow_checkbox();
 
       //Engineering Department > checkbox
-      engrMechanical.pow_checkbox();
-      engrElectrical.pow_checkbox();
-      engrPlumbing.pow_checkbox();
-      engrFirepro.pow_checkbox();
-      engrStructural.pow_checkbox();
+      engrMechanical.dept_checkbox();
+      engrElectrical.dept_checkbox();
+      engrPlumbing.dept_checkbox();
+      engrFirepro.dept_checkbox();
+      engrStructural.dept_checkbox();
 
 
 

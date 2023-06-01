@@ -115,15 +115,15 @@
                         <div class="content-info__wrapper assign">
                             <div class="content__info"> 
                                 <span>Project Name</span>
-                                <input type="text" name="projectName" required>
+                                <input type="text" name="projectName">
                             </div>
                             <div class="content__info"> 
                                 <span>Location</span>
-                                <input type="text" name="location" required>
+                                <input type="text" name="location">
                             </div>
                             <div class="content__info"> 
                                 <span>Lot areas</span>
-                                <input type="text" name="lotAreas" required>
+                                <input type="text" name="lotAreas">
                             </div>
                             <div class="content__info" id="services"> 
                                 <span>Services</span>
@@ -185,11 +185,11 @@
                             </div>
                             <div class="content__info"> 
                                 <span>Company Name</span>
-                                <input type="text" name="companyName" required>
+                                <input type="text" name="companyName">
                              </div>
                             <div class="content__info"> 
                                 <span>Client Name</span>
-                                <input type="text" name="clientName" required>
+                                <input type="text" name="clientName">
                             </div>
                         </div>
                     </div>

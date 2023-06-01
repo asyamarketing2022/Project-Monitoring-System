@@ -4,6 +4,7 @@ if(!isset($_SESSION)){
 }
 
 include_once("connections/DBconnection.php");
+include_once("EngrController.php");
 // include_once("ProjectController.php");
 
 $db = new DBconnection();
@@ -75,6 +76,15 @@ $con = $db->connection();
 
         $con->query($sql) or die ($con->error);
 
+        $engrMechanical = new EngrController("mechanical_schematic", "mechanical_designdevelopment", "mechanical_constructiondrawing", "mechanical_manager");
+
+        $engrMechanical->get_engr();
+        
+        $engrElectrical = new EngrController("electrical_schematic", "electrical_designdevelopment", "electrical_constructiondrawing", "electrical_manager");
+        $engrElectrical->get_engr();
+
+        // print_r($_SESSION['EngrSchematic']);
+        // print_r($_SESSION['EngrSchematic']);
 
     }
 
