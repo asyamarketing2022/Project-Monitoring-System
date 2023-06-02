@@ -730,18 +730,21 @@ jQuery(function () {
 
                   if($(formCheck).children().length < 3){
 
+                     let department_space = `${this.department}`;
+                     let department = department_space.replace(/\s/g, '');
+
                      let phaseofwork_Wrapper = `<div class="phase_of_work">
                      <span>Phase of Work</span>
                      <div class="form-check">
-                        <input class="form-check-input schematic" name="${this.department}_schematic[]" type="checkbox" value="">
+                        <input class="form-check-input schematic" name="${department}_schematic[]" type="checkbox" value="">
                         <label class="form-check-label" for="flexCheckDefault">Schematic<label>
                      </div>
                      <div class="form-check">
-                        <input class="form-check-input designDevelopment" name="${this.department}_designdevelopment[]" type="checkbox" value="">
+                        <input class="form-check-input designDevelopment" name="${department}_designdevelopment[]" type="checkbox" value="">
                         <label class="form-check-label" for="flexCheckDefault">Design Development<label>
                      </div>
                      <div class="form-check">
-                        <input class="form-check-input constructionDrawing" name="${this.department}_constructiondrawing[]" type="checkbox" value="">
+                        <input class="form-check-input constructionDrawing" name="${department}_constructiondrawing[]" type="checkbox" value="">
                         <label class="form-check-label" for="flexCheckDefault">Construction Drawings<label>
                      </div>
                   </div>`;

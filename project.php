@@ -47,21 +47,15 @@
             <div class="content-table">
                 <table>
                     <tr>
-                        <th></th>
-                        <th>ID</th>
-                        <th>Code</th>
                         <th>Project Name</th>
-                        <th>Quality Check</th>
-                        <th>File Type</th>
-                        <th>Project Tree Style</th>
-                        <th>Ignore Files</th>
-                        <th>String Error Contact</th>
-                        <th>Screen Search</th>
-                        <th>Status</th>
+                        <th>Location</th>
+                        <th>Lot Areas</th>
+                        <th>Typology</th>
+                        <th>Company Name</th>
+                        <th>Client Name</th>
                         <th></th>
                         <th></th>
                     </tr>
-
                     
                     <!-- project-table.php for SQL -->
 
@@ -69,30 +63,25 @@
 
                             <?php do { ?>
                                 <tr class="table-row_projects table-form" value="<?php echo $projectInfo['id'] ?>">
-                                    <td><input type="checkbox" id="" name="" value=""></td>
-                                    <td class="project-id"><?php echo $projectInfo['id'] ?></td>
-                                    <td><?php echo $projectInfo['code'] ?></td>
                                     <td><?php echo $projectInfo['project_name'] ?></td>
-                                    <td><?php echo $projectInfo['quality_check'] ?></td>
-                                    <td><?php echo $projectInfo['file_type'] ?></td>
-                                    <td><?php echo $projectInfo['project_tree_style'] ?></td>
-                                    <td><?php echo $projectInfo['ignore_files'] ?></td>
-                                    <td><?php echo $projectInfo['string_error_contact'] ?></td>
-                                    <td><?php echo $projectInfo['screenshot_search_prefix'] ?></td>
-                                    <td></td>
+                                    <td><?php echo $projectInfo['location'] ?></td>
+                                    <td><?php echo $projectInfo['lot_areas'] ?></td>
+                                    <td><?php echo $projectInfo['typology'] ?></td>
+                                    <td><?php echo $projectInfo['company_name'] ?></td>
+                                    <td><?php echo $projectInfo['client_name'] ?></td>
 
                                     <?php if(isset($_SESSION['UserLogin']) && $_SESSION['Access'] == "admin") { ?>
+         
+                                        <td><a class="" href="viewproject.php?ID=<?php echo $projectInfo['id'] ?>">View</a></td>
                                         
-                                        <td><span data-toggle="modal" data-target="#edit_project" class="edit-project" value="<?php echo $projectInfo['id'] ?>">Edit</span></td>
-                                        <td><span data-toggle="modal" data-target="#assign_project" class="view-project" value="<?php echo $projectInfo['id'] ?>">Assign</span></td>
+                                        <!-- <td><span data-toggle="modal" data-target="#edit_project" class="edit-project" value="<?/*php echo $projectInfo['id'] */?>">Edit</span></td>
+                                        <td><span data-toggle="modal" data-target="#assign_project" class="view-project" value="<?/*php echo $projectInfo['id'] */?>">Assign</span></td> -->
                                     
                                     <?php } ?>
 
                                 </tr>
                             <?php } while($projectInfo = $project->fetch_assoc()); ?>
 
-                     
-                   
                     </form>
                 </table>
             </div>
@@ -115,15 +104,15 @@
                         <div class="content-info__wrapper assign">
                             <div class="content__info"> 
                                 <span>Project Name</span>
-                                <input type="text" name="projectName">
+                                <input type="text" name="projectName" required>
                             </div>
                             <div class="content__info"> 
                                 <span>Location</span>
-                                <input type="text" name="location">
+                                <input type="text" name="location" required>
                             </div>
                             <div class="content__info"> 
                                 <span>Lot areas</span>
-                                <input type="text" name="lotAreas">
+                                <input type="text" name="lotAreas" required>
                             </div>
                             <div class="content__info" id="services"> 
                                 <span>Services</span>
@@ -321,9 +310,5 @@
         </div>
     </div>
 </div>
-
-
-
-
 
 <?php include 'footer.php'; ?>

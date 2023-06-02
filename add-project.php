@@ -77,14 +77,19 @@ $con = $db->connection();
         $con->query($sql) or die ($con->error);
 
         $engrMechanical = new EngrController("mechanical_schematic", "mechanical_designdevelopment", "mechanical_constructiondrawing", "mechanical_manager");
-
         $engrMechanical->get_engr();
         
         $engrElectrical = new EngrController("electrical_schematic", "electrical_designdevelopment", "electrical_constructiondrawing", "electrical_manager");
         $engrElectrical->get_engr();
 
-        // print_r($_SESSION['EngrSchematic']);
-        // print_r($_SESSION['EngrSchematic']);
+        $engrPlumbing = new EngrController("plumbing_schematic", "plumbing_designdevelopment", "plumbing_constructiondrawing", "plumbing_manager");
+        $engrPlumbing->get_engr();
+
+        $engrFirepro = new EngrController("fireprotection_schematic", "fireprotection_designdevelopment", "fireprotection_constructiondrawing", "fireprotection_manager");
+        $engrFirepro->get_engr();
+
+        $engrFirepro = new EngrController("structural_schematic", "structural_designdevelopment", "structural_constructiondrawing", "structural_manager");
+        $engrFirepro->get_engr();
 
     }
 

@@ -341,7 +341,8 @@ a {
 }
 
 .search-action__wrapper,
-.select-action__wrapper {
+.select-action__wrapper,
+.project-title {
     width: 100%;
     display: block;
     height: 50px;

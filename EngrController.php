@@ -40,12 +40,14 @@ class EngrController
                 $container_array[] = $managerInput[$i];
                 $managerName = implode(" ", $container_array);
 
+                $serviceEngr = isset($_POST['serviceEngi']);
+
                 $last = "SELECT * FROM pms_projects ORDER BY id DESC LIMIT 1";
                 $result = mysqli_query($this->conn, $last);
                 $row = $result->fetch_assoc();
                 $last_data = $row['id'];
 
-                $sql = "UPDATE `pms_projects` SET `$rowSchematic` = '$managerName', `$rowdesignDevelopment` = '$managerName', `$rowconstructionDrawings` = '$managerName' WHERE id = '$last_data'";
+                $sql = "UPDATE `pms_projects` SET `service_engineering` = '$serviceEngr', `$rowSchematic` = '$managerName', `$rowdesignDevelopment` =  '$managerName', `$rowconstructionDrawings` = '$managerName' WHERE id = '$last_data'";
 
                 $this->conn->query($sql) or die ($this->conn->error);
 
