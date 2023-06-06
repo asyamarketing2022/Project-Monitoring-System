@@ -1216,7 +1216,99 @@ jQuery(function () {
    })
 
 
-   //Class for 
+   //Phase of work status clicked
+   function powStatus(){
+
+      let powStatus = document.querySelectorAll('.pow_status');
+
+      for (let i = 0; powStatus.length > i; i++) {
+
+         $(powStatus[i]).on('click', ()=> {
+
+            if($(powStatus[i]).children().length != 1) {
+
+               let div_container = $("<div class='status_tooltip'>");
+               let span_working = $("<span class='orangeStatus'>Working on it</span>");
+               let span_stuck = $("<span class='redStatus'>Stuck</span>");
+               let span_done = $("<span clas='greenStatus'>Done</span>");
+               let input_text = $("<input type='text'>");
+   
+               $(div_container).append(span_working);
+               $(div_container).append(span_stuck);
+               $(div_container).append(span_done);
+               $(div_container).append(input_text);
+               $(powStatus[i]).append(div_container);
+
+            } else {
+
+               $(powStatus[i]).children(1).remove();
+
+            }
+         });
+
+      }
+
+   }
+   powStatus();
+
+   function enterStatus(){
+
+      let status_tooltip = document.querySelectorAll('.status_tooltip');
+      // let orangeStatus = $(status_tooltip).children(1);
+
+      for (let i = 0; status_tooltip.length > i; i++) {
+
+        let orangeStatus = $(status_tooltip[i]).children(1);
+
+         $(orangeStatus).on('click', ()=> {
+
+            console.log('okay');
+
+         });
+
+      }
+
+   }
+
+   let td_powStatus = document.querySelectorAll('.pow_status');
+
+   for (let i = 0; td_powStatus.length > i; i++) {
+      
+      $(td_powStatus).on('click', ()=> {
+
+         let status_tooltip = document.querySelectorAll('.status_tooltip');
+      
+         console.log(status_tooltip);
+
+      });
+   }
+
+   function postUsers_in_modal(){
+
+      let photo_id = document.querySelectorAll('.photo_id');
+
+      for (let i = 0; photo_id.length > i; i++) {
+
+         $(photo_id[i]).on('click', ()=> {
+
+            let photosId = $(photo_id[i]).attr('value');
+
+            $.ajax({   
+              type: 'POST',
+              url: 'postUsers_in_modal.php',
+              data: {
+                 'photosId': photosId,
+               },
+               success:function(data){
+                   $('.viewManagers_container').html(data);
+                 }
+            });
+
+         });
+         
+      }
+   }
+   postUsers_in_modal();
 
 });
 
