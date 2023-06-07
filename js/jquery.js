@@ -1247,41 +1247,97 @@ jQuery(function () {
          });
 
       }
-
    }
-   powStatus();
+   // powStatus();
 
-   function enterStatus(){
+   function statusTooltip(){
 
-      let status_tooltip = document.querySelectorAll('.status_tooltip');
-      // let orangeStatus = $(status_tooltip).children(1);
+      let td_powStatus = document.querySelectorAll('.pow_status');
 
-      for (let i = 0; status_tooltip.length > i; i++) {
+      for (let i = 0; td_powStatus.length > i; i++) {
 
-        let orangeStatus = $(status_tooltip[i]).children(1);
+         let tooltip = $(td_powStatus[i]).children('.status_tooltip');
 
-         $(orangeStatus).on('click', ()=> {
+         $(td_powStatus[i]).on('click', ()=> {
 
-            console.log('okay');
+            if($(tooltip).hasClass('d-none')) {
+
+               $(tooltip).removeClass('d-none');
+    
+            } 
+            
+            // else {
+               
+            //    $(tooltip).addClass('d-none');
+
+            // }
 
          });
+         
+      }
+   }
+   statusTooltip();
+  
+   function enterStatus(){
+
+      let statusTooltip = document.querySelectorAll('.status_tooltip');
+
+      for (let i = 0; statusTooltip.length > i; i++) {
+
+        let status = $(statusTooltip[i]).children();
+        let powStatus = $(statusTooltip[i]).parent();
+        let textStatus = $(powStatus).children('.text_status');
+        let tooltip = $(powStatus).children('.status_tooltip');
+
+        for (let num = 0; status.length != num; num++) {
+         
+            $(status[num]).off().on('click', ()=> {
+
+            $(tooltip).addClass('d-none');
+
+             console.log(tooltip);
+
+             let updateStatus = $(status[num]).text();
+             let status_db_row = $(powStatus).attr('value');
+             let projectId = $('#projectTitle').attr('value');
+
+               $.ajax({   
+               type: 'POST',
+               url: 'phase-of-work_status.php',
+               data: {
+                  'updateStatus': updateStatus,
+                  'projectId': projectId,
+                  'status_db_Row': status_db_row,
+                  },
+                  success:function(data){
+                     $(textStatus).html(data);
+                  }
+               });
+
+            });
+
+         }
 
       }
 
    }
+   enterStatus();
 
-   let td_powStatus = document.querySelectorAll('.pow_status');
+   // let td_powStatus = document.querySelectorAll('.pow_status');
 
-   for (let i = 0; td_powStatus.length > i; i++) {
+   // for (let i = 0; td_powStatus.length > i; i++) {
       
-      $(td_powStatus).on('click', ()=> {
+   //    $(td_powStatus[i]).on('click', ()=> {
 
-         let status_tooltip = document.querySelectorAll('.status_tooltip');
+   //       let status_tooltip = document.querySelectorAll('.status_tooltip');
       
-         console.log(status_tooltip);
+   //       // console.log(status_tooltip);
 
-      });
-   }
+   //    });
+   // }
+
+
+
 
    function postUsers_in_modal(){
 
@@ -1292,6 +1348,9 @@ jQuery(function () {
          $(photo_id[i]).on('click', ()=> {
 
             let photosId = $(photo_id[i]).attr('value');
+            // let projectId = $('#projectTitle');
+
+            // console.log(projectId);
 
             $.ajax({   
               type: 'POST',

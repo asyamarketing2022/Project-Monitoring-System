@@ -1,7 +1,8 @@
 <?php $page = 'project'; include 'header.php'; ?>
 
-<?php include("connections/DBconnection.php"); ?>
-<?php include("sidebar.php"); ?>
+<?php include_once("connections/DBconnection.php"); ?>
+<?php include_once("phase-of-work_status.php"); ?>
+<?php include_once("sidebar.php"); ?>
 
 
 <?php 
@@ -21,7 +22,7 @@ $row = $project->fetch_assoc();
 
 <div class="grid-right__content">
     <div class="project-title mt-4">
-         <h1 class="float-start"><?php echo $row['project_name'] ?></h1>
+         <h1 class="float-start" id="projectTitle" value='<?php echo $projectID ?>'><?php echo $row['project_name'] ?></h1>
          <p class="float-end">image info</p>
     </div>
 
@@ -76,8 +77,15 @@ $row = $project->fetch_assoc();
                     ?> 
                     </td>
                     <td>Sample Typology</td>
-                    <td class="pow_status">
-                        <?php echo $row['arch_conceptual_status'] ?>
+                    <td class="pow_status" value="arch_conceptual_status">
+                        <span class='text_status'><?php echo $row['arch_conceptual_status'] ?></span>
+                        <div class="status_tooltip d-none">
+                            <span class="orangeStatus">Working on it</span>
+                            <span class="redStatus">Stuck</span>
+                            <span clas="greenStatus">Done</span>
+                           <input type="text">
+                            
+                        </div>
                     </td>
                     <td><?php echo $row['added_at'] ?></td>
                     <td></td>
@@ -121,7 +129,16 @@ $row = $project->fetch_assoc();
                     ?> 
                     </td>
                     <td>Sample Typology</td>
-                    <td class="pow_status"><?php echo $row['arch_conceptual_status'] ?></td>
+                    <td class="pow_status">
+                        <?php echo $row['arch_conceptual_status'] ?>
+                        <div class="status_tooltip d-none">
+                            <span class="orangeStatus">Working on it</span>
+                            <span class="redStatus">Stuck</span>
+                            <span clas="greenStatus">Done</span>
+                            <input type="text">
+                        </div>
+                    </td>
+                    </td>
                     <td><?php echo $row['added_at'] ?></td>
                     <td></td>
                     <td><button>Choose File</button></td>
