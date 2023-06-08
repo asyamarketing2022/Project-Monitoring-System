@@ -73,6 +73,22 @@ a {
 
 .content-table td.pow_status {
     position: relative;
+    width: 150px;
+}
+
+.content-table td.pow_status .text_status {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: auto;
 }
 
 .content-table td.pow_status .status_tooltip {

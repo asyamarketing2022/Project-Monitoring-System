@@ -1256,48 +1256,160 @@ jQuery(function () {
 
       for (let i = 0; td_powStatus.length > i; i++) {
 
+         let textStatus = $(td_powStatus[i]).children('.text_status');
          let tooltip = $(td_powStatus[i]).children('.status_tooltip');
 
-         $(td_powStatus[i]).on('click', ()=> {
+         $(textStatus).on('click', ()=> {
 
             if($(tooltip).hasClass('d-none')) {
 
                $(tooltip).removeClass('d-none');
     
-            } 
-            
-            // else {
+            } else {
                
-            //    $(tooltip).addClass('d-none');
+               $(tooltip).addClass('d-none');
 
-            // }
+            }
 
          });
          
       }
    }
    statusTooltip();
-  
+
+   function statusColor(){
+
+      let textStatus = document.querySelectorAll('.text_status');
+
+      for(let num = 0; textStatus.length > num; num++){
+
+         if($(textStatus[num]).text() === 'Working on it'){
+
+            $(textStatus[num]).css("background", "#fdab3d");
+
+         } else if($(textStatus[num]).text() === 'Stuck') {
+
+            $(textStatus[num]).css("background", "#e2445c");
+            
+         } else if($(textStatus[num]).text() === 'Done') {
+
+            $(textStatus[num]).css("background", "#00c875");
+
+         }
+
+         let x = $(textStatus[num]).text()
+
+         $(x).on('change', ()=> {
+
+            console.log('okay');
+   
+         });
+
+      }
+   }
+   statusColor();
+
+//    $(document).on('change', ()=> {
+
+//       statusColor();
+
+//   });
+
+   // $(document).on('click', ()=> {
+
+   //    statusColor();
+   //    console.log("okay");
+
+   // });
+
+   // let statustoolTip = document.querySelectorAll('.status_tooltip');
+
+   // Array.from(statustoolTip).forEach((tooltip) => {
+
+   //    let span = $(tooltip).children('span');
+
+   //       console.log(span);
+
+   //       $(span).on('click', ()=> {
+
+   //          console.log('okay');
+
+   //       });
+
+   //    for(let num = 0; span.length > num; num++){
+
+   //       // console.log($(span[num]));
+
+   //       // $(span[num]).on('click', ()=> {
+
+   //       //    console.log('okay');
+
+   //       // });
+
+   //    }
+
+   // });
+
+   function spanClick(){
+
+      let statusTooltip = document.querySelectorAll('.status_tooltip');
+
+      for (let i = 0; statusTooltip.length > i; i++) {
+
+         let span = $(statusTooltip[i]).children('span');
+
+         $(statusTooltip[i]).on('click',(e)=> {
+
+            let textStatus = document.querySelectorAll('.text_status');
+
+            for(let num = 0; textStatus.length > num; num++){
+
+               $(textStatus[num]).on('change', ()=> {
+
+                  console.log('okay')
+
+               });
+      
+               // if($(textStatus[num]).text() === 'Working on it'){
+      
+               //    $(textStatus[num]).css("background", "#fdab3d");
+
+               //    console.log('okay')
+
+               // } 
+      
+
+            }
+
+
+         });
+
+
+      }
+
+   }
+   spanClick();
+
+
    function enterStatus(){
 
       let statusTooltip = document.querySelectorAll('.status_tooltip');
 
       for (let i = 0; statusTooltip.length > i; i++) {
 
-        let status = $(statusTooltip[i]).children();
+        let span = $(statusTooltip[i]).children('span');
+        let input = $(statusTooltip[i]).children('input');
         let powStatus = $(statusTooltip[i]).parent();
         let textStatus = $(powStatus).children('.text_status');
-        let tooltip = $(powStatus).children('.status_tooltip');
+      //   let tooltip = $(powStatus).children('.status_tooltip');
 
-        for (let num = 0; status.length != num; num++) {
+        for (let num = 0; span.length > num; num++) {
          
-            $(status[num]).off().on('click', ()=> {
+            $(span[num]).off().on('click', ()=> {
 
-            $(tooltip).addClass('d-none');
+             $(span[num]).parent().addClass('d-none');
 
-             console.log(tooltip);
-
-             let updateStatus = $(status[num]).text();
+             let updateStatus = $(span[num]).text();
              let status_db_row = $(powStatus).attr('value');
              let projectId = $('#projectTitle').attr('value');
 
@@ -1313,10 +1425,36 @@ jQuery(function () {
                      $(textStatus).html(data);
                   }
                });
-
             });
 
          }
+
+         $(input).on('keypress', (e)=> {
+
+            if(e.key === 'Enter')
+            {
+               let inputText = $(input).val();
+               let status_db_row = $(powStatus).attr('value');
+               let projectId = $('#projectTitle').attr('value');
+         
+               $.ajax({   
+                  type: 'POST',
+                  url: 'phase-of-work_status.php',
+                  data: {
+                     'inputText': inputText,
+                     'projectId': projectId,
+                     'status_db_Row': status_db_row,
+                     },
+                     success:function(data){
+                        $(textStatus).html(data);
+                     }
+               });
+
+               $(input).parent().addClass('d-none');
+
+            }
+
+         });
 
       }
 
@@ -1348,9 +1486,6 @@ jQuery(function () {
          $(photo_id[i]).on('click', ()=> {
 
             let photosId = $(photo_id[i]).attr('value');
-            // let projectId = $('#projectTitle');
-
-            // console.log(projectId);
 
             $.ajax({   
               type: 'POST',
@@ -1359,7 +1494,7 @@ jQuery(function () {
                  'photosId': photosId,
                },
                success:function(data){
-                   $('.viewManagers_container').html(data);
+                   $('.managers_container').html(data);
                  }
             });
 
@@ -1368,6 +1503,31 @@ jQuery(function () {
       }
    }
    postUsers_in_modal();
+
+   function postProjectInfo_in_modal(){
+
+      let infoIcon = document.querySelector('.info-icon');
+      
+      $(infoIcon).on('click', ()=> {
+
+         let projectId = $('#projectTitle').attr('value');
+         
+         $.ajax({   
+            type: 'POST',
+            url: 'postProjectInfo_in_modal.php',
+            data: {
+               'projectId': projectId,
+             },
+             success:function(data){
+                 $('.projectInfo_container').html(data);
+               }
+          });
+
+
+      });
+      
+   }
+   postProjectInfo_in_modal()
 
 });
 

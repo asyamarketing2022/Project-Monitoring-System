@@ -23,7 +23,7 @@ $row = $project->fetch_assoc();
 <div class="grid-right__content">
     <div class="project-title mt-4">
          <h1 class="float-start" id="projectTitle" value='<?php echo $projectID ?>'><?php echo $row['project_name'] ?></h1>
-         <p class="float-end">image info</p>
+         <div class="float-end info-icon" data-toggle="modal" data-target="#projectInfo"><img src="img/info-icon.png" alt="" width="30"></div>
     </div>
 
     <!-- Architecture table  -->
@@ -82,7 +82,7 @@ $row = $project->fetch_assoc();
                         <div class="status_tooltip d-none">
                             <span class="orangeStatus">Working on it</span>
                             <span class="redStatus">Stuck</span>
-                            <span clas="greenStatus">Done</span>
+                            <span class="greenStatus">Done</span>
                            <input type="text">
                             
                         </div>
@@ -129,8 +129,8 @@ $row = $project->fetch_assoc();
                     ?> 
                     </td>
                     <td>Sample Typology</td>
-                    <td class="pow_status">
-                        <?php echo $row['arch_conceptual_status'] ?>
+                    <td class="pow_status" value="arch_schematic_status">
+                        <span class='text_status'><?php echo $row['arch_schematic_status'] ?></span>
                         <div class="status_tooltip d-none">
                             <span class="orangeStatus">Working on it</span>
                             <span class="redStatus">Stuck</span>
@@ -357,7 +357,25 @@ $row = $project->fetch_assoc();
                 </button>
             </div>
             <span class="modal-title">Managers</span>
-            <div class="viewManagers_container">
+            <div class="managers_container">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- View Project Info - Modal -->
+<div class="modal fade pop-up__modal" id="projectInfo" tabindex="-1" role="dialog" aria-labelledby="viewManagers" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document" style="max-width: 800px;">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <h5></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <span class="modal-title">Project Info</span>
+            <div class="projectInfo_container">
 
             </div>
         </div>
