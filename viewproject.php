@@ -18,6 +18,9 @@ $query_projects = "SELECT * FROM pms_projects WHERE id = '$projectID'";
 $project = $con->query($query_projects) or die ($con->error);
 $row = $project->fetch_assoc();
 
+// $archConceptualStatus = str_replace(' ', '', $row['arch_conceptual_status']);
+// $archConceptualStatus = ltrim($row['arch_conceptual_status'], " ");
+
 ?>
 
 <div class="grid-right__content">
@@ -78,12 +81,12 @@ $row = $project->fetch_assoc();
                     </td>
                     <td>Sample Typology</td>
                     <td class="pow_status" value="arch_conceptual_status">
-                        <span class='text_status'><?php echo $row['arch_conceptual_status'] ?></span>
+                        <div class='text_status'><span><?php echo $row['arch_conceptual_status'] ?></span></div>
                         <div class="status_tooltip d-none">
-                            <span class="orangeStatus">Working on it</span>
-                            <span class="redStatus">Stuck</span>
-                            <span class="greenStatus">Done</span>
-                           <input type="text">
+                            <span class="status orangeStatus">Working on it</span>
+                            <span class="status redStatus">Stuck</span>
+                            <span class="status greenStatus">Done</span>
+                           <input type="text" onkeypress="return /[ A-Za-z0-9]/i.test(event.key)" onpaste="return false;" ondrop="return false;" autocomplete="off" >
                             
                         </div>
                     </td>
@@ -130,12 +133,12 @@ $row = $project->fetch_assoc();
                     </td>
                     <td>Sample Typology</td>
                     <td class="pow_status" value="arch_schematic_status">
-                        <span class='text_status'><?php echo $row['arch_schematic_status'] ?></span>
+                        <div class='text_status'><span><?php echo $row['arch_schematic_status'] ?></span></div>
                         <div class="status_tooltip d-none">
                             <span class="orangeStatus">Working on it</span>
                             <span class="redStatus">Stuck</span>
-                            <span clas="greenStatus">Done</span>
-                            <input type="text">
+                            <span class="greenStatus">Done</span>
+                            <input type="text" pattern="[A-Za-z]{3}">
                         </div>
                     </td>
                     </td>

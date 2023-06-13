@@ -15,19 +15,20 @@ if(isset($_POST['updateStatus'])){
 
     $con->query($sql) or die ($con->error);
 
-    echo $updateStatus;
+    echo "<span>$updateStatus</span>";
+
 
 } elseif(isset($_POST['inputText'])) {
 
     $projectId = $_POST['projectId'];
     $status_db_Row = $_POST['status_db_Row'];
-    $inputText = $_POST['inputText'];
+    $inputText =  ucfirst(strtolower($_POST['inputText']));
 
     $sql = "UPDATE `pms_projects` SET `$status_db_Row` = '$inputText' WHERE id = '$projectId'";
 
     $con->query($sql) or die ($con->error);
 
-    echo $inputText;
+    echo "<span>$inputText</span>";
 
 }
 

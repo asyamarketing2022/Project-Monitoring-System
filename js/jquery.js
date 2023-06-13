@@ -1309,87 +1309,6 @@ jQuery(function () {
    }
    statusColor();
 
-//    $(document).on('change', ()=> {
-
-//       statusColor();
-
-//   });
-
-   // $(document).on('click', ()=> {
-
-   //    statusColor();
-   //    console.log("okay");
-
-   // });
-
-   // let statustoolTip = document.querySelectorAll('.status_tooltip');
-
-   // Array.from(statustoolTip).forEach((tooltip) => {
-
-   //    let span = $(tooltip).children('span');
-
-   //       console.log(span);
-
-   //       $(span).on('click', ()=> {
-
-   //          console.log('okay');
-
-   //       });
-
-   //    for(let num = 0; span.length > num; num++){
-
-   //       // console.log($(span[num]));
-
-   //       // $(span[num]).on('click', ()=> {
-
-   //       //    console.log('okay');
-
-   //       // });
-
-   //    }
-
-   // });
-
-   function spanClick(){
-
-      let statusTooltip = document.querySelectorAll('.status_tooltip');
-
-      for (let i = 0; statusTooltip.length > i; i++) {
-
-         let span = $(statusTooltip[i]).children('span');
-
-         $(statusTooltip[i]).on('click',(e)=> {
-
-            let textStatus = document.querySelectorAll('.text_status');
-
-            for(let num = 0; textStatus.length > num; num++){
-
-               $(textStatus[num]).on('change', ()=> {
-
-                  console.log('okay')
-
-               });
-      
-               // if($(textStatus[num]).text() === 'Working on it'){
-      
-               //    $(textStatus[num]).css("background", "#fdab3d");
-
-               //    console.log('okay')
-
-               // } 
-      
-
-            }
-
-
-         });
-
-
-      }
-
-   }
-   spanClick();
-
 
    function enterStatus(){
 
@@ -1401,7 +1320,6 @@ jQuery(function () {
         let input = $(statusTooltip[i]).children('input');
         let powStatus = $(statusTooltip[i]).parent();
         let textStatus = $(powStatus).children('.text_status');
-      //   let tooltip = $(powStatus).children('.status_tooltip');
 
         for (let num = 0; span.length > num; num++) {
          
@@ -1431,27 +1349,28 @@ jQuery(function () {
 
          $(input).on('keypress', (e)=> {
 
-            if(e.key === 'Enter')
-            {
-               let inputText = $(input).val();
-               let status_db_row = $(powStatus).attr('value');
-               let projectId = $('#projectTitle').attr('value');
-         
-               $.ajax({   
-                  type: 'POST',
-                  url: 'phase-of-work_status.php',
-                  data: {
-                     'inputText': inputText,
-                     'projectId': projectId,
-                     'status_db_Row': status_db_row,
-                     },
-                     success:function(data){
-                        $(textStatus).html(data);
-                     }
-               });
+            let inputText = $(input).val();
+            let status_db_row = $(powStatus).attr('value');
+            let projectId = $('#projectTitle').attr('value');
 
-               $(input).parent().addClass('d-none');
+            
+            if(e.key === 'Enter') {
+   
+                  $.ajax({   
+                     type: 'POST',
+                     url: 'phase-of-work_status.php',
+                     data: {
+                        'inputText': inputText,
+                        'projectId': projectId,
+                        'status_db_Row': status_db_row,
+                        },
+                        success:function(data){
+                           $(textStatus).html(data);
+                        }
+                  });
 
+                  $(input).parent().addClass('d-none');
+              
             }
 
          });
@@ -1461,21 +1380,40 @@ jQuery(function () {
    }
    enterStatus();
 
-   // let td_powStatus = document.querySelectorAll('.pow_status');
 
-   // for (let i = 0; td_powStatus.length > i; i++) {
-      
-   //    $(td_powStatus[i]).on('click', ()=> {
+   function changeStatus(){
+   
+      let powStatus_wrapper = document.querySelectorAll('.pow_status');
 
-   //       let status_tooltip = document.querySelectorAll('.status_tooltip');
-      
-   //       // console.log(status_tooltip);
+      Array.from(powStatus_wrapper).forEach((powStatus) => {
 
-   //    });
-   // }
+           let status_tooltip = $(powStatus).children('.status_tooltip');
+           let textStatus = $(powStatus).children('.text_status');
+           let orangeStatusBtn = $(status_tooltip).find('.orangeStatus');
+           let redStatusBtn = $(status_tooltip).find('.redStatus');
+           let greenStatusBtn = $(status_tooltip).find('.greenStatus');
+   
+            $(orangeStatusBtn).on('click', ()=> {
+   
+               $(textStatus).css("background", "#fdab3d");
+           
+            });
 
+            $(redStatusBtn).on('click', ()=> {
 
+               (textStatus).css("background", "#e2445c");
 
+            });
+
+            $(greenStatusBtn).on('click', ()=> {
+
+               (textStatus).css("background", "#00c875");
+
+            });
+   
+      });
+   }
+   changeStatus()
 
    function postUsers_in_modal(){
 

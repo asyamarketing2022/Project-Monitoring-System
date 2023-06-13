@@ -114,16 +114,20 @@ a {
     font-weight: 500;
 }
 
-.content-table td.pow_status .status_tooltip span:nth-child(1) {
+.content-table td.pow_status .status_tooltip span:nth-child(1), .orangeStatus {
     background: #fdab3d;
 }
 
-.content-table td.pow_status .status_tooltip span:nth-child(2) {
+.content-table td.pow_status .status_tooltip span:nth-child(2), .redStatus {
     background: #e2445c;
 }
 
-.content-table td.pow_status .status_tooltip span:nth-child(3) {
+.content-table td.pow_status .status_tooltip span:nth-child(3), .greeStatus {
     background: #00c875;
+}
+
+.content-table td.pow_status .status_tooltip input {
+    text-transform: capitalize;
 }
   /* tr:last-of-type td:first-of-type {
     border-bottom-left-radius: 10px;
