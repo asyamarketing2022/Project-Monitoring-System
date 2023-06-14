@@ -1295,16 +1295,11 @@ jQuery(function () {
 
             $(textStatus[num]).css("background", "#00c875");
 
+         } else {
+
+            $(textStatus[num]).css("background", "#abd8e3");
+
          }
-
-         let x = $(textStatus[num]).text()
-
-         $(x).on('change', ()=> {
-
-            console.log('okay');
-   
-         });
-
       }
    }
    statusColor();
@@ -1370,6 +1365,7 @@ jQuery(function () {
                   });
 
                   $(input).parent().addClass('d-none');
+                  $(textStatus).css("background", "#abd8e3");
               
             }
 
@@ -1460,12 +1456,64 @@ jQuery(function () {
                  $('.projectInfo_container').html(data);
                }
           });
-
-
       });
       
    }
    postProjectInfo_in_modal()
+
+   function upload_file_path(){
+
+      let projectName = $('#projectTitle').text()
+      let projectId = $('#projectTitle').attr('value');
+      let uploadPathBtn = document.querySelectorAll('.uploadPathBtn');
+      let td_phaseofwork = document.querySelectorAll('.td_phase_of_work');
+
+      for(let i = 0; uploadPathBtn.length > i; i++){
+         
+         $(uploadPathBtn[i]).on('click', ()=> {
+
+            let tableContainer = $(uploadPathBtn[i]).closest('.project_services_table');
+            let projectService = $(tableContainer).find('th.th_services').text();
+            let text_phaseofwork = $(td_phaseofwork[i]).text();
+
+            $.ajax({
+               type: 'POST',
+               url: 'postUpload_file_path_modal.php',
+               data: {
+                  'projectId': projectId,
+                  'projectName': projectName,
+                  'projectService': projectService,
+                  'text_phaseofwork': text_phaseofwork,
+               },
+               success:function(data){
+                  $('.uploadFilePath_container').html(data);
+               }
+            });
+         });
+
+      }
+
+   }
+   upload_file_path();
+
+   function view_file_paths(){
+
+      let projectId = $('#projectTitle').attr('value');
+      let viewfilepathBtn = document.querySelectorAll('.viewfilepathBtn');
+
+      for(let i = 0; viewfilepathBtn.length > i; i++){
+
+         $(viewfilepathBtn[i]).on('click', ()=> {
+
+            console.log('okay');
+
+         });
+
+      }
+
+   }
+   view_file_paths();
+  
 
 });
 

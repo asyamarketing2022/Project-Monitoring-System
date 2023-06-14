@@ -70,14 +70,11 @@
                                     <td><?php echo $projectInfo['company_name'] ?></td>
                                     <td><?php echo $projectInfo['client_name'] ?></td>
 
-                                    <?php if(isset($_SESSION['UserLogin']) && $_SESSION['Access'] == "admin") { ?>
+                                    <?/* php if(isset($_SESSION['UserLogin']) && $_SESSION['Access'] == "admin") { */?>
          
                                         <td><a class="" href="viewproject.php?ID=<?php echo $projectInfo['id'] ?>">View</a></td>
                                         
-                                        <!-- <td><span data-toggle="modal" data-target="#edit_project" class="edit-project" value="<?/*php echo $projectInfo['id'] */?>">Edit</span></td>
-                                        <td><span data-toggle="modal" data-target="#assign_project" class="view-project" value="<?/*php echo $projectInfo['id'] */?>">Assign</span></td> -->
-                                    
-                                    <?php } ?>
+                                    <?/*php } */?>
 
                                 </tr>
                             <?php } while($projectInfo = $project->fetch_assoc()); ?>

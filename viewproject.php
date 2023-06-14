@@ -3,6 +3,7 @@
 <?php include_once("connections/DBconnection.php"); ?>
 <?php include_once("phase-of-work_status.php"); ?>
 <?php include_once("sidebar.php"); ?>
+<?php include_once("upload_file_path.php"); ?>
 
 
 <?php 
@@ -35,7 +36,7 @@ $row = $project->fetch_assoc();
     <div class="content-table project_services_table">
         <table>
             <tr>
-                <th>Architecture</th>
+                <th class="th_services">Architecture</th>
                 <th>Department</th>
                 <th>Manager</th>
                 <th>Project In Charge</th>
@@ -70,7 +71,7 @@ $row = $project->fetch_assoc();
             ?>
 
                 <tr class="table-row_projects table-form" value="">
-                    <td>Conceptual</td>
+                    <td class="td_phase_of_work">Conceptual</td>
                     <td><?php echo $managerInfo['department']; ?></td>
                     <td class="photo_id" data-toggle="modal" data-target="#view_managers" value="<?php foreach($managersID_array as $managersID)echo "$managersID ";?>">
                     <?php foreach($managersImage_array as $managerImage)
@@ -92,8 +93,8 @@ $row = $project->fetch_assoc();
                     </td>
                     <td><?php echo $row['added_at'] ?></td>
                     <td></td>
-                    <td><button>Choose File</button></td>
-                    <td><button>Check Files</button></td>
+                    <td><button class="uploadPathBtn" data-toggle="modal" data-target="#uploadPath">Upload File Path</button></td>
+                    <td><button class="viewfilepathBtn" data-toggle="modal" data-target="#viewfilepath">Check Files</button></td>
                  </tr>
 
             <?php } ?>
@@ -122,7 +123,7 @@ $row = $project->fetch_assoc();
             ?>
 
                 <tr class="table-row_projects table-form" value="">
-                    <td>Schematic</td>
+                    <td class="td_phase_of_work">Schematic</td>
                     <td><?php echo $managerInfo['department']; ?></td>
                     <td>
                     <?php foreach($arch_SchematicManagersImage_array as $arch_SchematicManagerImage)
@@ -144,7 +145,7 @@ $row = $project->fetch_assoc();
                     </td>
                     <td><?php echo $row['added_at'] ?></td>
                     <td></td>
-                    <td><button>Choose File</button></td>
+                    <td><button class="uploadPathBtn" data-toggle="modal" data-target="#uploadPath">Upload File Path</button></td>
                     <td><button>Check Files</button></td>
                  </tr>
 
@@ -291,7 +292,7 @@ $row = $project->fetch_assoc();
         <div class="content-table project_services_table">
             <table>
                 <tr>
-                    <th>Interior</th>
+                    <th class="th_services">Interior</th>
                     <th>Department</th>
                     <th>Manager</th>
                     <th>Project In Charge</th>
@@ -324,7 +325,7 @@ $row = $project->fetch_assoc();
                 ?>
 
                     <tr class="table-row_projects table-form" value="">
-                        <td>Conceptual</td>
+                        <td class="td_phase_of_work">Conceptual</td>
                         <td><?php echo $managerInfo['department']; ?></td>
                         <td>
                         <?php foreach($Int_ConceptualManagersImage_array as $Int_ConceptualManagerImage)
@@ -337,7 +338,7 @@ $row = $project->fetch_assoc();
                         <td><?php echo $row['arch_conceptual_status'] ?></td>
                         <td><?php echo $row['added_at'] ?></td>
                         <td></td>
-                        <td><button>Choose File</button></td>
+                        <td><button class="uploadPathBtn" data-toggle="modal" data-target="#uploadPath">Upload File Path</button></td>
                         <td><button>Check Files</button></td>
                     </tr>
 
@@ -368,7 +369,7 @@ $row = $project->fetch_assoc();
 </div>
 
 <!-- View Project Info - Modal -->
-<div class="modal fade pop-up__modal" id="projectInfo" tabindex="-1" role="dialog" aria-labelledby="viewManagers" aria-hidden="true">
+<div class="modal fade pop-up__modal" id="projectInfo" tabindex="-1" role="dialog" aria-labelledby="viewProjectInfo" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-xl" role="document" style="max-width: 800px;">
         <div class="modal-content">
             <div class="modal-header border-0">
@@ -379,6 +380,42 @@ $row = $project->fetch_assoc();
             </div>
             <span class="modal-title">Project Info</span>
             <div class="projectInfo_container">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Upload file path - Modal -->
+<div class="modal fade pop-up__modal" id="uploadPath" tabindex="-1" role="dialog" aria-labelledby="uploadPath" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document" style="max-width: 800px;">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <h5></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <span class="modal-title">Upload File Path</span>
+            <div class="uploadFilePath_container">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- View file path - Modal -->
+<div class="modal fade pop-up__modal" id="viewfilepath" tabindex="-1" role="dialog" aria-labelledby="viewfilepath" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document" style="max-width: 800px;">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <h5></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <span class="modal-title">View File Paths</span>
+            <div class="viewFilePath_container">
 
             </div>
         </div>
