@@ -23,11 +23,11 @@ if(isset($_POST['projectId'])){
                 </div>
                 <div class='content__info'>
                     <span>File Name:</span>
-                    <input name='fileName' type='text'>
+                    <input name='fileName' type='text' required>
                 </div>
                 <div class='content__info'>
                     <span>Insert File Path:</span>
-                    <input name='filePath' type='text'>
+                    <input name='filePath' type='url' required>
                 </div>
                 <div class='content__info d-none'>
                     <span>Project ID:</span>

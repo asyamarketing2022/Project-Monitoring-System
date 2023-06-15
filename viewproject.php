@@ -80,7 +80,7 @@ $row = $project->fetch_assoc();
 
                     ?> 
                     </td>
-                    <td>Sample Typology</td>
+                    <td data-toggle="modal" data-target="#view_project_in_charge">Project In Charge</td>
                     <td class="pow_status" value="arch_conceptual_status">
                         <div class='text_status'><span><?php echo $row['arch_conceptual_status'] ?></span></div>
                         <div class="status_tooltip d-none">
@@ -146,7 +146,7 @@ $row = $project->fetch_assoc();
                     <td><?php echo $row['added_at'] ?></td>
                     <td></td>
                     <td><button class="uploadPathBtn" data-toggle="modal" data-target="#uploadPath">Upload File Path</button></td>
-                    <td><button>Check Files</button></td>
+                    <td><button class="viewfilepathBtn" data-toggle="modal" data-target="#viewfilepath">Check Files</button></td>
                  </tr>
 
             <?php } ?>
@@ -339,7 +339,7 @@ $row = $project->fetch_assoc();
                         <td><?php echo $row['added_at'] ?></td>
                         <td></td>
                         <td><button class="uploadPathBtn" data-toggle="modal" data-target="#uploadPath">Upload File Path</button></td>
-                        <td><button>Check Files</button></td>
+                        <td><button class="viewfilepathBtn" data-toggle="modal" data-target="#viewfilepath">Check Files</button></td>
                     </tr>
 
                 <?php } ?>
@@ -362,6 +362,49 @@ $row = $project->fetch_assoc();
             </div>
             <span class="modal-title">Managers</span>
             <div class="managers_container">
+                    <!-- postUsersManager_in_modal.php -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- View My Project In Charge - Modal -->
+<div class="modal fade pop-up__modal" id="view_project_in_charge" tabindex="-1" role="dialog" aria-labelledby="viewPIC" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document" style="max-width: 800px;">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <h5></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <span class="modal-title">Project In Charge</span>
+            <div class="project_in_charge_container">
+                <!-- postUsersManager_in_modal.php -->
+                <div class="user_container">
+                    <div class="user_photo">
+                        <img src="img/userImage/John Doe.png" alt="" width="200">
+                        <button><a href="#">View Profile</a></button>
+                    </div>
+                    <div class="user_info">
+                        <div class="user_fullname">
+                            <label>Name:</label>
+                            <span>John Doe</span>
+                        </div>
+            
+                        <div class="user_position">
+                            <label>Position:</label>
+                            <span>Web</span>
+                        </div>
+
+                        <div class="user_department">
+                            <label>Department:</label>
+                            <span>design</span>
+                        </div>
+                    </div>
+                </div>
+
+                <img src="img/add-icon.png" alt="" width="50">
 
             </div>
         </div>
@@ -380,6 +423,7 @@ $row = $project->fetch_assoc();
             </div>
             <span class="modal-title">Project Info</span>
             <div class="projectInfo_container">
+                <!-- postProjectInfo_in_modal.php -->
 
             </div>
         </div>
@@ -398,6 +442,7 @@ $row = $project->fetch_assoc();
             </div>
             <span class="modal-title">Upload File Path</span>
             <div class="uploadFilePath_container">
+                <!-- postUpload_file_path_modal.php -->
 
             </div>
         </div>
@@ -416,6 +461,7 @@ $row = $project->fetch_assoc();
             </div>
             <span class="modal-title">View File Paths</span>
             <div class="viewFilePath_container">
+                <!-- view-Filepath_in_modal.php -->
 
             </div>
         </div>

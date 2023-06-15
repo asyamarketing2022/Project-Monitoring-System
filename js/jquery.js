@@ -1411,7 +1411,7 @@ jQuery(function () {
    }
    changeStatus()
 
-   function postUsers_in_modal(){
+   function postUsersManager_in_modal(){
 
       let photo_id = document.querySelectorAll('.photo_id');
 
@@ -1423,7 +1423,7 @@ jQuery(function () {
 
             $.ajax({   
               type: 'POST',
-              url: 'postUsers_in_modal.php',
+              url: 'postUsersManager_in_modal.php',
               data: {
                  'photosId': photosId,
                },
@@ -1436,7 +1436,7 @@ jQuery(function () {
          
       }
    }
-   postUsers_in_modal();
+   postUsersManager_in_modal();
 
    function postProjectInfo_in_modal(){
 
@@ -1500,20 +1500,71 @@ jQuery(function () {
 
       let projectId = $('#projectTitle').attr('value');
       let viewfilepathBtn = document.querySelectorAll('.viewfilepathBtn');
+      let td_phaseofwork = document.querySelectorAll('.td_phase_of_work');
 
       for(let i = 0; viewfilepathBtn.length > i; i++){
 
          $(viewfilepathBtn[i]).on('click', ()=> {
 
-            console.log('okay');
+            let tableContainer = $(viewfilepathBtn[i]).closest('.project_services_table');
+            let projectService = $(tableContainer).find('th.th_services').text();
+            let text_phaseofwork = $(td_phaseofwork[i]).text();
 
+            $.ajax({
+               type: 'POST',
+               url: 'view-Filepath_in_modal.php',
+               data: {
+                  'projectId': projectId,
+                  'projectService': projectService,
+                  'text_phaseofwork': text_phaseofwork,
+               },
+               success:function(data){
+                  $('.viewFilePath_container').html(data);
+               }
+            });
          });
-
       }
 
    }
    view_file_paths();
   
+   function tooltip(){
+
+      var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+      var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+         return new bootstrap.Tooltip(tooltipTriggerEl)
+      })
+
+   }
+
+   let viewfilepathBtn = document.querySelectorAll('.viewfilepathBtn');
+
+   Array.from(viewfilepathBtn).forEach((viewfilepath) => {
+
+      $(viewfilepath).on('click', ()=> {
+
+         setTimeout(
+            function() 
+            {
+               tooltip();
+            }, 500);
+
+      });
+   });
+
+   // for (let i = 0; viewfilepathBtn > i; i++){
+
+   //    $(viewfilepathBtn[i]).on('click', ()=> {
+
+   //       // tooltip();
+
+   //       console.log('okay');
+
+   //    });
+
+   // }
+
+
 
 });
 
