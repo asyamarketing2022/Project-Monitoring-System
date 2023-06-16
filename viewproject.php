@@ -4,6 +4,7 @@
 <?php include_once("phase-of-work_status.php"); ?>
 <?php include_once("sidebar.php"); ?>
 <?php include_once("upload_file_path.php"); ?>
+<?php include_once("searchEmployee_table.php"); ?>
 
 
 <?php 
@@ -80,7 +81,7 @@ $row = $project->fetch_assoc();
 
                     ?> 
                     </td>
-                    <td data-toggle="modal" data-target="#view_project_in_charge">Project In Charge</td>
+                    <td class="projectIncharge_table_row" data-toggle="modal" data-target="#view_project_in_charge">Project In Charge</td>
                     <td class="pow_status" value="arch_conceptual_status">
                         <div class='text_status'><span><?php echo $row['arch_conceptual_status'] ?></span></div>
                         <div class="status_tooltip d-none">
@@ -132,7 +133,7 @@ $row = $project->fetch_assoc();
 
                     ?> 
                     </td>
-                    <td>Sample Typology</td>
+                    <td class="projectIncharge_table_row" data-toggle="modal" data-target="#view_project_in_charge">Project In Charge</td>
                     <td class="pow_status" value="arch_schematic_status">
                         <div class='text_status'><span><?php echo $row['arch_schematic_status'] ?></span></div>
                         <div class="status_tooltip d-none">
@@ -334,7 +335,7 @@ $row = $project->fetch_assoc();
 
                         ?> 
                         </td>
-                        <td>Sample Typology</td>
+                        <td class="projectIncharge_table_row" data-toggle="modal" data-target="#view_project_in_charge">Project In Charge</td>
                         <td><?php echo $row['arch_conceptual_status'] ?></td>
                         <td><?php echo $row['added_at'] ?></td>
                         <td></td>
@@ -380,7 +381,7 @@ $row = $project->fetch_assoc();
             </div>
             <span class="modal-title">Project In Charge</span>
             <div class="project_in_charge_container">
-                <!-- postUsersManager_in_modal.php -->
+                <!-- postUsersProjectInCharge_in_modal.php -->
                 <div class="user_container">
                     <div class="user_photo">
                         <img src="img/userImage/John Doe.png" alt="" width="200">
@@ -404,7 +405,7 @@ $row = $project->fetch_assoc();
                     </div>
                 </div>
 
-                <img src="img/add-icon.png" alt="" width="50">
+                <img data-toggle="modal" data-target="#addProjectInCharge" src="img/add-icon.png" alt="" width="50">
 
             </div>
         </div>
@@ -463,6 +464,70 @@ $row = $project->fetch_assoc();
             <div class="viewFilePath_container">
                 <!-- view-Filepath_in_modal.php -->
 
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Project In Charge - Modal -->
+<div class="modal fade pop-up__modal" id="addProjectInCharge" tabindex="-1" role="dialog" aria-labelledby="addProjectInCharge" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-md" role="document" style="max-width: 750px;">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <h5></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <span class="modal-title">Add Project In Charge</span>
+            <div class="_container">
+                <!-- view-Filepath_in_modal.php -->
+                <div class="search-employee_container content-info__wrapper tab-position_right">
+                    <div class="content__info">
+                        <span>Search Employee:</span>
+                        <div class="search_wrapper" style="max-width: 500px;">
+                            <input class="searchFilter w-100" name="search" value="" type="text" placeholder="Employee Lastname">
+                            <!-- <button type="submit" class="search-button submitFilter">Search</button> -->
+                            <div class="search_employee_wrapper">
+
+                                <div class="x"></div>
+                                <!-- searchEmployee_table.php -->
+
+                                <?php 
+                                
+                                    do {
+
+                                        echo "<div class='user_container' value='" . $employee_info['ID'] . "'>
+                                                    <div class='user_photo'>
+                                                        <img class='m-0' src='img/userImage/" . $employee_info['user_image'] . "' alt='' width='100'>
+                                                        <button class='selectBtn'><a href='#'>Select Employee</a></button>
+                                                    </div>
+                                                    <div class='user_info'>
+                                                        <div class='user_fullname'>
+                                                            <label>Name:</label>
+                                                            <span>" . $employee_info['first_name'] . " " . $employee_info['last_name'] . "</span>
+                                                        </div>
+                                            
+                                                        <div class='user_position'>
+                                                            <label>Position:</label>
+                                                            <span>" . $employee_info['position'] . "</span>
+                                                        </div>
+                
+                                                        <div class='user_department'>
+                                                            <label>Department:</label>
+                                                            <span>" . $employee_info['department'] . "</span>
+                                                        </div>
+                                                    </div>
+                                                </div>";
+
+                                    } while($employee_info = $employee->fetch_assoc());
+                            
+                                ?>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

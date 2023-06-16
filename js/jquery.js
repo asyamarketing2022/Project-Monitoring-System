@@ -159,7 +159,7 @@ jQuery(function () {
    }
    notifShow();
 
-   //Search Filter  
+   //Search Filter (User Log)
    function searchFilter() {
       $('.submitFilter').on('click', (e)=> {
          let searchFilter = $(".searchFilter").val();
@@ -183,7 +183,7 @@ jQuery(function () {
    }
    searchFilter()
 
-   //Limit of data in table   
+   //Limit of data in table (User Log)
    function limitData() {
       $('.dataLimit').on('change', function(){
          let searchFilter = $(".searchFilter").val();
@@ -204,7 +204,7 @@ jQuery(function () {
    }
    limitData();
 
-   //Changing Data thru pagination
+   //Changing Data thru pagination (User Log)
    function page() {
       $(document).on('click', '.pagination_link', function(){
          let page = $(this).attr("id");
@@ -227,7 +227,7 @@ jQuery(function () {
    }
    page();  
 
-   //Pagination with LimitData 
+   //Pagination with LimitData (User Log)
    function pageBtn() { 
       $('.dataLimit').on('change', function(){
           let val = $('.dataLimit option:selected').attr('value');
@@ -248,7 +248,7 @@ jQuery(function () {
    }
    pageBtn();
 
-
+   //Selected Page (User Log)
    function selectedPage() {
       $(document).on('click', '.pagination_link', function(){
 
@@ -1552,19 +1552,104 @@ jQuery(function () {
       });
    });
 
-   // for (let i = 0; viewfilepathBtn > i; i++){
+   function searchEmployee(){
 
-   //    $(viewfilepathBtn[i]).on('click', ()=> {
+      let searchFilter = document.querySelector('.searchFilter');
 
-   //       // tooltip();
+      $(searchFilter).on('keydown', ()=> {
 
-   //       console.log('okay');
+         setTimeout(
+            function() 
+            {
+               let searchValue = $(searchFilter).val();
 
-   //    });
+               $.ajax({
+                  type: 'POST',
+                  url: 'searchEmployee_table.php',
+                  data: {
+                     'searchValue' : searchValue,
+                  },
+                  success:function(data){
+                     $('.search_employee_wrapper').html(data);
+                  }
+               });
 
-   // }
+            }, 100);
+      });
+      
+   }
+   searchEmployee();
 
+   function getService_and_pow(){
 
+      let projectIncharge_table_row = document.querySelectorAll('.projectIncharge_table_row');
+
+      for (let i = 0; projectIncharge_table_row.length > i; i++){
+
+         $(projectIncharge_table_row[i]).on('click', ()=> {
+
+           let tableForm = $(projectIncharge_table_row[i]).parent();
+           let td_pow = $(tableForm).children('.td_phase_of_work');
+           let tbody = $(tableForm).parent();
+           let projectService = $(tbody).find('th.th_services').text();
+           let searchEmployee_container = document.querySelector('.search-employee_container');
+
+           let contentInfo = `<div class="content__info">
+                                 <span>Phase of work:</span>
+                                 <p class="searchEmployee_pow">${$(td_pow).text()}</p>
+                              </div>
+                              <div class="content__info">
+                                 <span>Service:</span>
+                                 <p class='searchEmployee_service'>${projectService}</p>
+                              </div>
+                              `;
+
+           $(contentInfo).appendTo(searchEmployee_container);
+
+         });
+
+      }
+
+   }
+   getService_and_pow();
+
+   function selectEmployee(){
+
+      let selectBtn = document.querySelectorAll('.selectBtn');
+
+      for(let i = 0; selectBtn.length > i; i++){
+
+         $(selectBtn[i]).on('click', ()=> {
+
+            let userContainer = $(selectBtn[i]).parent().parent();
+            let employeeId = $(userContainer).attr('value');
+            let projectId = $('#projectTitle').attr('value');
+            let searchEmployee_pow = $('.searchEmployee_pow').text()
+            let searchEmployee_service = $('.searchEmployee_service').text()
+
+            $.ajax({
+               type: 'POST',
+               url: 'assign-projectIncharge.php',
+               data: {
+                  'projectId' : projectId,
+                  'employeeId' : employeeId,
+                  'searchEmployee_pow' : searchEmployee_pow,
+                  'searchEmployee_service' : searchEmployee_service,
+               },
+               // success: function (data) {
+               //    alert("success", data);
+               //  },
+               success:function(data){
+                  $('.x').html(data);
+               }
+            });
+
+         });
+
+      }
+
+   }
+   selectEmployee();
 
 });
 

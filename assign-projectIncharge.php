@@ -1,9 +1,37 @@
+<?php include_once('connections/DBconnection.php'); ?>
+<?php include 'login.php'; ?>
+
 <?php 
 
-include_once('connections/connection.php');
-$con = connection();
+$db = new DBconnection();
+$con = $db->connection();
+
+if(isset($_POST['employeeId'])) {
+
+    $projectId = $_POST['projectId'];
+    $employeeId = $_POST['employeeId'];
+    $searchEmployee_pow = $_POST['searchEmployee_pow'];
+    $searchEmployee_service = $_POST['searchEmployee_service'];
+    $managerId = $_SESSION['UserId'];
+
+    $x = 'arch_conceptual_who_assigned_manager';
+
+    $query_project = "SELECT * FROM `pms_projects` WHERE id = '$projectId'";
+    $project = $con->query($query_project) or die ($con->error);
 
 
+    echo $project["' . arch_conceptual_who_assigned_manager . '"];
+
+
+    // $sql = "INSERT INTO `pms_projects`(`arch_conceptual_who_assigned_manager`, `arch_conceptual_assigned_employee`) VALUE ('$managerId', '$employeeId ')"
+
+    // $updateSQL = "UPDATE `pms_projects` SET `arch_conceptual_who_assigned_manager` =  '$managerId' WHERE id = '$projectId'";
+
+    // $con->query($sql) or die ($con->error);
+
+
+
+}
 
 
 // if (isset($_GET['tableID'])) {
