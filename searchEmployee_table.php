@@ -6,9 +6,7 @@
 $db = new DBconnection();
 $con = $db->connection();
 
-    $sql = "SELECT * FROM registered_users WHERE access = 'employee'";
-    $employee = $con->query($sql) or die ($con->error);
-    $employee_info = $employee->fetch_assoc();
+
 
     if(isset($_POST['searchValue'])){
 
@@ -52,7 +50,12 @@ $con = $db->connection();
 
         }
 
-      
+    } else {
+
+        $sql = "SELECT * FROM registered_users WHERE access = 'employee'";
+        $employee = $con->query($sql) or die ($con->error);
+        $employee_info = $employee->fetch_assoc();
+
 
     }
 

@@ -64,8 +64,25 @@ $row = $project->fetch_assoc();
                     $manager = $con->query($query_users) or die ($con->error);
                     $managerInfo = $manager->fetch_assoc();
 
-                    $managersImage_array[] = $managerInfo['user_image'];
-                    $managersID_array[] = $managerInfo['ID'];
+                    $arch_ConceptualManagersImage_array[] = $managerInfo['user_image'];
+                    $arch_conceptualmanagersID_array[] = $managerInfo['ID'];
+    
+
+                }
+
+            $assignedEmployees = (explode(" ", $row['arch_conceptual_assigned_employee']));
+            $employeesCount = count($assignedEmployees);
+
+                for($num = 0; $num < $employeesCount; $num++) {
+
+                    $assignedEmployeeId = $assignedEmployees[$num];
+
+                    $query_employee = "SELECT * FROM registered_users WHERE ID = '$assignedEmployeeId'";
+                    $assignedEmployee = $con->query($query_employee) or die ($con->error);
+                    $assignedEmployeeInfo = $assignedEmployee->fetch_assoc();
+
+                    $arch_ConceptualAssignedEmployeeImage_array[] = $assignedEmployeeInfo['user_image'];
+                    $arch_ConceptualAssignedEmployeeId_array[] = $assignedEmployeeInfo['ID'];
 
                 }
 
@@ -74,14 +91,21 @@ $row = $project->fetch_assoc();
                 <tr class="table-row_projects table-form" value="">
                     <td class="td_phase_of_work">Conceptual</td>
                     <td><?php echo $managerInfo['department']; ?></td>
-                    <td class="photo_id" data-toggle="modal" data-target="#view_managers" value="<?php foreach($managersID_array as $managersID)echo "$managersID ";?>">
-                    <?php foreach($managersImage_array as $managerImage)
+                    <td class="manager_photo_id" data-toggle="modal" data-target="#view_managers" value="<?php foreach($arch_conceptualmanagersID_array as $arch_conceptualmanagersID)echo "$arch_conceptualmanagersID ";?>">
+                    <?php foreach($arch_ConceptualManagersImage_array as $arch_ConceptualManagersImage)
                    
-                    echo "<img src='/img/userImage/" . $managerImage . "' alt='' class='table_image_small'>";
+                    echo "<img src='/img/userImage/" . $arch_ConceptualManagersImage . "' alt='' class='table_image_small'>";
 
                     ?> 
                     </td>
-                    <td class="projectIncharge_table_row" data-toggle="modal" data-target="#view_project_in_charge">Project In Charge</td>
+                    <td class="who_assigned_manager d-none" value="<?php echo $row['arch_conceptual_who_assigned_manager']; ?>"></td>
+                    <td class="projectIncharge_table_row" data-toggle="modal" data-target="#view_project_in_charge" value="<?php foreach($arch_ConceptualAssignedEmployeeId_array as $arch_ConceptualAssignedEmployeeId)echo "$arch_ConceptualAssignedEmployeeId ";?>">
+                    <?php foreach($arch_ConceptualAssignedEmployeeImage_array as $arch_ConceptualAssignedEmployeeImage)
+                   
+                    echo "<img src='/img/userImage/" . $arch_ConceptualAssignedEmployeeImage . "' alt='' class='table_image_small'>";
+
+                    ?> 
+                    </td>
                     <td class="pow_status" value="arch_conceptual_status">
                         <div class='text_status'><span><?php echo $row['arch_conceptual_status'] ?></span></div>
                         <div class="status_tooltip d-none">
@@ -118,6 +142,8 @@ $row = $project->fetch_assoc();
                     $managerInfo = $manager->fetch_assoc();
 
                     $arch_SchematicManagersImage_array[] = $managerInfo['user_image'];
+                    $arch_SchematicmanagersID_array[] = $managerInfo['ID'];
+                  
 
                 }
 
@@ -126,10 +152,10 @@ $row = $project->fetch_assoc();
                 <tr class="table-row_projects table-form" value="">
                     <td class="td_phase_of_work">Schematic</td>
                     <td><?php echo $managerInfo['department']; ?></td>
-                    <td>
-                    <?php foreach($arch_SchematicManagersImage_array as $arch_SchematicManagerImage)
+                    <td class="manager_photo_id" data-toggle="modal" data-target="#view_managers" value="<?php foreach($arch_SchematicmanagersID_array as $arch_SchematicmanagersID)echo "$arch_SchematicmanagersID ";?>">
+                    <?php foreach($arch_SchematicManagersImage_array as $arch_SchematicManagersImage)
                    
-                    echo "<img src='/img/userImage/" . $arch_SchematicManagerImage . "' alt='' class='table_image_small'>";
+                    echo "<img src='/img/userImage/" . $arch_SchematicManagersImage . "' alt='' class='table_image_small'>";
 
                     ?> 
                     </td>
@@ -170,27 +196,37 @@ $row = $project->fetch_assoc();
                     $managerInfo = $manager->fetch_assoc();
 
                     $arch_DesigndevelopmentManagersImage_array[] = $managerInfo['user_image'];
+                    $arch_DesigndevelopmentManagersID_array[] = $managerInfo['ID'];
 
                 }
 
             ?>
 
                 <tr class="table-row_projects table-form" value="">
-                    <td>Design Development</td>
+                    <td class="td_phase_of_work">Design Development</td>
                     <td><?php echo $managerInfo['department']; ?></td>
-                    <td>
+                    <td class="manager_photo_id" data-toggle="modal" data-target="#view_managers" value="<?php foreach($arch_DesigndevelopmentManagersID_array as $arch_DesigndevelopmentManagersID)echo "$arch_DesigndevelopmentManagersID ";?>">
                     <?php foreach($arch_DesigndevelopmentManagersImage_array as $arch_DesigndevelopmentManagerImage)
                    
                     echo "<img src='/img/userImage/" . $arch_DesigndevelopmentManagerImage . "' alt='' class='table_image_small'>";
 
                     ?> 
                     </td>
-                    <td>Sample Typology</td>
-                    <td><?php echo $row['arch_conceptual_status'] ?></td>
+                    <td class="projectIncharge_table_row" data-toggle="modal" data-target="#view_project_in_charge">Project In Charge</td>
+                    <td class="pow_status" value="arch_designdevelopment_status">
+                        <div class='text_status'><span><?php echo $row['arch_designdevelopment_status'] ?></span></div>
+                        <div class="status_tooltip d-none">
+                            <span class="orangeStatus">Working on it</span>
+                            <span class="redStatus">Stuck</span>
+                            <span class="greenStatus">Done</span>
+                            <input type="text" pattern="[A-Za-z]{3}">
+                        </div>
+                    </td>
+                    </td>
                     <td><?php echo $row['added_at'] ?></td>
                     <td></td>
-                    <td><button>Choose File</button></td>
-                    <td><button>Check Files</button></td>
+                    <td><button class="uploadPathBtn" data-toggle="modal" data-target="#uploadPath">Upload File Path</button></td>
+                    <td><button class="viewfilepathBtn" data-toggle="modal" data-target="#viewfilepath">Check Files</button></td>
                  </tr>
 
             <?php } ?>
@@ -213,27 +249,37 @@ $row = $project->fetch_assoc();
                     $managerInfo = $manager->fetch_assoc();
 
                     $arch_ConstructionManagersImage_array[] = $managerInfo['user_image'];
+                    $arch_ConstructionManagersID_array[] = $managerInfo['ID'];
 
                 }
 
             ?>
 
                 <tr class="table-row_projects table-form" value="">
-                    <td>Construction Drawings</td>
+                    <td class="td_phase_of_work">Construction Drawings</td>
                     <td><?php echo $managerInfo['department']; ?></td>
-                    <td>
+                    <td class="manager_photo_id" data-toggle="modal" data-target="#view_managers" value="<?php foreach($arch_ConstructionManagersID_array as $arch_ConstructionManagersID)echo "$arch_ConstructionManagersID ";?>">
                     <?php foreach($arch_ConstructionManagersImage_array as $arch_ConstructionManagerImage)
                    
                     echo "<img src='/img/userImage/" . $arch_ConstructionManagerImage . "' alt='' class='table_image_small'>";
 
                     ?> 
                     </td>
-                    <td>Sample Typology</td>
-                    <td><?php echo $row['arch_conceptual_status'] ?></td>
+                    <td class="projectIncharge_table_row" data-toggle="modal" data-target="#view_project_in_charge">Project In Charge</td>
+                    <td class="pow_status" value="arch_construction_status">
+                        <div class='text_status'><span><?php echo $row['arch_construction_status'] ?></span></div>
+                        <div class="status_tooltip d-none">
+                            <span class="orangeStatus">Working on it</span>
+                            <span class="redStatus">Stuck</span>
+                            <span class="greenStatus">Done</span>
+                            <input type="text" pattern="[A-Za-z]{3}">
+                        </div>
+                    </td>
+                    </td>
                     <td><?php echo $row['added_at'] ?></td>
                     <td></td>
-                    <td><button>Choose File</button></td>
-                    <td><button>Check Files</button></td>
+                    <td><button class="uploadPathBtn" data-toggle="modal" data-target="#uploadPath">Upload File Path</button></td>
+                    <td><button class="viewfilepathBtn" data-toggle="modal" data-target="#viewfilepath">Check Files</button></td>
                  </tr>
 
             <?php } ?>
@@ -256,6 +302,7 @@ $row = $project->fetch_assoc();
                     $managerInfo = $manager->fetch_assoc();
 
                     $arch_SiteManagersImage_array[] = $managerInfo['user_image'];
+                    $arch_SiteManagersID_array[] = $managerInfo['ID'];
 
                 }
 
@@ -264,19 +311,28 @@ $row = $project->fetch_assoc();
                 <tr class="table-row_projects table-form" value="">
                     <td>Site Supervision</td>
                     <td><?php echo $managerInfo['department']; ?></td>
-                    <td>
+                    <td class="manager_photo_id" data-toggle="modal" data-target="#view_managers" value="<?php foreach($arch_SiteManagersID_array as $arch_SiteManagersID)echo "$arch_SiteManagersID ";?>">
                     <?php foreach($arch_SiteManagersImage_array as $arch_SiteManagerImage)
                    
                     echo "<img src='/img/userImage/" . $arch_SiteManagerImage . "' alt='' class='table_image_small'>";
 
                     ?> 
                     </td>
-                    <td>Sample Typology</td>
-                    <td><?php echo $row['arch_conceptual_status'] ?></td>
+                    <td class="projectIncharge_table_row" data-toggle="modal" data-target="#view_project_in_charge">Project In Charge</td>
+                    <td class="pow_status" value="arch_site_status">
+                        <div class='text_status'><span><?php echo $row['arch_site_status'] ?></span></div>
+                        <div class="status_tooltip d-none">
+                            <span class="orangeStatus">Working on it</span>
+                            <span class="redStatus">Stuck</span>
+                            <span class="greenStatus">Done</span>
+                            <input type="text" pattern="[A-Za-z]{3}">
+                        </div>
+                    </td>
+                    </td>
                     <td><?php echo $row['added_at'] ?></td>
                     <td></td>
-                    <td><button>Choose File</button></td>
-                    <td><button>Check Files</button></td>
+                    <td><button class="uploadPathBtn" data-toggle="modal" data-target="#uploadPath">Upload File Path</button></td>
+                    <td><button class="viewfilepathBtn" data-toggle="modal" data-target="#viewfilepath">Check Files</button></td>
                  </tr>
 
             <?php } ?>
@@ -364,6 +420,7 @@ $row = $project->fetch_assoc();
             <span class="modal-title">Managers</span>
             <div class="managers_container">
                     <!-- postUsersManager_in_modal.php -->
+
             </div>
         </div>
     </div>
@@ -372,7 +429,7 @@ $row = $project->fetch_assoc();
 <!-- View My Project In Charge - Modal -->
 <div class="modal fade pop-up__modal" id="view_project_in_charge" tabindex="-1" role="dialog" aria-labelledby="viewPIC" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-xl" role="document" style="max-width: 800px;">
-        <div class="modal-content">
+        <div class="modal-content" style="height: 500px; overflow-y: auto;">
             <div class="modal-header border-0">
                 <h5></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -382,32 +439,10 @@ $row = $project->fetch_assoc();
             <span class="modal-title">Project In Charge</span>
             <div class="project_in_charge_container">
                 <!-- postUsersProjectInCharge_in_modal.php -->
-                <div class="user_container">
-                    <div class="user_photo">
-                        <img src="img/userImage/John Doe.png" alt="" width="200">
-                        <button><a href="#">View Profile</a></button>
-                    </div>
-                    <div class="user_info">
-                        <div class="user_fullname">
-                            <label>Name:</label>
-                            <span>John Doe</span>
-                        </div>
-            
-                        <div class="user_position">
-                            <label>Position:</label>
-                            <span>Web</span>
-                        </div>
-
-                        <div class="user_department">
-                            <label>Department:</label>
-                            <span>design</span>
-                        </div>
-                    </div>
-                </div>
-
-                <img data-toggle="modal" data-target="#addProjectInCharge" src="img/add-icon.png" alt="" width="50">
 
             </div>
+            <img class="addProjectInChargeBtn" data-toggle="modal" data-target="#addProjectInCharge" src="img/add-icon.png" alt="" width="50">
+
         </div>
     </div>
 </div>
@@ -490,7 +525,6 @@ $row = $project->fetch_assoc();
                             <!-- <button type="submit" class="search-button submitFilter">Search</button> -->
                             <div class="search_employee_wrapper">
 
-                                <div class="x"></div>
                                 <!-- searchEmployee_table.php -->
 
                                 <?php 

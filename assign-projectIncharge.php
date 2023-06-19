@@ -6,7 +6,7 @@
 $db = new DBconnection();
 $con = $db->connection();
 
-if(isset($_POST['employeeId'])) {
+if(isset($_POST['projectId'])) {
 
     $projectId = $_POST['projectId'];
     $employeeId = $_POST['employeeId'];
@@ -14,13 +14,34 @@ if(isset($_POST['employeeId'])) {
     $searchEmployee_service = $_POST['searchEmployee_service'];
     $managerId = $_SESSION['UserId'];
 
-    $x = 'arch_conceptual_who_assigned_manager';
-
     $query_project = "SELECT * FROM `pms_projects` WHERE id = '$projectId'";
     $project = $con->query($query_project) or die ($con->error);
+    $project_info = $project->fetch_assoc();
+
+    if($searchEmployee_service == 'Architecture') {
+
+        if($searchEmployee_pow == 'Conceptual') {
+
+            $archConceptualAssignedEmployee = $project_info['arch_conceptual_assigned_employee'];
+            $container_assignedEmployee = array("$archConceptualAssignedEmployee", "$employeeId");
+            $employeesAssigned = implode(" ", $container_assignedEmployee);
+
+            $archConceptualWhoAssignedManager = $project_info['arch_conceptual_who_assigned_manager'];
+            $container_whoAssignedManager = array("$archConceptualWhoAssignedManager", "$managerId");
+            $whoAssignedManager = implode(" ", $container_whoAssignedManager);
+
+            $updateSQL = "UPDATE `pms_projects` SET `arch_conceptual_assigned_employee` =  '$employeesAssigned', `arch_conceptual_who_assigned_manager` = '$whoAssignedManager' WHERE id = '$projectId'";
+
+            $con->query($updateSQL) or die ($con->error);
 
 
-    echo $project["' . arch_conceptual_who_assigned_manager . '"];
+        } else {
+
+            echo "Not Okay";
+
+        }
+
+    }
 
 
     // $sql = "INSERT INTO `pms_projects`(`arch_conceptual_who_assigned_manager`, `arch_conceptual_assigned_employee`) VALUE ('$managerId', '$employeeId ')"

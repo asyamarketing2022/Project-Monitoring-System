@@ -1210,45 +1210,12 @@ jQuery(function () {
 
    let searchUser = document.querySelector('.searchUser-input');
 
-   // $(searchUser).on('change', () => {
    $(searchUser).on('change', () => {
       selectedUser();
    })
 
 
    //Phase of work status clicked
-   function powStatus(){
-
-      let powStatus = document.querySelectorAll('.pow_status');
-
-      for (let i = 0; powStatus.length > i; i++) {
-
-         $(powStatus[i]).on('click', ()=> {
-
-            if($(powStatus[i]).children().length != 1) {
-
-               let div_container = $("<div class='status_tooltip'>");
-               let span_working = $("<span class='orangeStatus'>Working on it</span>");
-               let span_stuck = $("<span class='redStatus'>Stuck</span>");
-               let span_done = $("<span clas='greenStatus'>Done</span>");
-               let input_text = $("<input type='text'>");
-   
-               $(div_container).append(span_working);
-               $(div_container).append(span_stuck);
-               $(div_container).append(span_done);
-               $(div_container).append(input_text);
-               $(powStatus[i]).append(div_container);
-
-            } else {
-
-               $(powStatus[i]).children(1).remove();
-
-            }
-         });
-
-      }
-   }
-   // powStatus();
 
    function statusTooltip(){
 
@@ -1377,6 +1344,7 @@ jQuery(function () {
    enterStatus();
 
 
+   // Project Status Color Change function
    function changeStatus(){
    
       let powStatus_wrapper = document.querySelectorAll('.pow_status');
@@ -1411,21 +1379,22 @@ jQuery(function () {
    }
    changeStatus()
 
+   // Assigned Manager - Modal
    function postUsersManager_in_modal(){
 
-      let photo_id = document.querySelectorAll('.photo_id');
+      let manager_photo_id = document.querySelectorAll('.manager_photo_id');
 
-      for (let i = 0; photo_id.length > i; i++) {
+      for (let i = 0; manager_photo_id.length > i; i++) {
 
-         $(photo_id[i]).on('click', ()=> {
+         $(manager_photo_id[i]).on('click', ()=> {
 
-            let photosId = $(photo_id[i]).attr('value');
+            let managerPhotoId = $(manager_photo_id[i]).attr('value');
 
             $.ajax({   
               type: 'POST',
               url: 'postUsersManager_in_modal.php',
               data: {
-                 'photosId': photosId,
+                 'managerPhotoId': managerPhotoId,
                },
                success:function(data){
                    $('.managers_container').html(data);
@@ -1438,6 +1407,38 @@ jQuery(function () {
    }
    postUsersManager_in_modal();
 
+   // Assigned Project In Charge - Modal
+   function postUsersProjectInCharge_in_modal(){
+
+      let employeesAssigned_id = document.querySelectorAll('.projectIncharge_table_row');
+      let managers_id = document.querySelectorAll('.who_assigned_manager');
+
+      for (let i = 0; employeesAssigned_id.length > i; i++) {
+
+         $(employeesAssigned_id[i]).on('click', ()=> {
+
+            let employeeAssigned_id = $(employeesAssigned_id[i]).attr('value');
+            let managerIds = $(managers_id[i]).attr('value');
+
+            $.ajax({   
+              type: 'POST',
+              url: 'postUsersProjectInCharge_in_modal.php',
+              data: {
+                 'employeeAssigned_id': employeeAssigned_id,
+                 'managerIds': managerIds,
+               },
+               success:function(data){
+                   $('.project_in_charge_container').html(data);
+                 }
+            });
+
+         });
+         
+      }
+   }
+   postUsersProjectInCharge_in_modal();
+
+   // Project Info - Show Project Information function 
    function postProjectInfo_in_modal(){
 
       let infoIcon = document.querySelector('.info-icon');
@@ -1461,6 +1462,8 @@ jQuery(function () {
    }
    postProjectInfo_in_modal()
 
+
+   // Upload File Path Function
    function upload_file_path(){
 
       let projectName = $('#projectTitle').text()
@@ -1496,6 +1499,7 @@ jQuery(function () {
    }
    upload_file_path();
 
+   // View All File paths function
    function view_file_paths(){
 
       let projectId = $('#projectTitle').attr('value');
@@ -1528,6 +1532,7 @@ jQuery(function () {
    }
    view_file_paths();
   
+   // Notes File Path - tooltip
    function tooltip(){
 
       var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
@@ -1552,6 +1557,7 @@ jQuery(function () {
       });
    });
 
+   // Search Employee Function
    function searchEmployee(){
 
       let searchFilter = document.querySelector('.searchFilter');
@@ -1580,6 +1586,33 @@ jQuery(function () {
    }
    searchEmployee();
 
+   // Add Project In Charge Button - To Show All Not Selected Employee
+   function addProjectInChargeBtn(){
+
+      let addProjectInChargeBtn = document.querySelector('.addProjectInChargeBtn')
+
+      $(addProjectInChargeBtn).on('click', ()=> {
+
+            let userIDs = document.querySelectorAll('.project_in_charge_container .user_container');
+            let userId_container = [];
+
+            Array.from(userIDs).forEach((userID) => {
+    
+               userId_container.push($(userID).attr('value'));
+
+            });
+
+            console.log(userId_container);
+
+      });
+
+
+   }
+   addProjectInChargeBtn()
+
+
+
+   // Create a dynamic html element for Service and Phase of work
    function getService_and_pow(){
 
       let projectIncharge_table_row = document.querySelectorAll('.projectIncharge_table_row');
@@ -1594,11 +1627,11 @@ jQuery(function () {
            let projectService = $(tbody).find('th.th_services').text();
            let searchEmployee_container = document.querySelector('.search-employee_container');
 
-           let contentInfo = `<div class="content__info">
+           let contentInfo = `<div class="content__info d-none">
                                  <span>Phase of work:</span>
                                  <p class="searchEmployee_pow">${$(td_pow).text()}</p>
                               </div>
-                              <div class="content__info">
+                              <div class="content__info d-none">
                                  <span>Service:</span>
                                  <p class='searchEmployee_service'>${projectService}</p>
                               </div>
@@ -1613,6 +1646,7 @@ jQuery(function () {
    }
    getService_and_pow();
 
+   // Select Employee Function
    function selectEmployee(){
 
       let selectBtn = document.querySelectorAll('.selectBtn');
@@ -1636,12 +1670,10 @@ jQuery(function () {
                   'searchEmployee_pow' : searchEmployee_pow,
                   'searchEmployee_service' : searchEmployee_service,
                },
-               // success: function (data) {
-               //    alert("success", data);
-               //  },
-               success:function(data){
-                  $('.x').html(data);
-               }
+               success: function (data) {
+                  // alert("success", data);
+                  window.location.reload();
+                },
             });
 
          });

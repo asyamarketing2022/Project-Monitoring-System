@@ -8,14 +8,14 @@ include_once("connections/DBconnection.php");
 $db = new DBconnection();
 $con = $db->connection();
 
-if(isset($_POST['photosId'])) {
-    $photosId = explode(" ", $_POST['photosId']);
-    array_pop($photosId);
-    $photosIdCount = count($photosId);
+if(isset($_POST['managerPhotoId'])) {
+    $managerPhotoId = explode(" ", $_POST['managerPhotoId']);
+    array_pop($managerPhotoId);
+    $photosIdCount = count($managerPhotoId);
 
     for ($i = 0; $i < $photosIdCount; $i++) {
 
-        $userID = $photosId[$i];
+        $userID = $managerPhotoId[$i];
 
         $query_users = "SELECT * FROM registered_users WHERE ID = '$userID'";
         $manager = $con->query($query_users) or die ($con->error);
