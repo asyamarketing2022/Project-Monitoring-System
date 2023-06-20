@@ -1586,7 +1586,7 @@ jQuery(function () {
    }
    searchEmployee();
 
-   // Add Project In Charge Button - To Show All Not Selected Employee
+   // Add Project In Charge Button - To Show All Not Assign Employee
    function addProjectInChargeBtn(){
 
       let addProjectInChargeBtn = document.querySelector('.addProjectInChargeBtn')
@@ -1602,15 +1602,23 @@ jQuery(function () {
 
             });
 
-            console.log(userId_container);
+            $.ajax({
+               type: 'POST',
+               url: 'searchEmployee_table.php',
+               data: {
+                  'userId_container' : userId_container,
+               },
+               success:function(data){
+                  $('.search_employee_wrapper').html(data);
+               }
+            });
+
 
       });
 
 
    }
-   addProjectInChargeBtn()
-
-
+   addProjectInChargeBtn();
 
    // Create a dynamic html element for Service and Phase of work
    function getService_and_pow(){

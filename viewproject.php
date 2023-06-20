@@ -529,32 +529,32 @@ $row = $project->fetch_assoc();
 
                                 <?php 
                                 
-                                    do {
+                                    // do {
 
-                                        echo "<div class='user_container' value='" . $employee_info['ID'] . "'>
-                                                    <div class='user_photo'>
-                                                        <img class='m-0' src='img/userImage/" . $employee_info['user_image'] . "' alt='' width='100'>
-                                                        <button class='selectBtn'><a href='#'>Select Employee</a></button>
-                                                    </div>
-                                                    <div class='user_info'>
-                                                        <div class='user_fullname'>
-                                                            <label>Name:</label>
-                                                            <span>" . $employee_info['first_name'] . " " . $employee_info['last_name'] . "</span>
-                                                        </div>
+                                    //     echo "<div class='user_container' value='" . $employee_info['ID'] . "'>
+                                    //                 <div class='user_photo'>
+                                    //                     <img class='m-0' src='img/userImage/" . $employee_info['user_image'] . "' alt='' width='100'>
+                                    //                     <button class='selectBtn'><a href='#'>Select Employee</a></button>
+                                    //                 </div>
+                                    //                 <div class='user_info'>
+                                    //                     <div class='user_fullname'>
+                                    //                         <label>Name:</label>
+                                    //                         <span>" . $employee_info['first_name'] . " " . $employee_info['last_name'] . "</span>
+                                    //                     </div>
                                             
-                                                        <div class='user_position'>
-                                                            <label>Position:</label>
-                                                            <span>" . $employee_info['position'] . "</span>
-                                                        </div>
+                                    //                     <div class='user_position'>
+                                    //                         <label>Position:</label>
+                                    //                         <span>" . $employee_info['position'] . "</span>
+                                    //                     </div>
                 
-                                                        <div class='user_department'>
-                                                            <label>Department:</label>
-                                                            <span>" . $employee_info['department'] . "</span>
-                                                        </div>
-                                                    </div>
-                                                </div>";
+                                    //                     <div class='user_department'>
+                                    //                         <label>Department:</label>
+                                    //                         <span>" . $employee_info['department'] . "</span>
+                                    //                     </div>
+                                    //                 </div>
+                                    //             </div>";
 
-                                    } while($employee_info = $employee->fetch_assoc());
+                                    // } while($employee_info = $employee->fetch_assoc());
                             
                                 ?>
 
