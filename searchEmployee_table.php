@@ -14,10 +14,10 @@ $con = $db->connection();
 
         $assignedEmployee = $_POST['userId_container'];
         $length = count($assignedEmployee);
-        $output = "";
         $loop = 0;
         $num = 0;
-        
+  
+    
         if(mysqli_num_rows($query_run) > 0)
         {
             foreach($query_run as $query_employee)
@@ -61,19 +61,54 @@ $con = $db->connection();
                                     </div>
                                 </div>";
 
+                          
+
                         } 
+                        
+                        // elseif(empty($_POST['searchValue'])){
+
+                        //     // echo "<div class='user_container' value='" . $query_employee['ID'] . "'>
+                        //     //     <div class='user_photo'>
+                        //     //         <img class='m-0' src='img/userImage/" . $query_employee['user_image'] . "' alt='' width='100'>
+                        //     //         <button class='selectBtn'><a href='#'>Select Employee</a></button>
+                        //     //     </div>
+                        //     //         <div class='user_info'>
+                        //     //             <div class='user_fullname'>
+                        //     //                 <label>Name:</label>
+                        //     //                 <span>" . $query_employee['first_name'] . " " . $query_employee['last_name'] . "</span>
+                        //     //             </div>
+        
+                        //     //             <div class='user_position'>
+                        //     //                 <label>Position:</label>
+                        //     //                 <span>" . $query_employee['position'] . "</span>
+                        //     //             </div>
+        
+                        //     //             <div class='user_department'>
+                        //     //                 <label>Department:</label>
+                        //     //                 <span>" . $query_employee['department'] . "</span>
+                        //     //             </div>
+                        //     //         </div>
+                        //     //     </div>";
+                        //     echo "";
+
+                    
+                        // } else {
+
+                        //     echo "No Search Found!!!!!!!!!!!!";
+                        // }
 
                         $loop = 0;
                         $num = 0;
 
-                    }
+                    } 
     
                 }
             }
+   
+
         } else {
 
             echo "No Search Found";
-
         }
 
     } elseif(isset($_POST['userId_container'])){
@@ -83,7 +118,6 @@ $con = $db->connection();
 
         $assignedEmployee = $_POST['userId_container'];
         $length = count($assignedEmployee);
-        $output = "";
         $loop = 0;
 
         if(mysqli_num_rows($query_run) > 0)

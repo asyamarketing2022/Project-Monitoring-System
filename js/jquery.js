@@ -1698,8 +1698,36 @@ jQuery(function () {
 
       }
 
+
    }
-   selectEmployee();
+   $('.addProjectInChargeBtn').on('click', ()=> {
+
+      setTimeout(
+
+         function() 
+            {
+
+         selectEmployee();
+
+         }, 100);
+
+   });
+
+   $('.searchFilter').on('keypress', ()=> {
+
+      setTimeout(
+
+         function() 
+            {
+
+         selectEmployee();
+
+         }, 300);
+
+
+
+   });
+   
 
 });
 
