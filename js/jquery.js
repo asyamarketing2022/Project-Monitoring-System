@@ -1564,6 +1564,15 @@ jQuery(function () {
 
       $(searchFilter).on('keydown', ()=> {
 
+         let userIDs = document.querySelectorAll('.project_in_charge_container .user_container');
+         let userId_container = [];
+
+         Array.from(userIDs).forEach((userID) => {
+ 
+            userId_container.push($(userID).attr('value'));
+
+         });
+
          setTimeout(
             function() 
             {
@@ -1573,6 +1582,7 @@ jQuery(function () {
                   type: 'POST',
                   url: 'searchEmployee_table.php',
                   data: {
+                     'userId_container' : userId_container,
                      'searchValue' : searchValue,
                   },
                   success:function(data){
