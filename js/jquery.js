@@ -1431,7 +1431,6 @@ jQuery(function () {
                    $('.project_in_charge_container').html(data);
                  }
             });
-
          });
          
       }
@@ -1590,7 +1589,7 @@ jQuery(function () {
                   }
                });
 
-            }, 100);
+            }, 50);
       });
       
    }
@@ -1622,10 +1621,7 @@ jQuery(function () {
                   $('.search_employee_wrapper').html(data);
                }
             });
-
-
       });
-
 
    }
    addProjectInChargeBtn();

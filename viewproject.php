@@ -4,7 +4,7 @@
 <?php include_once("phase-of-work_status.php"); ?>
 <?php include_once("sidebar.php"); ?>
 <?php include_once("upload_file_path.php"); ?>
-<?php include_once("searchEmployee_table.php"); ?>
+<?/*php include_once("searchEmployee_table.php"); */?>
 
 
 <?php 
@@ -98,7 +98,9 @@ $row = $project->fetch_assoc();
 
                     ?> 
                     </td>
+
                     <td class="who_assigned_manager d-none" value="<?php echo $row['arch_conceptual_who_assigned_manager']; ?>"></td>
+
                     <td class="projectIncharge_table_row" data-toggle="modal" data-target="#view_project_in_charge" value="<?php foreach($arch_ConceptualAssignedEmployeeId_array as $arch_ConceptualAssignedEmployeeId)echo "$arch_ConceptualAssignedEmployeeId ";?>">
                     <?php foreach($arch_ConceptualAssignedEmployeeImage_array as $arch_ConceptualAssignedEmployeeImage)
                    
@@ -106,6 +108,8 @@ $row = $project->fetch_assoc();
 
                     ?> 
                     </td>
+
+
                     <td class="pow_status" value="arch_conceptual_status">
                         <div class='text_status'><span><?php echo $row['arch_conceptual_status'] ?></span></div>
                         <div class="status_tooltip d-none">
@@ -130,20 +134,61 @@ $row = $project->fetch_assoc();
             // Architecture Schematic Phase Of Work
             if($row['arch_schematic'] == 1) {  
 
-            $schematicManagers = (explode(" ", $row['arch_schematic_manager']));
-            $managerCount = count($schematicManagers);
+                $ArchSchematicManagers = (explode(" ", $row['arch_schematic_manager']));
+                $ArchSchematicManagerCount = count($ArchSchematicManagers);
 
-                for ($i = 0; $i < $managerCount; $i++) {
+                    if(!empty($ArchSchematicManagers)) {
 
-                    $managerID = $schematicManagers[$i];
+                        for ($i = 0; $i < $ArchSchematicManagerCount; $i++) {
 
-                    $query_users = "SELECT * FROM registered_users WHERE ID = '$managerID'";
-                    $manager = $con->query($query_users) or die ($con->error);
-                    $managerInfo = $manager->fetch_assoc();
+                        $ArchSchematicManager = $ArchSchematicManagers[$i];
 
-                    $arch_SchematicManagersImage_array[] = $managerInfo['user_image'];
-                    $arch_SchematicmanagersID_array[] = $managerInfo['ID'];
-                  
+                            $query_users = "SELECT * FROM registered_users WHERE ID = '$ArchSchematicManager'";
+                            $ArchSchematicManager_run = $con->query($query_users) or die ($con->error);
+                            $ArchSchematicManagerInfo = $ArchSchematicManager_run->fetch_assoc();
+        
+                            $arch_SchematicManagersImage_array[] = $ArchSchematicManagerInfo['user_image'];
+                            $arch_SchematicmanagersID_array[] = $ArchSchematicManagerInfo['ID'];
+
+                        }
+
+                    } else {
+
+                        $arch_SchematicManagersImage_array = [];
+                        $arch_SchematicmanagersID_array = [];
+
+                    }
+
+                // $x = explode(" ", $row['arch_schematic_assigned_employee']);
+
+                // $ArchSchematicAssignedEmployees = (empty($row['arch_schematic_assigned_employee'] ? "" : $x));
+                // $ArchSchematicAssignedEmployees = (empty($row['arch_schematic_assigned_employee'] ? "" : explode(" ", $row['arch_schematic_assigned_employee'])));
+
+                // echo $ArchSchematicAssignedEmployees;
+                // print_r($x);
+
+                if(!empty($row['arch_schematic_assigned_employee'])) {
+
+                $ArchSchematicAssignedEmployees = explode(" ", $row['arch_schematic_assigned_employee']);
+                $ArchSchematicEmployeesCount = (empty($ArchSchematicAssignedEmployees) ? "" : count($ArchSchematicAssignedEmployees));
+        
+                        for($num = 0; $num < $ArchSchematicEmployeesCount; $num++) {
+        
+                            $ArchSchematicAssignedEmployeesId = $ArchSchematicAssignedEmployees[$num];
+        
+                            $query_employee = "SELECT * FROM registered_users WHERE ID = '$ArchSchematicAssignedEmployeesId '";
+                            $ArchSchematicAssignedEmployees_run = $con->query($query_employee) or die ($con->error);
+                            $ArchSchematicAssignedEmployeesInfo = $ArchSchematicAssignedEmployees_run->fetch_assoc();
+        
+                            $arch_SchematicAssignedEmployeeImage_array[] = $ArchSchematicAssignedEmployeesInfo['user_image'];
+                            $arch_SchematicAssignedEmployeeId_array[] = $ArchSchematicAssignedEmployeesInfo['ID'];
+        
+                        }
+
+                } else {
+
+                    $arch_SchematicAssignedEmployeeImage_array = [];
+                    $arch_SchematicAssignedEmployeeId_array = [];
 
                 }
 
@@ -159,7 +204,17 @@ $row = $project->fetch_assoc();
 
                     ?> 
                     </td>
-                    <td class="projectIncharge_table_row" data-toggle="modal" data-target="#view_project_in_charge">Project In Charge</td>
+
+                    <td class="who_assigned_manager d-none" value="<?php echo $row['arch_schematic_who_assigned_manager']; ?>"></td>
+                    <td class="projectIncharge_table_row" data-toggle="modal" data-target="#view_project_in_charge" value="<?php foreach($arch_SchematicAssignedEmployeeId_array as $arch_SchematicAssignedEmployeeId) echo "$arch_SchematicAssignedEmployeeId ";?>">
+
+                    <?php foreach($arch_SchematicAssignedEmployeeImage_array as $arch_SchematicAssignedEmployeeImage)
+                
+                                echo "<img src='/img/userImage/" . $arch_SchematicAssignedEmployeeImage . "' alt='' class='table_image_small'>";
+
+                    ?> 
+                    </td>
+
                     <td class="pow_status" value="arch_schematic_status">
                         <div class='text_status'><span><?php echo $row['arch_schematic_status'] ?></span></div>
                         <div class="status_tooltip d-none">
@@ -439,6 +494,7 @@ $row = $project->fetch_assoc();
             <span class="modal-title">Project In Charge</span>
             <div class="project_in_charge_container">
                 <!-- postUsersProjectInCharge_in_modal.php -->
+                
 
             </div>
             <img class="addProjectInChargeBtn" data-toggle="modal" data-target="#addProjectInCharge" src="img/add-icon.png" alt="" width="50">
@@ -557,6 +613,7 @@ $row = $project->fetch_assoc();
                                     // } while($employee_info = $employee->fetch_assoc());
                             
                                 ?>
+
 
                             </div>
                         </div>
