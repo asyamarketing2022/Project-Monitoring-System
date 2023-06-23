@@ -53,44 +53,55 @@ $row = $project->fetch_assoc();
             // Architecture Conceptual Phase Of Work
             if($row['arch_conceptual'] == 1) {  
 
-            $conceptualManagers = (explode(" ", $row['arch_conceptual_manager']));
-            $managerCount = count($conceptualManagers);
+            // $conceptualManagers = (explode(" ", $row['arch_conceptual_manager']));
+            // $managerCount = count($conceptualManagers);
 
-                for ($i = 0; $i < $managerCount; $i++) {
+            $ArchConceptualManagers = (explode(" ", $row['arch_conceptual_manager']));
+            $ArchConceptualManagerCount = count($ArchConceptualManagers);
 
-                    $managerID = $conceptualManagers[$i];
+                for ($i = 0; $i < $ArchConceptualManagerCount; $i++) {
 
-                    $query_users = "SELECT * FROM registered_users WHERE ID = '$managerID'";
-                    $manager = $con->query($query_users) or die ($con->error);
-                    $managerInfo = $manager->fetch_assoc();
+                    $ArchConceptualManager = $ArchConceptualManagers[$i];
 
-                    $arch_ConceptualManagersImage_array[] = $managerInfo['user_image'];
-                    $arch_conceptualmanagersID_array[] = $managerInfo['ID'];
+                    $query_users = "SELECT * FROM registered_users WHERE ID = '$ArchConceptualManager'";
+                    $ArchConceptualManager_run = $con->query($query_users) or die ($con->error);
+                    $ArchConceptualManagerInfo = $ArchConceptualManager_run->fetch_assoc();
+
+                    $arch_ConceptualManagersImage_array[] = $ArchConceptualManagerInfo['user_image'];
+                    $arch_conceptualmanagersID_array[] = $ArchConceptualManagerInfo['ID'];
+
+                }
+
+                if(!empty($row['arch_conceptual_assigned_employee'])) {
+
+                    $ArchConceptualAssignedEmployees = explode(" ", $row['arch_conceptual_assigned_employee']);
+                    $ArchConceptualEmployeesCount = (empty($ArchConceptualAssignedEmployees) ? "" : count($ArchConceptualAssignedEmployees));
+
+                            for($num = 0; $num < $ArchConceptualEmployeesCount; $num++) {
+            
+                                $ArchConceptualAssignedEmployeesId = $ArchConceptualAssignedEmployees[$num];
+            
+                                $query_employee = "SELECT * FROM registered_users WHERE ID = '$ArchConceptualAssignedEmployeesId'";
+                                $ArchConceptualAssignedEmployees_run = $con->query($query_employee) or die ($con->error);
+                                $ArchConceptualAssignedEmployeesInfo = $ArchConceptualAssignedEmployees_run->fetch_assoc();
+            
+                                $arch_ConceptualAssignedEmployeeImage_array[] = $ArchConceptualAssignedEmployeesInfo['user_image'];
+                                $arch_ConceptualAssignedEmployeeId_array[] = $ArchConceptualAssignedEmployeesInfo['ID'];
+            
+                            }
     
-
-                }
-
-            $assignedEmployees = (explode(" ", $row['arch_conceptual_assigned_employee']));
-            $employeesCount = count($assignedEmployees);
-
-                for($num = 0; $num < $employeesCount; $num++) {
-
-                    $assignedEmployeeId = $assignedEmployees[$num];
-
-                    $query_employee = "SELECT * FROM registered_users WHERE ID = '$assignedEmployeeId'";
-                    $assignedEmployee = $con->query($query_employee) or die ($con->error);
-                    $assignedEmployeeInfo = $assignedEmployee->fetch_assoc();
-
-                    $arch_ConceptualAssignedEmployeeImage_array[] = $assignedEmployeeInfo['user_image'];
-                    $arch_ConceptualAssignedEmployeeId_array[] = $assignedEmployeeInfo['ID'];
-
-                }
+                    } else {
+    
+                        $arch_ConceptualAssignedEmployeeImage_array = [];
+                        $arch_ConceptualAssignedEmployeeId_array = [];
+    
+                    }
 
             ?>
 
                 <tr class="table-row_projects table-form" value="">
                     <td class="td_phase_of_work">Conceptual</td>
-                    <td><?php echo $managerInfo['department']; ?></td>
+                    <td><?php echo $ArchConceptualManagerInfo['department']; ?></td>
                     <td class="manager_photo_id" data-toggle="modal" data-target="#view_managers" value="<?php foreach($arch_conceptualmanagersID_array as $arch_conceptualmanagersID)echo "$arch_conceptualmanagersID ";?>">
                     <?php foreach($arch_ConceptualManagersImage_array as $arch_ConceptualManagersImage)
                    
@@ -159,14 +170,6 @@ $row = $project->fetch_assoc();
 
                     }
 
-                // $x = explode(" ", $row['arch_schematic_assigned_employee']);
-
-                // $ArchSchematicAssignedEmployees = (empty($row['arch_schematic_assigned_employee'] ? "" : $x));
-                // $ArchSchematicAssignedEmployees = (empty($row['arch_schematic_assigned_employee'] ? "" : explode(" ", $row['arch_schematic_assigned_employee'])));
-
-                // echo $ArchSchematicAssignedEmployees;
-                // print_r($x);
-
                 if(!empty($row['arch_schematic_assigned_employee'])) {
 
                 $ArchSchematicAssignedEmployees = explode(" ", $row['arch_schematic_assigned_employee']);
@@ -196,7 +199,7 @@ $row = $project->fetch_assoc();
 
                 <tr class="table-row_projects table-form" value="">
                     <td class="td_phase_of_work">Schematic</td>
-                    <td><?php echo $managerInfo['department']; ?></td>
+                    <td><?php echo $ArchSchematicManagerInfo['department']; ?></td>
                     <td class="manager_photo_id" data-toggle="modal" data-target="#view_managers" value="<?php foreach($arch_SchematicmanagersID_array as $arch_SchematicmanagersID)echo "$arch_SchematicmanagersID ";?>">
                     <?php foreach($arch_SchematicManagersImage_array as $arch_SchematicManagersImage)
                    
@@ -239,35 +242,80 @@ $row = $project->fetch_assoc();
             // Architecture Design Development Phase Of Work
             if($row['arch_designdevelopment'] == 1) {  
 
-            $designdevelopmentManagers = (explode(" ", $row['arch_designdevelopment_manager']));
-            $managerCount = count($designdevelopmentManagers);
+                $ArchDesigndevelopmentManagers = (explode(" ", $row['arch_designdevelopment_manager']));
+                $ArchDesigndevelopmentManagerCount = count($ArchDesigndevelopmentManagers);
 
-                for ($i = 0; $i < $managerCount; $i++) {
+                    if(!empty($ArchDesigndevelopmentManagers)) {
 
-                    $managerID = $designdevelopmentManagers[$i];
+                        for ($i = 0; $i < $ArchDesigndevelopmentManagerCount; $i++) {
 
-                    $query_users = "SELECT * FROM registered_users WHERE ID = '$managerID'";
-                    $manager = $con->query($query_users) or die ($con->error);
-                    $managerInfo = $manager->fetch_assoc();
+                        $ArchDesigndevelopmentManager = $ArchDesigndevelopmentManagers[$i];
 
-                    $arch_DesigndevelopmentManagersImage_array[] = $managerInfo['user_image'];
-                    $arch_DesigndevelopmentManagersID_array[] = $managerInfo['ID'];
+                            $query_users = "SELECT * FROM registered_users WHERE ID = '$ArchDesigndevelopmentManager'";
+                            $ArchDesigndevelopmentManager_run = $con->query($query_users) or die ($con->error);
+                            $ArchDesigndevelopmentManagerInfo = $ArchDesigndevelopmentManager_run->fetch_assoc();
+        
+                            $arch_DesigndevelopmentManagersImage_array[] = $ArchDesigndevelopmentManagerInfo['user_image'];
+                            $arch_DesigndevelopmentmanagersID_array[] = $ArchDesigndevelopmentManagerInfo['ID'];
 
-                }
+                        }
+
+                    } else {
+
+                        $arch_DesigndevelopmentManagersImage_array = [];
+                        $arch_DesigndevelopmentmanagersID_array = [];
+
+                    }
+                    
+                if(!empty($row['arch_designdevelopment_assigned_employee'])) {
+
+                    $ArchDesigndevelopmentAssignedEmployees = explode(" ", $row['arch_designdevelopment_assigned_employee']);
+                    $ArchDesigndevelopmentEmployeesCount = (empty($ArchDesigndevelopmentAssignedEmployees) ? "" : count($ArchDesigndevelopmentAssignedEmployees));
+            
+                            for($num = 0; $num < $ArchDesigndevelopmentEmployeesCount; $num++) {
+            
+                                $ArchDesigndevelopmentAssignedEmployeesId = $ArchDesigndevelopmentAssignedEmployees[$num];
+            
+                                $query_employee = "SELECT * FROM registered_users WHERE ID = '$ArchDesigndevelopmentAssignedEmployeesId '";
+                                $ArchDesigndevelopmentAssignedEmployees_run = $con->query($query_employee) or die ($con->error);
+                                $ArchDesigndevelopmentAssignedEmployeesInfo = $ArchDesigndevelopmentAssignedEmployees_run->fetch_assoc();
+            
+                                $arch_DesigndevelopmentAssignedEmployeeImage_array[] = $ArchDesigndevelopmentAssignedEmployeesInfo['user_image'];
+                                $arch_DesigndevelopmentAssignedEmployeeId_array[] = $ArchDesigndevelopmentAssignedEmployeesInfo['ID'];
+            
+                            }
+    
+                    } else {
+    
+                        $arch_DesigndevelopmentAssignedEmployeeImage_array = [];
+                        $arch_DesigndevelopmentAssignedEmployeeId_array = [];
+    
+                    }
+
 
             ?>
 
                 <tr class="table-row_projects table-form" value="">
                     <td class="td_phase_of_work">Design Development</td>
-                    <td><?php echo $managerInfo['department']; ?></td>
-                    <td class="manager_photo_id" data-toggle="modal" data-target="#view_managers" value="<?php foreach($arch_DesigndevelopmentManagersID_array as $arch_DesigndevelopmentManagersID)echo "$arch_DesigndevelopmentManagersID ";?>">
+                    <td><?php echo $ArchDesigndevelopmentManagerInfo['department']; ?></td>
+                    <td class="manager_photo_id" data-toggle="modal" data-target="#view_managers" value="<?php foreach($arch_DesigndevelopmentmanagersID_array as $arch_DesigndevelopmentmanagersID)echo "$arch_DesigndevelopmentmanagersID ";?>">
                     <?php foreach($arch_DesigndevelopmentManagersImage_array as $arch_DesigndevelopmentManagerImage)
                    
                     echo "<img src='/img/userImage/" . $arch_DesigndevelopmentManagerImage . "' alt='' class='table_image_small'>";
 
                     ?> 
                     </td>
-                    <td class="projectIncharge_table_row" data-toggle="modal" data-target="#view_project_in_charge">Project In Charge</td>
+
+                    <td class="who_assigned_manager d-none" value="<?php echo $row['arch_designdevelopment_who_assigned_manager']; ?>"></td>
+                    <td class="projectIncharge_table_row" data-toggle="modal" data-target="#view_project_in_charge" value="<?php foreach($arch_DesigndevelopmentAssignedEmployeeId_array as $arch_DesigndevelopmentAssignedEmployeeId) echo "$arch_DesigndevelopmentAssignedEmployeeId ";?>">
+
+                    <?php foreach($arch_DesigndevelopmentAssignedEmployeeImage_array as $arch_DesigndevelopmentAssignedEmployeeImage)
+                
+                                echo "<img src='/img/userImage/" . $arch_DesigndevelopmentAssignedEmployeeImage . "' alt='' class='table_image_small'>";
+
+                    ?> 
+                    </td>
+
                     <td class="pow_status" value="arch_designdevelopment_status">
                         <div class='text_status'><span><?php echo $row['arch_designdevelopment_status'] ?></span></div>
                         <div class="status_tooltip d-none">
@@ -292,27 +340,61 @@ $row = $project->fetch_assoc();
             // Architecture Construction Phase Of Work
             if($row['arch_construction'] == 1) {  
 
-            $constructionManagers = (explode(" ", $row['arch_construction_manager']));
-            $managerCount = count($constructionManagers);
+                $ArchConstructionManagers = (explode(" ", $row['arch_construction_manager']));
+                $ArchDesigndevelopmentManagerCount = count($ArchConstructionManagers);
 
-                for ($i = 0; $i < $managerCount; $i++) {
+                    if(!empty($ArchConstructionManagers)) {
 
-                    $managerID = $constructionManagers[$i];
+                        for ($i = 0; $i < $ArchDesigndevelopmentManagerCount; $i++) {
 
-                    $query_users = "SELECT * FROM registered_users WHERE ID = '$managerID'";
-                    $manager = $con->query($query_users) or die ($con->error);
-                    $managerInfo = $manager->fetch_assoc();
+                        $ArchConstructionManager = $ArchConstructionManagers[$i];
 
-                    $arch_ConstructionManagersImage_array[] = $managerInfo['user_image'];
-                    $arch_ConstructionManagersID_array[] = $managerInfo['ID'];
+                            $query_users = "SELECT * FROM registered_users WHERE ID = '$ArchConstructionManager'";
+                            $ArchConstructionManager_run = $con->query($query_users) or die ($con->error);
+                            $ArchConstructionManagerInfo = $ArchConstructionManager_run->fetch_assoc();
+        
+                            $arch_ConstructionManagersImage_array[] = $ArchConstructionManagerInfo['user_image'];
+                            $arch_ConstructionManagersID_array[] = $ArchConstructionManagerInfo['ID'];
 
-                }
+                        }
+
+                    } else {
+
+                        $arch_ConstructionManagersImage_array = [];
+                        $arch_ConstructionManagersID_array= [];
+
+                    }
+            
+                    if(!empty($row['arch_construction_assigned_employee'])) {
+
+                        $ArchConstructionAssignedEmployees = explode(" ", $row['arch_construction_assigned_employee']);
+                        $ArchConstructionEmployeesCount = (empty($ArchConstructionAssignedEmployees) ? "" : count($ArchConstructionAssignedEmployees));
+                
+                                for($num = 0; $num < $ArchConstructionEmployeesCount; $num++) {
+                
+                                    $ArchConstructionAssignedEmployeesId = $ArchConstructionAssignedEmployees[$num];
+                
+                                    $query_employee = "SELECT * FROM registered_users WHERE ID = '$ArchConstructionAssignedEmployeesId'";
+                                    $ArchConstructionAssignedEmployees_run = $con->query($query_employee) or die ($con->error);
+                                    $ArchConstructionAssignedEmployeesInfo = $ArchConstructionAssignedEmployees_run->fetch_assoc();
+                
+                                    $arch_ConstructionAssignedEmployeeImage_array[] = $ArchConstructionAssignedEmployeesInfo['user_image'];
+                                    $arch_ConstructionAssignedEmployeeId_array[] = $ArchConstructionAssignedEmployeesInfo['ID'];
+                
+                                }
+        
+                        } else {
+        
+                            $arch_ConstructionAssignedEmployeeImage_array = [];
+                            $arch_ConstructionAssignedEmployeeId_array = [];
+        
+                        }
 
             ?>
 
                 <tr class="table-row_projects table-form" value="">
                     <td class="td_phase_of_work">Construction Drawings</td>
-                    <td><?php echo $managerInfo['department']; ?></td>
+                    <td><?php echo $ArchConstructionManagerInfo['department']; ?></td>
                     <td class="manager_photo_id" data-toggle="modal" data-target="#view_managers" value="<?php foreach($arch_ConstructionManagersID_array as $arch_ConstructionManagersID)echo "$arch_ConstructionManagersID ";?>">
                     <?php foreach($arch_ConstructionManagersImage_array as $arch_ConstructionManagerImage)
                    
@@ -320,7 +402,17 @@ $row = $project->fetch_assoc();
 
                     ?> 
                     </td>
-                    <td class="projectIncharge_table_row" data-toggle="modal" data-target="#view_project_in_charge">Project In Charge</td>
+
+                    <td class="who_assigned_manager d-none" value="<?php echo $row['arch_construction_who_assigned_manager']; ?>"></td>
+                    <td class="projectIncharge_table_row" data-toggle="modal" data-target="#view_project_in_charge" value="<?php foreach($arch_ConstructionAssignedEmployeeId_array as $arch_ConstructionAssignedEmployeeId) echo "$arch_ConstructionAssignedEmployeeId ";?>">
+
+                    <?php foreach($arch_ConstructionAssignedEmployeeImage_array as $arch_ConstructionAssignedEmployeeImage)
+                
+                        echo "<img src='/img/userImage/" . $arch_ConstructionAssignedEmployeeImage . "' alt='' class='table_image_small'>";
+
+                    ?> 
+                    </td>
+
                     <td class="pow_status" value="arch_construction_status">
                         <div class='text_status'><span><?php echo $row['arch_construction_status'] ?></span></div>
                         <div class="status_tooltip d-none">
@@ -345,27 +437,61 @@ $row = $project->fetch_assoc();
             // Architecture Site Supervision Phase Of Work
             if($row['arch_site'] == 1) {  
 
-            $siteManagers = (explode(" ", $row['arch_site_manager']));
-            $managerCount = count($siteManagers);
+                $ArchSiteManagers = (explode(" ", $row['arch_site_manager']));
+                $ArchSiteManagerCount = count($ArchSiteManagers);
 
-                for ($i = 0; $i < $managerCount; $i++) {
+                    if(!empty($ArchSiteManagers)) {
 
-                    $managerID = $siteManagers[$i];
+                        for ($i = 0; $i < $ArchSiteManagerCount; $i++) {
 
-                    $query_users = "SELECT * FROM registered_users WHERE ID = '$managerID'";
-                    $manager = $con->query($query_users) or die ($con->error);
-                    $managerInfo = $manager->fetch_assoc();
+                        $ArchSiteManager = $ArchSiteManagers[$i];
 
-                    $arch_SiteManagersImage_array[] = $managerInfo['user_image'];
-                    $arch_SiteManagersID_array[] = $managerInfo['ID'];
+                            $query_users = "SELECT * FROM registered_users WHERE ID = '$ArchSiteManager'";
+                            $ArchSiteManager_run = $con->query($query_users) or die ($con->error);
+                            $ArchSiteManagerInfo = $ArchSiteManager_run->fetch_assoc();
+        
+                            $arch_SiteManagersImage_array[] = $ArchSiteManagerInfo['user_image'];
+                            $arch_SiteManagersID_array[] = $ArchSiteManagerInfo['ID'];
 
-                }
+                        }
+
+                    } else {
+
+                        $arch_SiteManagersImage_array = [];
+                        $arch_SiteManagersImage_array = [];
+
+                    }
+
+                    if(!empty($row['arch_site_assigned_employee'])) {
+
+                        $ArchSiteAssignedEmployees = explode(" ", $row['arch_site_assigned_employee']);
+                        $ArchSiteEmployeesCount = (empty($ArchSiteAssignedEmployees) ? "" : count($ArchSiteAssignedEmployees));
+                
+                                for($num = 0; $num < $ArchSiteEmployeesCount; $num++) {
+                
+                                    $ArchSiteAssignedEmployeesId = $ArchSiteAssignedEmployees[$num];
+                
+                                    $query_employee = "SELECT * FROM registered_users WHERE ID = '$ArchSiteAssignedEmployeesId'";
+                                    $ArchSiteAssignedEmployees_run = $con->query($query_employee) or die ($con->error);
+                                    $ArchSiteAssignedEmployeesInfo = $ArchSiteAssignedEmployees_run->fetch_assoc();
+                
+                                    $arch_SiteAssignedEmployeeImage_array[] = $ArchSiteAssignedEmployeesInfo['user_image'];
+                                    $arch_SiteAssignedEmployeeId_array[] = $ArchSiteAssignedEmployeesInfo['ID'];
+                
+                                }
+        
+                        } else {
+        
+                            $arch_SiteAssignedEmployeeImage_array = [];
+                            $arch_SiteAssignedEmployeeId_array = [];
+        
+                        }
 
             ?>
 
                 <tr class="table-row_projects table-form" value="">
-                    <td>Site Supervision</td>
-                    <td><?php echo $managerInfo['department']; ?></td>
+                    <td class="td_phase_of_work">Site Supervision</td>
+                    <td><?php echo $ArchSiteManagerInfo['department']; ?></td>
                     <td class="manager_photo_id" data-toggle="modal" data-target="#view_managers" value="<?php foreach($arch_SiteManagersID_array as $arch_SiteManagersID)echo "$arch_SiteManagersID ";?>">
                     <?php foreach($arch_SiteManagersImage_array as $arch_SiteManagerImage)
                    
@@ -373,7 +499,17 @@ $row = $project->fetch_assoc();
 
                     ?> 
                     </td>
-                    <td class="projectIncharge_table_row" data-toggle="modal" data-target="#view_project_in_charge">Project In Charge</td>
+
+                    <td class="who_assigned_manager d-none" value="<?php echo $row['arch_site_who_assigned_manager']; ?>"></td>
+                    <td class="projectIncharge_table_row" data-toggle="modal" data-target="#view_project_in_charge" value="<?php foreach($arch_SiteAssignedEmployeeId_array as $arch_SiteAssignedEmployeeId) echo "$arch_SiteAssignedEmployeeId ";?>">
+
+                    <?php foreach($arch_SiteAssignedEmployeeImage_array as $arch_SiteAssignedEmployeeImage)
+                
+                        echo "<img src='/img/userImage/" . $arch_SiteAssignedEmployeeImage . "' alt='' class='table_image_small'>";
+
+                    ?> 
+                    </td>
+
                     <td class="pow_status" value="arch_site_status">
                         <div class='text_status'><span><?php echo $row['arch_site_status'] ?></span></div>
                         <div class="status_tooltip d-none">
@@ -419,35 +555,91 @@ $row = $project->fetch_assoc();
                 
                 if($row['int_conceptual'] == 1) {  
 
-                $conceptualManagers = (explode(" ", $row['int_conceptual_manager']));
-                $managerCount = count($conceptualManagers);
+                    $IntConceptualManagers = (explode(" ", $row['arch_construction_manager']));
+                    $ArchConceptualManagerCount = count($IntConceptualManagers);
+    
+                        if(!empty($IntConceptualManagers)) {
+    
+                            for ($i = 0; $i < $ArchConceptualManagerCount; $i++) {
+    
+                                $IntConceptualManager = $IntConceptualManagers[$i];
+    
+                                $query_users = "SELECT * FROM registered_users WHERE ID = '$IntConceptualManager'";
+                                $IntConceptualManager_run = $con->query($query_users) or die ($con->error);
+                                $IntConceptualManagerInfo = $IntConceptualManager_run->fetch_assoc();
+            
+                                $Int_ConceptualManagersImage_array[] = $IntConceptualManagerInfo['user_image'];
+                                $Int_ConceptualManagersID_array[] = $IntConceptualManagerInfo['ID'];
+    
+                            }
+    
+                        } else {
+    
+                            $Int_ConceptualManagersImage_array = [];
+                            $Int_ConceptualManagersID_array = [];
+    
+                        }
 
-                    for ($i = 0; $i < $managerCount; $i++) {
+                        if(!empty($row['int_conceptual_assigned_employee'])) {
 
-                        $managerID = $conceptualManagers[$i];
-
-                        $query_users = "SELECT * FROM registered_users WHERE ID = '$managerID'";
-                        $manager = $con->query($query_users) or die ($con->error);
-                        $managerInfo = $manager->fetch_assoc();
-
-                        $Int_ConceptualManagersImage_array[] = $managerInfo['user_image'];
-
-                    }
+                            $IntConceptualAssignedEmployees = explode(" ", $row['int_conceptual_assigned_employee']);
+                            $IntConceptualEmployeesCount = (empty($IntConceptualAssignedEmployees) ? "" : count($IntConceptualAssignedEmployees));
+                    
+                                    for($num = 0; $num < $IntConceptualEmployeesCount; $num++) {
+                    
+                                        $IntConceptualAssignedEmployeesId = $IntConceptualAssignedEmployees[$num];
+                    
+                                        $query_employee = "SELECT * FROM registered_users WHERE ID = '$ArchSiteAssignedEmployeesId'";
+                                        $IntConceptualAssignedEmployees_run = $con->query($query_employee) or die ($con->error);
+                                        $IntConceptualAssignedEmployeesInfo = $IntConceptualAssignedEmployees_run->fetch_assoc();
+                    
+                                        $int_ConceptualAssignedEmployeeImage_array[] = $IntConceptualAssignedEmployeesInfo['user_image'];
+                                        $int_ConceptualAssignedEmployeeId_array[] = $IntConceptualAssignedEmployeesInfo['ID'];
+                    
+                                    }
+            
+                            } else {
+            
+                                $int_ConceptualAssignedEmployeeImage_array = [];
+                                $int_ConceptualAssignedEmployeeId_array = [];
+            
+                            }
 
                 ?>
 
                     <tr class="table-row_projects table-form" value="">
                         <td class="td_phase_of_work">Conceptual</td>
-                        <td><?php echo $managerInfo['department']; ?></td>
+                        <td><?php echo $IntConceptualManagerInfo['department']; ?></td>
                         <td>
-                        <?php foreach($Int_ConceptualManagersImage_array as $Int_ConceptualManagerImage)
+
+                        <?php foreach($Int_ConceptualManagersImage_array as $int_ConceptualManagerImage)
                     
-                        echo "<img src='/img/userImage/" . $Int_ConceptualManagerImage . "' alt='' class='table_image_small'>";
+                        echo "<img src='/img/userImage/" . $int_ConceptualManagerImage . "' alt='' class='table_image_small'>";
+
+                        ?> 
+
+                        </td>
+
+
+                        <td class="who_assigned_manager d-none" value="<?php echo $row['arch_site_who_assigned_manager']; ?>"></td>
+                        <td class="projectIncharge_table_row" data-toggle="modal" data-target="#view_project_in_charge" value="<?php foreach($int_ConceptualAssignedEmployeeId_array as $int_ConceptualAssignedEmployeeId) echo "$int_ConceptualAssignedEmployeeId ";?>">
+
+                        <?php foreach($int_ConceptualAssignedEmployeeImage_array as $int_ConceptualAssignedEmployeeImage)
+                    
+                            echo "<img src='/img/userImage/" . $int_ConceptualAssignedEmployeeImage . "' alt='' class='table_image_small'>";
 
                         ?> 
                         </td>
-                        <td class="projectIncharge_table_row" data-toggle="modal" data-target="#view_project_in_charge">Project In Charge</td>
-                        <td><?php echo $row['arch_conceptual_status'] ?></td>
+                        
+                        <td class="pow_status" value="int_conceptual_status">
+                            <div class='text_status'><span><?php echo $row['int_conceptual_status'] ?></span></div>
+                            <div class="status_tooltip d-none">
+                                <span class="orangeStatus">Working on it</span>
+                                <span class="redStatus">Stuck</span>
+                                <span class="greenStatus">Done</span>
+                                <input type="text" pattern="[A-Za-z]{3}">
+                            </div>
+                        </td>
                         <td><?php echo $row['added_at'] ?></td>
                         <td></td>
                         <td><button class="uploadPathBtn" data-toggle="modal" data-target="#uploadPath">Upload File Path</button></td>

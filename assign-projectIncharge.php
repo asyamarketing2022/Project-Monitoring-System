@@ -25,17 +25,27 @@ if(isset($_POST['projectId'])) {
 
         if($searchEmployee_pow == 'Conceptual') {
 
-            $archConceptualAssignedEmployee = $project_info['arch_conceptual_assigned_employee'];
-            $container_assignedEmployee = array("$archConceptualAssignedEmployee", "$employeeId");
-            $employeesAssigned = implode($container_assignedEmployee, " ");
+            if(!empty($project_info['arch_conceptual_assigned_employee'])) {
 
-            $archConceptualWhoAssignedManager = $project_info['arch_conceptual_who_assigned_manager'];
-            $container_whoAssignedManager = array("$archConceptualWhoAssignedManager", "$managerId");
-            $whoAssignedManager = implode($container_whoAssignedManager, " ");
+                $archConceptualAssignedEmployee = $project_info['arch_conceptual_assigned_employee'];
+                $container_assignedEmployee = array("$archConceptualAssignedEmployee", "$employeeId");
+                $employeesAssigned = implode($container_assignedEmployee, " ");
+    
+                $archConceptualWhoAssignedManager = $project_info['arch_conceptual_who_assigned_manager'];
+                $container_whoAssignedManager = array("$archConceptualWhoAssignedManager", "$managerId");
+                $whoAssignedManager = implode($container_whoAssignedManager, " ");
+    
+                $updateSQL = "UPDATE `pms_projects` SET `arch_conceptual_assigned_employee` = '$employeesAssigned', `arch_conceptual_who_assigned_manager` = '$whoAssignedManager' WHERE id = '$projectId'";
+    
+                $con->query($updateSQL) or die ($con->error);
 
-            $updateSQL = "UPDATE `pms_projects` SET `arch_conceptual_assigned_employee` = '$employeesAssigned', `arch_conceptual_who_assigned_manager` = '$whoAssignedManager' WHERE id = '$projectId'";
+            } else {
 
-            $con->query($updateSQL) or die ($con->error);
+                $updateSQL = "UPDATE `pms_projects` SET `arch_conceptual_assigned_employee` = '$employeeId', `arch_conceptual_who_assigned_manager` = '$managerId' WHERE id = '$projectId'";
+    
+                $con->query($updateSQL) or die ($con->error);
+
+            }
 
         } elseif($searchEmployee_pow == 'Schematic') {
 
@@ -59,20 +69,114 @@ if(isset($_POST['projectId'])) {
     
                 $con->query($updateSQL) or die ($con->error);
 
+            }
+
+
+        } elseif($searchEmployee_pow == 'Design Development') {
+
+            if(!empty($project_info['arch_designdevelopment_assigned_employee'])){
+
+                $archDesigndevelopmentAssignedEmployee = $project_info['arch_designdevelopment_assigned_employee'];
+                $container_assignedEmployee = array("$archDesigndevelopmentAssignedEmployee", "$employeeId");
+                $employeesAssigned = implode(" ", $container_assignedEmployee);
+    
+                $archDesigndevelopmentWhoAssignedManager = $project_info['arch_designdevelopment_who_assigned_manager'];
+                $container_whoAssignedManager = array("$archDesigndevelopmentWhoAssignedManager", "$managerId");
+                $whoAssignedManager = implode(" ", $container_whoAssignedManager);
+    
+                $updateSQL = "UPDATE `pms_projects` SET `arch_designdevelopment_assigned_employee` = '$employeesAssigned', `arch_designdevelopment_who_assigned_manager` = '$whoAssignedManager' WHERE id = '$projectId'";
+    
+                $con->query($updateSQL) or die ($con->error);
+
+            } else {
+
+                $updateSQL = "UPDATE `pms_projects` SET `arch_designdevelopment_assigned_employee` = '$employeeId', `arch_designdevelopment_who_assigned_manager` = '$managerId' WHERE id = '$projectId'";
+    
+                $con->query($updateSQL) or die ($con->error);
+
+            }
+            
+
+        } elseif($searchEmployee_pow == 'Construction Drawings') {
+
+            if(!empty($project_info['arch_construction_assigned_employee'])){
+
+                $archConstruction_AssignedEmployee = $project_info['arch_construction_assigned_employee'];
+                $container_assignedEmployee = array("$archConstruction_AssignedEmployee", "$employeeId");
+                $employeesAssigned = implode(" ", $container_assignedEmployee);
+    
+                $archConstructionWhoAssignedManager = $project_info['arch_construction_who_assigned_manager'];
+                $container_whoAssignedManager = array("$archConstructionWhoAssignedManager", "$managerId");
+                $whoAssignedManager = implode(" ", $container_whoAssignedManager);
+    
+                $updateSQL = "UPDATE `pms_projects` SET `arch_construction_assigned_employee` = '$employeesAssigned', `arch_construction_who_assigned_manager` = '$whoAssignedManager' WHERE id = '$projectId'";
+    
+                $con->query($updateSQL) or die ($con->error);
+
+            } else {
+
+                $updateSQL = "UPDATE `pms_projects` SET `arch_construction_assigned_employee` = '$employeeId', `arch_construction_who_assigned_manager` = '$managerId' WHERE id = '$projectId'";
+    
+                $con->query($updateSQL) or die ($con->error);
+
+            }
+            
+        } elseif($searchEmployee_pow == 'Site Supervision') {
+
+            if(!empty($project_info['arch_site_assigned_employee'])){
+
+                $archSite_AssignedEmployee = $project_info['arch_site_assigned_employee'];
+                $container_assignedEmployee = array("$archSite_AssignedEmployee", "$employeeId");
+                $employeesAssigned = implode(" ", $container_assignedEmployee);
+    
+                $archSiteWhoAssignedManager = $project_info['arch_site_who_assigned_manager'];
+                $container_whoAssignedManager = array("$archSiteWhoAssignedManager", "$managerId");
+                $whoAssignedManager = implode(" ", $container_whoAssignedManager);
+    
+                $updateSQL = "UPDATE `pms_projects` SET `arch_site_assigned_employee` = '$employeesAssigned', `arch_site_who_assigned_manager` = '$whoAssignedManager' WHERE id = '$projectId'";
+    
+                $con->query($updateSQL) or die ($con->error);
+
+            } else {
+
+                $updateSQL = "UPDATE `pms_projects` SET `arch_site_assigned_employee` = '$employeeId', `arch_site_who_assigned_manager` = '$managerId' WHERE id = '$projectId'";
+    
+                $con->query($updateSQL) or die ($con->error);
 
             }
 
+        }
+
+    }elseif($searchEmployee_service == 'Interior') {
+
+        if($searchEmployee_pow == 'Conceptual') {
+
+            if(!empty($project_info['int_conceptual_assigned_employee'])) {
+
+                $archConceptualAssignedEmployee = $project_info['int_conceptual_assigned_employee'];
+                $container_assignedEmployee = array("$archConceptualAssignedEmployee", "$employeeId");
+                $employeesAssigned = implode($container_assignedEmployee, " ");
+    
+                $archConceptualWhoAssignedManager = $project_info['int_conceptual_who_assigned_manager'];
+                $container_whoAssignedManager = array("$archConceptualWhoAssignedManager", "$managerId");
+                $whoAssignedManager = implode($container_whoAssignedManager, " ");
+    
+                $updateSQL = "UPDATE `pms_projects` SET `int_conceptual_assigned_employee` = '$employeesAssigned', `int_conceptual_who_assigned_manager` = '$whoAssignedManager' WHERE id = '$projectId'";
+    
+                $con->query($updateSQL) or die ($con->error);
+
+            } else {
+
+                $updateSQL = "UPDATE `pms_projects` SET `int_conceptual_assigned_employee` = '$employeeId', `int_conceptual_who_assigned_manager` = '$managerId' WHERE id = '$projectId'";
+    
+                $con->query($updateSQL) or die ($con->error);
+
+            }
 
         }
 
     }
 
-
-    // $sql = "INSERT INTO `pms_projects`(`arch_conceptual_who_assigned_manager`, `arch_conceptual_assigned_employee`) VALUE ('$managerId', '$employeeId ')"
-
-    // $updateSQL = "UPDATE `pms_projects` SET `arch_conceptual_who_assigned_manager` =  '$managerId' WHERE id = '$projectId'";
-
-    // $con->query($sql) or die ($con->error);
 
 
 

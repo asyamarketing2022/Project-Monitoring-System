@@ -1472,7 +1472,7 @@ jQuery(function () {
 
       for(let i = 0; uploadPathBtn.length > i; i++){
          
-         $(uploadPathBtn[i]).on('click', ()=> {
+         $(uploadPathBtn[i]).off().on('click', ()=> {
 
             let tableContainer = $(uploadPathBtn[i]).closest('.project_services_table');
             let projectService = $(tableContainer).find('th.th_services').text();
