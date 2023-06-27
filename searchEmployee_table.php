@@ -152,37 +152,8 @@ $con = $db->connection();
 
             } while($query_employee = $query_run->fetch_assoc());
             
- 
-            // if(mysqli_num_rows($query_run) > 0)
-            // {
-            //     foreach($query_run as $query_employee)
-            //     {
-            //         echo "<div class='user_container' value='" . $query_employee['ID'] . "'>
-            //         <div class='user_photo'>
-            //             <img class='m-0' src='img/userImage/" . $query_employee['user_image'] . "' alt='' width='100'>
-            //             <button class='selectBtn'><a href='#'>Select Employee</a></button>
-            //         </div>
-            //             <div class='user_info'>
-            //                 <div class='user_fullname'>
-            //                     <label>Name:</label>
-            //                     <span>" . $query_employee['first_name'] . " " . $query_employee['last_name'] . "</span>
-            //                 </div>
 
-            //                 <div class='user_position'>
-            //                     <label>Position:</label>
-            //                     <span>" . $query_employee['position'] . "</span>
-            //                 </div>
-
-            //                 <div class='user_department'>
-            //                     <label>Department:</label>
-            //                     <span>" . $query_employee['department'] . "</span>
-            //                 </div>
-            //             </div>
-            //         </div>";
-            //     }
-            // }
-
-    } elseif(!empty($_POST['userId_container'])) {
+    } elseif(!empty($_POST['userId_container']) && !isset($_POST['searchValue'])) {
 
         $sql = "SELECT * FROM registered_users WHERE access = 'employee'";
         $query_run = mysqli_query($con, $sql);

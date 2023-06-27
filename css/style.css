@@ -570,6 +570,14 @@ a {
     height: auto;
 }
 
+.content-table.project_services_table table {
+    table-layout: fixed;
+}
+
+.content-table.project_services_table table td {
+    width: 11%;
+}
+
 /* .content-table .pageBtn .pagination_link:nth-child(2)  {
     position: relative;
 } */

@@ -1723,7 +1723,56 @@ jQuery(function () {
 
 
    });
+
+
+   function disable_previous_dates() {
+
+      var today = new Date().toISOString().split('T')[0];
+      var calendars = document.querySelectorAll('.dueDate');
+      
+      Array.from(calendars).forEach((calendar) => {
+
+         calendar.setAttribute('min', today);
+
+      });
+  }
+  disable_previous_dates();
    
+  function set_duedate() {
+
+      let calendars = document.querySelectorAll('.dueDate');
+      let projectId = $('#projectTitle').attr('value');
+
+      for(let i = 0; calendars.length > i; i++){
+
+         let tableContainer = $(calendars[i]).closest('.project_services_table');
+         let name = $(calendars[i]).attr('name');
+
+         $(calendars[i]).on('change', ()=> {
+
+            let date = $(calendars[i]).val();
+ 
+             $.ajax({
+                type: 'POST',
+                url: 'set-dueDate.php',
+                data: {
+                   'date' : date,
+                   'name' : name,
+                   'projectId' : projectId 
+                },
+                success: function (data) {
+                   // alert("success", data);
+                   window.location.reload();
+                },
+             });
+
+            // console.log(projectId);
+             
+          });
+
+      }
+  }
+  set_duedate();
 
 });
 
