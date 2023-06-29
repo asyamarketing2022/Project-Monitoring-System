@@ -26,7 +26,12 @@ $con = connection();
 
 ?>
 
-<div class="container-fluid">
+<div class="container-fluid" style="
+background-image: url('img/coming-soon.jpg'); 
+background-size: cover; 
+background-position: center center; 
+height: 100%; 
+width: 100%;">
     <div class="row">
         <?php if(isset($_SESSION['Access']) == "Admin") { ?> 
 
@@ -35,13 +40,14 @@ $con = connection();
         </div> -->
 
         <?php } ?>
-        <div class="header-container">
+
+        <!-- <div class="header-container">
             <div class="header shadow-sm p-3 mb-5 bg-body rounded w-100 h-auto">
                 <h1>Home</h1>
             </div>
-        </div>
+        </div> -->
 
-        <div class="col-lg-12">
+        <!-- <div class="col-lg-12">
             <div class="content shadow">
                 <div class="container">
                     <form action="" method="post">
@@ -90,7 +96,7 @@ $con = connection();
                     </form>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </div>
 
