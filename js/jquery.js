@@ -846,36 +846,36 @@ jQuery(function () {
       masterPlanning_Conceptual.managers();
       masterPlanning_Schematic.managers();
 
-      //Department Manager > checkbox
-      mechanicalDepartmentCheckbox.managers_checkbox();
-      electricalDepartmentCheckbox.managers_checkbox();
-      plumbingDepartmentCheckbox.managers_checkbox();
-      fireProtectionDepartmentCheckbox.managers_checkbox();
-      structuralDepartmentCheckbox.managers_checkbox();
+      // //Department Manager > checkbox
+      // mechanicalDepartmentCheckbox.managers_checkbox();
+      // electricalDepartmentCheckbox.managers_checkbox();
+      // plumbingDepartmentCheckbox.managers_checkbox();
+      // fireProtectionDepartmentCheckbox.managers_checkbox();
+      // structuralDepartmentCheckbox.managers_checkbox();
 
-      //Architecture services > Phase of work checkbox
-      archConceptual.pow_checkbox();
-      archSchematic.pow_checkbox();
-      archdesignDev.pow_checkbox();
-      archconsDrawings.pow_checkbox();
-      archsiteVision.pow_checkbox();
+      // //Architecture services > Phase of work checkbox
+      // archConceptual.pow_checkbox();
+      // archSchematic.pow_checkbox();
+      // archdesignDev.pow_checkbox();
+      // archconsDrawings.pow_checkbox();
+      // archsiteVision.pow_checkbox();
 
-      //Interior Design services > Phase of work checkbox
-      interiorDesign_Conceptual.pow_checkbox();
-      interiorDesign_designDev.pow_checkbox();
-      interiorDesign_constructionDrawings.pow_checkbox();
-      interiorDesign_siteSupervision.pow_checkbox();
+      // //Interior Design services > Phase of work checkbox
+      // interiorDesign_Conceptual.pow_checkbox();
+      // interiorDesign_designDev.pow_checkbox();
+      // interiorDesign_constructionDrawings.pow_checkbox();
+      // interiorDesign_siteSupervision.pow_checkbox();
 
-      //Master planning services > Phase of work checkbox
-      masterPlanning_Conceptual.pow_checkbox();
-      masterPlanning_Schematic.pow_checkbox();
+      // //Master planning services > Phase of work checkbox
+      // masterPlanning_Conceptual.pow_checkbox();
+      // masterPlanning_Schematic.pow_checkbox();
 
-      //Engineering Department > checkbox
-      engrMechanical.dept_checkbox();
-      engrElectrical.dept_checkbox();
-      engrPlumbing.dept_checkbox();
-      engrFirepro.dept_checkbox();
-      engrStructural.dept_checkbox();
+      // //Engineering Department > checkbox
+      // engrMechanical.dept_checkbox();
+      // engrElectrical.dept_checkbox();
+      // engrPlumbing.dept_checkbox();
+      // engrFirepro.dept_checkbox();
+      // engrStructural.dept_checkbox();
 
 
 
@@ -1556,6 +1556,91 @@ jQuery(function () {
       });
    });
 
+      // Search Manager Function
+      function searchManager(){
+
+         let searchManager = document.querySelector('.searchManager');
+   
+         $(searchManager).on('keydown', ()=> {
+
+            let searchManager_pow = document.querySelector('.searchManager_pow');
+            let searchManager_service = document.querySelector('.searchManager_service');
+            let userIDs = document.querySelectorAll('.managers_container .user_container');
+            let userId_container = [];
+
+            let phase_of_work = $(searchManager_pow).text();
+            let service = $(searchManager_service).text();
+
+            Array.from(userIDs).forEach((userID) => {
+    
+               userId_container.push($(userID).attr('value'));
+   
+            });
+   
+            setTimeout(
+               function() 
+               {
+                  let searchValue = $(searchManager).val();
+   
+                  $.ajax({
+                     type: 'POST',
+                     url: 'searchManager_table.php',
+                     data: {
+                        'userId_container' : userId_container,
+                        'searchValue' : searchValue,
+                        'phase_of_work' : phase_of_work,
+                        'service' : service,
+                     },
+                     success:function(data){
+                        $('.search_manager_wrapper').html(data);
+                     }
+                  });
+   
+               }, 50);
+
+         });
+         
+      }
+      searchManager();
+
+   // Add Project In Charge Button - To Show All Not Assign Employee
+   function addManagerBtn(){
+
+      let addManagerBtn = document.querySelector('.addManagerBtn');
+
+      $(addManagerBtn).on('click', ()=> {
+
+            let searchManager_pow = document.querySelector('.searchManager_pow');
+            let searchManager_service = document.querySelector('.searchManager_service');
+            let userIDs = document.querySelectorAll('.managers_container .user_container');
+            let userId_container = [];
+
+            let phase_of_work = $(searchManager_pow).text();
+            let service = $(searchManager_service).text();
+
+            Array.from(userIDs).forEach((userID) => {
+    
+               userId_container.push($(userID).attr('value'));
+
+            });
+
+            $.ajax({
+               type: 'POST',
+               url: 'searchManager_table.php',
+               data: {
+                  'userId_container' : userId_container,
+                  'phase_of_work' : phase_of_work,
+                  'service' : service,
+               },
+               success:function(data){
+                  $('.search_manager_wrapper').html(data);
+               }
+            });
+      });
+
+   }
+   addManagerBtn();
+
    // Search Employee Function
    function searchEmployee(){
 
@@ -1590,6 +1675,7 @@ jQuery(function () {
                });
 
             }, 50);
+     
       });
       
    }
@@ -1627,7 +1713,7 @@ jQuery(function () {
    addProjectInChargeBtn();
 
    // Create a dynamic html element for Service and Phase of work
-   function getService_and_pow(){
+   function PIC_service_and_pow(){
 
       let projectIncharge_table_row = document.querySelectorAll('.projectIncharge_table_row');
 
@@ -1641,11 +1727,11 @@ jQuery(function () {
            let projectService = $(tbody).find('th.th_services').text();
            let searchEmployee_container = document.querySelector('.search-employee_container');
 
-           let contentInfo = `<div class="content__info d-none">
+           let contentInfo = `<div class="content__info">
                                  <span>Phase of work:</span>
                                  <p class="searchEmployee_pow">${$(td_pow).text()}</p>
                               </div>
-                              <div class="content__info d-none">
+                              <div class="content__info">
                                  <span>Service:</span>
                                  <p class='searchEmployee_service'>${projectService}</p>
                               </div>
@@ -1658,7 +1744,55 @@ jQuery(function () {
       }
 
    }
-   getService_and_pow();
+   PIC_service_and_pow();
+
+   function manager_service_and_pow(){
+
+      let manager_photo_id = document.querySelectorAll('.manager_photo_id');
+
+      for (let i = 0; manager_photo_id.length > i; i++){
+
+         $(manager_photo_id[i]).on('click', ()=> {
+
+           let tableForm = $(manager_photo_id[i]).parent();
+           let td_pow = $(tableForm).children('.td_phase_of_work');
+           let tbody = $(tableForm).parent();
+           let projectService = $(tbody).find('th.th_services').text();
+           let searchManager_container = document.querySelector('.search-manager_container');
+
+           let contentInfo = `<div class="content__info">
+                                 <span>Phase of work:</span>
+                                 <p class="searchManager_pow">${$(td_pow).text()}</p>
+                              </div>
+                              <div class="content__info">
+                                 <span>Service:</span>
+                                 <p class='searchManager_service'>${projectService}</p>
+                              </div>
+                              `;
+
+           $(contentInfo).appendTo(searchManager_container);
+            
+            let phase_of_work = $(td_pow).text();
+
+           $.ajax({
+            type: 'POST',
+            url: 'searchManager_table.php',
+            data: {
+               'projectService' : projectService,
+               'phase_of_work' : phase_of_work,
+            },
+            success:function(data){
+               $('.search_manager_wrapper').html(data);
+            }
+         });
+
+
+         });
+
+      }
+
+   }
+   manager_service_and_pow();
 
    // Select Employee Function
    function selectEmployee(){
@@ -1686,7 +1820,14 @@ jQuery(function () {
                },
                success: function (data) {
                   // alert("success", data);
-                  window.location.reload();
+                  setTimeout(
+                     function()
+                     {
+
+                        window.location.reload();
+
+                     }, 100);
+
                 },
             });
 
@@ -1773,6 +1914,11 @@ jQuery(function () {
       }
   }
   set_duedate();
+
+
+  $('.modal').on('hidden.bs.modal', function () {
+   location.reload();
+  })
 
 });
 

@@ -15,7 +15,6 @@ if(isset($_POST['employeeAssigned_id'])) {
 
     $managerIds = explode(" ", $_POST['managerIds']);
 
-
     for ($i = 0; $i < $photosIdCount; $i++) {
 
         $userID = $employeeAssigned_id[$i];

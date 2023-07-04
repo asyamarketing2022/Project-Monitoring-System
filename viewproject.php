@@ -5,6 +5,8 @@
 <?php include_once("sidebar.php"); ?>
 <?php include_once("upload_file_path.php"); ?>
 <?php include_once("ViewProjectController.php"); ?>
+<?php include_once("SearchManagerController.php"); ?>
+
 <?/*php include_once("searchEmployee_table.php"); */?>
 
 
@@ -221,7 +223,7 @@ $row = $project->fetch_assoc();
 <!-- View My Managers - Modal -->
 <div class="modal fade pop-up__modal" id="view_managers" tabindex="-1" role="dialog" aria-labelledby="viewManagers" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-xl" role="document" style="max-width: 800px;">
-        <div class="modal-content">
+        <div class="modal-content" style="height: 500px; overflow-y: auto;">
             <div class="modal-header border-0">
                 <h5></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -233,6 +235,8 @@ $row = $project->fetch_assoc();
                     <!-- postUsersManager_in_modal.php -->
 
             </div>
+            <img class="addManagerBtn" data-toggle="modal" data-target="#addManager" src="img/add-icon.png" alt="" width="50">
+
         </div>
     </div>
 </div>
@@ -251,7 +255,6 @@ $row = $project->fetch_assoc();
             <div class="project_in_charge_container">
                 <!-- postUsersProjectInCharge_in_modal.php -->
                 
-
             </div>
             <img class="addProjectInChargeBtn" data-toggle="modal" data-target="#addProjectInCharge" src="img/add-icon.png" alt="" width="50">
 
@@ -339,9 +342,37 @@ $row = $project->fetch_assoc();
 
                                 <!-- searchEmployee_table.php -->
 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-                                
+<!-- Add Manager - Modal -->
+<div class="modal fade pop-up__modal" id="addManager" tabindex="-1" role="dialog" aria-labelledby="addManager" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-md" role="document" style="max-width: 750px;">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <h5></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <span class="modal-title">Add Manager</span>
+            <div class="_container">
+                <!-- view-Filepath_in_modal.php -->
+                <div class="search-manager_container content-info__wrapper tab-position_right">
+                    <div class="content__info">
+                        <span>Search Manager:</span>
+                        <div class="search_wrapper" style="max-width: 500px;">
+                            <input class="searchManager w-100" name="search" value="" type="text" placeholder="Manager Lastname">
+                            <!-- <button type="submit" class="search-button submitFilter">Search</button> -->
+                            <div class="search_manager_wrapper">
 
+                                <!-- searchEmployee_table.php -->
 
                             </div>
                         </div>

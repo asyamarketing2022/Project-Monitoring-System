@@ -726,7 +726,8 @@ a {
     font-weight: 700;
 } 
 
-.search_employee_wrapper {
+.search_employee_wrapper,
+.search_manager_wrapper {
     width: 100%;
     height: 300px;
     border: 1px solid rgb(182 186 187 / 45%);

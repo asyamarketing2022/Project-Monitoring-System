@@ -21,7 +21,7 @@ if(isset($_POST['managerPhotoId'])) {
         $manager = $con->query($query_users) or die ($con->error);
         $managerInfo = $manager->fetch_assoc();
 
-        echo "<div class='user_container'>
+        echo "<div class='user_container' value='" . $managerInfo['ID'] . "'>
                 <div class='user_photo'>
                     <img src='img/userImage/" . $managerInfo['user_image'] . "' alt='' width='200'>
                     <button><a href='#'>View Profile</a></button>

@@ -97,7 +97,7 @@ if(isset($_POST['projectId'])) {
             }
             
 
-        } elseif($searchEmployee_pow == 'Construction Drawings') {
+        } elseif($searchEmployee_pow == 'Construction Drawing') {
 
             if(!empty($project_info['arch_construction_assigned_employee'])){
 

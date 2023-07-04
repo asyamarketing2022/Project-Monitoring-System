@@ -49,20 +49,28 @@ class ViewProjectController
 
         if($row[$service_phase_of_work] == 1) {  
 
-        $phase_of_work_managers = (explode(" ", $row[$manager]));
-        $phase_of_work_manager_count = count($phase_of_work_managers);
+            if(!empty($row[$manager])) {
 
-            for ($i = 0; $i < $phase_of_work_manager_count; $i++) {
+                $phase_of_work_managers = (explode(" ", $row[$manager]));
+                $phase_of_work_manager_count = (empty($phase_of_work_managers) ? "" : count($phase_of_work_managers));
 
-                $phase_of_work_manager = $phase_of_work_managers[$i];
+                for ($i = 0; $i < $phase_of_work_manager_count; $i++) {
 
-                $query_users = "SELECT * FROM registered_users WHERE ID = '$phase_of_work_manager'";
-                $phase_of_work_manager_run = $this->conn->query($query_users) or die ($this->conn->error);
-                $phase_of_work_manager_info = $phase_of_work_manager_run->fetch_assoc();
+                    $phase_of_work_manager = $phase_of_work_managers[$i];
 
-                $phase_of_work_manager_image_array[] = $phase_of_work_manager_info['user_image'];
-                $phase_of_work_manager_id_array[] = $phase_of_work_manager_info['ID'];
+                    $query_users = "SELECT * FROM registered_users WHERE ID = '$phase_of_work_manager'";
+                    $phase_of_work_manager_run = $this->conn->query($query_users) or die ($this->conn->error);
+                    $phase_of_work_manager_info = $phase_of_work_manager_run->fetch_assoc();
 
+                    $phase_of_work_manager_image_array[] = $phase_of_work_manager_info['user_image'];
+                    $phase_of_work_manager_id_array[] = $phase_of_work_manager_info['ID'];
+                    
+                }
+
+            } else {
+
+                $phase_of_work_manager_image_array = [];
+                $phase_of_work_manager_id_array = [];
             }
 
 
@@ -93,7 +101,8 @@ class ViewProjectController
 
                 echo "<tr class='table-row_projects table-form' value=''>
                 <td class='td_phase_of_work'>$phaseOfwork</td>
-                <td>". $phase_of_work_manager_info['department'] ."</td>";
+                <td></td>";
+                // <td>". $phase_of_work_manager_info['department'] ."</td>"
 
                 echo " <td class='manager_photo_id' data-toggle='modal' data-target='#view_managers' value='";
 
