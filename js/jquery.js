@@ -1850,7 +1850,7 @@ jQuery(function () {
 
    });
 
-   $('.searchFilter').on('keypress', ()=> {
+   $('.searchFilter').on('keydown', ()=> {
 
       setTimeout(
 
@@ -1859,9 +1859,7 @@ jQuery(function () {
 
          selectEmployee();
 
-         }, 300);
-
-
+         }, 100);
 
    });
 

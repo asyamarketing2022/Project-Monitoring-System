@@ -38,6 +38,49 @@ $con = $db->connection();
                 $ArchConstruction = new SearchManagerController('project management', $searchValue, $userId_container);
                 $ArchConstruction->searchManager();
  
+            } elseif($phase_of_work == 'Site Supervision') {
+
+                $ArchSite = new SearchManagerController('project management', $searchValue, $userId_container);
+                $ArchSite->searchManager();
+
+            }
+
+        } elseif($service == 'Interior') {
+
+            if($phase_of_work == 'Conceptual'){
+
+                $IntConceptual = new SearchManagerController('interior design', $searchValue, $userId_container);
+                $IntConceptual->searchManager();
+
+            } elseif($phase_of_work == 'Design Development') {
+
+                $IntDesignDevelopment = new SearchManagerController('interior design', $searchValue, $userId_container);
+                $IntDesignDevelopment->searchManager();
+
+            } elseif($phase_of_work == 'Construction Drawing') {
+
+                $IntConstruction = new SearchManagerController('interior design', $searchValue, $userId_container);
+                $IntConstruction->searchManager();
+
+            } elseif($phase_of_work == 'Site Supervision') {
+
+                $IntSite = new SearchManagerController('interior design', $searchValue, $userId_container);
+                $IntSite->searchManager();
+            
+            }
+
+        } elseif($service == 'Master Planning') {
+
+            if($phase_of_work == 'Conceptual'){
+
+                $MasterPlanningConceptual = new SearchManagerController('master planning', $searchValue, $userId_container);
+                $MasterPlanningConceptual->searchManager();
+
+            } elseif($phase_of_work == 'Schematic') {
+
+                $MasterPlanningSchematic = new SearchManagerController('master planning', $searchValue, $userId_container);
+                $MasterPlanningSchematic->searchManager();
+
             }
 
         }
@@ -74,6 +117,49 @@ $con = $db->connection();
                 $ArchConstruction = new SearchManagerController('project management', $searchValue, $userId_container);
                 $ArchConstruction->searchManager();
  
+            } elseif($phase_of_work == 'Site Supervision') {
+
+                $ArchSite = new SearchManagerController('project management', $searchValue, $userId_container);
+                $ArchSite->searchManager();
+
+            } 
+
+        } elseif($service == 'Interior') {
+
+            if($phase_of_work == 'Conceptual'){
+
+                $IntConceptual = new SearchManagerController('interior design', $searchValue, $userId_container);
+                $IntConceptual->searchManager();
+
+            } elseif($phase_of_work == 'Design Development') {
+
+                $IntDesignDevelopment = new SearchManagerController('interior design', $searchValue, $userId_container);
+                $IntDesignDevelopment->searchManager();
+
+            } elseif($phase_of_work == 'Construction Drawing') {
+
+                $IntConstruction = new SearchManagerController('interior design', $searchValue, $userId_container);
+                $IntConstruction->searchManager();
+
+            } elseif($phase_of_work == 'Site Supervision') {
+
+                $IntSite = new SearchManagerController('interior design', $searchValue, $userId_container);
+                $IntSite->searchManager();
+            
+            }
+
+        } elseif($service == 'Master Planning') {
+
+            if($phase_of_work == 'Conceptual'){
+
+                $MasterPlanningConceptual = new SearchManagerController('master planning', $searchValue, $userId_container);
+                $MasterPlanningConceptual->searchManager();
+
+            } elseif($phase_of_work == 'Schematic') {
+
+                $MasterPlanningSchematic = new SearchManagerController('master planning', $searchValue, $userId_container);
+                $MasterPlanningSchematic->searchManager();
+
             }
 
         }
