@@ -2,8 +2,6 @@
 <?php include 'login.php'; ?>
 <?php include_once('AssignedEmployeeController.php'); ?>
 
-
-
 <?php 
 
 $db = new DBconnection();
@@ -16,13 +14,6 @@ if(isset($_POST['projectId'])) {
     $searchEmployee_pow = $_POST['searchEmployee_pow'];
     $searchEmployee_service = $_POST['searchEmployee_service'];
     $managerId = $_SESSION['UserId'];
-
-    $query_project = "SELECT * FROM `pms_projects` WHERE id = '$projectId'";
-    $project = $con->query($query_project) or die ($con->error);
-    $project_info = $project->fetch_assoc();
-
-    $employeesAssigned = "";
-    $whoAssignedManager = "";
 
     if($searchEmployee_service == 'Architecture') {
 

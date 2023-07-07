@@ -21,7 +21,6 @@ class AssignedEmployeeController
       $this->projectId = $projectId;
       $this->managerId = $managerId;
       $this->employeeId = $employeeId;
-
     }
 
     function assignProjectInCharge()
@@ -42,19 +41,18 @@ class AssignedEmployeeController
 
       if(!empty($row[$service_pow_assignedEmployee])) {
 
-        $archConceptualAssignedEmployee = $row[$service_pow_assignedEmployee];
-        $container_assignedEmployee = array("$archConceptualAssignedEmployee", "$employeeIds");
-        $employeesAssigned = implode($container_assignedEmployee, " ");
+        $AssignedEmployee = $row[$service_pow_assignedEmployee];
+        $container_assignedEmployee = array("$AssignedEmployee", "$employeeIds");
+        $wrapper_employeesAssigned = implode($container_assignedEmployee, " ");
 
-        $archConceptualWhoAssignedManager = $row[$service_pow_assignedManager];
-        $container_whoAssignedManager = array("$archConceptualWhoAssignedManager", "$managerIds");
-        $whoAssignedManager = implode($container_whoAssignedManager, " ");
+        $WhoAssignedManager = $row[$service_pow_assignedManager];
+        $container_whoAssignedManager = array("$WhoAssignedManager", "$managerIds");
+        $wrapper_whoAssignedManager = implode($container_whoAssignedManager, " ");
 
-        $updateSQL = "UPDATE `pms_projects` SET `$service_pow_assignedEmployee` = '$employeesAssigned', `$service_pow_assignedManager` = '$whoAssignedManager' WHERE id = '" . $this->projectId . "'";
+        $updateSQL = "UPDATE `pms_projects` SET `$service_pow_assignedEmployee` = '$wrapper_employeesAssigned', `$service_pow_assignedManager` = '$wrapper_whoAssignedManager' WHERE id = '" . $this->projectId . "'";
 
         $this->conn->query($updateSQL) or die ($this->conn->error);
 
-      
       } else {
 
         $service_pow_assignedManager = (empty($this->service_pow_assigned_manager) ? "arch_schematic_who_assigned_manager" : $this->service_pow_assigned_manager);

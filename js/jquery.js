@@ -1794,6 +1794,73 @@ jQuery(function () {
    }
    manager_service_and_pow();
 
+   // Select Manager Function
+   function selectManager(){
+
+      let selectBtn = document.querySelectorAll('.selectBtn');
+
+      for(let i = 0; selectBtn.length > i; i++){
+
+         $(selectBtn[i]).on('click', ()=> {
+
+            let userContainer = $(selectBtn[i]).parent().parent();
+            let managerId = $(userContainer).attr('value');
+            let projectId = $('#projectTitle').attr('value');
+            let searchManager_pow = $('.searchManager_pow').text()
+            let searchManager_service = $('.searchManager_service').text()
+ 
+            $.ajax({
+               type: 'POST',
+               url: 'assign-manager.php',
+               data: {
+                  'managerId' : managerId,
+                  'projectId' : projectId,
+                  'searchManager_pow' : searchManager_pow,
+                  'searchManager_service' : searchManager_service,
+               },
+               success: function(data){
+                   // alert("success", data);
+                  setTimeout(
+                     function()
+                     {
+
+                        window.location.reload();
+
+                     }, 100);
+               },
+            });
+         });
+
+      }
+   }
+   $('.addManagerBtn').on('click', ()=> {
+
+      setTimeout(
+
+         function() 
+            {
+
+               selectManager();
+
+         }, 100);
+
+   });
+
+   $('.searchManager ').on('keydown', ()=> {
+
+      setTimeout(
+
+         function() 
+            {
+
+               selectManager();
+
+         }, 100);
+
+   });
+
+
+
    // Select Employee Function
    function selectEmployee(){
 
