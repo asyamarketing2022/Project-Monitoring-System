@@ -110,6 +110,58 @@ $row = $project->fetch_assoc();
 
     <?php } ?>
 
+    <!-- Architecture table  -->
+    <?php if($row['service_engineering'] == 1) { ?>
+
+        <div class="content-table project_services_table">
+            <table>
+                <tr>
+                    <th class="th_services">Engineering</th>
+                    <th>Department</th>
+                    <th>Manager</th>
+                    <th>Project In Charge</th>
+                    <th>Status</th>
+                    <th>Date Receive</th>
+                    <th>Due Date</th>
+                    <th>File Upload</th>
+                    <th>File Lists</th>
+                </tr>
+
+        <?php 
+
+         // Architecture Conceptual Phase Of Work
+        if($row['engi_schematic'] == 1) {  
+
+            $engiSchematic = new ViewProjectController('engi_schematic', 'engi_schematic_manager', 'engi_schematic_assigned_employee', 'Schematic', 'engi_schematic_who_assigned_manager', 'engi_schematic_status', 'engi_schematic_duedate');
+            $engiSchematic->view_phase_of_work_status();
+
+        } ?> 
+
+        
+        <?php 
+            
+        // Architecture Design Development Phase Of Work
+        if($row['engi_designdevelopment'] == 1) {  
+
+            $engiDesignDevelopment = new ViewProjectController('engi_designdevelopment', 'engi_designdevelopment_manager', 'engi_designdevelopment_assigned_employee', 'Design Development', 'engi_designdevelopment_who_assigned_manager', 'engi_designdevelopment_status', 'engi_designdevelopment_duedate');
+            $engiDesignDevelopment->view_phase_of_work_status();
+
+        } ?>
+
+        <?php 
+        
+        // Architecture Construction Phase Of Work
+        if($row['engi_construction'] == 1) {  
+
+            $engiConstructionDrawing = new ViewProjectController('engi_construction', 'engi_construction_manager', 'engi_construction_assigned_employee', 'Construction Drawing', 'engi_construction_who_assigned_manager', 'engi_construction_status', 'engi_construction_duedate');
+            $engiConstructionDrawing->view_phase_of_work_status();
+
+        } ?>
+
+            </table>
+        </div>
+
+    <?php } ?>
 
     <!-- Interior table  -->
     <?php if($row['service_interior'] == 1) { ?>
@@ -372,7 +424,7 @@ $row = $project->fetch_assoc();
                             <!-- <button type="submit" class="search-button submitFilter">Search</button> -->
                             <div class="search_manager_wrapper">
 
-                                <!-- searchEmployee_table.php -->
+                                <!-- searchManager_table.php -->
 
                             </div>
                         </div>

@@ -42,6 +42,25 @@ if(isset($_POST['projectId'])) {
 
         }
 
+    }elseif($searchManager_service == 'Engineering') {
+
+         if($searchManager_pow == 'Schematic') {
+
+            $EngrSchematic = new AssignedManagerController($managerId, $projectId, 'engi_schematic_manager');
+            $EngrSchematic->assignManager();
+
+        } elseif($searchManager_pow == 'Design Development'){
+
+            $EngrDesignDevelopment = new AssignedManagerController($managerId, $projectId, 'engi_designdevelopment_manager');
+            $EngrDesignDevelopment->assignManager();
+
+        } elseif($searchManager_pow == 'Construction Drawing'){
+
+            $EngrConstruction = new AssignedManagerController($managerId, $projectId, 'engi_construction_manager');
+            $EngrConstruction->assignManager();
+
+        }
+
     }elseif($searchManager_service == 'Interior') {
 
         if($searchManager_pow == 'Conceptual') {
@@ -61,8 +80,8 @@ if(isset($_POST['projectId'])) {
 
         } elseif($searchManager_pow == 'Site Supervision'){
 
-            $IntConstruction = new AssignedManagerController($managerId, $projectId, 'int_construction_manager');
-            $IntConstruction->assignManager();
+            $IntSite = new AssignedManagerController($managerId, $projectId, 'int_site_manager');
+            $IntSite->assignManager();
 
         }
 

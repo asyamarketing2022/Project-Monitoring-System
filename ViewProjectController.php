@@ -28,6 +28,7 @@ class ViewProjectController
         $this->name = $name;
 
     }
+    
     function view_phase_of_work_status()
     {
 

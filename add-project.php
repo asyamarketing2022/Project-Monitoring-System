@@ -40,6 +40,22 @@ $con = $db->connection();
         $manager_archSiteSupervision_array = isset($_POST['siteSupervision_projectmanagement']) ? $_POST['siteSupervision_projectmanagement'] : [];
         $manager_archSiteSupervision = implode(" ", $manager_archSiteSupervision_array);
 
+
+
+
+        $serviceEngi = isset($_POST['serviceEngi']);
+
+        $engiSchematic = isset($_POST['engi_schematic']);
+
+        $engidesigndevelopment = isset($_POST['engi_designdevelopment']);
+
+        $engiconstruction = isset($_POST['engi_construction']);
+
+
+
+
+
+
         $serviceInt = isset($_POST['serviceInterior']);
 
         $intConceptual = isset($_POST['interior_conceptual']);
@@ -72,7 +88,7 @@ $con = $db->connection();
         $companyName = $_POST['companyName'];
         $clientName = $_POST['clientName'];
         
-        $sql = "INSERT INTO `pms_projects`(`project_name`, `location`, `lot_areas`, `service_architecture`, `arch_conceptual`, `arch_conceptual_manager`, `arch_schematic`, `arch_schematic_manager`, `arch_designdevelopment`, `arch_designdevelopment_manager`, `arch_construction`, `arch_construction_manager`, `arch_site`, `arch_site_manager`, `service_interior`, `int_conceptual`, `int_conceptual_manager`, `int_designdevelopment`, `int_designdevelopment_manager`, `int_construction`, `int_construction_manager`, `int_site`, `int_site_manager`,`service_masterplanning`, `masterplanning_conceptual`, `masterplanning_conceptual_manager`, `masterplanning_schematic`, `masterplanning_schematic_manager`, `typology`, `company_name`, `client_name`) VALUES ('$projectName', '$location', '$lotAreas', '$serviceArch', '$archConceptual', '$manager_archConceptual', '$archSchematic', '$manager_archSchematic', '$archdesigndevelopment', '$manager_archDesignDevelopment', '$archconstruction', '$manager_archConstructionDrawings', '$archsite', '$manager_archSiteSupervision', '$serviceInt', '$intConceptual', '$manager_intConceptual', '$intdesignDevelopment', '$manager_intDesignDevelopment', '$intConstruction', '$manager_intConstruction', '$intSite', '$manager_intSite', '$serviceMaster', '$masterConceptual', '$manager_masterConceptual', '$masterSchematic', '$manager_masterSchematic', '$typology', '$companyName', '$clientName')";
+        $sql = "INSERT INTO `pms_projects`(`project_name`, `location`, `lot_areas`, `service_architecture`, `arch_conceptual`, `arch_conceptual_manager`, `arch_schematic`, `arch_schematic_manager`, `arch_designdevelopment`, `arch_designdevelopment_manager`, `arch_construction`, `arch_construction_manager`, `arch_site`, `arch_site_manager`, `service_engineering`, `engi_schematic`, `engi_designdevelopment`, `engi_construction`, `service_interior`, `int_conceptual`, `int_conceptual_manager`, `int_designdevelopment`, `int_designdevelopment_manager`, `int_construction`, `int_construction_manager`, `int_site`, `int_site_manager`,`service_masterplanning`, `masterplanning_conceptual`, `masterplanning_conceptual_manager`, `masterplanning_schematic`, `masterplanning_schematic_manager`, `typology`, `company_name`, `client_name`) VALUES ('$projectName', '$location', '$lotAreas', '$serviceArch', '$archConceptual', '$manager_archConceptual', '$archSchematic', '$manager_archSchematic', '$archdesigndevelopment', '$manager_archDesignDevelopment', '$archconstruction', '$manager_archConstructionDrawings', '$archsite', '$manager_archSiteSupervision', '$serviceEngi', '$engiSchematic', '$engidesigndevelopment', '$engiconstruction', '$serviceInt', '$intConceptual', '$manager_intConceptual', '$intdesignDevelopment', '$manager_intDesignDevelopment', '$intConstruction', '$manager_intConstruction', '$intSite', '$manager_intSite', '$serviceMaster', '$masterConceptual', '$manager_masterConceptual', '$masterSchematic', '$manager_masterSchematic', '$typology', '$companyName', '$clientName')";
 
         $con->query($sql) or die ($con->error);
 

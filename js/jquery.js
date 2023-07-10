@@ -618,8 +618,10 @@ jQuery(function () {
    let arch = new SelectServices('arch', '#architecture', 'Architecture', 'arch-pow_wrapper');
    $('#architecture').on('change', arch.dynamic_phaseofwork(), arch.conceptual(), arch.schematic(), arch.designDevelopment(), arch.constructionDrawings(), arch.siteSupervision()  );
 
+   // let engi = new SelectServices('engi', '#engineering', 'Engineering', 'engi-pow_wrapper');
+   // $('#engineering').on('change', engi.engrDepartment());
    let engi = new SelectServices('engi', '#engineering', 'Engineering', 'engi-pow_wrapper');
-   $('#engineering').on('change', engi.engrDepartment());
+   $('#engineering').on('change', engi.dynamic_phaseofwork(), engi.schematic(), engi.designDevelopment(), engi.constructionDrawings() );
 
    let intDesign = new SelectServices('interior', '#interiorDesign', 'Interior Design', 'interiorDesign-pow_wrapper');
    $('#interiorDesign').on('change', intDesign.dynamic_phaseofwork(), intDesign.conceptual(), intDesign.designDevelopment(), intDesign.constructionDrawings(), intDesign.siteSupervision());
@@ -809,6 +811,12 @@ jQuery(function () {
    let archconsDrawings = new SelectCheckbox('.arch-pow_wrapper', '#architecture', '.constructionDrawings', 'project management');
    let archsiteVision = new SelectCheckbox('.arch-pow_wrapper', '#architecture', '.siteSupervision', 'project management');
    
+   let engrMechanical = new SelectCheckbox('.engi-pow_wrapper', '#engineering', '.mechanical', 'mechanical');
+   let engrElectrical = new SelectCheckbox('.engi-pow_wrapper', '#engineering', '.electrical', 'electrical');
+   let engrPlumbing = new SelectCheckbox('.engi-pow_wrapper', '#engineering', '.plumbing', 'plumbing');
+   let engrFirepro = new SelectCheckbox('.engi-pow_wrapper', '#engineering', '.fireProtection', 'fire protection');
+   let engrStructural = new SelectCheckbox('.engi-pow_wrapper', '#engineering', '.structural', 'structural');
+
    let interiorDesign_Conceptual = new SelectCheckbox('.interiorDesign-pow_wrapper', '#interiorDesign', '.conceptual', 'interior design');
    let interiorDesign_designDev = new SelectCheckbox('.interiorDesign-pow_wrapper', '#interiorDesign', '.designDevelopment', 'interior design');
    let interiorDesign_constructionDrawings = new SelectCheckbox('.interiorDesign-pow_wrapper', '#interiorDesign', '.constructionDrawings', 'interior design');
@@ -817,11 +825,11 @@ jQuery(function () {
    let masterPlanning_Conceptual = new SelectCheckbox('.masterPlanning-pow_wrapper', '#masterPlanning', '.conceptual', 'master planning');
    let masterPlanning_Schematic = new SelectCheckbox('.masterPlanning-pow_wrapper', '#masterPlanning', '.schematic', 'master planning');
 
-   let engrMechanical = new SelectCheckbox('.engi-pow_wrapper', '#engineering', '.mechanical', 'mechanical');
-   let engrElectrical = new SelectCheckbox('.engi-pow_wrapper', '#engineering', '.electrical', 'electrical');
-   let engrPlumbing = new SelectCheckbox('.engi-pow_wrapper', '#engineering', '.plumbing', 'plumbing');
-   let engrFirepro = new SelectCheckbox('.engi-pow_wrapper', '#engineering', '.fireProtection', 'fire protection');
-   let engrStructural = new SelectCheckbox('.engi-pow_wrapper', '#engineering', '.structural', 'structural');
+   // let engrMechanical = new SelectCheckbox('.engi-pow_wrapper', '#engineering', '.mechanical', 'mechanical');
+   // let engrElectrical = new SelectCheckbox('.engi-pow_wrapper', '#engineering', '.electrical', 'electrical');
+   // let engrPlumbing = new SelectCheckbox('.engi-pow_wrapper', '#engineering', '.plumbing', 'plumbing');
+   // let engrFirepro = new SelectCheckbox('.engi-pow_wrapper', '#engineering', '.fireProtection', 'fire protection');
+   // let engrStructural = new SelectCheckbox('.engi-pow_wrapper', '#engineering', '.structural', 'structural');
 
    let mechanicalDepartmentCheckbox = new SelectCheckbox('.engi-pow_wrapper', '.managersCheckbox', '.mechanical', 'mechanical' );
    let electricalDepartmentCheckbox = new SelectCheckbox('.engi-pow_wrapper', '.managersCheckbox', '.electrical', 'electrical');
@@ -837,6 +845,12 @@ jQuery(function () {
       archdesignDev.managers();
       archconsDrawings.managers();
       archsiteVision.managers();
+
+      // mechanicalDepartmentCheckbox.managers();
+      // electricalDepartmentCheckbox.managers();
+      // plumbingDepartmentCheckbox.managers();
+      // fireProtectionDepartmentCheckbox.managers();
+      // structuralDepartmentCheckbox.managers();
       
       interiorDesign_Conceptual.managers();
       interiorDesign_designDev.managers();
@@ -1901,8 +1915,6 @@ jQuery(function () {
          });
 
       }
-
-
    }
    $('.addProjectInChargeBtn').on('click', ()=> {
 

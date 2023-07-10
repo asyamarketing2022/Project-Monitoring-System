@@ -45,6 +45,25 @@ $con = $db->connection();
 
             }
 
+        } elseif($service == 'Engineering') {
+
+            if($phase_of_work == 'Schematic'){
+    
+                $EngiSchematic = new SearchManagerController('mechanical electrical fire-protection plumbing structural', $searchValue, $userId_container);
+                $EngiSchematic->searchEngrManager();
+
+            } elseif($phase_of_work == 'Design Development') {
+
+                $EngiSchematic = new SearchManagerController('mechanical electrical fire-protection plumbing structural', $searchValue, $userId_container);
+                $EngiSchematic->searchEngrManager();
+
+            } elseif($phase_of_work == 'Construction Drawing') {
+
+                $EngiSchematic = new SearchManagerController('mechanical electrical fire-protection plumbing structural', $searchValue, $userId_container);
+                $EngiSchematic->searchEngrManager();
+
+            }
+
         } elseif($service == 'Interior') {
 
             if($phase_of_work == 'Conceptual'){
@@ -123,6 +142,26 @@ $con = $db->connection();
                 $ArchSite->searchManager();
 
             } 
+
+        } elseif($service == 'Engineering') {
+
+            if($phase_of_work == 'Schematic'){
+    
+                $EngiSchematic = new SearchManagerController('mechanical electrical fire-protection plumbing structural', $searchValue, $userId_container);
+                $EngiSchematic->searchEngrManager();
+
+            } elseif($phase_of_work == 'Design Development') {
+
+                $EngiSchematic = new SearchManagerController('mechanical electrical fire-protection plumbing structural', $searchValue, $userId_container);
+                $EngiSchematic->searchEngrManager();
+
+            } elseif($phase_of_work == 'Construction Drawing') {
+
+                $EngiSchematic = new SearchManagerController('mechanical electrical fire-protection plumbing structural', $searchValue, $userId_container);
+                $EngiSchematic->searchEngrManager();
+
+            }
+
 
         } elseif($service == 'Interior') {
 
