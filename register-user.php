@@ -19,6 +19,8 @@ include_once("user-record.php");
     $position = $_POST['position'];
     $password = $_POST['password'];
     $access = $_POST['access'];
+    $userImage = 'placeholder-user.png';
+
 
     $check = mysqli_query($con, "SELECT * FROM registered_users WHERE email = '$email'");
     $checkrows = mysqli_num_rows($check);
@@ -29,7 +31,7 @@ include_once("user-record.php");
 
     } else {
 
-        $sql = "INSERT INTO `registered_users`(`first_name`, `last_name`, `gender`, `date_of_birth`, `mobile_number`, `address`, `email`, `department`, `position`, `password`, `access`) VALUES ('$fname', '$lname', '$gender', '$birthday', '$mobilenumber', '$address','$email', '$department', '$position', '$password', '$access')";
+        $sql = "INSERT INTO `registered_users`(`user_image`, `first_name`, `last_name`, `gender`, `date_of_birth`, `mobile_number`, `address`, `email`, `department`, `position`, `password`, `access`) VALUES ('$userImage', '$fname', '$lname', '$gender', '$birthday', '$mobilenumber', '$address','$email', '$department', '$position', '$password', '$access')";
 
         $con->query($sql) or die ($con->error); 
 

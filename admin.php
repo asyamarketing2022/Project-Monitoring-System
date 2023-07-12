@@ -220,7 +220,7 @@ if(isset($_POST['userID'])) {
                 <div class="profile-picture">
                     <img src="/img/placeholder-user.png" alt="" width="250px">
                     <div class="change-button">
-                        CHANGE
+                        CHANGE  
                     </div>
                 </div>
                 <form id="editUser" action="" method="post">

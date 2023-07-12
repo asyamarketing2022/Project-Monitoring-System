@@ -34,7 +34,7 @@ if(isset($_POST['employeeAssigned_id'])) {
                     <button><a href='#'>View Profile</a></button>
                 </div>
                 <div class='user_info'>
-                    <div class='user_assignedBy'>
+                    <div class='user_assignedBy' value='" . $managerInfo['ID']  . "'>
                         <label>Assigned By:</label>
                         <span>" . $managerInfo['first_name'] . " " . $managerInfo['last_name'] . "</span>
                     </div>
@@ -52,6 +52,10 @@ if(isset($_POST['employeeAssigned_id'])) {
                     <div class='user_department'>
                         <label>Department:</label>
                         <span>" . $assignedEmployeeInfo['department'] . "</span>
+                    </div>
+
+                    <div class='user_tasks border-0'>
+                        <button class='border-0'><a href='#' class='viewTasks m-3'>View Tasks</a></button>
                     </div>
                 </div>
             </div>";

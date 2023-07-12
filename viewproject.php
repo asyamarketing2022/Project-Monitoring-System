@@ -28,6 +28,12 @@ $row = $project->fetch_assoc();
 
 ?>
 
+<!-- <div class="col-lg-12"> -->
+  <!-- <div class="loading">
+    <img src="img/loading2.gif" alt="">
+  </div>     -->
+<!-- </div> -->
+
 <div class="grid-right__content">
     <div class="project-title mt-4">
          <h1 class="float-start" id="projectTitle" value='<?php echo $projectID ?>'><?php echo $row['project_name'] ?></h1>
@@ -402,7 +408,78 @@ $row = $project->fetch_assoc();
         </div>
     </div>
 </div>
+<div class="tasks-content_container">
+    <div class="tasks-content">
+        <div class="user_photo">
+            <img src="img/userImage/placeholder-user.png" alt="" width='200'>
+            <h3>Sample Sample</h3>
+        </div>
+        <div class="user-tasks">
+            <div class="content-table">
+                <h3>Tasks</h3>
+                <table>
+                    <tbody>
+                        <tr>
+                            <th>Task Title</th>
+                            <th>Notes</th>
+                            <th>Date Started</th>
+                            <th>Due Date</th>
+                            <th>Status</th>
+                            <th>Upload File Path</th>
+                            <th>File Lists</th>
+                        </tr>
+                        <tr>
+                            <td>Ground Floor Design</td>
+                            <td><button type='button' class='btn btn-secondary tooltip-btn' data-bs-toggle='tooltip' data-bs-placement='bottom' title='' data-original-title='sample' aria-describedby='tooltip943616'>Notes</button></td>
+                            <td>2023-06-27</td>
+                            <td>2023-06-30</td>
+                            <td></td>
+                            <td><button class='uploadPathBtn'>Upload File Path</button></td>
+                            <td><button class='viewfilepathBtn'>Check Files</button></td>
+                        </tr>
+                       <tr> 
+                            <td><img class='addNewTaskBtn' src='img/add-icon.png' alt='' width='25'>
 
+                            <div class="addNewTask_form_container">
+                                <div class="content-info__wrapper">
+                                    <form action="">
+                                    <div class="content__info">
+                                        <span>Task Title:</span>
+                                        <input type='text' name='taskTitle'>
+                                    </div>
+                                    <div class="content__info">
+                                        <span>Date Started:</span>
+                                        <input type='text' name='dateStarted'>
+                                    </div>
+                                    <div class="content__info">
+                                        <span>Due Date:</span>
+                                        <input type='text' name='dueDate'>
+                                    </div>
+                                    <div class="content__info">
+                                        <span>Notes</span>
+                                        <textarea name="notes" id="" cols="30" rows="10"></textarea>
+                                    </div>
+                                    <div class="button-wrapper">
+                                        <input class='submit-button' type="text" value='Add'>
+                                    </div>
+                                    </form>
+                                </div>
+                            </div>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+               
+            </div>
+        </div>
+    </div>
+</div>
 <!-- Add Manager - Modal -->
 <div class="modal fade pop-up__modal" id="addManager" tabindex="-1" role="dialog" aria-labelledby="addManager" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-md" role="document" style="max-width: 750px;">

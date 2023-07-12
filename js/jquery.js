@@ -1475,6 +1475,22 @@ jQuery(function () {
    }
    postProjectInfo_in_modal()
 
+   // function postProjectInfo_in_modal_delay(){
+
+   //    let projectInchargeBtn = document.querySelectorAll('.projectIncharge_table_row');
+
+   //    for(let i = 0; projectInchargeBtn.length > i; i++){
+
+   //       $(projectInchargeBtn[i]).on('click', ()=> {
+   //          setTimeout(function() {
+   //             $('#view_project_in_charge').modal('show');
+   //          }, 1000);
+   //       });
+
+   //    }
+   // }
+   // postProjectInfo_in_modal_delay();
+
 
    // Upload File Path Function
    function upload_file_path(){
@@ -1698,7 +1714,7 @@ jQuery(function () {
    // Add Project In Charge Button - To Show All Not Assign Employee
    function addProjectInChargeBtn(){
 
-      let addProjectInChargeBtn = document.querySelector('.addProjectInChargeBtn')
+      let addProjectInChargeBtn = document.querySelector('.addProjectInChargeBtn');
 
       $(addProjectInChargeBtn).on('click', ()=> {
 
@@ -1725,6 +1741,21 @@ jQuery(function () {
 
    }
    addProjectInChargeBtn();
+
+   function addProjectInChargeBtn_clicked_delay(){
+
+      let addProjectInChargeBtn = document.querySelector('.addProjectInChargeBtn');
+
+      $(addProjectInChargeBtn).on('click', ()=> {
+
+         setTimeout(function() {
+            $('#addProjectInCharge').modal();
+         }, 2000);
+
+      });
+
+   }
+   addProjectInChargeBtn_clicked_delay()
 
    // Create a dynamic html element for Service and Phase of work
    function PIC_service_and_pow(){
@@ -1991,6 +2022,128 @@ jQuery(function () {
       }
   }
   set_duedate();
+
+
+  function project_in_charge_clicked(){
+      let $pic_table = document.querySelectorAll('.projectIncharge_table_row');
+
+      for(let i = 0; $pic_table.length > i; i++){
+         
+         $($pic_table[i]).on('click', ()=> {
+
+            setTimeout(
+
+               function() 
+                  {
+      
+                     window.ViewTasksBtn = document.querySelectorAll('.viewTasks');
+                     
+      
+               }, 1);
+
+
+         });
+
+      }
+
+  }
+//   project_in_charge_clicked();
+
+   function viewTasksBtn() {
+
+      $('#view_project_in_charge').on('mouseenter', ()=> {
+
+         let ViewTasksBtn = document.querySelectorAll('.viewTasks');
+
+         // if($(ViewTasksBtn).value != ''){
+
+            // let viewTasks = window.ViewTasksBtn;
+
+            for(let i = 0; ViewTasksBtn.length > i; i++){
+
+               $(ViewTasksBtn[i]).on('click', ()=> {
+
+                  setTimeout(
+
+                     function() 
+                        {
+
+                     $('#view_project_in_charge').addClass('move-left-25');
+
+                  }, 10);
+
+                  setTimeout(
+
+                     function() 
+                        {
+
+                     $('.tasks-content_container').css('z-index', '999999')   
+                     $('.tasks-content').addClass('tasks-content_show');
+                 
+                  }, 70);
+         
+               });
+               
+            // }
+   
+         }
+      
+      });
+  }
+  viewTasksBtn();
+
+  function addNewTask(){
+
+   $('.tasks-content_container').on('mouseenter', ()=> {
+
+      let addNewTastBtn = document.querySelector('.addNewTask');
+
+      $('.addNewTask').off().on('click', ()=> {
+
+         console.log('okay');
+
+      });
+
+   });
+   
+  }
+  addNewTask();
+
+  function addNewTask_form_show(){
+
+    $('.addNewTaskBtn').on('click', ()=> {
+
+      $('.addNewTask_form_container').toggle();
+
+    });  
+
+  }
+  addNewTask_form_show();
+// $('.viewTasks').on('mouseenter', viewTasksBtn);
+
+//   let viewTasks = document.querySelectorAll('.viewTasks');
+
+//   console.log(viewTasks);
+
+//   for(let i = 0; viewTasks.length > i; i++){
+
+      // $('.viewTasks').on('click', ()=> {
+
+      //    viewTasksBtn();
+
+      // });
+
+   // }
+
+
+  function loading(){
+
+      let loading = document.querySelector('.loading');
+      $(loading).addClass('d-none');
+
+  }
+//   $(window).on('load', loading);
+
 
 
   $('.modal').on('hidden.bs.modal', function () {
