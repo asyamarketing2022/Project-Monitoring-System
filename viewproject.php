@@ -300,21 +300,87 @@ $row = $project->fetch_assoc();
 </div>
 
 <!-- View My Project In Charge - Modal -->
-<div class="modal fade pop-up__modal" id="view_project_in_charge" tabindex="-1" role="dialog" aria-labelledby="viewPIC" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-xl" role="document" style="max-width: 800px;">
-        <div class="modal-content" style="height: 500px; overflow-y: auto;">
-            <div class="modal-header border-0">
-                <h5></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
+<div class="modal fade pop-up__modal" id="view_project_in_charge" tabindex="-1" role="dialog" aria-labelledby="viewPIC" aria-hidden="true" style='overflow: hidden;'>
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document" style="max-width: 100%;">
+        <div class="modal-content" style="height: 900px; background: transparent; border: none;">
+
+            <div class="model-left-content">
+                <div class="modal-header border-0">
+                    <h5></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <span class="modal-title">Project In Charge</span>
+                <div class="project_in_charge_container">
+                    <!-- postUsersProjectInCharge_in_modal.php -->
+                    
+                </div>
+                <img class="addProjectInChargeBtn" data-toggle="modal" data-target="#addProjectInCharge" src="img/add-icon.png" alt="" width="50">
             </div>
-            <span class="modal-title">Project In Charge</span>
-            <div class="project_in_charge_container">
-                <!-- postUsersProjectInCharge_in_modal.php -->
-                
+
+            <div class="model-right-content">
+                <div class="tasks-content_container">
+                    <div class="tasks-content">
+                        <div class="user_photo">
+                            <img src="img/userImage/placeholder-user.png" alt="" width='200'>
+                            <h3>Sample Sample</h3>
+                        </div>
+                        <div class="user-tasks">
+                            <div class="content-table">
+                                <h3>Tasks</h3>
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <th>Task Title</th>
+                                            <th>Notes</th>
+                                            <th>Date Started</th>
+                                            <th>Due Date</th>
+                                            <th>Status</th>
+                                            <th>Upload File Path</th>
+                                            <th>File Lists</th>
+                                        </tr>
+                                        <tr>
+                                            <td>Ground Floor Design</td>
+                                            <td><button type='button' class='btn btn-secondary tooltip-btn' data-bs-toggle='tooltip' data-bs-placement='bottom' title='' data-original-title='sample' aria-describedby='tooltip943616'>Notes</button></td>
+                                            <td>2023-06-27</td>
+                                            <td>2023-06-30</td>
+                                            <td><input type='text' name='dateStarted'></td>
+                                            <td><button class='uploadPathBtn'>Upload File Path</button></td>
+                                            <td><button class='viewfilepathBtn'>Check Files</button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <img class='addNewTaskBtn' src='img/add-icon.png' alt='' width='25'>
+                            <div class="addNewTask_form_container">
+                                <div class="content-info__wrapper">
+                                        <div class="ex"></div>
+                                    <div class="content__info">
+                                        <span>Task Title:</span>
+                                        <input class='taskTitle' type='text' name='taskTitle'>
+                                    </div>
+                                    <div class="content__info">
+                                        <span>Date Start:</span>
+                                        <input class='date_start dis_previous_dates' name='dateStart' type="date">
+                                    </div>
+                                    <div class="content__info">
+                                        <span>Due Date:</span>
+                                        <input class='date_end dis_previous_dates' name='dueDate' type="date">
+                                    </div>
+                                    <div class="content__info">
+                                        <span>Notes</span>
+                                        <textarea class='newTask_notes' name="notes" id="" cols="30" rows="10"></textarea>
+                                    </div>
+                                    <div class="button-wrapper">
+                                        <input class='submit-button submit-new-task' type="button" value='Add'>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <img class="addProjectInChargeBtn" data-toggle="modal" data-target="#addProjectInCharge" src="img/add-icon.png" alt="" width="50">
 
         </div>
     </div>
@@ -408,78 +474,7 @@ $row = $project->fetch_assoc();
         </div>
     </div>
 </div>
-<div class="tasks-content_container">
-    <div class="tasks-content">
-        <div class="user_photo">
-            <img src="img/userImage/placeholder-user.png" alt="" width='200'>
-            <h3>Sample Sample</h3>
-        </div>
-        <div class="user-tasks">
-            <div class="content-table">
-                <h3>Tasks</h3>
-                <table>
-                    <tbody>
-                        <tr>
-                            <th>Task Title</th>
-                            <th>Notes</th>
-                            <th>Date Started</th>
-                            <th>Due Date</th>
-                            <th>Status</th>
-                            <th>Upload File Path</th>
-                            <th>File Lists</th>
-                        </tr>
-                        <tr>
-                            <td>Ground Floor Design</td>
-                            <td><button type='button' class='btn btn-secondary tooltip-btn' data-bs-toggle='tooltip' data-bs-placement='bottom' title='' data-original-title='sample' aria-describedby='tooltip943616'>Notes</button></td>
-                            <td>2023-06-27</td>
-                            <td>2023-06-30</td>
-                            <td></td>
-                            <td><button class='uploadPathBtn'>Upload File Path</button></td>
-                            <td><button class='viewfilepathBtn'>Check Files</button></td>
-                        </tr>
-                       <tr> 
-                            <td><img class='addNewTaskBtn' src='img/add-icon.png' alt='' width='25'>
 
-                            <div class="addNewTask_form_container">
-                                <div class="content-info__wrapper">
-                                    <form action="">
-                                    <div class="content__info">
-                                        <span>Task Title:</span>
-                                        <input type='text' name='taskTitle'>
-                                    </div>
-                                    <div class="content__info">
-                                        <span>Date Started:</span>
-                                        <input type='text' name='dateStarted'>
-                                    </div>
-                                    <div class="content__info">
-                                        <span>Due Date:</span>
-                                        <input type='text' name='dueDate'>
-                                    </div>
-                                    <div class="content__info">
-                                        <span>Notes</span>
-                                        <textarea name="notes" id="" cols="30" rows="10"></textarea>
-                                    </div>
-                                    <div class="button-wrapper">
-                                        <input class='submit-button' type="text" value='Add'>
-                                    </div>
-                                    </form>
-                                </div>
-                            </div>
-                            </td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                </table>
-               
-            </div>
-        </div>
-    </div>
-</div>
 <!-- Add Manager - Modal -->
 <div class="modal fade pop-up__modal" id="addManager" tabindex="-1" role="dialog" aria-labelledby="addManager" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-md" role="document" style="max-width: 750px;">

@@ -1771,19 +1771,22 @@ jQuery(function () {
            let tbody = $(tableForm).parent();
            let projectService = $(tbody).find('th.th_services').text();
            let searchEmployee_container = document.querySelector('.search-employee_container');
+           let contentInfoWrapper = document.querySelector('.addNewTask_form_container .content-info__wrapper');
 
-           let contentInfo = `<div class="content__info">
+           let contentInfo = `<div class="content__info d-none">
                                  <span>Phase of work:</span>
                                  <p class="searchEmployee_pow">${$(td_pow).text()}</p>
                               </div>
-                              <div class="content__info">
+                              <div class="content__info d-none">
                                  <span>Service:</span>
                                  <p class='searchEmployee_service'>${projectService}</p>
                               </div>
                               `;
 
            $(contentInfo).appendTo(searchEmployee_container);
+         //   $(contentInfo).prependTo(contentInfoWrapper);
 
+   
          });
 
       }
@@ -1977,7 +1980,7 @@ jQuery(function () {
    function disable_previous_dates() {
 
       var today = new Date().toISOString().split('T')[0];
-      var calendars = document.querySelectorAll('.dueDate');
+      var calendars = document.querySelectorAll('.dis_previous_dates');
       
       Array.from(calendars).forEach((calendar) => {
 
@@ -2061,16 +2064,48 @@ jQuery(function () {
 
             for(let i = 0; ViewTasksBtn.length > i; i++){
 
-               $(ViewTasksBtn[i]).on('click', ()=> {
+               $(ViewTasksBtn[i]).off().on('click', ()=> {
+
+                  // $('.projectId').parent().remove();
+                  $('.userId').parent().remove();
+
+                  // let projectId = $('#projectTitle').attr('value');
+                  let userContainer = $(ViewTasksBtn[i]).parent().parent().parent().parent();
+                  let userId = $(userContainer).attr('value');
+                  let contentInfoWrapper = document.querySelector('.addNewTask_form_container .content-info__wrapper');
+                  let phase_of_work = $('.searchEmployee_pow').text();
+                  let services = $('.searchEmployee_service').text();
+
+                  let contentInfo = `<div class="content__info d-none">
+                                       <span>User ID:</span>
+                                       <p class="userId" value="${userId}">${userId}</p>
+                                    </div>
+                                    `;
+
+                  $(contentInfo).prependTo(contentInfoWrapper);
+        
+                  $.ajax({
+                     type: 'POST',
+                     url: 'tasks-table.php',
+                     data: {
+                        userId: userId,
+                        phase_of_work: phase_of_work,
+                        services: services
+                     },
+                     success: function (data) {
+                        $('.user-tasks .content-table').html(data);
+                     },
+                  });
 
                   setTimeout(
 
                      function() 
                         {
 
-                     $('#view_project_in_charge').addClass('move-left-25');
+                     $('#view_project_in_charge .model-left-content').addClass('move-left-22');
 
                   }, 10);
+
 
                   setTimeout(
 
@@ -2119,6 +2154,47 @@ jQuery(function () {
 
   }
   addNewTask_form_show();
+
+  function submitNewTask(){
+
+   $('.submit-new-task').on('click', ()=> {
+
+      let projectId = $('#projectTitle').attr('value');
+      let projectTitle = $('#projectTitle').text();
+      let userId = $('.userId').attr('value');
+      let phase_of_work = $('.searchEmployee_pow').text();
+      let services = $('.searchEmployee_service').text();
+      let taskTitle = $('.taskTitle').val();
+      let dateStart = $('.date_start').val();
+      let dateEnd = $('.date_end').val();
+      let newTask_notes = $('.newTask_notes').val();
+
+      $.ajax({
+         type: 'POST',
+         url: 'add-newTask.php',
+         data: {
+            projectId: projectId,
+            projectTitle: projectTitle,
+            userId: userId,
+            phase_of_work: phase_of_work,
+            services: services,
+            taskTitle: taskTitle,
+            dateStart: dateStart,
+            dateEnd, dateEnd,
+            newTask_notes: newTask_notes
+         },
+         success: function (data) {
+            // alert("success", data);
+            // $('.ex').html(data);
+            window.location.reload();
+         },
+      });
+
+   });
+
+  }
+  submitNewTask();
+  
 // $('.viewTasks').on('mouseenter', viewTasksBtn);
 
 //   let viewTasks = document.querySelectorAll('.viewTasks');
@@ -2134,7 +2210,6 @@ jQuery(function () {
       // });
 
    // }
-
 
   function loading(){
 

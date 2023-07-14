@@ -157,7 +157,7 @@ class ViewProjectController
                     </div>
                 </td>
                 <td>" . $row['added_at'] . "</td>
-                <td><input class='dueDate' name='$inputName' type='date' value='" . $row[$dueDate] . "'></td>
+                <td><input class='dueDate dis_previous_dates' name='$inputName' type='date' value='" . $row[$dueDate] . "'></td>
                 <td><button class='uploadPathBtn' data-toggle='modal' data-target='#uploadPath'>Upload File Path</button></td>
                 <td><button class='viewfilepathBtn' data-toggle='modal' data-target='#viewfilepath'>Check Files</button></td>
             </tr>";
