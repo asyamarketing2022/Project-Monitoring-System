@@ -1230,7 +1230,6 @@ jQuery(function () {
 
 
    //Phase of work status clicked
-
    function statusTooltip(){
 
       let td_powStatus = document.querySelectorAll('.pow_status');
@@ -1258,33 +1257,40 @@ jQuery(function () {
    }
    statusTooltip();
 
+
    function statusColor(){
 
       let textStatus = document.querySelectorAll('.text_status');
+      let span = document.querySelectorAll('.text_status span');
 
       for(let num = 0; textStatus.length > num; num++){
 
-         if($(textStatus[num]).text() === 'Working on it'){
+         if($(span[num]).text() === 'Working on it'){
 
-            $(textStatus[num]).css("background", "#fdab3d");
+            // $(textStatus[num]).css("background", "#fdab3d");
+            $(span[num]).parent().css("background", "#fdab3d");
 
-         } else if($(textStatus[num]).text() === 'Stuck') {
+         } else if($(span[num]).text() === 'Stuck') {
 
-            $(textStatus[num]).css("background", "#e2445c");
+            // $(textStatus[num]).css("background", "#e2445c");
+            $(span[num]).parent().css("background", "#e2445c");
             
-         } else if($(textStatus[num]).text() === 'Done') {
+         } else if($(span[num]).text() === 'Done') {
 
-            $(textStatus[num]).css("background", "#00c875");
+            // $(textStatus[num]).css("background", "#00c875");
+            $(span[num]).parent().css("background", "#00c875");
 
          } else {
 
-            $(textStatus[num]).css("background", "#abd8e3");
+            // $(textStatus[num]).css("background", "#abd8e3");
+            $(span[num]).parent().css("background", "#abd8e3");
 
          }
+
       }
    }
    statusColor();
-
+   
 
    function enterStatus(){
 
@@ -1357,6 +1363,78 @@ jQuery(function () {
    }
    enterStatus();
 
+   function taskStatus(){
+
+      $('.tasks-content').on('mouseenter', ()=> {
+
+      let statusTooltip = document.querySelectorAll('.user-tasks .status_tooltip');
+
+      for (let i = 0; statusTooltip.length > i; i++) {
+
+         let span = $(statusTooltip[i]).children('span');
+         let input = $(statusTooltip[i]).children('input');
+         let tableRow = $(statusTooltip[i]).parent().parent();
+
+         let powStatus = $(statusTooltip[i]).parent();
+         let textStatus = $(powStatus).children('.text_status');
+
+         for (let num = 0; span.length > num; num++) { 
+
+            $(span[num]).off().on('click', ()=> {
+
+               $(span[num]).parent().addClass('d-none');
+
+               let updateStatus = $(span[num]).text();
+               let taskId = $(tableRow).find('.taskId').attr('value');
+
+               $.ajax({   
+                  type: 'POST',
+                  url: 'taskStatus.php',
+                  data: {
+                     'updateStatus': updateStatus,
+                     'taskId': taskId
+                     },
+                     success:function(data){
+                        $(textStatus).html(data);
+                  }
+               });
+
+            });
+
+         };
+
+         $(input).on('keypress', (e)=> {
+
+            let inputText = $(input).val();
+            let taskId = $(tableRow).find('.taskId').attr('value');
+            
+            if(e.key === 'Enter') {
+   
+                  $.ajax({   
+                     type: 'POST',
+                     url: 'taskStatus.php',
+                     data: {
+                        'taskId': taskId,
+                        'inputText': inputText
+                        },
+                        success:function(data){
+                           $(textStatus).html(data);
+                        }
+                  });
+
+                  $(input).parent().addClass('d-none');
+                  $(textStatus).css("background", "#abd8e3");
+              
+            }
+
+         });
+
+      }      
+
+   });
+
+   }
+   taskStatus();
 
    // Project Status Color Change function
    function changeStatus(){
@@ -1392,6 +1470,9 @@ jQuery(function () {
       });
    }
    changeStatus()
+   $('.tasks-content_container').on('mouseenter focus', changeStatus);
+   $('.tasks-content_container').on('mouseleave blur', changeStatus);
+
 
    // Assigned Manager - Modal
    function postUsersManager_in_modal(){
@@ -1528,6 +1609,38 @@ jQuery(function () {
    }
    upload_file_path();
 
+   function upload_file_path_tooltip() {
+
+      let uploadPathBtn = document.querySelectorAll('.uploadPathBtn');
+
+      for(let i = 0; uploadPathBtn.length > i; i++){
+   
+            let upload_filepath_td = $(uploadPathBtn[i]).parent();
+            let upload_filepath_tooltip = $(upload_filepath_td).find('.upload_filepath_tooltip');
+   
+            $(uploadPathBtn[i]).on('click', ()=> {
+   
+               if($(upload_filepath_tooltip).hasClass('d-none')) {
+   
+                  $(upload_filepath_tooltip).removeClass('d-none');
+       
+               } else {
+                  
+                  $(upload_filepath_tooltip).addClass('d-none');
+   
+               }
+   
+            });
+            
+      
+
+      }
+
+   }
+   $('.tasks-content_container').on('mouseenter focus', upload_file_path_tooltip);
+   $('.tasks-content_container').on('mouseleave blur', upload_file_path_tooltip);
+
+   
    // View All File paths function
    function view_file_paths(){
 
@@ -2058,23 +2171,20 @@ jQuery(function () {
 
          let ViewTasksBtn = document.querySelectorAll('.viewTasks');
 
-         // if($(ViewTasksBtn).value != ''){
-
-            // let viewTasks = window.ViewTasksBtn;
-
             for(let i = 0; ViewTasksBtn.length > i; i++){
 
                $(ViewTasksBtn[i]).off().on('click', ()=> {
 
-                  // $('.projectId').parent().remove();
                   $('.userId').parent().remove();
 
-                  // let projectId = $('#projectTitle').attr('value');
                   let userContainer = $(ViewTasksBtn[i]).parent().parent().parent().parent();
                   let userId = $(userContainer).attr('value');
                   let contentInfoWrapper = document.querySelector('.addNewTask_form_container .content-info__wrapper');
                   let phase_of_work = $('.searchEmployee_pow').text();
                   let services = $('.searchEmployee_service').text();
+                  let projectId = $('#projectTitle').attr('value');
+                  let projectName = $('#projectTitle').text();
+                  
 
                   let contentInfo = `<div class="content__info d-none">
                                        <span>User ID:</span>
@@ -2084,16 +2194,37 @@ jQuery(function () {
 
                   $(contentInfo).prependTo(contentInfoWrapper);
         
+                  // For task table
                   $.ajax({
                      type: 'POST',
                      url: 'tasks-table.php',
                      data: {
-                        userId: userId,
-                        phase_of_work: phase_of_work,
-                        services: services
+                        'userId': userId,
+                        'phase_of_work': phase_of_work,
+                        'services': services,
+                        'projectId': projectId,
+                        'projectName': projectName
                      },
                      success: function (data) {
+                        // $('.user-tasks .content-table').html(data);
                         $('.user-tasks .content-table').html(data);
+                     },
+                  });
+
+                  // For user Photo and Name
+                  let fullName = $(userContainer).find('.user_fullname span').text();
+                  let userPhoto = $(userContainer).find('.user_photo img').attr('src');
+
+                  $.ajax({
+                     type: 'POST',
+                     url: 'tasks-table.php',
+                     data: {
+                        fullName: fullName,
+                        userPhoto: userPhoto
+                     },
+                     success: function (data) {
+                        // $('.user-tasks .content-table').html(data);
+                        $('.tasks-content .user_photo').html(data);
                      },
                   });
 
@@ -2102,30 +2233,59 @@ jQuery(function () {
                      function() 
                         {
 
-                     $('#view_project_in_charge .model-left-content').addClass('move-left-22');
+                     $('#view_project_in_charge .modal-left-content').addClass('move-left-22');
 
                   }, 10);
-
 
                   setTimeout(
 
                      function() 
                         {
 
-                     $('.tasks-content_container').css('z-index', '999999')   
+                     $('.tasks-content_container').css('z-index', '10')   
                      $('.tasks-content').addClass('tasks-content_show');
-                 
+              
+                     statusColor()
+
                   }, 70);
-         
+
                });
-               
-            // }
-   
          }
       
       });
   }
   viewTasksBtn();
+
+  // Task Statups Tool tip
+  function taskStatusTooltip(){
+
+         let taskStatus = document.querySelectorAll('.user-tasks .pow_status');
+
+         for (let i = 0; taskStatus.length > i; i++) {
+   
+            let textStatus = $(taskStatus[i]).children('.text_status');
+            let tooltip = $(taskStatus[i]).children('.status_tooltip');
+   
+            $(textStatus).on('click', ()=> {
+   
+               if($(tooltip).hasClass('d-none')) {
+   
+                  $(tooltip).removeClass('d-none');
+       
+               } else {
+                  
+                  $(tooltip).addClass('d-none');
+   
+               }
+   
+            });
+            
+         }
+
+      // });
+  }
+  $('.tasks-content_container').on('mouseenter focus', taskStatusTooltip);
+  $('.tasks-content_container').on('mouseleave blur', taskStatusTooltip);
 
   function addNewTask(){
 
@@ -2146,18 +2306,18 @@ jQuery(function () {
 
   function addNewTask_form_show(){
 
-    $('.addNewTaskBtn').on('click', ()=> {
+      $('.addNewTaskBtn').on('click', ()=> {
 
-      $('.addNewTask_form_container').toggle();
+         $('.addNewTask_form_container').toggle();
 
-    });  
+      }); 
 
   }
   addNewTask_form_show();
 
   function submitNewTask(){
 
-   $('.submit-new-task').on('click', ()=> {
+   $('.submit-new-task').off().on('click', ()=> {
 
       let projectId = $('#projectTitle').attr('value');
       let projectTitle = $('#projectTitle').text();
@@ -2169,27 +2329,29 @@ jQuery(function () {
       let dateEnd = $('.date_end').val();
       let newTask_notes = $('.newTask_notes').val();
 
-      $.ajax({
-         type: 'POST',
-         url: 'add-newTask.php',
-         data: {
-            projectId: projectId,
-            projectTitle: projectTitle,
-            userId: userId,
-            phase_of_work: phase_of_work,
-            services: services,
-            taskTitle: taskTitle,
-            dateStart: dateStart,
-            dateEnd, dateEnd,
-            newTask_notes: newTask_notes
-         },
-         success: function (data) {
-            // alert("success", data);
-            // $('.ex').html(data);
-            window.location.reload();
-         },
-      });
+         $.ajax({
+            type: 'POST',
+            url: 'add-newTask.php',
+            data: {
+               projectId: projectId,
+               projectTitle: projectTitle,
+               userId: userId,
+               phase_of_work: phase_of_work,
+               services: services,
+               taskTitle: taskTitle,
+               dateStart: dateStart,
+               dateEnd, dateEnd,
+               newTask_notes: newTask_notes
+            },
+            success: function (data) {
+               // alert("success", data);
+               // window.location.reload();
+               $('.user-tasks .content-table').html(data);
+               $('.addNewTask_form_container').css('display', 'none');
+            },
+         });
 
+    
    });
 
   }

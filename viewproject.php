@@ -304,7 +304,7 @@ $row = $project->fetch_assoc();
     <div class="modal-dialog modal-dialog-centered modal-xl" role="document" style="max-width: 100%;">
         <div class="modal-content" style="height: 900px; background: transparent; border: none;">
 
-            <div class="model-left-content">
+            <div class="modal-left-content">
                 <div class="modal-header border-0">
                     <h5></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -319,43 +319,21 @@ $row = $project->fetch_assoc();
                 <img class="addProjectInChargeBtn" data-toggle="modal" data-target="#addProjectInCharge" src="img/add-icon.png" alt="" width="50">
             </div>
 
-            <div class="model-right-content">
+            <div class="modal-right-content">
                 <div class="tasks-content_container">
                     <div class="tasks-content">
                         <div class="user_photo">
-                            <img src="img/userImage/placeholder-user.png" alt="" width='200'>
-                            <h3>Sample Sample</h3>
+                              <!-- tasks-table.php for dynamic content -->
+      
                         </div>
                         <div class="user-tasks">
                             <div class="content-table">
-                                <h3>Tasks</h3>
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <th>Task Title</th>
-                                            <th>Notes</th>
-                                            <th>Date Started</th>
-                                            <th>Due Date</th>
-                                            <th>Status</th>
-                                            <th>Upload File Path</th>
-                                            <th>File Lists</th>
-                                        </tr>
-                                        <tr>
-                                            <td>Ground Floor Design</td>
-                                            <td><button type='button' class='btn btn-secondary tooltip-btn' data-bs-toggle='tooltip' data-bs-placement='bottom' title='' data-original-title='sample' aria-describedby='tooltip943616'>Notes</button></td>
-                                            <td>2023-06-27</td>
-                                            <td>2023-06-30</td>
-                                            <td><input type='text' name='dateStarted'></td>
-                                            <td><button class='uploadPathBtn'>Upload File Path</button></td>
-                                            <td><button class='viewfilepathBtn'>Check Files</button></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                <!-- tasks-table.php for dynamic content -->
+
                             </div>
                             <img class='addNewTaskBtn' src='img/add-icon.png' alt='' width='25'>
                             <div class="addNewTask_form_container">
                                 <div class="content-info__wrapper">
-                                        <div class="ex"></div>
                                     <div class="content__info">
                                         <span>Task Title:</span>
                                         <input class='taskTitle' type='text' name='taskTitle'>
@@ -381,7 +359,6 @@ $row = $project->fetch_assoc();
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
