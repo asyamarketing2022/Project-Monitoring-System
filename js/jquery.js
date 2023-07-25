@@ -1365,8 +1365,6 @@ jQuery(function () {
 
    function taskStatus(){
 
-      $('.tasks-content').on('mouseenter', ()=> {
-
       let statusTooltip = document.querySelectorAll('.user-tasks .status_tooltip');
 
       for (let i = 0; statusTooltip.length > i; i++) {
@@ -1431,10 +1429,10 @@ jQuery(function () {
 
       }      
 
-   });
-
    }
-   taskStatus();
+   $('.tasks-content_container').on('mouseenter focus', taskStatus);
+   $('.tasks-content_container').on('mouseleave blur', taskStatus);
+
 
    // Project Status Color Change function
    function changeStatus(){
@@ -1609,6 +1607,7 @@ jQuery(function () {
    }
    upload_file_path();
 
+   //Tasks upload file path tooltip 
    function upload_file_path_tooltip() {
 
       let uploadPathBtn = document.querySelectorAll('.uploadPathBtn');
@@ -1617,9 +1616,35 @@ jQuery(function () {
    
             let upload_filepath_td = $(uploadPathBtn[i]).parent();
             let upload_filepath_tooltip = $(upload_filepath_td).find('.upload_filepath_tooltip');
-   
-            $(uploadPathBtn[i]).on('click', ()=> {
-   
+
+            $(uploadPathBtn[i]).off().on('click', ()=> {
+
+               let tableRow = $(uploadPathBtn[i]).parent().parent();
+               let taskId = $(tableRow).find('.taskId').attr('value');
+               let taskTitle = $(tableRow).find('.taskTitle').text();
+
+               $.ajax({
+                  type: 'POST',
+                  url: 'tasks-table.php',
+                  data: {
+                     'taskId': taskId,
+                  },
+                  success:function(data){
+                     $('.task-id').html(data);
+                  }
+               });
+
+               $.ajax({
+                  type: 'POST',
+                  url: 'tasks-table.php',
+                  data: {
+                     'taskTitle': taskTitle
+                  },
+                  success:function(data){
+                     $('.task-title').html(data);
+                  }
+               });
+
                if($(upload_filepath_tooltip).hasClass('d-none')) {
    
                   $(upload_filepath_tooltip).removeClass('d-none');
@@ -1631,14 +1656,65 @@ jQuery(function () {
                }
    
             });
-            
-      
-
       }
 
    }
    $('.tasks-content_container').on('mouseenter focus', upload_file_path_tooltip);
    $('.tasks-content_container').on('mouseleave blur', upload_file_path_tooltip);
+
+   //Tasks upload file path tooltip 
+   function submit_file_path(){
+
+      let submitBtn = document.querySelectorAll('.submit-file-path');
+
+      for(let i = 0; submitBtn.length > i; i++){
+
+         $(submitBtn[i]).off().on('click', ()=> {
+
+            let notes = $($('.new-task-notes')[i]).val();
+            let fileName = $($('.file-name')[i]).val();
+            let filePath = $($('.file-path')[i]).val();
+            let projectId = $('.project-Id').attr('value');
+            let projectName = $('.project-name').attr('value');
+            let phaseofwork = $('.phase-of-work').attr('value');
+            let services = $('.services').attr('value');
+            let employeeId = $('.employeeId').attr('value');
+            let taskId = $('.task-id').html();
+            let taskTitle = $('.task-title').html();
+
+            $.ajax({
+               type: 'POST',
+               url: 'submitFile_path.php',
+               data: {
+                  'notes': notes,
+                  'fileName': fileName,
+                  'filePath': filePath,
+                  'projectId': projectId,
+                  'projectName': projectName,
+                  'phaseofwork': phaseofwork,
+                  'services': services,
+                  'employeeId': employeeId,
+                  'taskId': taskId,
+                  'taskTitle': taskTitle
+               },
+               success:function(data){
+                  // $('').html(data);
+                  alert("success", data)
+                  $($('.new-task-notes')[i]).val('');
+                  $($('.file-name')[i]).val('');
+                  $($('.file-path')[i]).val('');
+
+                  $($('.upload_filepath_tooltip')[i]).addClass('d-none');
+               }
+            });
+
+         });
+
+      }
+
+   }
+   $('.tasks-content_container').on('mouseenter focus', submit_file_path);
+   $('.tasks-content_container').on('mouseleave blur', submit_file_path);
 
    
    // View All File paths function
@@ -2184,7 +2260,6 @@ jQuery(function () {
                   let services = $('.searchEmployee_service').text();
                   let projectId = $('#projectTitle').attr('value');
                   let projectName = $('#projectTitle').text();
-                  
 
                   let contentInfo = `<div class="content__info d-none">
                                        <span>User ID:</span>
@@ -2214,13 +2289,15 @@ jQuery(function () {
                   // For user Photo and Name
                   let fullName = $(userContainer).find('.user_fullname span').text();
                   let userPhoto = $(userContainer).find('.user_photo img').attr('src');
+                  let employeeId = userId;
 
                   $.ajax({
                      type: 'POST',
                      url: 'tasks-table.php',
                      data: {
-                        fullName: fullName,
-                        userPhoto: userPhoto
+                        'employeeId': employeeId,
+                        'fullName': fullName,
+                        'userPhoto': userPhoto
                      },
                      success: function (data) {
                         // $('.user-tasks .content-table').html(data);
@@ -2266,7 +2343,9 @@ jQuery(function () {
             let textStatus = $(taskStatus[i]).children('.text_status');
             let tooltip = $(taskStatus[i]).children('.status_tooltip');
    
-            $(textStatus).on('click', ()=> {
+            $(textStatus).off().on('click', ()=> {
+
+               console.log('okay');
    
                if($(tooltip).hasClass('d-none')) {
    
@@ -2284,6 +2363,7 @@ jQuery(function () {
 
       // });
   }
+  taskStatusTooltip();
   $('.tasks-content_container').on('mouseenter focus', taskStatusTooltip);
   $('.tasks-content_container').on('mouseleave blur', taskStatusTooltip);
 
@@ -2324,10 +2404,28 @@ jQuery(function () {
       let userId = $('.userId').attr('value');
       let phase_of_work = $('.searchEmployee_pow').text();
       let services = $('.searchEmployee_service').text();
-      let taskTitle = $('.taskTitle').val();
+      let taskTitle = $('.taskTitle_field').val();
       let dateStart = $('.date_start').val();
       let dateEnd = $('.date_end').val();
       let newTask_notes = $('.newTask_notes').val();
+
+      if(!$('.taskTitle_field').val()) {
+   
+         alert('Fill-up Task Title');
+
+      } else if(!$('.date_start').val()) {
+
+         alert('Select Date Start');
+
+      } else if(!$('.date_end').val()) {
+
+         alert('Select Due Date');
+
+      } else if(!$('.newTask_notes').val()) {
+
+         alert('Fill-up Notes');
+
+      } else {
 
          $.ajax({
             type: 'POST',
@@ -2348,9 +2446,22 @@ jQuery(function () {
                // window.location.reload();
                $('.user-tasks .content-table').html(data);
                $('.addNewTask_form_container').css('display', 'none');
+
+               setTimeout(
+
+                  function() 
+                     {
+
+                     taskStatusTooltip();
+                     statusColor();
+                     upload_file_path_tooltip();
+
+               }, 70);
+
             },
          });
-
+ 
+      }
     
    });
 

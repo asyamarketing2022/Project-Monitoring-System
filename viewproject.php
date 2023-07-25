@@ -336,22 +336,22 @@ $row = $project->fetch_assoc();
                                 <div class="content-info__wrapper">
                                     <div class="content__info">
                                         <span>Task Title:</span>
-                                        <input class='taskTitle' type='text' name='taskTitle'>
+                                        <input class='taskTitle_field' type='text' name='taskTitle' required>
                                     </div>
                                     <div class="content__info">
                                         <span>Date Start:</span>
-                                        <input class='date_start dis_previous_dates' name='dateStart' type="date">
+                                        <input class='date_start dis_previous_dates' name='dateStart' type="date" required>
                                     </div>
                                     <div class="content__info">
                                         <span>Due Date:</span>
-                                        <input class='date_end dis_previous_dates' name='dueDate' type="date">
+                                        <input class='date_end dis_previous_dates' name='dueDate' type="date" required>
                                     </div>
                                     <div class="content__info">
                                         <span>Notes</span>
-                                        <textarea class='newTask_notes' name="notes" id="" cols="30" rows="10"></textarea>
+                                        <textarea class='newTask_notes' name="notes" id="" cols="30" rows="10" required></textarea>
                                     </div>
                                     <div class="button-wrapper">
-                                        <input class='submit-button submit-new-task' type="button" value='Add'>
+                                        <input class='submit-button submit-new-task' type="button" value='Add' required>
                                     </div>
                                 </div>
                             </div>

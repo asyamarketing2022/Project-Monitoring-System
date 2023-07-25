@@ -56,7 +56,7 @@ if(isset($_POST['projectId'])) {
                                 <div class='text_status'>
                                     <span>" . $row['status'] . "</span> 
                                 </div>
-                                <div class='status_tooltip' style='display: none'>
+                                <div class='status_tooltip d-none'>
                                     <span class='status orangeStatus'>Working On It</span>
                                     <span class='status redStatus'>Stuck</span>
                                     <span class='status greenStatus'>Done</span>

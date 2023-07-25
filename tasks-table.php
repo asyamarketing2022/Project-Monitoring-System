@@ -5,6 +5,18 @@ include_once("connections/DBconnection.php");
 $db = new DBconnection();
 $con = $db->connection();
 
+if(isset($_POST['taskId'])) {
+
+    echo $_POST['taskId'];
+
+}
+
+if(isset($_POST['taskTitle'])) {
+
+    echo $_POST['taskTitle'];
+
+}
+
 if(isset($_POST['userId'])) {
 
     $userId = $_POST['userId'];
@@ -38,7 +50,7 @@ if(isset($_POST['userId'])) {
 
             $output .= "<tr>
                             <td class='taskId d-none' value='". $row['id'] ."'>". $row['id'] ."</td>
-                            <td>". $row['task_title'] ."</td>
+                            <td class='taskTitle'>". $row['task_title'] ."</td>
                             <td>". $row['notes'] ."</td>
                             <td>". $row['date_started'] ."</td>
                             <td>". $row['due_date'] ."</td>
@@ -62,34 +74,42 @@ if(isset($_POST['userId'])) {
                                             <div class='content-info__wrapper'>
                                                 <div class='content__info'>
                                                     <span>Notes:</span>
-                                                    <textarea name='notes' id='' cols='25' rows='5'></textarea>
+                                                    <textarea class='new-task-notes' name='notes' id='' cols='25' rows='5'></textarea>
                                                 </div>
                                                 <div class='content__info'>
                                                     <span>File Name:</span>
-                                                    <input name='fileName' 'type='text' required=''>
+                                                    <input class='file-name' name='fileName' 'type='text' required=''>
                                                 </div>
                                                 <div class='content__info'>
                                                     <span>Insert File Path:</span>
-                                                    <input name='filePath' type='url' required=''>
+                                                    <input class='file-path' name='filePath' type='url' required=''>
+                                                </div>
+                                                <div class='content__info d-none'>
+                                                    <span>Task Id:</span>
+                                                    <span class='task-id'></span>
+                                                </div>
+                                                <div class='content__info d-none'>
+                                                    <span>Task Title:</span>
+                                                    <span class='task-title'></span>
                                                 </div>
                                                 <div class='content__info d-none'>
                                                     <span>Project Id:</span>
-                                                    <input name='projectId' type='hidden' value='$projectId'>
+                                                    <input class='project-Id' name='projectId' type='hidden' value='$projectId'>
                                                 </div>
                                                 <div class='content__info d-none'>
                                                 <span>Project Name:</span>
-                                                    <input name='projectName' type='hidden' value='$projectName'>
+                                                    <input class='project-name' name='projectName' type='hidden' value='$projectName'>
                                                 </div>
                                                 <div class='content__info d-none'>
                                                     <span>Phase of Work:</span>
-                                                    <input name='phaseOfwork' type='hidden' value='$phase_of_work'>
+                                                    <input class='phase-of-work' name='phaseOfwork' type='hidden' value='$phase_of_work'>
                                                 </div>
                                                 <div class='content__info d-none'>
                                                     <span>Services:</span>
-                                                    <input name='services' type='hidden' value='$services'>
+                                                    <input class='services' name='services' type='hidden' value='$services'>
                                                 </div>
                                                 <div class='button-wrapper'>
-                                                    <input class='submit-button' name='uploadfilepath' type='submit' value='Save'>
+                                                    <input class='submit-button submit-file-path' name='' type='submit' value='Submit'>
                                                 </div>
                                             </div>
                                         </div>
@@ -129,9 +149,11 @@ if(isset($_POST['userPhoto'])) {
 
     $fullName = $_POST['fullName'];
     $userPhoto = $_POST['userPhoto'];
-
-    echo "<img src='". $userPhoto ."' alt='' width='200'>
-        <h3>". $fullName ."</h3>";
+    $employeeId = $_POST['employeeId'];
+    
+    echo "<img src='$userPhoto' alt='' width='200'>
+        <h3>$fullName</h3>
+        <span class='employeeId d-none' value='$employeeId'><strong>Employee Id:</strong> $employeeId</span>";
 
 }
 ?>
