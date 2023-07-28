@@ -17,6 +17,12 @@ if(isset($_POST['taskTitle'])) {
 
 }
 
+if(isset($_POST['employee-name'])) {
+
+    echo $_POST['employee-name'];
+
+}
+
 if(isset($_POST['userId'])) {
 
     $userId = $_POST['userId'];
@@ -85,6 +91,10 @@ if(isset($_POST['userId'])) {
                                                     <input class='file-path' name='filePath' type='url' required=''>
                                                 </div>
                                                 <div class='content__info d-none'>
+                                                    <span>Employee Name:</span>
+                                                    <span class='employee-name'></span>
+                                                </div>
+                                                    <div class='content__info d-none'>
                                                     <span>Task Id:</span>
                                                     <span class='task-id'></span>
                                                 </div>
@@ -116,7 +126,17 @@ if(isset($_POST['userId'])) {
                                     </div>
                                 </div>
                             </td>
-                            <td><button class='viewfilepathBtn'>Check Files</button></td>
+                            <td class='check_filepath_td'>
+                                <button class='checkfilepathBtn'>Check Files</button>
+                                <div class='check_filepath_tooltip d-none'>
+                                  <div class='check_filepath_wrapper'>
+                                      <span>Check File Path</span>
+                                      <div class='content-table'>
+         
+                                      </div>
+                                  </div>
+                                </div>
+                            </td>
                         </tr>";
 
         } while($row = $employee_tasks->fetch_assoc());

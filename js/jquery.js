@@ -1450,7 +1450,7 @@ jQuery(function () {
             $(orangeStatusBtn).on('click', ()=> {
    
                $(textStatus).css("background", "#fdab3d");
-           
+     
             });
 
             $(redStatusBtn).on('click', ()=> {
@@ -1622,6 +1622,18 @@ jQuery(function () {
                let tableRow = $(uploadPathBtn[i]).parent().parent();
                let taskId = $(tableRow).find('.taskId').attr('value');
                let taskTitle = $(tableRow).find('.taskTitle').text();
+               let employeeName = $('.user_photo h3').text();
+
+               $.ajax({
+                  type: 'POST',
+                  url: 'tasks-table.php',
+                  data: {
+                     'employee-name': employeeName,
+                  },
+                  success:function(data){
+                     $('.employee-name').html(data);
+                  }
+               });
 
                $.ajax({
                   type: 'POST',
@@ -1662,6 +1674,50 @@ jQuery(function () {
    $('.tasks-content_container').on('mouseenter focus', upload_file_path_tooltip);
    $('.tasks-content_container').on('mouseleave blur', upload_file_path_tooltip);
 
+ //Check file path tooltip 
+ function check_file_path_tooltip() {
+
+   let checkfilepathBtn = document.querySelectorAll('.checkfilepathBtn');
+
+   for(let i = 0; checkfilepathBtn.length > i; i++){
+
+      let check_filepath_td = $(checkfilepathBtn[i]).parent();
+      let check_filepath_tooltip = $(check_filepath_td).find('.check_filepath_tooltip');
+
+      $(checkfilepathBtn[i]).off().on('click', ()=> {
+
+         let taskId = $($('.taskId')[i]).attr('value');
+
+        $.ajax({
+            type: 'POST',
+            url: 'check_file_paths_table.php',
+            data: {
+               'taskId': taskId,
+            },
+            success:function(data){
+               $('.check_filepath_wrapper .content-table').html(data);
+            }
+
+        });
+
+         if($(check_filepath_tooltip).hasClass('d-none')) {
+   
+            $(check_filepath_tooltip).removeClass('d-none');
+ 
+         } else {
+            
+            $(check_filepath_tooltip).addClass('d-none');
+
+         }
+
+      });
+
+   }
+
+ }
+ $('.tasks-content_container').on('mouseenter focus', check_file_path_tooltip);
+ $('.tasks-content_container').on('mouseleave blur', check_file_path_tooltip);
+
    //Tasks upload file path tooltip 
    function submit_file_path(){
 
@@ -1679,6 +1735,7 @@ jQuery(function () {
             let phaseofwork = $('.phase-of-work').attr('value');
             let services = $('.services').attr('value');
             let employeeId = $('.employeeId').attr('value');
+            let employeeName = $('.employee-name').html();
             let taskId = $('.task-id').html();
             let taskTitle = $('.task-title').html();
 
@@ -1694,6 +1751,7 @@ jQuery(function () {
                   'phaseofwork': phaseofwork,
                   'services': services,
                   'employeeId': employeeId,
+                  'employeeName': employeeName,
                   'taskId': taskId,
                   'taskTitle': taskTitle
                },
@@ -2252,9 +2310,11 @@ jQuery(function () {
                $(ViewTasksBtn[i]).off().on('click', ()=> {
 
                   $('.userId').parent().remove();
+                  $('.employeeName').parent().remove();
 
                   let userContainer = $(ViewTasksBtn[i]).parent().parent().parent().parent();
                   let userId = $(userContainer).attr('value');
+                  let employeeName = $(userContainer).find('.user_fullname span').text()
                   let contentInfoWrapper = document.querySelector('.addNewTask_form_container .content-info__wrapper');
                   let phase_of_work = $('.searchEmployee_pow').text();
                   let services = $('.searchEmployee_service').text();
@@ -2262,12 +2322,18 @@ jQuery(function () {
                   let projectName = $('#projectTitle').text();
 
                   let contentInfo = `<div class="content__info d-none">
+                                       <span>Employee Name:</span>
+                                       <p class="employeeName" value="${employeeName}">${employeeName}</p>
+                                    </div>
+                                    <div class="content__info d-none">
                                        <span>User ID:</span>
                                        <p class="userId" value="${userId}">${userId}</p>
                                     </div>
                                     `;
 
                   $(contentInfo).prependTo(contentInfoWrapper);
+
+                  console.log(employeeName);
         
                   // For task table
                   $.ajax({
@@ -2345,8 +2411,6 @@ jQuery(function () {
    
             $(textStatus).off().on('click', ()=> {
 
-               console.log('okay');
-   
                if($(tooltip).hasClass('d-none')) {
    
                   $(tooltip).removeClass('d-none');
@@ -2401,13 +2465,16 @@ jQuery(function () {
 
       let projectId = $('#projectTitle').attr('value');
       let projectTitle = $('#projectTitle').text();
-      let userId = $('.userId').attr('value');
+      let employeeId = $('.userId').attr('value');
+      let employeeName = $('.employeeName').attr('value');
       let phase_of_work = $('.searchEmployee_pow').text();
       let services = $('.searchEmployee_service').text();
       let taskTitle = $('.taskTitle_field').val();
       let dateStart = $('.date_start').val();
       let dateEnd = $('.date_end').val();
       let newTask_notes = $('.newTask_notes').val();
+
+      let projectName = $('#projectTitle').text();
 
       if(!$('.taskTitle_field').val()) {
    
@@ -2433,19 +2500,26 @@ jQuery(function () {
             data: {
                projectId: projectId,
                projectTitle: projectTitle,
-               userId: userId,
+               employeeId: employeeId,
+               employeeName: employeeName,
                phase_of_work: phase_of_work,
                services: services,
                taskTitle: taskTitle,
                dateStart: dateStart,
                dateEnd, dateEnd,
-               newTask_notes: newTask_notes
+               newTask_notes: newTask_notes,
+               projectName: projectName
             },
             success: function (data) {
                // alert("success", data);
                // window.location.reload();
                $('.user-tasks .content-table').html(data);
                $('.addNewTask_form_container').css('display', 'none');
+
+               $('.taskTitle_field').val('');
+               $('.date_start').val('');
+               $('.date_end').val('');
+               $('.newTask_notes').val('');
 
                setTimeout(
 
@@ -2456,7 +2530,19 @@ jQuery(function () {
                      statusColor();
                      upload_file_path_tooltip();
 
-               }, 70);
+                     $('.tasks-content_container').on('mouseenter focus', taskStatus);
+                     $('.tasks-content_container').on('mouseleave blur', taskStatus);
+                     taskStatus();
+
+                     $('.tasks-content_container').on('mouseenter focus', changeStatus);
+                     $('.tasks-content_container').on('mouseleave blur', changeStatus);
+                     changeStatus();
+
+                     $('.tasks-content_container').on('mouseenter focus', check_file_path_tooltip);
+                     $('.tasks-content_container').on('mouseleave blur', check_file_path_tooltip);
+                     check_file_path_tooltip();
+
+               }, 10);
 
             },
          });
@@ -2468,21 +2554,6 @@ jQuery(function () {
   }
   submitNewTask();
   
-// $('.viewTasks').on('mouseenter', viewTasksBtn);
-
-//   let viewTasks = document.querySelectorAll('.viewTasks');
-
-//   console.log(viewTasks);
-
-//   for(let i = 0; viewTasks.length > i; i++){
-
-      // $('.viewTasks').on('click', ()=> {
-
-      //    viewTasksBtn();
-
-      // });
-
-   // }
 
   function loading(){
 
@@ -2491,8 +2562,6 @@ jQuery(function () {
 
   }
 //   $(window).on('load', loading);
-
-
 
   $('.modal').on('hidden.bs.modal', function () {
    location.reload();

@@ -27,9 +27,6 @@ if (mysqli_num_rows($project) > 0){
     }
 
     echo $_SESSION['new_notif'];
-    // echo $userID;
-
-    // echo 'error';
     
 } else {
 

@@ -1,6 +1,7 @@
 <?php 
 
 include_once("connections/DBconnection.php");
+include_once("login.php");
 
 $db = new DBconnection();
 $con = $db->connection();
@@ -11,16 +12,19 @@ if(isset($_POST['projectId'])) {
     $projectTitle = $_POST['projectTitle'];
     $services = $_POST['services'];
     $phase_of_work = $_POST['phase_of_work'];
-    $employeeId = $_POST['userId'];
-    $employeeName = 'sample';
+    $employeeId = $_POST['employeeId'];
+    $employeeName = $_POST['employeeName'];
     $taskTitle = $_POST['taskTitle'];
     $new_task_notes = $_POST['newTask_notes'];
     $dateStart = $_POST['dateStart'];
     $dateEnd = $_POST['dateEnd'];
     $status = '';
-    $invite_status = '3';
+    $invite_status = 'new';
+    $projectName = $_POST['projectName'];
+    $userfirstName = $_SESSION['UserLogin'];
+    $userlastName = $_SESSION['Userlname'];
 
-    $sql = "INSERT INTO `employees_tasks`(`project_id`, `project_name`, `services`, `phase_of_work`, `employee_id`, `employee_name`, `task_title`, `notes`, `date_started`, `due_date`, `status`, `invite_status`) VALUES ('$projectId', '$projectTitle', '$services', '$phase_of_work', '$employeeId', '$employeeName', '$taskTitle', '$new_task_notes', '$dateStart', '$dateEnd', '$status', '$invite_status')";
+    $sql = "INSERT INTO `employees_tasks`(`project_id`, `project_name`, `services`, `phase_of_work`, `employee_id`, `employee_name`, `task_title`, `notes`, `date_started`, `due_date`, `status`, `invite_status`, `sent_by`) VALUES ('$projectId', '$projectTitle', '$services', '$phase_of_work', '$employeeId', '$employeeName', '$taskTitle', '$new_task_notes', '$dateStart', '$dateEnd', '$status', '$invite_status', '$userfirstName $userlastName')";
 
     $con->query($sql) or die ($con->error);
 
@@ -36,7 +40,7 @@ if(isset($_POST['projectId'])) {
                         <table>
                             <tbody>
                                 <tr>
-                                    <th>Task Title</th>
+                                    <th>Task Title Add-newtask.php</th>
                                     <th>Notes</th>
                                     <th>Date Started</th>
                                     <th>Due Date</th>
@@ -48,7 +52,8 @@ if(isset($_POST['projectId'])) {
         do {
 
             $output .= "<tr>
-                            <td>". $row['task_title'] ."</td>
+                            <td class='taskId d-none' value='". $row['id'] ."'>". $row['id'] ."</td>
+                            <td class='taskTitle'>". $row['task_title'] ."</td>
                             <td>". $row['notes'] ."</td>
                             <td>". $row['date_started'] ."</td>
                             <td>". $row['due_date'] ."</td>
@@ -57,14 +62,78 @@ if(isset($_POST['projectId'])) {
                                     <span>" . $row['status'] . "</span> 
                                 </div>
                                 <div class='status_tooltip d-none'>
-                                    <span class='status orangeStatus'>Working On It</span>
+                                    <span class='status orangeStatus'>Working on it</span>
                                     <span class='status redStatus'>Stuck</span>
                                     <span class='status greenStatus'>Done</span>
                                     <input onkeypress='return /[ A-Za-z0-9]/i.test(event.key)' onpaste='return false;' ondrop='return false;' autocomplete='off'>
                                 </div>
                             </td>
-                            <td><button class='uploadPathBtn'>Upload File Path</button></td>
-                            <td><button class='viewfilepathBtn'>Check Files</button></td>
+                            <td class='upload_filepath_td'>
+                                <button class='uploadPathBtn'>Upload File Path</button>
+                                <div class='upload_filepath_tooltip d-none'>
+                                <div class='upload_filepath_wrapper'>
+                                    <span>Upload File Path</span>
+                                    <div class='upload_filepath_form'>
+                                        <div class='content-info__wrapper'>
+                                            <div class='content__info'>
+                                                <span>Notes:</span>
+                                                <textarea class='new-task-notes' name='notes' id='' cols='25' rows='5'></textarea>
+                                            </div>
+                                            <div class='content__info'>
+                                                <span>File Name:</span>
+                                                <input class='file-name' name='fileName' 'type='text' required=''>
+                                            </div>
+                                            <div class='content__info'>
+                                                <span>Insert File Path:</span>
+                                                <input class='file-path' name='filePath' type='url' required=''>
+                                            </div>
+                                            <div class='content__info d-none'>
+                                                <span>Employee Name:</span>
+                                                <span class='employee-name'></span>
+                                            </div>
+                                            <div class='content__info d-none'>
+                                                <span>Task Id:</span>
+                                                <span class='task-id'></span>
+                                            </div>
+                                            <div class='content__info d-none'>
+                                                <span>Task Title:</span>
+                                                <span class='task-title'></span>
+                                            </div>
+                                            <div class='content__info d-none'>
+                                                <span>Project Id:</span>
+                                                <input class='project-Id' name='projectId' type='hidden' value='$projectId'>
+                                            </div>
+                                            <div class='content__info d-none'>
+                                            <span>Project Name:</span>
+                                                <input class='project-name' name='projectName' type='hidden' value='$projectName'>
+                                            </div>
+                                            <div class='content__info d-none'>
+                                                <span>Phase of Work:</span>
+                                                <input class='phase-of-work' name='phaseOfwork' type='hidden' value='$phase_of_work'>
+                                            </div>
+                                            <div class='content__info d-none'>
+                                                <span>Services:</span>
+                                                <input class='services' name='services' type='hidden' value='$services'>
+                                            </div>
+                                            <div class='button-wrapper'>
+                                                <input class='submit-button submit-file-path' name='' type='submit' value='Submit'>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </td>
+                            <td class='check_filepath_td'>
+                                <button class='checkfilepathBtn'>Check Files</button>
+                                <div class='check_filepath_tooltip d-none'>
+                                    <div class='check_filepath_wrapper'>
+                                        <span>Check File Path</span>
+                                        <div class='content-table'>
+            
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
                         </tr>";
 
         } while($row = $employee_tasks->fetch_assoc());

@@ -136,6 +136,22 @@ a {
     box-shadow: 1px 4px 5px 3px rgba(0,0,0,0.3);
 }
 
+.tasks-content .user-tasks .check_filepath_td {
+    position: relative;
+}
+
+.tasks-content .user-tasks .check_filepath_td .check_filepath_tooltip {
+    position: absolute;
+    width: 800px;
+    right: 10%;
+    background: #fff;
+    border: 1px solid;
+    z-index: 15;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 1px 4px 5px 3px rgba(0,0,0,0.3);
+}
+
 .addNewTask_form_container {
     position: absolute;
     display: none;

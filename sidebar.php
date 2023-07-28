@@ -1,5 +1,6 @@
 <?php include 'login.php'; ?>
 <?php include 'notification-box.php'; ?>
+<?php include 'task-notification.php'; ?>
 
 <div class="manage-project__wrapper">
 
@@ -27,39 +28,39 @@
                 <li><a href="logout.php"><i class="fa fa-arrow-down"></i></a></li>
             </ul>
 
-                <?php if (mysqli_num_rows($notif) > 0){ ?>
+                <?php if (mysqli_num_rows($project) > 0){ ?>
 
                     <div class="notif-list">
                         <div class="notif_container">
 
-                            <?/*php while($notif_info = mysqli_fetch_assoc($notif)) { */?>
+                        <?php do { ?>
 
-                                <?php do { ?>
+                            <?php if($newtask_notif['invite_status'] == 'new') { ?>
 
-                                    <?php if($notif_info['notif_status'] == 'new') { ?>
+                                <div class="notif_box">
+                                    <div class="profile-photo">
+                                        <img src="" alt="">
+                                    </div>
+                                    <div class="notif-text">
+                                        <p>You have new Task </p>
+                                        <span><?php echo $newtask_notif['added_at'] ?></span>
+                                    
 
-                                        <div class="notif_box">
-                                            <div class="profile-photo">
-                                                <img src="" alt="">
-                                            </div>
-                                            <div class="notif-text">
-                                                <p>You have new project</p>
-                                                <span><?php echo $notif_info['added_at'] ?></span>
-                                             
-                                            </div>
-                                        </div>
+                                        $row['sent_by'] . "' sent a new task from '" . $row['project_name'] . "' project. '" . $row['task_title'] . "'";
 
-                                    <?php } ?>
 
-                                <?php } while($notif_info = $notif->fetch_assoc()); ?>
 
-                            <?/*php } */?>
+                                    </div>
+                                </div>
+
+                            <?php } ?>
+
+                            <?php } while($newtask_notif = $project->fetch_assoc()); ?>
 
                         </div>
                     </div>      
 
                 <?php } ?>
-          
         </div>
     </div>
 
