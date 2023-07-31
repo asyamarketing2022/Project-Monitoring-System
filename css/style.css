@@ -26,6 +26,28 @@ a {
     color: #004c3f;
 }
 
+.accept {
+    width: 100px;
+    height: 30px;
+    border: 2px solid #938f8f;
+    color: #fff;
+    font-weight: 700;
+    border-radius: 5px;
+    background: rgb(134,186,53);
+    background: linear-gradient(180deg, rgba(134,186,53,1) 0%, rgba(124,180,43,1) 35%, rgba(134,186,53,1) 100%);
+}
+
+.decline {
+    width: 100px;
+    height: 30px;
+    border: 2px solid #938f8f;
+    color: #fff;
+    font-weight: 700;
+    border-radius: 5px;
+    background: rgb(221,92,81);
+    background: linear-gradient(180deg, rgba(221,92,81,1) 0%, rgba(218,81,70,1) 35%, rgba(221,92,81,1) 100%);
+}
+
 .loading {
     position: fixed;
     z-index: 999999;
@@ -488,14 +510,44 @@ a {
     position: absolute;
     right: 130px;
     top: -25px;
-    background: #F4F4F4;
+    /* background: #F4F4F4; */
+    background: #fff;
     border-radius: 5px;
-    padding: 15px;
+    /* padding: 15px; */
+    border-radius: 5px;
+    box-shadow: 1px 4px 5px 3px rgba(0,0,0,0.3);
 }
 
 .notif-list .notif_container  .notif_box {
- 
+    padding: 5px 20px;
+    width: 300px;
+    border-radius: 5px;
+}
 
+.notif-list .notif_container  .notif_box:hover {
+    background: #d5d4d4;
+}
+
+.notif-list .notif_container  .notif_box a {
+    color: #000;
+}
+
+.notif-list .notif_container  .notif_box:hover a {
+    color: #000;
+}
+
+.notif-list .notif_container  .notif_box .notif-text {
+    padding-bottom: 0.5rem;
+}
+
+.notif-list .notif_container  .notif_box .notif-text .notif-message {
+    font-size: 20px;
+}
+
+.notif-list .notif_container  .notif_box .notif-text .newTask-date {
+    font-size: 13px;
+    color: #939191;
+    font-weight: 700;
 }
 
 .grid-left__menu {
@@ -977,8 +1029,9 @@ a {
 
 .profile .profile-column {
     display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(400px,1fr));
-    grid-gap: 50px;
+    /* grid-template-columns: repeat(auto-fit,minmax(400px,1fr)); */
+    grid-template-columns: 40% 60%;
+    grid-gap: 30px;
     padding: 20px;
 }
 
@@ -996,6 +1049,11 @@ a {
 
 .profile .myprofile-info .myphoto {
     grid-area: myphoto;
+   
+}
+
+.profile .myprofile-info .myphoto img {
+    width: 200px;
 }
 
 .profile .myprofile-info .profile-info {
@@ -1012,6 +1070,58 @@ a {
 
 .profile .myprojects .content-table table { 
     border: 1px solid #f7f6f6;
+}
+
+.profile .myprojects .content-table table tr:hover {
+    background: #dfdbdb;
+    cursor: pointer;
+}
+
+.profile .myprojects .content-table table th {
+    font-size: 14px;
+}
+
+.profile .myprojects .content-table table td {
+    font-weight: 700;
+    font-size: 13px;
+    padding: 10px;
+}
+
+.profile .myprojects .content-table table .invite_status_td {
+    position: relative;
+}
+
+.profile .myprojects .content-table table .invite_status_td .invite_status_tooltip {
+    position: absolute;
+    width: 450px;
+    right: 10%;
+    background: #fff;
+    border: 1px solid;
+    z-index: 15;
+}
+
+.profile .myprojects .content-table table .invite_status_td .invite_status_tooltip .invite_status_wrapper {
+    padding: 15px;
+}
+
+.profile .myprojects .content-table table .invite_status_td .invite_status_tooltip button.accept {
+    
+}
+
+.profile .myprojects .content-table table .invite_status_td .invite_status_tooltip button.accept img {
+    width: 13px;
+    position: relative;
+    top: -3px;
+}
+
+.profile .myprojects .content-table table .invite_status_td .invite_status_tooltip button.decline {
+    
+}
+
+.profile .myprojects .content-table table .invite_status_td .invite_status_tooltip button.decline img {
+    width: 9px;
+    position: relative;
+    top: -2px;
 }
 
 .profile .myprojects .search-action__wrapper {

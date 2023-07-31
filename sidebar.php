@@ -1,6 +1,7 @@
 <?php include 'login.php'; ?>
 <?php include 'notification-box.php'; ?>
-<?php include 'task-notification.php'; ?>
+<?php include 'notification-task.php'; ?>
+
 
 <div class="manage-project__wrapper">
 
@@ -13,9 +14,12 @@
         <div class="userLog">
             <ul>
                 <li><i class="fa fa-wechat"></i></li>
-                <!-- For dynamic codes - notification.php -->
-                <li><i class="fa fa-bell"><span class="notif_count"></span></i></li>
-
+                <!-- For dynamic codes - notification-count.php -->
+                <li>
+                    <i class="fa fa-bell">
+                            <span class="notif_count"></span>
+                    </i>
+                </li>
 
                 <?php if(isset($_SESSION['UserLogin'])){ ?>
 
@@ -28,7 +32,7 @@
                 <li><a href="logout.php"><i class="fa fa-arrow-down"></i></a></li>
             </ul>
 
-                <?php if (mysqli_num_rows($project) > 0){ ?>
+                <?php if (mysqli_num_rows($tasks) > 0){ ?>
 
                     <div class="notif-list">
                         <div class="notif_container">
@@ -36,26 +40,21 @@
                         <?php do { ?>
 
                             <?php if($newtask_notif['invite_status'] == 'new') { ?>
-
                                 <div class="notif_box">
-                                    <div class="profile-photo">
-                                        <img src="" alt="">
-                                    </div>
-                                    <div class="notif-text">
-                                        <p>You have new Task </p>
-                                        <span><?php echo $newtask_notif['added_at'] ?></span>
-                                    
+                                    <a href="/profile.php">
+                                        <div class="notif-text pb-2">
+                                            <span class='notif-message' style='font-size: 20px;'><strong>You have new Task</strong></span></br>
+                                            <span><?php echo $newtask_notif['sent_by']?> sent a new task from </span></br>
+                                            <span><strong><?php echo $newtask_notif['project_name'] ?></strong> project</span></br>
+                                            <span>Task TItle: <strong><?php echo $newtask_notif['task_title'] ?></strong></span></br>
+                                            <span class='newTask-date'><?php echo $newtask_notif['added_at']?></span>
 
-                                        $row['sent_by'] . "' sent a new task from '" . $row['project_name'] . "' project. '" . $row['task_title'] . "'";
-
-
-
-                                    </div>
+                                        </div>
+                                    </a>
                                 </div>
-
                             <?php } ?>
 
-                            <?php } while($newtask_notif = $project->fetch_assoc()); ?>
+                            <?php } while($newtask_notif = $tasks->fetch_assoc()); ?>
 
                         </div>
                     </div>      

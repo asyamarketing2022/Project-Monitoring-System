@@ -10,16 +10,19 @@ if(!isset($_SESSION))
 
 $userID = $_SESSION['UserId'];
 
-$sql = "SELECT notif_status FROM project_history WHERE employee_id = $userID";
+// $sql = "SELECT notif_status FROM project_history WHERE employee_id = $userID";
+$sql = "SELECT invite_status FROM employees_tasks WHERE employee_id = $userID";
 $project = $con->query($sql) or die ($con->error);
 
 if (mysqli_num_rows($project) > 0){
 
+    $_SESSION['new_notif'] = '';
+
     while($row = mysqli_fetch_assoc($project)) {
 
-        if($row['notif_status'] == 'new') {
+        if($row['invite_status'] == 'new') {
 
-            $newProject_array[] = $row['notif_status'];
+            $newProject_array[] = $row['invite_status'];
 
             $_SESSION['new_notif'] = count($newProject_array);
 
@@ -28,11 +31,7 @@ if (mysqli_num_rows($project) > 0){
 
     echo $_SESSION['new_notif'];
     
-} else {
-
-    echo "";
-
-}
+} 
 
 mysqli_close($con);
 

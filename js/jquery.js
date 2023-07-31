@@ -141,7 +141,7 @@ jQuery(function () {
       $(function() {
          $.ajax({
             type: 'GET',
-            url: 'notification.php',
+            url: 'notification-count.php',
             success:function(data){
                $('.notif_count').html(data);
             }
@@ -1807,6 +1807,137 @@ jQuery(function () {
 
    }
    view_file_paths();
+
+   //New Task Tooltip
+   function newtask_tooltip(){
+
+      let newTask_Btn = document.querySelectorAll('.new-task-btn');
+
+      for(let i = 0; newTask_Btn.length > i; i++){
+
+         let invite_status_td = $(newTask_Btn[i]).parent();
+         let invite_status_tooltip = $(invite_status_td).find('.invite_status_tooltip');
+
+         $(newTask_Btn[i]).off().on('click', ()=> {
+
+            if($(invite_status_tooltip).hasClass('d-none')) {
+   
+               $(invite_status_tooltip).removeClass('d-none');
+    
+            } else {
+               
+               $(invite_status_tooltip).addClass('d-none');
+
+            }
+
+         });
+
+      }
+
+   }
+   newtask_tooltip()
+
+   //New Task Tooltip
+   function decline_note_popup(){
+
+         let decline_btn = document.querySelectorAll('.decline');
+         let decline_note_wrapper = document.querySelectorAll('.decline-note_wrapper');
+   
+         for(let i = 0; decline_btn.length > i; i++){
+   
+            $(decline_btn[i]).off().on('click', ()=> {
+   
+               if($(decline_note_wrapper[i]).hasClass('d-none')) {
+      
+                  $(decline_note_wrapper[i]).removeClass('d-none');
+       
+               } else {
+                  
+                  $(decline_note_wrapper[i]).addClass('d-none');
+   
+               }
+
+            });
+   
+         }
+   
+      }
+   decline_note_popup();
+
+   //Accept Task
+   function accept_task(){
+
+      let accept_btn = document.querySelectorAll('button.accept');
+      let newTask_btn = document.querySelectorAll('.new-task-btn');
+
+      for(let i = 0; accept_btn.length > i; i++){
+
+        let taskId = $(accept_btn[i]).parents('.task-table_row').attr('value');
+
+         $(accept_btn[i]).off().on('click', ()=> {
+
+            let acceptText = 'accept';
+            
+            $.ajax({
+               type: 'POST',
+               url: 'task-accept.php',
+               data: {
+                  'taskId': taskId,
+                  'acceptText': acceptText,
+               },
+               success:function(data){
+               //  $(newTask_btn[i]).html(data);
+                  window.location.reload();
+               }
+            });
+
+         });
+
+      }
+
+   }
+   accept_task();
+
+   //Decline Task
+   function decline_task(){
+
+      let submit_decline_btn = document.querySelectorAll('.submit-decline');
+
+      for(let i = 0; submit_decline_btn.length > i; i++ ) {
+
+         let decline = document.querySelectorAll('.decline-notes');
+
+         $(submit_decline_btn[i]).off().on('click', ()=> {
+
+            let taskId = $(submit_decline_btn[i]).parents('.task-table_row').attr('value');
+            let declineNotes = $(decline[i]).val();
+            let declineText = 'decline';
+
+            if($(decline[i]).val() == '') {
+
+               alert('Please fill-up decline notes');
+
+            } else {
+
+                  $.ajax({
+                     type: 'POST',
+                     url: 'task-decline.php',
+                     data: {
+                        'taskId': taskId,
+                        'declineText': declineText,
+                        'declineNotes': declineNotes,
+                     },
+                     success:function(data){
+                        window.location.reload();
+                  }
+               });
+
+            }
+
+         });
+      }
+   }
+   decline_task();
   
    // Notes File Path - tooltip
    function tooltip(){

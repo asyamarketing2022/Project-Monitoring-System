@@ -16,7 +16,7 @@
             <div class="profile-column">
                 <div class="myprofile-info">
                     <div class="myphoto">
-                        <img src="/img/placeholder-user.png" alt="" width="250px">
+                        <img src="/img/placeholder-user.png" alt="">
                     </div>
                     <div class="profile-info">
                         <?php if(isset($_SESSION['UserLogin'])){ ?>
@@ -56,52 +56,72 @@
                         <table class="w-100">
                             <tbody>
                                 <tr>
-                                    <th>Code</th>
                                     <th>Project Name</th>
+                                    <th>Service</th>
+                                    <th>Phase of work</th>
+                                    <th>Task Title</th>
+                                    <th>Date Started</th>
+                                    <th>Due Date</th>
                                     <th>Status</th>
                                     <th></th>
                                 </tr>
 
                                 <!-- myprojects-table.php -->
-                                <form action="" method="POST">
 
-                                <?php if(isset($_SESSION['UserLogin']) && $_SESSION['Access'] == "manager" ) { ?>
-                     
                                     <?php if(!empty($userProject['id'])) { ?>
 
                                         <?php do { ?>
 
-                                            <tr class="table-row_projects table-form" value="<?php echo $userProject['id']; ?>">
-                                                <td><?php echo $userProject['project_code']; ?></td>
+                                            <tr class="task-table_row" value="<?php echo $userProject['id']; ?>">
                                                 <td><?php echo $userProject['project_name']; ?></td>
+                                                <td><?php echo $userProject['services']; ?></td>
+                                                <td><?php echo $userProject['phase_of_work']; ?></td>
+                                                <td><?php echo $userProject['task_title']; ?></td>
+                                                <td><?php echo $userProject['date_started']; ?></td>
+                                                <td><?php echo $userProject['due_date']; ?></td>
                                                 <td><?php echo $userProject['status']; ?></td>
-                                                <td><span data-toggle="modal" data-target="#view_project" class="view-myProject" value="<?php echo $userProject['id']; ?>">View</span></td>
+                                                <td class='invite_status_td'>
+
+                                                    <?php if($userProject['invite_status'] == 'new'){ ?>
+
+                                                    <button class='new-task-btn'>
+                                                        <?php echo $userProject['invite_status']; ?>
+                                                    </button>
+                                                    <div class="invite_status_tooltip d-none">
+                                                        <div class="invite_status_wrapper">
+                                                            <div class="invite_status_form">
+                                                                <div class="content-info__wrapper">
+                                                                    <div class="button-wrapper pb-0">
+                                                                        <button class='accept' type='button'><span>Accept</span>
+                                                                            <img class='check-icon' src="img/check-solid-white.svg" alt="">
+                                                                        </button>
+                                                                        <button class='decline' type='button'>Decline 
+                                                                            <img class='x-icon' src="img/x-solid-white.svg" alt="">
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="decline-note_wrapper pt-3 d-none">
+                                                                        <div class="content__info">
+                                                                            <span>Notes:</span>
+                                                                            <textarea class="decline-notes" name="notes" id="" cols="25" rows="5"  placeholder="Why you decline the task?" required></textarea>
+                                                                        </div>
+                                                                        <div class="button-wrapper">
+                                                                            <input class="submit-button submit-decline" name="" type="submit" value="Submit">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <?php } else { ?>
+                                                        <span><?php echo $userProject['invite_status']; ?></span>
+                                                    <?php } ?>
+                                                </td>
                                             </tr>
 
                                         <?php } while($userProject = $myProjects->fetch_assoc()); ?>
 
                                     <?php } ?>
 
-                                <?php } elseif(isset($_SESSION['UserLogin']) && $_SESSION['Access'] == "employee") { ?>
-
-                                        <?php if(!empty($picProject['id'])) { ?>
-
-                                            <?php do { ?>
-
-                                                <tr class="table-row_projects table-form" value="<?php echo $picProject['id']; ?>">
-                                                    <td><?php echo $picProject['project_code']; ?></td>
-                                                    <td><?php echo $picProject['project_name']; ?></td>
-                                                    <td><?php echo $picProject['status']; ?></td>
-                                                    <td><span data-toggle="modal" data-target="#view_project" class="view-myProject" value="<?php echo $picProject['id']; ?>">View</span></td>
-                                                </tr>
-                                                
-                                            <?php } while($picProject = $project->fetch_assoc()); ?>
-
-                                        <?php } ?>
-
-                                    <?php } ?>
-
-                                </form>
                             </tbody>
                         </table>
                     </div>

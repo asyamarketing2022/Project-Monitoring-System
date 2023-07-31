@@ -2,8 +2,10 @@
 
 <?php 
 
-include_once("connections/connection.php");
-$con = connection();
+include_once("connections/DBconnection.php");
+
+$db = new DBconnection();
+$con = $db->connection();
 
 
 // $sql = "SELECT * FROM assign_project ORDER BY id ASC"
@@ -17,7 +19,7 @@ $con = connection();
 
 $userID = $_SESSION['UserId'];
     
-$sql = "SELECT * FROM assign_project WHERE manager_id = '$userID'";
+$sql = "SELECT * FROM employees_tasks WHERE employee_id = '$userID'";
 $myProjects = $con->query($sql) or die ($con->error);
 $userProject = $myProjects->fetch_assoc();
 
