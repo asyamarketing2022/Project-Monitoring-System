@@ -28,6 +28,7 @@ if(isset($_POST['login'])){
     if($user_detail > 0){
 
         $_SESSION['UserId'] = $row['ID'];
+        $_SESSION['UserImage'] = $row['user_image'];
         $_SESSION['UserLogin'] = $row['first_name'];
         $_SESSION['Userlname'] = $row['last_name'];
         $_SESSION['UserEmail'] = $row['email'];

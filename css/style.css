@@ -48,6 +48,50 @@ a {
     background: linear-gradient(180deg, rgba(221,92,81,1) 0%, rgba(218,81,70,1) 35%, rgba(221,92,81,1) 100%);
 }
 
+.decline-td {
+    text-align: center;
+    /* background: #e96969; */
+}
+
+td.updateTd {
+    display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: center;
+	align-content: center;
+}
+
+button.update {
+    width: 80%;
+    height: 35px;
+    border: none;
+    color: #fff;
+    font-weight: 700;
+    border-radius: 26px;
+    background: #439eed;
+}
+
+button.updateTask {
+    color: #619d61;
+    background: none;
+    width: 80%;
+    height: 35px;
+    border: none;
+    font-weight: 700;
+    border-radius: 26px;
+}
+
+button.deleteTask {
+    color: #cd3232;
+    background: none;
+    width: 80%;
+    height: 35px;
+    border: none;
+    font-weight: 700;
+    border-radius: 26px;
+}
+
 .loading {
     position: fixed;
     z-index: 999999;
@@ -173,6 +217,27 @@ a {
     border-radius: 5px;
     box-shadow: 1px 4px 5px 3px rgba(0,0,0,0.3);
 }
+
+.tasks-content .user-tasks .task_note_td, 
+.tasks-content .user-tasks .declineTask_note_td,
+.tasks-content .user-tasks .task_title_td
+  {
+    position: relative;
+}
+
+.tasks-content .user-tasks .task_note_td .task_note_tooltip,
+.tasks-content .user-tasks .declineTask_note_tooltip, 
+.tasks-content .user-tasks .task_title_tooltip
+ {
+    position: absolute;
+    width: 450px;
+    background: #fff;
+    border: 1px solid;
+    z-index: 15;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 1px 4px 5px 3px rgba(0,0,0,0.3);
+ }
 
 .addNewTask_form_container {
     position: absolute;
@@ -342,7 +407,8 @@ a {
     padding-bottom: 20px;
 }
 
-.button-wrapper .submit-button {
+.button-wrapper .submit-button, 
+.button-wrapper .update-button  {
     width: 180px;
     background-color: #39a2c3;
     color: #fff;
@@ -873,9 +939,16 @@ a {
 } */
 
 
-.content-info__wrapper .content__info, .profile-info .profile-info__content {
+.content-info__wrapper .content__info {
     display: grid;
     grid-template-columns: 20% 80%;
+    margin-bottom: 20px;
+    grid-gap: 10px;
+}
+
+.profile-info .profile-info__content {
+    display: grid;
+    grid-template-columns: 30% 70%;
     margin-bottom: 20px;
     grid-gap: 10px;
 }
@@ -1049,15 +1122,35 @@ a {
 
 .profile .myprofile-info .myphoto {
     grid-area: myphoto;
-   
+    position: relative;
+    text-align: center;
 }
 
 .profile .myprofile-info .myphoto img {
     width: 200px;
 }
 
+.profile .myprofile-info .myphoto .change-photo {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile .myprofile-info .myphoto .change-photo button {
+    font-size: 14px;
+    border: none;
+    border-radius: 10px;
+    padding: 1px;
+    background: #fff;
+    position: absolute;
+}
+
 .profile .myprofile-info .profile-info {
     grid-area: profileinfo;
+    position: relative;
+    top: 20px;
 }
 
 .profile .myprofile-info .mydesc {

@@ -1718,8 +1718,96 @@ jQuery(function () {
  $('.tasks-content_container').on('mouseenter focus', check_file_path_tooltip);
  $('.tasks-content_container').on('mouseleave blur', check_file_path_tooltip);
 
-   //Tasks upload file path tooltip 
-   function submit_file_path(){
+
+// Task notes popup
+function task_notes(){
+
+   let tasknotes_btn = document.querySelectorAll('.tasknotes-btn');
+
+   for(let i = 0; tasknotes_btn.length > i; i++ ){
+
+      let task_note_td = $(tasknotes_btn[i]).parent();
+      let task_note_tooltip = $(task_note_td).find('.task_note_tooltip');
+
+      $(tasknotes_btn[i]).off().on('click', ()=> {
+
+         if($(task_note_tooltip).hasClass('d-none')) {
+   
+            $(task_note_tooltip).removeClass('d-none');
+ 
+         } else {
+            
+            $(task_note_tooltip).addClass('d-none');
+
+         }
+
+      });
+
+   }
+
+}
+task_notes();
+
+// Decline task notes popup
+function decline_task_notes(){
+
+   let decline_notes_btn = document.querySelectorAll('.decline_notes_btn');
+
+   for(let i = 0; decline_notes_btn.length > i; i++){
+
+      let declineTask_note_td = $(decline_notes_btn[i]).parent();
+      let declineTask_note_tooltip = $(declineTask_note_td).find('.declineTask_note_tooltip');
+
+      $(decline_notes_btn[i]).off().on('click', ()=> {
+
+         if($(declineTask_note_tooltip).hasClass('d-none')) {
+   
+            $(declineTask_note_tooltip).removeClass('d-none');
+ 
+         } else {
+            
+            $(declineTask_note_tooltip).addClass('d-none');
+
+         }
+
+      });
+
+   }
+
+}
+decline_task_notes()
+
+// Task title notes popup
+function task_title_popup(){
+
+   let task_title_btn = document.querySelectorAll('.task_title_btn');
+
+   for(let i = 0; task_title_btn.length > i; i++){
+
+      let task_title_td = $(task_title_btn[i]).parent();
+      let task_title_tooltip = $(task_title_td).find('.task_title_tooltip');
+
+      $(task_title_btn[i]).off().on('click', ()=> {
+
+         if($(task_title_tooltip).hasClass('d-none')) {
+   
+            $(task_title_tooltip).removeClass('d-none');
+ 
+         } else {
+            
+            $(task_title_tooltip).addClass('d-none');
+
+         }
+
+      });
+
+   }
+
+}
+task_title_popup()
+
+//Tasks upload file path tooltip 
+function submit_file_path(){
 
       let submitBtn = document.querySelectorAll('.submit-file-path');
 
@@ -2464,8 +2552,6 @@ jQuery(function () {
 
                   $(contentInfo).prependTo(contentInfoWrapper);
 
-                  console.log(employeeName);
-        
                   // For task table
                   $.ajax({
                      type: 'POST',
@@ -2519,10 +2605,16 @@ jQuery(function () {
                      $('.tasks-content_container').css('z-index', '10')   
                      $('.tasks-content').addClass('tasks-content_show');
               
-                     statusColor()
+                     statusColor();
+                     disable_previous_dates();
+                     tooltip();
+                     task_notes();
+                     decline_task_notes();
+                     task_title_popup();
+                     updateNewTask();
+                     closeTooltip();
 
                   }, 70);
-
                });
          }
       
@@ -2673,6 +2765,12 @@ jQuery(function () {
                      $('.tasks-content_container').on('mouseleave blur', check_file_path_tooltip);
                      check_file_path_tooltip();
 
+                     task_notes();
+                     decline_task_notes();
+                     task_title_popup();
+                     updateNewTask();
+                     closeTooltip();
+
                }, 10);
 
             },
@@ -2684,7 +2782,91 @@ jQuery(function () {
 
   }
   submitNewTask();
-  
+
+  function updateNewTask() {
+
+      let deleteTaskBtn = document.querySelectorAll('.deleteTask');
+      let updateTaskBtn = document.querySelectorAll('.updateTask');
+
+      for(let i = 0; deleteTaskBtn.length > i; i++){
+
+         $(deleteTaskBtn[i]).off().on('click', ()=> {
+
+            let tableRow = $(deleteTaskBtn[i]).parent().parent();
+            let taskId = $(tableRow).find('.taskId').attr('value');
+            let deleteText = 'delete';
+
+            $.ajax({
+               type: 'POST',
+               url: 'update-newTask.php',
+               data: {
+                  'deleteText': deleteText,
+                  'taskId': taskId
+               },
+               success: function(data) {
+                  alert("success", data);
+               },
+
+            });
+         });
+      }
+
+      for(let i = 0; updateTaskBtn.length > i; i++){
+
+         $(updateTaskBtn[i]).off().on('click', ()=> {
+
+            let tableRow = $(updateTaskBtn[i]).parent().parent();
+            let taskTitle = $($('.input_task_title')[i]).val();
+            let taskNotes = $($('.update_task_note')[i]).val();
+            let taskId = $(tableRow).find('.taskId').attr('value');
+
+            let dateStart = $(tableRow).find('.date_start').val();
+            let dueDate = $(tableRow).find('.due_date').val();
+
+            let newText = 'new';
+            
+            $.ajax({
+               type: 'POST',
+               url: 'update-newTask.php',
+               data: {
+                   'newText': newText,
+                   'taskId': taskId,
+                   'taskTitle': taskTitle,
+                   'taskNotes': taskNotes,
+                   'dateStart': dateStart,
+                   'dueDate': dueDate
+               },
+               success: function(data) {
+                  $('.user-tasks .content-table').html(data);
+                  // alert("success", data);
+               },
+            });
+
+         });
+
+      }
+
+  }
+  updateNewTask();
+
+  function closeTooltip(){
+
+   let updateBtn = document.querySelectorAll('.close-tooltip');
+
+      for(let i = 0; updateBtn.length > i; i++){
+         
+         let tooltip = $(updateBtn[i]).parent().parent().parent().parent().parent();
+
+         $(updateBtn[i]).off().on('click', ()=> {
+
+               $(tooltip).addClass('d-none');
+
+         });
+         
+      }
+
+  }
+  closeTooltip();
 
   function loading(){
 

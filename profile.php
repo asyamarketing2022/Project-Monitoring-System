@@ -1,14 +1,12 @@
 <?php $page = 'profile'; include 'header.php'; ?>
-<?php include 'sidebar.php'; ?>
-<?php include 'myprojects-table.php'; ?>
-<?php include 'assign-project.php'; ?>
-<?php include 'projectIncharge_table.php'; ?>
-<?php include 'view-myproject.php'; ?>
-<?php include 'picproject-table.php'; ?>
-<?php include 'project-history.php'; ?>
+<?php include_once 'sidebar.php'; ?>
+<?php include_once 'myprojects-table.php'; ?>
+<?php include_once 'assign-project.php'; ?>
+<?php include_once 'projectIncharge_table.php'; ?>
+<?php include_once 'view-myproject.php'; ?>
+<?php include_once 'picproject-table.php'; ?>
+<?php include_once 'project-history.php'; ?>
 <?/*php include 'assign-projectIncharge.php'; */?>
-
-
 
 <div class="grid-right__content">
     <div class="profile">
@@ -17,6 +15,9 @@
                 <div class="myprofile-info">
                     <div class="myphoto">
                         <img src="/img/placeholder-user.png" alt="">
+                        <div class="change-photo">
+                            <button><a href="#">Change Photo</a></button>
+                        </div>
                     </div>
                     <div class="profile-info">
                         <?php if(isset($_SESSION['UserLogin'])){ ?>

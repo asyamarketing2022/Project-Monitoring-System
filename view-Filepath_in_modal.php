@@ -35,7 +35,7 @@ if(isset($_POST['projectId'])){
                         <td>" . $file_path_info['file_name'] . "</td>
                         <td>" . $file_path_info['added_at'] . "</td>
                         <td>" . $file_path_info['uploaded_by'] . "</td>
-                        <td><button type='button' class='btn btn-secondary tooltip-btn' data-bs-toggle='tooltip' data-bs-placement='bottom' title='" . $file_path_info['notes'] . "'>Notes</button>
+                        <td><button type='button' class='btn btn-secondary tooltip-btn' data-bs-toggle='tooltip' data-bs-placement='bottom' title='" . $file_path_info['notes'] . "' data-placement='bottom'>Notes</button>
                         
                         </td>
                         <td>
