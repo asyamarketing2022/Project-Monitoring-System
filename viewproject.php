@@ -351,7 +351,7 @@ $row = $project->fetch_assoc();
                                         <textarea class='newTask_notes' name="notes" id="" cols="30" rows="10" required></textarea>
                                     </div>
                                     <div class="button-wrapper">
-                                        <input class='submit-button submit-new-task' type="button" value='Add' required>
+                                        <input class='submit-button submit-new-task' type="button" value='Submit' required>
                                     </div>
                                 </div>
                             </div>

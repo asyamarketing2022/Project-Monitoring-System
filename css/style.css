@@ -582,6 +582,8 @@ button.deleteTask {
     /* padding: 15px; */
     border-radius: 5px;
     box-shadow: 1px 4px 5px 3px rgba(0,0,0,0.3);
+    overflow: auto;
+    max-height: 600px;
 }
 
 .notif-list .notif_container  .notif_box {
@@ -1113,7 +1115,8 @@ button.deleteTask {
     grid-template-columns: 35% 65%;
     grid-template-areas: 'myphoto profileinfo profileinfo'
     'mydesc mydesc mydesc';
-
+    height: 0;
+    grid-row-gap: 15px;
 }
 
 .profile .myprofile-info .profile-info__content {
@@ -1124,10 +1127,14 @@ button.deleteTask {
     grid-area: myphoto;
     position: relative;
     text-align: center;
+    top: 20px;
 }
 
 .profile .myprofile-info .myphoto img {
     width: 200px;
+    height: 150px;
+    clip-path: circle();
+    object-fit: contain;
 }
 
 .profile .myprofile-info .myphoto .change-photo {
@@ -1136,15 +1143,29 @@ button.deleteTask {
     flex-wrap: nowrap;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
 
-.profile .myprofile-info .myphoto .change-photo button {
+.profile .myprofile-info .myphoto .change-photo button.change-photo-btn {
     font-size: 14px;
     border: none;
     border-radius: 10px;
     padding: 1px;
     background: #fff;
+    /* position: absolute; */
+}
+
+.profile .myprofile-info .myphoto .change-photo .profile-photo_form {
     position: absolute;
+    top: 25px;
+    left: 30px;
+    width: 450px;
+    background: #fff;
+    border: 1px solid;
+    z-index: 15;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 1px 4px 5px 3px rgba(0,0,0,0.3);
 }
 
 .profile .myprofile-info .profile-info {
@@ -1155,6 +1176,39 @@ button.deleteTask {
 
 .profile .myprofile-info .mydesc {
     grid-area: mydesc;
+}
+
+.profile .myprofile-info .mydesc .edit-bio {
+    position: relative;
+}
+
+.profile .myprofile-info .mydesc .edit-bio .edit_bio_tooltip {
+    position: absolute;
+    width: 550px;
+    right: 0;
+    top: -150px;
+    background: #fff;
+    border: 1px solid;
+    z-index: 15;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 1px 4px 5px 3px rgba(0,0,0,0.3);
+}
+
+.profile .myprofile-info .mydesc .edit-bio button.edit_bio_btn {
+    font-size: 14px;
+    border: none;
+    border-radius: 10px;
+    padding: 1px;
+    background: #fff;
+}
+
+.profile .myprofile-info .mydesc .edit-bio button.edit_bio_btn a {
+    font-size: 14px;
+    border: none;
+    border-radius: 10px;
+    padding: 1px;
+    background: #fff;
 }
 
 .profile .myprojects .content-table {

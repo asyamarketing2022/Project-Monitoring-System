@@ -57,8 +57,8 @@ if(isset($_POST['projectId'])) {
                         <table>
                             <tbody>
                                 <tr>
-                                    <th>Task Title Add-newtask.php</th>
-                                    <th>Notes</th>
+                                    <th>Task Title</th>
+                                    <th>Task Notes</th>
                                     <th>Date Started</th>
                                     <th>Due Date</th>
                                     <th>Status</th>

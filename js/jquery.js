@@ -2734,7 +2734,7 @@ function submit_file_path(){
                projectName: projectName
             },
             success: function (data) {
-               // alert("success", data);
+               alert("Sent New Task", data);
                // window.location.reload();
                $('.user-tasks .content-table').html(data);
                $('.addNewTask_form_container').css('display', 'none');
@@ -2792,6 +2792,11 @@ function submit_file_path(){
 
          $(deleteTaskBtn[i]).off().on('click', ()=> {
 
+            let projectId = $('#projectTitle').attr('value');
+            let projectName = $('#projectTitle').text();
+            let employeeId = $('.userId').attr('value');
+            let phase_of_work = $('.searchEmployee_pow').text();
+            let services = $('.searchEmployee_service').text();
             let tableRow = $(deleteTaskBtn[i]).parent().parent();
             let taskId = $(tableRow).find('.taskId').attr('value');
             let deleteText = 'delete';
@@ -2800,14 +2805,30 @@ function submit_file_path(){
                type: 'POST',
                url: 'update-newTask.php',
                data: {
+                  'projectId': projectId,
+                  'projectName': projectName,
+                  'employeeId': employeeId,
+                  'phase_of_work': phase_of_work,
+                  'services': services,
                   'deleteText': deleteText,
                   'taskId': taskId
                },
                success: function(data) {
-                  alert("success", data);
-               },
+                  $('.user-tasks .content-table').html(data);
+                  // alert("success", data);
 
+                  statusColor();
+                  disable_previous_dates();
+                  tooltip();
+                  task_notes();
+                  decline_task_notes();
+                  task_title_popup();
+                  updateNewTask();
+                  closeTooltip();
+
+               },
             });
+
          });
       }
 
@@ -2815,11 +2836,16 @@ function submit_file_path(){
 
          $(updateTaskBtn[i]).off().on('click', ()=> {
 
+            let projectId = $('#projectTitle').attr('value');
+            let projectName = $('#projectTitle').text();
+            let employeeId = $('.userId').attr('value');
+            let phase_of_work = $('.searchEmployee_pow').text();
+            let services = $('.searchEmployee_service').text();
+
             let tableRow = $(updateTaskBtn[i]).parent().parent();
             let taskTitle = $($('.input_task_title')[i]).val();
             let taskNotes = $($('.update_task_note')[i]).val();
             let taskId = $(tableRow).find('.taskId').attr('value');
-
             let dateStart = $(tableRow).find('.date_start').val();
             let dueDate = $(tableRow).find('.due_date').val();
 
@@ -2829,16 +2855,30 @@ function submit_file_path(){
                type: 'POST',
                url: 'update-newTask.php',
                data: {
-                   'newText': newText,
-                   'taskId': taskId,
-                   'taskTitle': taskTitle,
-                   'taskNotes': taskNotes,
-                   'dateStart': dateStart,
-                   'dueDate': dueDate
+                  'employeeId': employeeId,
+                  'phase_of_work': phase_of_work,
+                  'services': services,
+                  'projectId': projectId,
+                  'projectName': projectName,
+                  'newText': newText,
+                  'taskId': taskId,
+                  'taskTitle': taskTitle,
+                  'taskNotes': taskNotes,
+                  'dateStart': dateStart,
+                  'dueDate': dueDate
                },
                success: function(data) {
                   $('.user-tasks .content-table').html(data);
                   // alert("success", data);
+
+                  statusColor();
+                  disable_previous_dates();
+                  tooltip();
+                  task_notes();
+                  decline_task_notes();
+                  task_title_popup();
+                  updateNewTask();
+                  closeTooltip();
                },
             });
 
@@ -2867,6 +2907,66 @@ function submit_file_path(){
 
   }
   closeTooltip();
+
+  function changePhoto(){
+      let change_photo_btn = document.querySelector('.change-photo-btn');
+      let change_photo_wrapper = $(change_photo_btn).parent();
+      let profile_photo_form = $(change_photo_wrapper).children('.profile-photo_form');
+
+      $(change_photo_btn).off().on('click', ()=> {
+
+         if($(profile_photo_form).hasClass('d-none')) {
+   
+            $(profile_photo_form).removeClass('d-none');
+       
+         } else {
+                  
+            $(profile_photo_form).addClass('d-none');
+   
+          }
+      });
+
+  }
+  changePhoto()
+
+  function editBio(){
+      let edit_bio_btn = document.querySelector('.edit_bio_btn');
+      let edit_bio_wrapper = $(edit_bio_btn).parent();
+      let edit_bio_tooltip = $(edit_bio_wrapper).children('.edit_bio_tooltip');
+      let submit_bio_btn = document.querySelector('.submit-bio');
+
+      $(edit_bio_btn).off().on('click', ()=> {
+
+            if($(edit_bio_tooltip).hasClass('d-none')) {
+      
+               $(edit_bio_tooltip).removeClass('d-none');
+          
+            } else {
+                     
+               $(edit_bio_tooltip).addClass('d-none');
+      
+            }
+      });
+
+      $(submit_bio_btn).off().on('click', ()=> {
+
+         let new_bio_text = $('.bio-textarea').val();
+
+         $.ajax({
+            type: 'POST',
+            url: 'update-bio.php',
+            data: {
+               'new_bio_text': new_bio_text,
+            },
+            success: function(data) {
+               // $('.current-bio').html(data);
+               window.location.reload();
+            },
+         });
+
+      });
+  }
+  editBio()
 
   function loading(){
 
