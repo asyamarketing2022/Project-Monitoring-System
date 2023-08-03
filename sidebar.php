@@ -1,7 +1,8 @@
-<?php include 'login.php'; ?>
-<?php include 'notification-box.php'; ?>
-<?php include 'notification-task.php'; ?>
-
+<?php include_once 'login.php'; ?>
+<?php include_once 'notification-box.php'; ?>
+<?php include_once 'notification-task.php'; ?>
+<?php include_once 'users-table.php'; ?>
+<?php include_once 'userProfile.php'; ?>
 
 <div class="manage-project__wrapper">
 
@@ -28,7 +29,11 @@
 
                 <?php } ?>
 
-                <li><img src="img/placeholder-user.png" width="50px" alt=""></li>
+
+                <!-- for php code users-table.php -->
+                <li><img class='top-profile-photo' src="img/upload/<?php echo $user_profile['user_image']; ?>"  width="50px" alt=""></li>
+
+
                 <li><a href="logout.php"><i class="fa fa-arrow-down"></i></a></li>
             </ul>
 
@@ -74,7 +79,7 @@
 
                 <li class="<?php if($page=='project'){echo 'active';} ?>" ><a href="/project.php"><i class="fa fa-clipboard"></i> Projects</a></li>
                 <li class="<?php if($page=='profile'){echo 'active';} ?>"><a href="/profile.php"> <i class="fa fa-users"></i> Profile</a></li>
-                <li class="<?php if($page=='usersReport'){echo 'active';} ?>"><a href="/usersReport.php"><i class="fa fa-newspaper-o"></i>Users Report</a></li>
+                <li class="<?php if($page=='usersReport'){echo 'active';} ?>"><a href="/usersReport.php"><i class="fa fa-newspaper-o"></i>Users Log</a></li>
                 <li><a href="#"><i class="fa fa-bitcoin"></i> Financial</a></li>
                 
             </ul>

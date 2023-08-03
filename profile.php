@@ -1,13 +1,13 @@
 <?php $page = 'profile'; include 'header.php'; ?>
 <?php include_once 'sidebar.php'; ?>
-<?php include_once 'myprojects-table.php'; ?>
 <?php include_once 'assign-project.php'; ?>
 <?php include_once 'projectIncharge_table.php'; ?>
 <?php include_once 'view-myproject.php'; ?>
 <?php include_once 'picproject-table.php'; ?>
 <?php include_once 'project-history.php'; ?>
-<?php include_once 'show-profile-photo.php'; ?>
-
+<?php include_once 'tasks-new.php'; ?>
+<?php include_once 'tasks-table-profile.php'; ?>
+<?php include_once 'userProfile.php'; ?>
 <?/*php include 'assign-projectIncharge.php'; */?>
 
 <div class="grid-right__content">
@@ -17,7 +17,7 @@
                 <div class="myprofile-info">
                     <div class="myphoto">
                       
-                        <img src="img/upload/<?php echo $userInfo['user_image']; ?>" alt="">
+                        <img src="img/upload/<?php echo $user_profile['user_image']; ?>" alt="">
 
                         <div class="change-photo">
                             <button class='change-photo-btn'><a href="#">Change Photo</a></button>
@@ -48,7 +48,7 @@
                     </div>
                     <div class="mydesc">
                         <h3>About</h3>
-                        <p class='current-bio'><?php echo $userInfo['user_bio']; ?></p>
+                        <p class='current-bio'><?php echo $user_profile['user_bio']; ?></p>
                         <div class="edit-bio">
                             <button class="edit_bio_btn"><a href="#">Edit</a></button>
                             <div class="edit_bio_tooltip d-none">
@@ -95,65 +95,89 @@
                                     <th></th>
                                 </tr>
 
-                                <!-- myprojects-table.php -->
+                                <!-- tasks-new.php -->
 
-                                    <?php if(!empty($userProject['id'])) { ?>
+                                    <?php if(!empty($newTasks_info['id'])) { ?>
 
                                         <?php do { ?>
 
-                                            <?php if($userProject['invite_status'] != 'delete') { ?>
+                                            <a href="">
+                                            <?php if($newTasks_info['invite_status'] == 'new'){ ?>
 
-                                                <tr class="task-table_row" value="<?php echo $userProject['id']; ?>">
-                                                    <td><?php echo $userProject['project_name']; ?></td>
-                                                    <td><?php echo $userProject['services']; ?></td>
-                                                    <td><?php echo $userProject['phase_of_work']; ?></td>
-                                                    <td><?php echo $userProject['task_title']; ?></td>
-                                                    <td><?php echo $userProject['date_started']; ?></td>
-                                                    <td><?php echo $userProject['due_date']; ?></td>
-                                                    <td><?php echo $userProject['status']; ?></td>
-                                                    <td class='invite_status_td'>
-
-                                                        <?php if($userProject['invite_status'] == 'new'){ ?>
-
-                                                        <button class='new-task-btn'>
-                                                            <?php echo $userProject['invite_status']; ?>
-                                                        </button>
-                                                        <div class="invite_status_tooltip d-none">
-                                                            <div class="invite_status_wrapper">
-                                                                <div class="invite_status_form">
-                                                                    <div class="content-info__wrapper">
-                                                                        <div class="button-wrapper pb-0">
-                                                                            <button class='accept' type='button'><span>Accept</span>
-                                                                                <img class='check-icon' src="img/check-solid-white.svg" alt="">
-                                                                            </button>
-                                                                            <button class='decline' type='button'>Decline 
-                                                                                <img class='x-icon' src="img/x-solid-white.svg" alt="">
-                                                                            </button>
-                                                                        </div>
-                                                                        <div class="decline-note_wrapper pt-3 d-none">
-                                                                            <div class="content__info">
-                                                                                <span>Notes:</span>
-                                                                                <textarea class="decline-notes" name="notes" id="" cols="25" rows="5"  placeholder="Why you decline the task?" required></textarea>
+                                                    <tr class="task-table_row table-row-green" value="<?php echo $newTasks_info['id']; ?>">
+                                                        
+                                                        <td><?php echo $newTasks_info['project_name']; ?></td>
+                                                        <td><?php echo $newTasks_info['services']; ?></td>
+                                                        <td><?php echo $newTasks_info['phase_of_work']; ?></td>
+                                                        <td><?php echo $newTasks_info['task_title']; ?></td>
+                                                        <td><?php echo $newTasks_info['date_started']; ?></td>
+                                                        <td><?php echo $newTasks_info['due_date']; ?></td>
+                                                        <td><?php echo $newTasks_info['status']; ?></td>
+                                                        <td class='invite_status_td'>
+                                                            <button class='new-task-btn'>
+                                                                <?php echo $newTasks_info['invite_status']; ?>
+                                                            </button>
+                                                            <div class="invite_status_tooltip d-none">
+                                                                <div class="invite_status_wrapper">
+                                                                    <div class="invite_status_form">
+                                                                        <div class="content-info__wrapper">
+                                                                            <div class="button-wrapper pb-0">
+                                                                                <button class='accept' type='button'><span>Accept</span>
+                                                                                    <img class='check-icon' src="img/check-solid-white.svg" alt="">
+                                                                                </button>
+                                                                                <button class='decline' type='button'>Decline 
+                                                                                    <img class='x-icon' src="img/x-solid-white.svg" alt="">
+                                                                                </button>
                                                                             </div>
-                                                                            <div class="button-wrapper">
-                                                                                <input class="submit-button submit-decline" name="" type="submit" value="Submit">
+                                                                            <div class="decline-note_wrapper pt-3 d-none">
+                                                                                <div class="content__info">
+                                                                                    <span>Notes:</span>
+                                                                                    <textarea class="decline-notes" name="notes" id="" cols="25" rows="5"  placeholder="Why you decline the task?" required></textarea>
+                                                                                </div>
+                                                                                <div class="button-wrapper">
+                                                                                    <input class="submit-button submit-decline" name="" type="submit" value="Submit">
+                                                                                </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <?php } else { ?>
-                                                            <span><?php echo $userProject['invite_status']; ?></span>
-                                                        <?php } ?>
-                                                    </td>
-                                                </tr>
+                                                        </td>
+                                                 
+                                                    </tr>
 
                                             <?php } ?>
 
-                                        <?php } while($userProject = $myProjects->fetch_assoc()); ?>
+                                            </a>
+                                        <?php } while($newTasks_info = $newTasks->fetch_assoc()); ?>
+                                        
 
                                     <?php } ?>
+
+                                <!-- tasks-table-profile.php -->
+
+                                <?php if(!empty($tasks_info['id'])) { ?>
+
+                                    <?php do { ?>
+
+                                        <?php if($tasks_info['invite_status'] == 'accept' || $tasks_info['invite_status'] == 'decline') { ?>
+
+                                                <tr class="task-table_row clickable-row" data-href='http://dev.pms.local/viewproject.php?ID=<?php echo $tasks_info['project_id'] ?>' value="<?php echo $tasks_info['id']; ?>">
+                                                    <td><?php echo $tasks_info['project_name']; ?></td>
+                                                    <td><?php echo $tasks_info['services']; ?></td>
+                                                    <td><?php echo $tasks_info['phase_of_work']; ?></td>
+                                                    <td><?php echo $tasks_info['task_title']; ?></td>
+                                                    <td><?php echo $tasks_info['date_started']; ?></td>
+                                                    <td><?php echo $tasks_info['due_date']; ?></td>
+                                                    <td><?php echo $tasks_info['status']; ?></td>
+                                                    <td><?php echo $tasks_info['invite_status'] ?></td>
+                                                </tr>
+                                       
+                                        <?php } ?>
+
+                                    <?php } while($tasks_info = $tasks->fetch_assoc()); ?>
+
+                                <?php } ?>
 
                             </tbody>
                         </table>

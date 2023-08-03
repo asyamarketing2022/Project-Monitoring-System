@@ -23,6 +23,18 @@ if(isset($_POST['employee-name'])) {
 
 }
 
+if(isset($_POST['userPhoto'])) {
+
+    $fullName = $_POST['fullName'];
+    $userPhoto = $_POST['userPhoto'];
+    $employeeId = $_POST['employeeId'];
+    
+    echo "<img class='photoCircle' src='$userPhoto' alt='' width='200'>
+        <h3>$fullName</h3>
+        <span class='employeeId d-none' value='$employeeId'><strong>Employee Id:</strong> $employeeId</span>";
+
+}
+
 if(isset($_POST['userId'])) {
 
     $userId = $_POST['userId'];
@@ -43,7 +55,7 @@ if(isset($_POST['userId'])) {
 
         $declineTask .= "
             <table>
-                <h3 class='pt-5'>Decline Tasks</h3>
+                <h3 class='pt-3'>Decline Tasks</h3>
                 <tbody>
                     <tr>
                         <th>Task Title</th>
@@ -264,15 +276,5 @@ if(isset($_POST['userId'])) {
     
 }
 
-if(isset($_POST['userPhoto'])) {
 
-    $fullName = $_POST['fullName'];
-    $userPhoto = $_POST['userPhoto'];
-    $employeeId = $_POST['employeeId'];
-    
-    echo "<img src='$userPhoto' alt='' width='200'>
-        <h3>$fullName</h3>
-        <span class='employeeId d-none' value='$employeeId'><strong>Employee Id:</strong> $employeeId</span>";
-
-}
 ?>
