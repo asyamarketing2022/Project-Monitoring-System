@@ -30,7 +30,7 @@ if(isset($_POST['employeeAssigned_id'])) {
 
         echo "<div class='user_container' value='" . $assignedEmployeeInfo['ID'] . "'>
                 <div class='user_photo'>
-                    <img src='img/userImage/" . $assignedEmployeeInfo['user_image'] . "' alt='' width='200'>
+                    <img class='photoCircle' src='img/upload/" . $assignedEmployeeInfo['user_image'] . "' alt='' width='200'>
                     <button><a href='#'>View Profile</a></button>
                 </div>
                 <div class='user_info'>

@@ -1,9 +1,10 @@
 <?php $page = 'admin'; include 'header.php'; ?>
-<?php include 'register-user.php'; ?>
+<?php include 'add-new-user.php'; ?>
 <?php include 'update-user.php'; ?>
 <?/*php include 'edit-user.php'; */?>
 <?php include 'users-table.php'; ?>
 <?php include("sidebar.php"); ?>
+<?php include_once 'userProfile.php'; ?>
 
 <?php 
 
@@ -94,7 +95,7 @@ if(isset($_POST['userID'])) {
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <span class="modal-title">Account Settings Add</span>
+      <span class="modal-title">Add New User</span>
       <!-- Tab -->
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item">
@@ -107,7 +108,7 @@ if(isset($_POST['userID'])) {
         <div class="profile-picture">
             <img src="/img/placeholder-user.png" alt="" width="250px">
             <div class="change-button">
-                CHANGE
+                Profile Photo
             </div>
         </div>
             <form id="profile-form" action="" method="post">

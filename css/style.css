@@ -48,6 +48,12 @@ a {
     background: linear-gradient(180deg, rgba(221,92,81,1) 0%, rgba(218,81,70,1) 35%, rgba(221,92,81,1) 100%);
 }
 
+.close {
+    font-size: 40px;
+    background: #fff;
+    border: 0;
+}
+
 .decline-td {
     text-align: center;
     /* background: #e96969; */
@@ -127,6 +133,10 @@ button.deleteTask {
     padding: 0 40px;
 }
 
+.table-row-green {
+    background: #a8c7a8 !important;
+}
+
 .tasks-content_container {
     position: absolute;
     left: 47%;
@@ -160,7 +170,7 @@ button.deleteTask {
 }
 
 .tasks-content .user_photo img {
-    width: 100px;
+    width: 150px;
 }
 
 .tasks-content .user_photo h3 {
@@ -183,7 +193,7 @@ button.deleteTask {
 .tasks-content .user-tasks .addNewTaskBtn {
     position: absolute;
     top: 0;
-    right: 0;
+    right: 2%;
 }
 
 .tasks-content .user-tasks .upload_filepath_td {
@@ -243,7 +253,7 @@ button.deleteTask {
     position: absolute;
     display: none;
     top: 0;
-    right: 3%;
+    right: 5%;
     z-index: 15;
 }
 
@@ -520,6 +530,12 @@ button.deleteTask {
     height: 55px;
 }
 
+.top-bar .userLog .top-profile-photo {
+    clip-path: circle();
+    object-fit: contain;
+    height: 35px;
+}
+
 .top-bar .userLog ul {
     display: flex;
     flex-direction: row;
@@ -527,6 +543,9 @@ button.deleteTask {
     justify-content: flex-end;
     align-items: center;
     align-content: flex-end;
+    margin: 0;
+    position: relative;
+    top: 10px;
 }
 
 .top-bar .userLog ul li {
@@ -575,7 +594,7 @@ button.deleteTask {
 .notif-list .notif_container {
     position: absolute;
     right: 130px;
-    top: -25px;
+    top: 10px;
     /* background: #F4F4F4; */
     background: #fff;
     border-radius: 5px;
@@ -1001,6 +1020,11 @@ button.deleteTask {
     z-index: 200;
 }
 
+input.form-check-input {
+    border: 1.5px solid #978e8e;
+    border-radius: 0;
+}
+
 .pow_wrapper, .dept_list {
     display: grid;
     grid-template-columns: repeat(auto-fit,minmax(100px,1fr));
@@ -1123,6 +1147,17 @@ button.deleteTask {
     grid-gap: 10px;
 }
 
+.photoCircle {
+    height: 150px;
+    clip-path: circle();
+    object-fit: contain;
+}
+
+.mini-photo {
+    width: 30px;
+    height: 30px;
+}
+
 .profile .myprofile-info .myphoto {
     grid-area: myphoto;
     position: relative;
@@ -1232,6 +1267,21 @@ button.deleteTask {
     font-weight: 700;
     font-size: 13px;
     padding: 10px;
+}
+
+.profile .myprojects .content-table table .invite_status_td button.new-task-btn {
+    font-size: 14px;
+    border: 1px solid #fff;
+    width: 100%;
+    padding: 1px;
+    background: #459745;
+    color: #fff;
+    font-weight: 700;
+}
+
+.profile .myprojects .content-table table .invite_status_td button.new-task-btn:hover {
+
+
 }
 
 .profile .myprojects .content-table table .invite_status_td {

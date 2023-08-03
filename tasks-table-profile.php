@@ -20,8 +20,9 @@ $con = $db->connection();
 $userID = $_SESSION['UserId'];
     
 $sql = "SELECT * FROM employees_tasks WHERE employee_id = '$userID'";
-$myProjects = $con->query($sql) or die ($con->error);
-$userProject = $myProjects->fetch_assoc();
+$tasks = $con->query($sql) or die ($con->error);
+$tasks_info = $tasks->fetch_assoc();
+
 
 
 ?>

@@ -37,9 +37,9 @@ $con = $db->connection();
 
                         if($num == 0){
 
-                            echo "<div class='user_container 1111' value='" . $query_employee['ID'] . "'>
+                            echo "<div class='user_container' value='" . $query_employee['ID'] . "'>
                                 <div class='user_photo'>
-                                    <img class='m-0' src='img/userImage/" . $query_employee['user_image'] . "' alt='' width='100'>
+                                    <img class='photoCircle m-0' src='img/upload/" . $query_employee['user_image'] . "' alt='' width='100'>
                                     <button class='selectBtn'><a href='#'>Select Employee</a></button>
                                 </div>
                                     <div class='user_info'>
@@ -87,9 +87,9 @@ $con = $db->connection();
             foreach($query_run as $query_employee)
             {
                
-             echo "<div class='user_container 222' value='" . $query_employee['ID'] . "'>
+             echo "<div class='user_container' value='" . $query_employee['ID'] . "'>
                         <div class='user_photo'>
-                            <img class='m-0' src='img/userImage/" . $query_employee['user_image'] . "' alt='' width='100'>
+                            <img class='photoCircle m-0' src='img/upload/" . $query_employee['user_image'] . "' alt='' width='100'>
                             <button class='selectBtn'><a href='#'>Select Employee</a></button>
                         </div>
                         <div class='user_info'>
@@ -127,9 +127,9 @@ $con = $db->connection();
 
             do {
 
-                echo "<div class='user_container 333' value='" . $query_employee['ID'] . "'>
+                echo "<div class='user_container' value='" . $query_employee['ID'] . "'>
                             <div class='user_photo'>
-                                <img class='m-0' src='img/userImage/" . $query_employee['user_image'] . "' alt='' width='100'>
+                                <img class='photoCircle m-0' src='img/upload/" . $query_employee['user_image'] . "' alt='' width='100'>
                                 <button class='selectBtn'><a href='#'>Select Employee</a></button>
                             </div>
                             <div class='user_info'>
@@ -183,9 +183,9 @@ $con = $db->connection();
     
                             if($num == 0){
     
-                                echo "<div class='user_container 4444' value='" . $query_employee['ID'] . "'>
+                                echo "<div class='user_container' value='" . $query_employee['ID'] . "'>
                                     <div class='user_photo'>
-                                        <img class='m-0' src='img/userImage/" . $query_employee['user_image'] . "' alt='' width='100'>
+                                        <img class='photoCircle m-0' src='img/upload/" . $query_employee['user_image'] . "' alt='' width='100'>
                                         <button class='selectBtn'><a href='#'>Select Employee</a></button>
                                     </div>
                                         <div class='user_info'>

@@ -2,7 +2,6 @@
 <?php include 'add-project.php'; ?>
 <?php include 'update-project.php'; ?>
 <?php include 'project-table.php'; ?>
-<?php include 'users-table.php'; ?>
 <?php include 'managers-table.php'; ?>
 <?php include 'assign-project.php'; ?>
 <?php include 'project-history.php'; ?>
@@ -53,7 +52,6 @@
                         <th>Typology</th>
                         <th>Company Name</th>
                         <th>Client Name</th>
-                        <th></th>
                         <th></th>
                     </tr>
                     

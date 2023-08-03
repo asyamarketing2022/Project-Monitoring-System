@@ -23,7 +23,7 @@ if(isset($_POST['managerPhotoId'])) {
 
         echo "<div class='user_container' value='" . $managerInfo['ID'] . "'>
                 <div class='user_photo'>
-                    <img src='img/userImage/" . $managerInfo['user_image'] . "' alt='' width='200'>
+                    <img class='photoCircle' src='img/upload/" . $managerInfo['user_image'] . "' alt='' width='200'>
                     <button><a href='#'>View Profile</a></button>
                 </div>
                 <div class='user_info'>

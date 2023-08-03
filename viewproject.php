@@ -340,11 +340,11 @@ $row = $project->fetch_assoc();
                                     </div>
                                     <div class="content__info">
                                         <span>Date Start:</span>
-                                        <input class='date_start dis_previous_dates' name='dateStart' type="date" required>
+                                        <input class='date_start dis_previous_dates new_task_dateStart' name='dateStart' type="date" required>
                                     </div>
                                     <div class="content__info">
                                         <span>Due Date:</span>
-                                        <input class='date_end dis_previous_dates' name='dueDate' type="date" required>
+                                        <input class='date_end dis_previous_dates new_task_dueDate' name='dueDate' type="date" required>
                                     </div>
                                     <div class="content__info">
                                         <span>Notes</span>

@@ -9,7 +9,7 @@ $con = $db->connection();
 $userID = $_SESSION['UserId'];
 
 $sql = "SELECT * FROM registered_users WHERE ID = '$userID'";
-$users = $con->query($sql) or die ($con->error);
-$userInfo = $users->fetch_assoc()
+$userProfile = $con->query($sql) or die ($con->error);
+$user_profile = $userProfile->fetch_assoc()
 
 ?>

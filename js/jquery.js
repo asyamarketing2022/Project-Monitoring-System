@@ -2693,8 +2693,8 @@ function submit_file_path(){
       let phase_of_work = $('.searchEmployee_pow').text();
       let services = $('.searchEmployee_service').text();
       let taskTitle = $('.taskTitle_field').val();
-      let dateStart = $('.date_start').val();
-      let dateEnd = $('.date_end').val();
+      let dateStart = $('.new_task_dateStart').val();
+      let dateEnd = $('.new_task_dueDate').val();
       let newTask_notes = $('.newTask_notes').val();
 
       let projectName = $('#projectTitle').text();
@@ -2703,11 +2703,11 @@ function submit_file_path(){
    
          alert('Fill-up Task Title');
 
-      } else if(!$('.date_start').val()) {
+      } else if(!$('.new_task_dateStart').val()) {
 
          alert('Select Date Start');
 
-      } else if(!$('.date_end').val()) {
+      } else if(!$('.new_task_dueDate').val()) {
 
          alert('Select Due Date');
 
@@ -2967,6 +2967,38 @@ function submit_file_path(){
       });
   }
   editBio()
+
+  function taskTable(){
+
+   // $.ajax({
+   //    type: 'POST',
+   //    url: 'taskTable.php',
+   //    data: {
+   //       'new_bio_text': new_bio_text,
+   //    },
+   //    success: function(data) {
+   //       // $('.current-bio').html(data);
+   //       window.location.reload();
+   //    },
+   // });
+
+  }
+  taskTable()
+
+  function linkTask(){
+
+      let clickable_row = document.querySelectorAll('.clickable-row');
+
+      for(let i = 0; clickable_row.length > i; i++){
+
+         $(clickable_row[i]).on('click', ()=> {
+            window.location = $(clickable_row[i]).data("href");
+        });
+
+      }
+
+  }
+  linkTask()
 
   function loading(){
 
