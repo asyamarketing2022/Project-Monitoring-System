@@ -695,6 +695,8 @@ button.deleteTask {
     /* background-color: #f6f6f6; */
     background-color: #fff;
     max-height: 100%;
+    overflow-y: auto;
+    height: 94vh;;
 }
 
 .manage-employee__content {

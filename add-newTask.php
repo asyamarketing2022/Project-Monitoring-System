@@ -23,8 +23,9 @@ if(isset($_POST['projectId'])) {
     $projectName = $_POST['projectName'];
     $userfirstName = $_SESSION['UserLogin'];
     $userlastName = $_SESSION['Userlname'];
+    $managerId = $_SESSION['UserId'];
 
-    $sql = "INSERT INTO `employees_tasks`(`project_id`, `project_name`, `services`, `phase_of_work`, `employee_id`, `employee_name`, `task_title`, `notes`, `date_started`, `due_date`, `status`, `invite_status`, `sent_by`) VALUES ('$projectId', '$projectTitle', '$services', '$phase_of_work', '$employeeId', '$employeeName', '$taskTitle', '$new_task_notes', '$dateStart', '$dateEnd', '$status', '$invite_status', '$userfirstName $userlastName')";
+    $sql = "INSERT INTO `employees_tasks`(`project_id`, `project_name`, `services`, `phase_of_work`, `employee_id`, `employee_name`, `task_title`, `notes`, `date_started`, `due_date`, `status`, `invite_status`, `sent_by`, `manager_id`) VALUES ('$projectId', '$projectTitle', '$services', '$phase_of_work', '$employeeId', '$employeeName', '$taskTitle', '$new_task_notes', '$dateStart', '$dateEnd', '$status', '$invite_status', '$userfirstName $userlastName', '$managerId')";
 
     $con->query($sql) or die ($con->error);
 
@@ -43,6 +44,7 @@ if(isset($_POST['projectId'])) {
             <h3 class='pt-5'>Decline Tasks</h3>
             <tbody>
                 <tr>
+                    <th class='d-none'>Manager Id</th>
                     <th>Task Title</th>
                     <th>Decline Notes</th>
                     <th>Task Notes</th>
@@ -57,6 +59,7 @@ if(isset($_POST['projectId'])) {
                         <table>
                             <tbody>
                                 <tr>
+                                    <th class='d-none'>Manager Id</th>
                                     <th>Task Title</th>
                                     <th>Task Notes</th>
                                     <th>Date Started</th>
@@ -71,11 +74,12 @@ if(isset($_POST['projectId'])) {
             if($row['invite_status'] == 'accept'){
 
             $output .= "<tr>
+                            <td class='managerId d-none' value='". $row['manager_id'] ."'>". $row['manager_id'] ."</td>
                             <td class='taskId d-none' value='". $row['id'] ."'>". $row['id'] ."</td>
                             <td class='taskTitle'>". $row['task_title'] ."</td>
                             <td>". $row['notes'] ."</td>
-                            <td>". $row['date_started'] ."</td>
-                            <td>". $row['due_date'] ."</td>
+                            <td class='taskStarted'>". $row['date_started'] ."</td>
+                            <td class='taskDue-Date'>". $row['due_date'] ."</td>
                             <td class='pow_status'>
                                 <div class='text_status'>
                                     <span>" . $row['status'] . "</span> 
@@ -159,6 +163,7 @@ if(isset($_POST['projectId'])) {
             } elseif($row['invite_status'] == 'decline') {   
             
                 $declineTask .= "<tr>
+                <td class='managerId d-none' value='". $row['manager_id'] ."'>". $row['manager_id'] ."</td>
                 <td class='taskId d-none' value='". $row['id'] ."'>". $row['id'] ."</td>
                 <td class='task_title_td'>
                     <button type='button' class='btn btn-secondary tooltip-btn task_title_btn' data-bs-toggle='tooltip' data-bs-placement='bottom' title='" . $row['task_title'] . "' data-placement='bottom'>Task Title</button>

@@ -10,9 +10,13 @@ if(!isset($_SESSION))
 
 $userID = $_SESSION['UserId'];
 
-// $sql = "SELECT notif_status FROM project_history WHERE employee_id = $userID";
+// $sql = "SELECT * FROM project_history WHERE employee_id = $userID";
+// $notif = $con->query($sql) or die ($con->error);
+// $notif_info = $notif->fetch_assoc();
+
 $sql = "SELECT * FROM project_history WHERE employee_id = $userID";
 $notif = $con->query($sql) or die ($con->error);
 $notif_info = $notif->fetch_assoc();
+
 
 ?>

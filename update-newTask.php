@@ -35,6 +35,7 @@ if(isset($_POST['deleteText'])){
             <h3 class='pt-5'>Decline Tasks</h3>
             <tbody>
                 <tr>
+                    <th class='d-none'>Manager Id</th>
                     <th>Task Title</th>
                     <th>Decline Notes</th>
                     <th>Task Notes</th>
@@ -49,6 +50,7 @@ if(isset($_POST['deleteText'])){
                         <table>
                             <tbody>
                                 <tr>
+                                    <th class='d-none'>Manager Id</th>
                                     <th>Task Title</th>
                                     <th>Task Notes</th>
                                     <th>Date Started</th>
@@ -63,11 +65,12 @@ if(isset($_POST['deleteText'])){
             if($row['invite_status'] == 'accept'){
 
             $output .= "<tr>
+                            <td class='managerId d-none' value='". $row['manager_id'] ."'>". $row['manager_id'] ."</td>
                             <td class='taskId d-none' value='". $row['id'] ."'>". $row['id'] ."</td>
                             <td class='taskTitle'>". $row['task_title'] ."</td>
                             <td>". $row['notes'] ."</td>
-                            <td>". $row['date_started'] ."</td>
-                            <td>". $row['due_date'] ."</td>
+                            <td class='taskStarted'>". $row['date_started'] ."</td>
+                            <td class='taskDue-Date'>". $row['due_date'] ."</td>
                             <td class='pow_status'>
                                 <div class='text_status'>
                                     <span>" . $row['status'] . "</span> 
@@ -152,6 +155,7 @@ if(isset($_POST['deleteText'])){
             } elseif($row['invite_status'] == 'decline') {   
             
                 $declineTask .= "<tr>
+                <td class='managerId d-none' value='". $row['manager_id'] ."'>". $row['manager_id'] ."</td>
                 <td class='taskId d-none' value='". $row['id'] ."'>". $row['id'] ."</td>
                 <td class='task_title_td'>
                     <button type='button' class='btn btn-secondary tooltip-btn task_title_btn' data-bs-toggle='tooltip' data-bs-placement='bottom' title='" . $row['task_title'] . "' data-placement='bottom'>Task Title</button>
@@ -289,6 +293,7 @@ if(isset($_POST['newText'])){
             <h3 class='pt-5'>Decline Tasks</h3>
             <tbody>
                 <tr>
+                    <th class='d-none'>Manager Id</th>
                     <th>Task Title</th>
                     <th>Decline Notes</th>
                     <th>Task Notes</th>
@@ -303,6 +308,7 @@ if(isset($_POST['newText'])){
                         <table>
                             <tbody>
                                 <tr>
+                                    <th class='d-none'>Manager Id</th>
                                     <th>Task Title</th>
                                     <th>Task Notes</th>
                                     <th>Date Started</th>
@@ -317,11 +323,12 @@ if(isset($_POST['newText'])){
             if($row['invite_status'] == 'accept'){
 
             $output .= "<tr>
+                            <td class='managerId d-none' value='". $row['manager_id'] ."'>". $row['manager_id'] ."</td>
                             <td class='taskId d-none' value='". $row['id'] ."'>". $row['id'] ."</td>
                             <td class='taskTitle'>". $row['task_title'] ."</td>
                             <td>". $row['notes'] ."</td>
-                            <td>". $row['date_started'] ."</td>
-                            <td>". $row['due_date'] ."</td>
+                            <td class='taskStarted'>". $row['date_started'] ."</td>
+                            <td class='taskDue-Date'>". $row['due_date'] ."</td>
                             <td class='pow_status'>
                                 <div class='text_status'>
                                     <span>" . $row['status'] . "</span> 
@@ -406,6 +413,7 @@ if(isset($_POST['newText'])){
             } elseif($row['invite_status'] == 'decline') {   
             
                 $declineTask .= "<tr>
+                <td class='managerId d-none' value='". $row['manager_id'] ."'>". $row['manager_id'] ."</td>
                 <td class='taskId d-none' value='". $row['id'] ."'>". $row['id'] ."</td>
                 <td class='task_title_td'>
                     <button type='button' class='btn btn-secondary tooltip-btn task_title_btn' data-bs-toggle='tooltip' data-bs-placement='bottom' title='" . $row['task_title'] . "' data-placement='bottom'>Task Title</button>

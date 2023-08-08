@@ -5,6 +5,12 @@ include_once("connections/DBconnection.php");
 $db = new DBconnection();
 $con = $db->connection();
 
+if(isset($_POST['managerId'])) {
+
+    echo $_POST['managerId'];
+
+}
+
 if(isset($_POST['taskId'])) {
 
     echo $_POST['taskId'];
@@ -58,6 +64,7 @@ if(isset($_POST['userId'])) {
                 <h3 class='pt-3'>Decline Tasks</h3>
                 <tbody>
                     <tr>
+                        <th class='d-none'>Manager Id</th>
                         <th>Task Title</th>
                         <th>Decline Notes</th>
                         <th>Task Notes</th>
@@ -73,6 +80,7 @@ if(isset($_POST['userId'])) {
                         <h3>Tasks</h3>
                             <tbody>
                                 <tr>
+                                    <th class='d-none'>Manager Id</th>
                                     <th>Task Title</th>
                                     <th>Task Notes</th>
                                     <th>Date Started</th>
@@ -87,11 +95,12 @@ if(isset($_POST['userId'])) {
             if($row['invite_status'] == 'accept'){
 
             $output .= "<tr>
+                            <td class='managerId d-none' value='". $row['manager_id'] ."'>". $row['manager_id'] ."</td>
                             <td class='taskId d-none' value='". $row['id'] ."'>". $row['id'] ."</td>
                             <td class='taskTitle'>". $row['task_title'] ."</td>
                             <td>". $row['notes'] ."</td>
-                            <td>". $row['date_started'] ."</td>
-                            <td>". $row['due_date'] ."</td>
+                            <td class='taskStarted'>". $row['date_started'] ."</td>
+                            <td class='taskDue-Date'>". $row['due_date'] ."</td>
                             <td class='pow_status'>
                                 <div class='text_status'>
                                     <span>" . $row['status'] . "</span> 
@@ -121,6 +130,10 @@ if(isset($_POST['userId'])) {
                                                 <div class='content__info'>
                                                     <span>Insert File Path:</span>
                                                     <input class='file-path' name='filePath' type='url' required=''>
+                                                </div>
+                                                <div class='content__info d-none'>
+                                                    <span>Manager Id:</span>
+                                                    <span class='manager-id'></span>
                                                 </div>
                                                 <div class='content__info d-none'>
                                                     <span>Employee Name:</span>
@@ -174,6 +187,7 @@ if(isset($_POST['userId'])) {
             } elseif($row['invite_status'] == 'decline') {
                 
                 $declineTask .= "<tr>
+                            <td class='managerId d-none' value='". $row['manager_id'] ."'>". $row['manager_id'] ."</td>
                             <td class='taskId d-none' value='". $row['id'] ."'>". $row['id'] ."</td>
                             <td class='task_title_td'>
                                 <button type='button' class='btn btn-secondary tooltip-btn task_title_btn' data-bs-toggle='tooltip' data-bs-placement='bottom' title='" . $row['task_title'] . "' data-placement='bottom'>Task Title</button>

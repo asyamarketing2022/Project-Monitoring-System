@@ -106,7 +106,7 @@ if(isset($_POST['userID'])) {
             </li>
         </ul>
         <div class="profile-picture">
-            <img src="/img/placeholder-user.png" alt="" width="250px">
+            <img src="/dev.project-management-system.local/img/placeholder-user.png" alt="" width="250px">
             <div class="change-button">
                 Profile Photo
             </div>
@@ -219,7 +219,7 @@ if(isset($_POST['userID'])) {
                     </li>
                 </ul>
                 <div class="profile-picture">
-                    <img src="/img/placeholder-user.png" alt="" width="250px">
+                    <img src="/dev.project-management-system.local/img/placeholder-user.png" alt="" width="250px">
                     <div class="change-button">
                         CHANGE  
                     </div>

@@ -59,6 +59,8 @@
 
                     <form action="" method="POST">
 
+                        <?php if(!empty($projectInfo['id'])) { ?>
+
                             <?php do { ?>
                                 <tr class="table-row_projects table-form" value="<?php echo $projectInfo['id'] ?>">
                                     <td><?php echo $projectInfo['project_name'] ?></td>
@@ -76,6 +78,8 @@
 
                                 </tr>
                             <?php } while($projectInfo = $project->fetch_assoc()); ?>
+
+                         <?php } ?>   
 
                     </form>
                 </table>

@@ -1554,22 +1554,6 @@ jQuery(function () {
    }
    postProjectInfo_in_modal()
 
-   // function postProjectInfo_in_modal_delay(){
-
-   //    let projectInchargeBtn = document.querySelectorAll('.projectIncharge_table_row');
-
-   //    for(let i = 0; projectInchargeBtn.length > i; i++){
-
-   //       $(projectInchargeBtn[i]).on('click', ()=> {
-   //          setTimeout(function() {
-   //             $('#view_project_in_charge').modal('show');
-   //          }, 1000);
-   //       });
-
-   //    }
-   // }
-   // postProjectInfo_in_modal_delay();
-
 
    // Upload File Path Function
    function upload_file_path(){
@@ -1580,17 +1564,20 @@ jQuery(function () {
       let td_phaseofwork = document.querySelectorAll('.td_phase_of_work');
 
       for(let i = 0; uploadPathBtn.length > i; i++){
-         
+   
          $(uploadPathBtn[i]).off().on('click', ()=> {
 
             let tableContainer = $(uploadPathBtn[i]).closest('.project_services_table');
             let projectService = $(tableContainer).find('th.th_services').text();
             let text_phaseofwork = $(td_phaseofwork[i]).text();
+            // let tableRow = $(uploadPathBtn[i]).parent().parent();
+            // let managerId = $(tableRow).find('.managerId');
 
             $.ajax({
                type: 'POST',
                url: 'postUpload_file_path_modal.php',
                data: {
+           
                   'projectId': projectId,
                   'projectName': projectName,
                   'projectService': projectService,
@@ -1622,7 +1609,19 @@ jQuery(function () {
                let tableRow = $(uploadPathBtn[i]).parent().parent();
                let taskId = $(tableRow).find('.taskId').attr('value');
                let taskTitle = $(tableRow).find('.taskTitle').text();
+               let managerId = $(tableRow).find('.managerId').text();
                let employeeName = $('.user_photo h3').text();
+
+               $.ajax({
+                  type: 'POST',
+                  url: 'tasks-table.php',
+                  data: {
+                     'managerId': managerId,
+                  },
+                  success:function(data){
+                     $('.manager-id').html(data);
+                  }
+               });
 
                $.ajax({
                   type: 'POST',
@@ -1826,6 +1825,7 @@ function submit_file_path(){
             let employeeName = $('.employee-name').html();
             let taskId = $('.task-id').html();
             let taskTitle = $('.task-title').html();
+            let managerId = $('.manager-id').html();
 
             $.ajax({
                type: 'POST',
@@ -1841,7 +1841,8 @@ function submit_file_path(){
                   'employeeId': employeeId,
                   'employeeName': employeeName,
                   'taskId': taskId,
-                  'taskTitle': taskTitle
+                  'taskTitle': taskTitle,
+                  'managerId': managerId,
                },
                success:function(data){
                   // $('').html(data);
@@ -2281,10 +2282,10 @@ function submit_file_path(){
                               <div class="content__info">
                                  <span>Service:</span>
                                  <p class='searchManager_service'>${projectService}</p>
-                              </div>
-                              `;
+                              </div>`;
 
-           $(contentInfo).appendTo(searchManager_container);
+           $(contentInfo).prependTo(searchManager_container);
+         //   $(contentInfo).after(searchManager_container);
             
             let phase_of_work = $(td_pow).text();
 
@@ -2319,7 +2320,9 @@ function submit_file_path(){
 
             let userContainer = $(selectBtn[i]).parent().parent();
             let managerId = $(userContainer).attr('value');
+            let managerFullname = $(userContainer).find('.user_fullname span').text();
             let projectId = $('#projectTitle').attr('value');
+            let projectName = $('#projectTitle').text();
             let searchManager_pow = $('.searchManager_pow').text()
             let searchManager_service = $('.searchManager_service').text()
  
@@ -2343,6 +2346,28 @@ function submit_file_path(){
                      }, 100);
                },
             });
+
+            // $.ajax({
+            //    type: 'POST',
+            //    url: 'task-manager.php',
+            //    data: {
+            //       'managerId' : managerId,
+            //       'managerFullname' : managerFullname,
+            //       'projectId': projectId,
+            //       'projectName': projectName,
+            //       'searchManager_pow' : searchManager_pow,
+            //       'searchManager_service' : searchManager_service,
+            //    },
+            //    success: function(data){
+            //       setTimeout(
+            //       function()
+            //       {
+            //          window.location.reload();
+            //       }, 100);
+            //    },
+            // });
+
+
          });
 
       }
@@ -2372,6 +2397,7 @@ function submit_file_path(){
          }, 100);
 
    });
+
 
 
 
@@ -2613,7 +2639,10 @@ function submit_file_path(){
                      task_title_popup();
                      updateNewTask();
                      closeTooltip();
-
+                     taskColor()
+                     taskDone_disable();
+                     taskChange_status();
+      
                   }, 70);
                });
          }
@@ -2770,6 +2799,9 @@ function submit_file_path(){
                      task_title_popup();
                      updateNewTask();
                      closeTooltip();
+                     taskChange_status();
+                     taskDone_disable();
+                     taskColor();
 
                }, 10);
 
@@ -2968,22 +3000,125 @@ function submit_file_path(){
   }
   editBio()
 
-  function taskTable(){
+  function taskColor(){
 
-   // $.ajax({
-   //    type: 'POST',
-   //    url: 'taskTable.php',
-   //    data: {
-   //       'new_bio_text': new_bio_text,
-   //    },
-   //    success: function(data) {
-   //       // $('.current-bio').html(data);
-   //       window.location.reload();
-   //    },
-   // });
+      let date = new Date();
+      let strDate = date.getFullYear() + "-" + "0" + (date.getMonth()+1)  + "-" + "0" + date.getDate();
+
+      let taskStatus = document.querySelectorAll('.user-tasks .text_status');
+      let taskdue_date = document.querySelectorAll('.taskDue-Date');
+
+         for(let i = 0; taskStatus.length > i; i++ ){
+
+            let statusUpdate = $(taskStatus[i]).text().trim();
+            let dueDate = $(taskdue_date[i]).text()
+
+            // Task Color 
+            if(statusUpdate == 'Done'){
+
+               let tableRow = $(taskStatus[i]).parent().parent();
+               $(tableRow).css('background', '#b9dbb9');
+
+            } else if(statusUpdate != 'Done') {
+
+               if(strDate == dueDate || strDate > dueDate) {
+
+                  let tableRow = $(taskStatus[i]).parent().parent();
+                  $(tableRow).css('background', '#dfabab');
+   
+               }
+
+            }
+
+            // Task Upload File Disable 
+            if(strDate == dueDate){
+
+            }
+
+
+         };
+  }
+//   dueDate_notification();
+
+
+  function taskDone_disable(){
+
+   let taskContainer = document.querySelectorAll('.user-tasks .text_status');
+
+      for(let i = 0; taskContainer.length > i; i++){
+
+        let taskStatus = $(taskContainer[i]).children('span').text();
+        let tableRow = $(taskContainer[i]).parent().parent();
+        let uploadPathBtn = $(tableRow).find('.uploadPathBtn');
+
+           if(taskStatus == 'Done'){
+
+               $(uploadPathBtn[i]).prop('disabled', true);
+
+           }
+
+      }
 
   }
-  taskTable()
+  taskDone_disable()
+
+  function taskChange_status(){
+
+   let taskWrapper = document.querySelectorAll('.user-tasks .text_status');
+
+      for(let i = 0; taskWrapper.length > i; i++){
+
+         let taskContainer = $(taskWrapper[i]).parent();
+         let statusTooltip = $(taskContainer).find('.status_tooltip');
+
+         let tableRow = $(taskContainer[i]).parent().parent();
+         let uploadPathBtn = $(tableRow).find('.uploadPathBtn');
+
+         // let statusBtn = $(statusTooltip[i]).find('.status');
+
+         $(taskContainer).on('click', ()=> {
+
+            let taskStatus = $(taskWrapper[i]).children('span').text();
+
+            if(!$(statusTooltip).hasClass('d-none') && taskStatus == 'Done'){
+
+               alert('Be care to change the task status, when you change the task status and the Due Date was already meet the task report will be delay');
+         
+            }
+
+         });
+
+         $(statusTooltip).off().on('click', ()=> {
+
+            setTimeout(
+
+               function() 
+                  {
+
+                     let taskStatus = $(taskWrapper[i]).children('span').text();
+
+
+                     if(taskStatus == 'Done'){
+
+                        $(uploadPathBtn[i]).prop('disabled', true);
+                        $(tableRow).css('background', '#b9dbb9');
+
+                     } else {
+
+                        $(uploadPathBtn[i]).prop('disabled', false);
+                        // $(tableRow).css('background', '#fff');
+
+                     }
+
+
+               }, 10);
+
+         }); 
+      }
+  }
+  taskChange_status();
+
+
 
   function linkTask(){
 

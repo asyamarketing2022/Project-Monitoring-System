@@ -89,6 +89,7 @@
                                     <th>Service</th>
                                     <th>Phase of work</th>
                                     <th>Task Title</th>
+                                    <th>Task Notes</th>
                                     <th>Date Started</th>
                                     <th>Due Date</th>
                                     <th>Status</th>
@@ -101,7 +102,6 @@
 
                                         <?php do { ?>
 
-                                            <a href="">
                                             <?php if($newTasks_info['invite_status'] == 'new'){ ?>
 
                                                     <tr class="task-table_row table-row-green" value="<?php echo $newTasks_info['id']; ?>">
@@ -110,6 +110,7 @@
                                                         <td><?php echo $newTasks_info['services']; ?></td>
                                                         <td><?php echo $newTasks_info['phase_of_work']; ?></td>
                                                         <td><?php echo $newTasks_info['task_title']; ?></td>
+                                                        <td><?php echo $tasks_info['notes']; ?></td>
                                                         <td><?php echo $newTasks_info['date_started']; ?></td>
                                                         <td><?php echo $newTasks_info['due_date']; ?></td>
                                                         <td><?php echo $newTasks_info['status']; ?></td>
@@ -147,8 +148,7 @@
                                                     </tr>
 
                                             <?php } ?>
-
-                                            </a>
+                                     
                                         <?php } while($newTasks_info = $newTasks->fetch_assoc()); ?>
                                         
 
@@ -162,11 +162,14 @@
 
                                         <?php if($tasks_info['invite_status'] == 'accept' || $tasks_info['invite_status'] == 'decline') { ?>
 
-                                                <tr class="task-table_row clickable-row" data-href='http://dev.pms.local/viewproject.php?ID=<?php echo $tasks_info['project_id'] ?>' value="<?php echo $tasks_info['id']; ?>">
+                                                <tr class="task-table_row clickable-row" data-href='<?php echo $URL ?>/viewproject.php?ID=<?php echo $tasks_info['project_id'] ?>' value="<?php echo $tasks_info['id']; ?>">
                                                     <td><?php echo $tasks_info['project_name']; ?></td>
                                                     <td><?php echo $tasks_info['services']; ?></td>
                                                     <td><?php echo $tasks_info['phase_of_work']; ?></td>
                                                     <td><?php echo $tasks_info['task_title']; ?></td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-outline-dark tooltip-btn task_title_btn" data-bs-toggle="tooltip" data-bs-placement="bottom" title="<?php echo $tasks_info['notes']; ?>" data-placement="bottom" data-original-title="<?php echo $tasks_info['notes']; ?>" style='font-size: 10px;'>Task Title</button>
+                                                    </td>
                                                     <td><?php echo $tasks_info['date_started']; ?></td>
                                                     <td><?php echo $tasks_info['due_date']; ?></td>
                                                     <td><?php echo $tasks_info['status']; ?></td>

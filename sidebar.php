@@ -3,13 +3,20 @@
 <?php include_once 'notification-task.php'; ?>
 <?php include_once 'users-table.php'; ?>
 <?php include_once 'userProfile.php'; ?>
+<?php include_once 'notification-file-path.php'; ?>
+
+<?php
+
+ $URL = 'http://asyamanhour';
+
+?>
 
 <div class="manage-project__wrapper">
 
     <div class="top-bar">
         <div class="back-to-homepage">
             <i class="fa fa-arrow-left"></i>
-            <span><a href="/homepage.php">Back to Homepage</a></span>
+            <span><a href="<?php echo $URL ?>/homepage.php">Back to Homepage</a></span>
         </div>
 
         <div class="userLog">
@@ -18,7 +25,7 @@
                 <!-- For dynamic codes - notification-count.php -->
                 <li>
                     <i class="fa fa-bell">
-                            <span class="notif_count"></span>
+                        <span class="notif_count"></span>
                     </i>
                 </li>
 
@@ -37,34 +44,56 @@
                 <li><a href="logout.php"><i class="fa fa-arrow-down"></i></a></li>
             </ul>
 
-                <?php if (mysqli_num_rows($tasks) > 0){ ?>
+                <div class="notif-list">
+                    <div class="notif_container">
 
-                    <div class="notif-list">
-                        <div class="notif_container">
+                        <!-- New Task Notification  -->
+                        <?php if (mysqli_num_rows($tasks) > 0){ ?>
 
-                        <?php do { ?>
+                                <?php do { ?>
 
-                            <?php if($newtask_notif['invite_status'] == 'new') { ?>
-                                <div class="notif_box">
-                                    <a href="/profile.php">
-                                        <div class="notif-text pb-2">
-                                            <span class='notif-message' style='font-size: 20px;'><strong>You have new Task</strong></span></br>
-                                            <span><?php echo $newtask_notif['sent_by']?> sent a new task from </span></br>
-                                            <span><strong><?php echo $newtask_notif['project_name'] ?></strong> project</span></br>
-                                            <span>Task TItle: <strong><?php echo $newtask_notif['task_title'] ?></strong></span></br>
-                                            <span class='newTask-date'><?php echo $newtask_notif['added_at']?></span>
+                                    <?php if($newtask_notif['invite_status'] == 'new') { ?>
+                                        <div class="notif_box">
+                                            <a href="<?php echo $URL ?>/profile.php">
+                                                <div class="notif-text pb-2">
+                                                    <span class='notif-message' style='font-size: 20px;'><strong>You have new Task</strong></span></br>
+                                                    <span><?php echo $newtask_notif['sent_by']?> sent a new task from </span></br>
+                                                    <span><strong><?php echo $newtask_notif['project_name'] ?></strong> project</span></br>
+                                                    <span>Task TItle: <strong><?php echo $newtask_notif['task_title'] ?></strong></span></br>
+                                                    <span class='newTask-date'><?php echo $newtask_notif['added_at']?></span>
 
+                                                </div>
+                                            </a>
                                         </div>
-                                    </a>
-                                </div>
-                            <?php } ?>
+                                    <?php } ?>
 
-                            <?php } while($newtask_notif = $tasks->fetch_assoc()); ?>
+                                <?php } while($newtask_notif = $tasks->fetch_assoc()); ?>
+        
+                        <?php } ?>
 
-                        </div>
-                    </div>      
+                        <!-- New File Path Notification -->
+                        <?php if (mysqli_num_rows($filePath) > 0){ ?>
 
-                <?php } ?>
+                            <?php do { ?>
+
+                                <?php if($filePath_notif['file_path_status'] == 'new') { ?>
+                                    <div class="notif_box">
+                                        <a href="/viewproject.php?ID=<?php echo $filePath_notif['project_id']; ?>">
+                                            <div class="notif-text pb-2">
+                                                <span class='notif-message' style='font-size: 20px;'><strong>New File Path Sent</strong></span></br>
+                                            </div>
+                                        </a>
+                                    </div>
+                                <?php } ?>
+
+                            <?php } while($filePath_notif = $filePath->fetch_assoc()); ?>
+
+                        <?php } ?>
+
+                
+                    </div>
+                </div>    
+
         </div>
     </div>
 
@@ -73,13 +102,13 @@
             <ul>
                 <?php if(isset($_SESSION['UserLogin']) && $_SESSION['Access'] == "admin" ) { ?>
 
-                    <li class="<?php if($page=='admin'){echo 'active';} ?>"><a href="/admin.php"><i class="fa fa-plus"></i> Add New Employee</a></li>
+                    <li class="<?php if($page=='admin'){echo 'active';} ?>"><a href="<?php echo $URL ?>/admin.php"><i class="fa fa-plus"></i> Add New Employee</a></li>
             
                 <?php } ?> 
 
-                <li class="<?php if($page=='project'){echo 'active';} ?>" ><a href="/project.php"><i class="fa fa-clipboard"></i> Projects</a></li>
-                <li class="<?php if($page=='profile'){echo 'active';} ?>"><a href="/profile.php"> <i class="fa fa-users"></i> Profile</a></li>
-                <li class="<?php if($page=='usersReport'){echo 'active';} ?>"><a href="/usersReport.php"><i class="fa fa-newspaper-o"></i>Users Log</a></li>
+                <li class="<?php if($page=='project'){echo 'active';} ?>" ><a href="<?php echo $URL ?>/project.php"><i class="fa fa-clipboard"></i> Projects</a></li>
+                <li class="<?php if($page=='profile'){echo 'active';} ?>"><a href="<?php echo $URL ?>/profile.php"> <i class="fa fa-users"></i> Profile</a></li>
+                <li class="<?php if($page=='usersReport'){echo 'active';} ?>"><a href="<?php echo $URL ?>/usersReport.php"><i class="fa fa-newspaper-o"></i>Users Log</a></li>
                 <li><a href="#"><i class="fa fa-bitcoin"></i> Financial</a></li>
                 
             </ul>

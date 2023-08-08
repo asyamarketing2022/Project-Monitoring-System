@@ -23,8 +23,10 @@ if(isset($_POST['filePath'])) {
     $filePath = addslashes($_POST['filePath']);
     $userfirstName = $_SESSION['UserLogin'];
     $userlastName = $_SESSION['Userlname'];
+    $managerId = $_POST['managerId'];
+    $filePathStatus = 'new';
     
-    $sql = "INSERT INTO `upload_file_path`(`project_id`, `project_name`, `service`, `phase_of_work`, `task_id`, `task_title`, `employee_id`, `employee_name`, `notes`, `file_name`, `file_path`, `uploaded_by`) VALUES ('$projectId', '$projectName', '$services', '$phaseofwork', '$taskId', '$taskTitle', '$employeeId', '$employeeName', '$notes', '$fileName', '$filePath', '$userfirstName $userlastName' )";
+    $sql = "INSERT INTO `upload_file_path`(`project_id`, `project_name`, `service`, `phase_of_work`, `task_id`, `task_title`, `employee_id`, `employee_name`, `notes`, `file_name`, `file_path`, `file_path_status`, `uploaded_by`, `manager_id`) VALUES ('$projectId', '$projectName', '$services', '$phaseofwork', '$taskId', '$taskTitle', '$employeeId', '$employeeName', '$notes', '$fileName', '$filePath', '$filePathStatus', '$userfirstName $userlastName', '$managerId')";
 
     $con->query($sql) or die ($con->error);
 
