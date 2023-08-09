@@ -26,6 +26,63 @@ a {
     color: #004c3f;
 }
 
+.close-btn-menu {
+    font-size: 25px;
+    color: #fff;
+    position: absolute;
+    right: 5px;
+    top: 15px;
+    font-weight: 600;
+    width: 40px;
+    /* display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center; */
+    display: none;
+}
+
+.close-btn-menu img {
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin-right: 5px;
+    width: 16px;
+    filter: invert(99%) sepia(5%) saturate(2%) hue-rotate(333deg) brightness(104%) contrast(100%); 
+}
+
+.popup-btn-menu {
+    font-size: 25px;
+    color: #fff;
+    position: fixed;
+    left: -300px;
+    top: 15px;
+    font-weight: 600;
+    width: 50px;
+    height: 40px;
+	flex-direction: row;
+	flex-wrap: nowrap;
+    /* display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	align-content: flex-end;*/
+    background: #004c3f; 
+    box-shadow: 1px 4px 5px 3px rgba(0,0,0,0.3);
+    transition: all 0.3s ease;
+    z-index: 100;
+    border-radius: 4px;
+    display: none;
+}
+
+.popup-btn-menu img {
+    position: absolute;
+    right: 0;
+    top: 11px;
+    margin-right: 5px;
+    width: 16px;
+    filter: invert(99%) sepia(5%) saturate(2%) hue-rotate(333deg) brightness(104%) contrast(100%);
+}
+
 .accept {
     width: 100px;
     height: 30px;
@@ -405,7 +462,8 @@ button.deleteTask {
 } */
 
 .tab-position_right {
-    width: 700px;
+    /* width: 700px; */
+    width: 100%;
     display: block;
     margin-left: auto;
     padding-top: 30px;
@@ -502,7 +560,7 @@ button.deleteTask {
 
 .top-bar {
     display: grid;
-    grid-template-columns: 15% 85%;
+    grid-template-columns: 100%;
 }
 
 .top-bar .back-to-homepage {
@@ -640,7 +698,8 @@ button.deleteTask {
 .grid-left__menu {
     /* background-color: #eff6fe; */
     background-color: #004c3f;
-    height: calc(100vh - 60px);
+    /* height: calc(100vh - 60px); */
+    height: 100%;
 }
 
 .grid-left__menu ul {
@@ -696,7 +755,8 @@ button.deleteTask {
     background-color: #fff;
     max-height: 100%;
     overflow-y: auto;
-    height: 94vh;;
+    height: 94vh;
+    padding-top: 100px;
 }
 
 .manage-employee__content {
@@ -906,8 +966,12 @@ button.deleteTask {
 
 .pop-up__modal .modal-content .profile-picture  {
     position: absolute;
-    top: 220px;
+    top: 270px;
     z-index: 100;
+}
+
+.pop-up__modal .modal-content .profile-picture img {
+    width: 230px
 }
 
 .pop-up__modal .modal-content .profile-picture .change-button {
@@ -1352,3 +1416,117 @@ input.form-check-input {
     visibility: visible;
 } */
 
+@media (max-width: 991px){
+    #edit_employee .modal-dialog,
+    #add_employee .modal-dialog {
+        max-width: 90%;
+    }
+
+    .popup-btn-menu {
+        display: block;
+    }
+
+    .close-btn-menu {
+        display: block;
+    }
+
+    .manage-employee__content {
+        display: block;
+        position: relative;
+    }
+
+    .grid-left__menu {
+        /* position: absolute; */
+        position: fixed;
+        width: 250px;
+        left: 0;
+        top: 0;
+        z-index: 100;
+        box-shadow: 1px 4px 5px 3px rgba(0,0,0,0.3);
+        transition: all 0.3s ease;
+    }
+
+    .grid-right__content {
+        width: 100%;
+        position: absolute;
+        padding: 0;
+        overflow-y: visible;
+    }
+
+    .grid-left__menu ul {
+        padding-top: 50px;
+    }
+
+    .pop-up__modal .modal-content .profile-picture img {
+        width: 20vw;
+    }
+
+    .content-table table {
+        height: 100%;
+        display: block;
+        max-width: -moz-fit-content;
+        max-width: fit-content;
+        margin: 0 auto;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+
+
+}
+
+@media (max-width: 1200px) {
+    .user-tasks .content-table table {
+        height: 100%;
+        display: block;
+        max-width: -moz-fit-content;
+        max-width: fit-content;
+        margin: 0 auto;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+}
+
+@media (max-width: 1400px) {
+    .content-table.project_services_table table {
+        height: 100%;
+        display: block;
+        max-width: -moz-fit-content;
+        max-width: fit-content;
+        margin: 0 auto;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+}
+
+@media (max-width: 1600px) {
+    .profile .profile-column {
+        grid-template-columns: 100%;
+    }
+
+    .profile .myprofile-info {
+        height: 350px;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1400px){
+
+    .manage-employee__content {
+        grid-template-columns: 25% 75%;
+    }
+
+}
+
+@media (min-width: 992px) and (max-width: 1600px){
+    .manage-employee__content .user_container .user_info label {
+        font-size: 1vw;
+    }
+
+    .manage-employee__content .user_container .user_info span {
+        font-size: 1vw;
+    }
+
+    #view_project_in_charge .modal-left-content {
+        width: 45vw;
+    }
+}

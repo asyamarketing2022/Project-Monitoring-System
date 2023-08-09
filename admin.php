@@ -16,26 +16,22 @@ if(isset($_POST['userID'])) {
     $user = $con->query($userSQL) or die ($con->error);
     $updateUser = $user->fetch_assoc();
 
+    $URL = 'http://asyamanhour';
+
 }
 
 ?>
 
         <div class="grid-right__content">
             <div class="search-action__wrapper mt-4">
-                <div class="search-action">
+                 <!-- <div class="search-action">
                     <input class="search" type="text">
                     <div class="search-button">Search</div>
-                </div>
+                </div> -->
                 <button type="button" class="btn" data-toggle="modal" data-target="#add_employee"><i class="fa fa-plus"></i> Add Employee</button>
             </div>
 
-            <div class="select-action__wrapper mt-4">
-                <!-- <ul class="select-action">
-                    <li><td><input type="checkbox" id="" name="" value=""></td></li>
-                    <li><i class="fa fa-edit"></i> Edit</li>
-                    <li><i class="fa fa-trash"></i> Delete</li>
-                </ul> -->
-
+            <!-- <div class="select-action__wrapper mt-4">
                 <div class="select-action__sort">
                     <span><i class="fa fa-sort-amount-desc"></i> Sort by</span>
                     <select class="form-select" aria-label="Default select example">
@@ -45,7 +41,21 @@ if(isset($_POST['userID'])) {
                         <option value="3">Three</option>
                     </select>
                 </div>
-            </div>
+            </div> -->
+
+            <!-- <div class="select-action__sort">
+                    <span><i class="fa fa-sort-amount-desc"></i> Sort by</span>
+                    <select class="form-select" aria-label="Default select example">
+                        <option selected>Name</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+            <div class="search-action">
+                    <input class="search" type="text">
+                    <div class="search-button">Search</div>
+                </div> -->
             <div class="content-table">
                 <table>
                     <tr>
@@ -57,14 +67,13 @@ if(isset($_POST['userID'])) {
                         <th>Department</th>
                         <th>Phone Number</th>
                         <th>Access</th>
-                        <th></th>
                     </tr>
                     
                     <form action="deleteUser.php" method="POST">
                         <!-- users-table.php -->
                         <?php do { ?>
                         <tr class="table-row_user Info_user table-form" value="<?php echo $userInfo['ID'] ?>">
-                            <td><input type="checkbox" class="id" id="id" name="lang[]" value="<?php echo $userInfo['ID'] ?>"></td>
+                       
                             <td class="user-id"><?php echo $userInfo['ID'] ?></td>
                             <td><?php echo $userInfo['first_name'] ?> <?php echo $userInfo['last_name'] ?></td>
                             <td><?php echo $userInfo['position'] ?></td>
@@ -106,10 +115,10 @@ if(isset($_POST['userID'])) {
             </li>
         </ul>
         <div class="profile-picture">
-            <img src="/dev.project-management-system.local/img/placeholder-user.png" alt="" width="250px">
-            <div class="change-button">
+            <img src="<?php echo $URL; ?>/img/placeholder-user.png" alt="">
+            <!-- <div class="change-button">
                 Profile Photo
-            </div>
+            </div> -->
         </div>
             <form id="profile-form" action="" method="post">
                 <div class="tab-content" id="profile-tab">
@@ -219,10 +228,10 @@ if(isset($_POST['userID'])) {
                     </li>
                 </ul>
                 <div class="profile-picture">
-                    <img src="/dev.project-management-system.local/img/placeholder-user.png" alt="" width="250px">
-                    <div class="change-button">
+                    <img src="<?php echo $URL; ?>/img/placeholder-user.png" alt="">
+                    <!-- <div class="change-button">
                         CHANGE  
-                    </div>
+                    </div> -->
                 </div>
                 <form id="editUser" action="" method="post">
                     <div class='tab-content updateform-user' id='profile-tab'>

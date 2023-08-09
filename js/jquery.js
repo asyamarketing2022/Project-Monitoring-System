@@ -3021,7 +3021,7 @@ function submit_file_path(){
 
             } else if(statusUpdate != 'Done') {
 
-               if(strDate == dueDate || strDate > dueDate) {
+               if(strDate > dueDate) {
 
                   let tableRow = $(taskStatus[i]).parent().parent();
                   $(tableRow).css('background', '#dfabab');
@@ -3036,9 +3036,10 @@ function submit_file_path(){
             }
 
 
+
          };
   }
-//   dueDate_notification();
+  taskColor();
 
 
   function taskDone_disable(){
@@ -3071,7 +3072,7 @@ function submit_file_path(){
          let taskContainer = $(taskWrapper[i]).parent();
          let statusTooltip = $(taskContainer).find('.status_tooltip');
 
-         let tableRow = $(taskContainer[i]).parent().parent();
+         let tableRow = $(taskContainer[i]).parent();
          let uploadPathBtn = $(tableRow).find('.uploadPathBtn');
 
          // let statusBtn = $(statusTooltip[i]).find('.status');
@@ -3082,7 +3083,7 @@ function submit_file_path(){
 
             if(!$(statusTooltip).hasClass('d-none') && taskStatus == 'Done'){
 
-               alert('Be care to change the task status, when you change the task status and the Due Date was already meet the task report will be delay');
+               alert("Be careful in changing the task status. When you change the task status in it's due date the task report will be marked as delay.");
          
             }
 
@@ -3097,28 +3098,122 @@ function submit_file_path(){
 
                      let taskStatus = $(taskWrapper[i]).children('span').text();
 
-
                      if(taskStatus == 'Done'){
 
                         $(uploadPathBtn[i]).prop('disabled', true);
                         $(tableRow).css('background', '#b9dbb9');
 
+
                      } else {
 
                         $(uploadPathBtn[i]).prop('disabled', false);
-                        // $(tableRow).css('background', '#fff');
+                        $(tableRow).css('background', '#fff');
 
                      }
 
 
                }, 10);
+               
+
+               let date = new Date();
+               let strDate = date.getFullYear() + "-" + "0" + (date.getMonth()+1)  + "-" + "0" + date.getDate();
+
+               let taskStatus = document.querySelectorAll('.user-tasks .text_status');
+               let taskdue_date = document.querySelectorAll('.taskDue-Date');
+
+               for(let i = 0; taskStatus.length > i; i++ ){
+
+                  let statusUpdate = $(taskStatus[i]).text().trim();
+                  let dueDate = $(taskdue_date[i]).text();
+
+                  // Task Color 
+                  // setTimeout(
+
+                  //    function() 
+                  //       {
+
+                  //       let taskStatus = $(taskWrapper[i]).children('span').text();
+
+                  //       if(statusUpdate == 'Done'){
+
+                  //          let tableRow = $(taskStatus[i]).parent().parent();
+                  //          $(tableRow).css('background', '#b9dbb9');
+
+                  //          console.log('Done');
+
+                  //       } 
+
+                  // }, 100);
+                     
+                     // else if(statusUpdate != 'Done') {
+
+                     //    if(strDate > dueDate) {
+
+                     //       let tableRow = $(taskStatus[i]).parent().parent();
+                     //       $(tableRow).css('background', '#dfabab');
+            
+                     //    }
+
+                     // }
+
+                     // console.log(statusUpdate)
+                     // console.log(strDate)
+                     // console.log(dueDate)
+
+
+               };
+               
 
          }); 
       }
   }
   taskChange_status();
 
+  function closeMenu(){
 
+      let closeMenuBtn = document.querySelector('.close-btn-menu');
+      let openMenuBtn = document.querySelector('.popup-btn-menu');
+
+      $(closeMenuBtn).off().on('click', ()=> {
+
+         $(closeMenuBtn).parent().css('left', '-300px');
+
+         setTimeout(
+
+            function() 
+               {
+
+               $(openMenuBtn).css('left', '-2px');
+
+            }, 50);
+
+      });
+
+  }
+  closeMenu();
+
+  function openMenu(){
+
+   let openMenuBtn = document.querySelector('.popup-btn-menu');
+   let closeMenuBtn = document.querySelector('.close-btn-menu');
+
+   $(openMenuBtn).off().on('click', ()=> {
+
+      $(openMenuBtn).css('left', '-300px');
+
+      setTimeout(
+
+         function() 
+            {
+
+               $(closeMenuBtn).parent().css('left', '0px');
+
+         }, 50);
+
+   });
+
+}
+openMenu();
 
   function linkTask(){
 

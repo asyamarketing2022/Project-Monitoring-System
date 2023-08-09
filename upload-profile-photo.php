@@ -2,6 +2,7 @@
 
 <?php
 
+// $target_dir = "img/upload/";
 $target_dir = "img/upload/";
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1;

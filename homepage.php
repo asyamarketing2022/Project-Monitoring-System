@@ -26,11 +26,11 @@ $con = connection();
 
 ?>
 
-<div class="container-fluid" style="
+<div class="container-fluid " style="
 background-image: url('img/coming-soon.jpg'); 
 background-size: cover; 
 background-position: center center; 
-height: 100%; 
+height: 100vh; 
 width: 100%;">
     <div class="row">
         <?php if(isset($_SESSION['Access']) == "Admin") { ?> 
@@ -100,14 +100,14 @@ width: 100%;">
     </div>
 </div>
 
-<div class="swiper-slide">
+<!-- <div class="swiper-slide">
     <div class="photo-wrapper">
         <a href="" alt=""></a>
     </div>
     <div class="caption" style="left: 0">
         <p></p>
     </div>
-</div>
+</div> -->
 
 
 

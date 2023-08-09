@@ -69,6 +69,13 @@ if(isset($_POST['tableID'])) {
                                     <option value='design' selected>Design</option>
                                     <option value='production'>Production</option>
                                     <option value='project management'>Project Management</option>
+                                    <option value='interior design'>Interior Design</option>
+                                    <option value='master planning'>Master Planning</option>
+                                    <option value='mechanical'>Mechanical</option>
+                                    <option value='electrical'>Electrical</option>
+                                    <option value='plumbing'>Plumbing</option>
+                                    <option value='fire protection'>Fire Protection</option>
+                                    <option value='structural'>Structural</option>
                                 </select>
                             </div>
                             <div class='profile-info__content'>

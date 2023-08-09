@@ -14,10 +14,7 @@
 <div class="manage-project__wrapper">
 
     <div class="top-bar">
-        <div class="back-to-homepage">
-            <i class="fa fa-arrow-left"></i>
-            <span><a href="<?php echo $URL ?>/homepage.php">Back to Homepage</a></span>
-        </div>
+
 
         <div class="userLog">
             <ul>
@@ -98,18 +95,22 @@
     </div>
 
     <div class="manage-employee__content">
+    <span class='popup-btn-menu'><img src="img/bars-solid.svg" alt=""></span>
         <div class="grid-left__menu">
+            <span class='close-btn-menu'><img src="img/x-solid.svg" alt=""></span>
             <ul>
+                <li class="<?php if($page=='homepage'){echo 'active';} ?>" ><a href="<?php echo $URL ?>/homepage.php"><i class="fa fa-clipboard"></i> Homepage</a></li>
+                <li class="<?php if($page=='profile'){echo 'active';} ?>"><a href="<?php echo $URL ?>/profile.php"> <i class="fa fa-users"></i> Profile</a></li>
                 <?php if(isset($_SESSION['UserLogin']) && $_SESSION['Access'] == "admin" ) { ?>
 
-                    <li class="<?php if($page=='admin'){echo 'active';} ?>"><a href="<?php echo $URL ?>/admin.php"><i class="fa fa-plus"></i> Add New Employee</a></li>
+                    <li class="<?php if($page=='admin'){echo 'active';} ?>"><a href="<?php echo $URL ?>/admin.php"><i class="fa fa-plus"></i> Employees</a></li>
             
                 <?php } ?> 
 
                 <li class="<?php if($page=='project'){echo 'active';} ?>" ><a href="<?php echo $URL ?>/project.php"><i class="fa fa-clipboard"></i> Projects</a></li>
-                <li class="<?php if($page=='profile'){echo 'active';} ?>"><a href="<?php echo $URL ?>/profile.php"> <i class="fa fa-users"></i> Profile</a></li>
+               
                 <li class="<?php if($page=='usersReport'){echo 'active';} ?>"><a href="<?php echo $URL ?>/usersReport.php"><i class="fa fa-newspaper-o"></i>Users Log</a></li>
-                <li><a href="#"><i class="fa fa-bitcoin"></i> Financial</a></li>
+                <!-- <li><a href="#"><i class="fa fa-bitcoin"></i> Financial</a></li> -->
                 
             </ul>
         </div>

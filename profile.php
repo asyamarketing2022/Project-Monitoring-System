@@ -10,7 +10,7 @@
 <?php include_once 'userProfile.php'; ?>
 <?/*php include 'assign-projectIncharge.php'; */?>
 
-<div class="grid-right__content">
+<div class="grid-right__content pt-0">
     <div class="profile">
         <div class="profile-container">
             <div class="profile-column">

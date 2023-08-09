@@ -12,10 +12,10 @@
 
         <div class="grid-right__content">
             <div class="search-action__wrapper mt-4">
-                <div class="search-action">
+                <!-- <div class="search-action">
                     <input class="search" type="text">
                     <div class="search-button">Search</div>
-                </div>
+                </div> -->
 
                 <?php if(isset($_SESSION['UserLogin']) && $_SESSION['Access'] == "admin") { ?>
 
@@ -24,14 +24,7 @@
                 <?php } ?>
             </div>
 
-            <div class="select-action__wrapper mt-4">
-                <!-- <ul class="select-action">
-                    <li><td><input type="checkbox" id="" name="" value=""></td></li>
-
-                    <li><i class="fa fa-edit"></i> Edit</li>
-                    <li><i class="fa fa-trash"></i> Delete</li>
-                </ul> -->
-
+            <!-- <div class="select-action__wrapper mt-4">
                 <div class="select-action__sort">
                     <span><i class="fa fa-sort-amount-desc"></i> Sort by</span>
                     <select class="form-select" aria-label="Default select example">
@@ -40,8 +33,8 @@
                         <option value="5">5</option>
                         <option value="8">8</option>
                     </select>
-                </div>
-            </div>
+                </div> 
+            </div> -->
 
             <div class="content-table">
                 <table>
